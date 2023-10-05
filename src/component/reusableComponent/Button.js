@@ -4,7 +4,7 @@ function Button({ buttonItems }) {
   return (
     <>
       {buttonItems.map((item, index) => (
-        <div
+        <button onClick={() => item.func()}
           key={index}
           className=" flex justify-center items-center py-[8px] w-full border border-[#000] mb-[20px] rounded-lg cursor-pointer"
         >
@@ -15,7 +15,7 @@ function Button({ buttonItems }) {
           <span className="text-[#2C2C2E]  text-[14px] md:text-[18px] font-semibold">
             {item.text}
           </span>
-        </div>
+        </button>
       ))}
     </>
   );
