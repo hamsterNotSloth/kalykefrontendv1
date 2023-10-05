@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { buttonItems } from "./ButtonItems";
-import Button from "./Button";
+import LoginModal from "./LoginModal";
+import MainModal from "./MainModal";
+import jwt_decode from "jwt-decode";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 function Modal() {
+  const [user, setUser] = useState(null);
+  const [showMainContent, setShowMainContent] = useState(true)
+  const [showSignUpContent, setShowSignUpContent] = useState(false)
+  const loginContentHandler = () => {
+    setShowMainContent(false)
+    setShowSignUpContent(true)
+  }
+
+  const buttonItems = [
+    // { icon: "images/google.png", text: "Sign up with Google", func: googleSignUpHandler },
+    { icon: "images/facebook.png", text: "Sign in with Facebook", func: loginContentHandler },
+    { icon: "images/apple-logo.png", text: "Sign in with Apple", func: loginContentHandler },
+    { icon: "images/mail.png", text: "sign up with Email", func: loginContentHandler },
+  ];
   return (
     <>
       <div
         id="authentication-modal"
         className=" flex items-center h-[100vh]  justify-center z-10 bg-black bg-opacity-30 overflow-auto py-4"
       >
-        <div className=" w-[300px] md:w-[470px] py-[1.5rem] px-[2rem]  rounded-[1rem] bg-[#fff] ">
+        <div className=" w-[400px] md:w-[470px] py-[1.5rem] px-[2rem]  rounded-[1rem] bg-[#fff] ">
           <div className="flex justify-between items-center pb-[20px]">
             <div className="spacer"></div>
             <div className="flex gap-3">
@@ -60,30 +77,10 @@ function Modal() {
               </button>
             </div>
           </div>
-
-          <span className="block text-center font-bold text-[18px] md:text-[25px] text-[#2C2C2E]  mt-[20px]  mb-[25px]  md:mt-[35px]  md:mb-[45px]">
-            Join the fastest{" "}
-            <span className="block text-center">growing 3D comunity</span>
-          </span>
-          <Button buttonItems={buttonItems} />
-          <span className="block text-center py-[20px] md:py-[60px] text-[#000] font-bold text-[16px] md:text-[18px] md:text-[20px] pr-2">
-            Already a member?
-            <a href="/" className=" text-[#007BC7] font-semibold ">
-              Sign in
-            </a>
-          </span>
-          <p className=" text-center text-[#999999] text-[11px] md:text-[13px] font-[500]">
-            Your privacy is most important to us.
-            <br /> So here are our
-            <a href="/" className="text-[#007BC7]">
-              Privacy Policy
-            </a>
-            an
-            <a href="/" className="text-[#007BC7]">
-              Terms and <br /> Conditions
-            </a>
-            about how we protect your data.
-          </p>
+          {showSignUpContent ? <LoginModal /> : null}
+          <GoogleOAuthProvider clientId="839029334431-0nuefo6olelm3b4ej6vuci248uej5eq3.apps.googleusercontent.com">
+            {showMainContent ? <MainModal loginContentHandler={loginContentHandler} buttonItems={buttonItems} /> : null}
+          </GoogleOAuthProvider>
         </div>
       </div>
     </>
