@@ -1,10 +1,14 @@
-import LoginModal from "./component/reusableComponent/LoginModal";
-import Modal from "./component/reusableComponent/Modal";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Signup from "./component/Authentication/Signup";
 
 function App() {
   return (
     <>
-      <Modal />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Signup />} />
+        </Routes>
+      </Router>
     </>
   );
 }
