@@ -1,11 +1,18 @@
-import React, { useState } from "react";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import React, { useEffect, useState } from "react";
+
 import MainModal from "./MainModal";
 import Logo from "./Logo";
 import SignupModal from "./SignupModal";
+import { auth, provider } from "./configg";
+import { signInWithPopup } from "firebase/auth";
 function Signup() {
   const [showMainContent, setShowMainContent] = useState(true);
   const [showSignUpContent, setShowSignUpContent] = useState(false);
+  const [value, setValue] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
   const loginContentHandler = () => {
     setShowMainContent(false);
     setShowSignUpContent(true);
@@ -14,7 +21,31 @@ function Signup() {
     setShowMainContent(true);
     setShowSignUpContent(false);
   };
+
+  const GoogleSignUpHandler = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        setValue({
+          username: user.displayName,
+          email: user.email,
+          password: "",
+        });
+
+        localStorage.setItem("email", value);
+
+      })
+      .catch((error) => {
+        console.error("Error signing in with Google:", error);
+      });
+  };
+
   const buttonItems = [
+    {
+      icon: "images/google.png",
+      text: "Sign up with Google",
+      func: GoogleSignUpHandler,
+    },
     {
       icon: "images/facebook.png",
       text: "Sign up with Facebook",
@@ -43,9 +74,14 @@ function Signup() {
             signContentHandler={signContentHandler}
           />
           {showSignUpContent ? <SignupModal /> : null}
-          <GoogleOAuthProvider clientId="839029334431-0nuefo6olelm3b4ej6vuci248uej5eq3.apps.googleusercontent.com">
-            {showMainContent ? <MainModal loginContentHandler={loginContentHandler} buttonItems={buttonItems} /> : null}
-          </GoogleOAuthProvider>
+          {/* <GoogleOAuthProvider clientId="839029334431-0nuefo6olelm3b4ej6vuci248uej5eq3.apps.googleusercontent.com"> */}
+          {showMainContent ? (
+            <MainModal
+              loginContentHandler={loginContentHandler}
+              buttonItems={buttonItems}
+            />
+          ) : null}
+          {/* </GoogleOAuthProvider> */}
         </div>
       </div>
     </>
