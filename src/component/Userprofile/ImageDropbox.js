@@ -1,10 +1,12 @@
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { useState } from 'react';
+import { storage } from '../../config/config';
 
 const ImageDropbox = () => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (e) => {
-    const selectedFile = e.target.files?.[0]; 
+    const selectedFile = e.target.files?.[0];
     if (selectedFile) {
       setSelectedFile(selectedFile);
     }
@@ -16,20 +18,28 @@ const ImageDropbox = () => {
         console.error('No file selected.');
         return;
       }
-  
-      const formData = new FormData();
-      formData.append('image', selectedFile);
-  
-      const response = await fetch('http://localhost:8000/api/product/product-upload', {
-        method: 'POST',
-        body: formData,
+
+      // const formData = new FormData();
+      // formData.append('image', selectedFile);
+
+      // const response = await fetch('http://localhost:8000/api/product/product-upload', {
+      //   method: 'POST',
+      //   body: formData,
+      // });
+      const imageRef = ref(storage, `user/images/${selectedFile.name}`);
+
+      uploadBytes(imageRef, selectedFile).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((url) => {
+          console.log(url);
+        });
       });
-      
+
+
     } catch (error) {
       console.error('Error while uploading image:', error);
     }
   };
-  
+
   return (
     <div className="flex items-center mt-3 justify-center w-full">
       <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">

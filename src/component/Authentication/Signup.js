@@ -3,16 +3,12 @@ import React, { useEffect, useState } from "react";
 import MainModal from "./MainModal";
 import Logo from "./Logo";
 import SignupModal from "./SignupModal";
-import { auth, provider } from "./configg";
-import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../../config/config";
+import { FacebookAuthProvider, signInWithPopup } from "firebase/auth";
 function Signup() {
   const [showMainContent, setShowMainContent] = useState(true);
   const [showSignUpContent, setShowSignUpContent] = useState(false);
-  const [value, setValue] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
+ 
   const loginContentHandler = () => {
     setShowMainContent(false);
     setShowSignUpContent(true);
@@ -26,19 +22,21 @@ function Signup() {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
-        setValue({
-          username: user.displayName,
-          email: user.email,
-          password: "",
-        });
-
-        localStorage.setItem("email", value);
-
+        console.log(user,':user')
       })
       .catch((error) => {
         console.error("Error signing in with Google:", error);
       });
   };
+
+  const faceBookSignInHandler = () => {
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(auth, provider).then((res) => {
+      console.log(res, "facebOOk login Success")
+    }) .catch(err => {
+      console.log(err, "Facebook login failed")
+    })
+  }
 
   const buttonItems = [
     {
@@ -49,7 +47,7 @@ function Signup() {
     {
       icon: "images/facebook.png",
       text: "Sign up with Facebook",
-      func: loginContentHandler,
+      func: faceBookSignInHandler,
     },
     {
       icon: "images/apple-logo.png",
@@ -62,6 +60,7 @@ function Signup() {
       func: loginContentHandler,
     },
   ];
+
   return (
     <>
       <div
@@ -81,7 +80,6 @@ function Signup() {
               buttonItems={buttonItems}
             />
           ) : null}
-          {/* </GoogleOAuthProvider> */}
         </div>
       </div>
     </>
