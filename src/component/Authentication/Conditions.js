@@ -3,7 +3,7 @@ import React from "react";
 function Conditions({ loginContentHandler }) {
   return (
     <>
-      <span className="block text-center py-[20px] md:py-[60px] text-[#000] font-bold text-[16px] md:text-[18px] md:text-[20px] pr-2">
+      <span className="flex gap-1 justify-center text-center py-[20px] md:py-[60px] text-[#000] font-bold text-[16px] md:text-[18px] md:text-[20px] pr-2">
         Already a member?
         <button
           onClick={loginContentHandler}

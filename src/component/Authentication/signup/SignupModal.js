@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import InputFields from "../reusableComponent/InputFields";
+import InputFields from "../../reusableComponent/InputFields";
 import Policy from "./Policy";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { useSignUpMutation } from "../../redux/apiCalls/apiSlice";
+import { useSignUpMutation } from "../../../redux/apiCalls/apiSlice";
+import { toast } from "react-toastify";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
@@ -13,7 +14,7 @@ const validationSchema = Yup.object().shape({
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Confirm Password is required"),
 });
-function SignupModal() {
+function SignupModal({goToLoginHandler}) {
   const initialValues = {
     username: "",
     email: "",
@@ -22,14 +23,16 @@ function SignupModal() {
   };
   const [signUp] = useSignUpMutation();
 
-  //   const onChangeHandler = (e) => {
-  //     setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  //     console.log(credentials, "....");
-  //   };
   const handleSubmit = async (values) => {
     try {
       let response = await signUp(values);
       console.log("cre", response);
+      if(response.data && response.data.status == true) {
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.message);
+      }
+      localStorage.setItem("userToken", response.data.token);
     } catch (error) {
       console.log(error);
     }
@@ -95,6 +98,10 @@ function SignupModal() {
             </Form>
           )}
         </Formik>
+        <div className="flex gap-2">
+          <span>Already Have an account?</span>
+          <button className="text-[#007BC7]" onClick={goToLoginHandler}>Sign in.</button>
+        </div>
         <Policy />
       </div>
     </>

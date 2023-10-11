@@ -1,10 +1,10 @@
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { useState } from 'react';
 import { storage } from '../../config/config';
 
 const ImageDropbox = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-
+  const [refernceImage, setRefernceImage] = useState(null)
   const handleFileChange = (e) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
@@ -12,13 +12,25 @@ const ImageDropbox = () => {
     }
   };
 
-  const uploadImageToBackend = async () => {
+  const deleteImageHandler = async () => {
+    try {
+      deleteObject(refernceImage).then(() => {
+        console.log("Successfully deleted Image.")
+      }).catch((error) => {
+        console.log("Image deletion unsucessfull.", error)
+      });
+      
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
+  const uploadImageHandler = async () => {
     try {
       if (!selectedFile) {
         console.error('No file selected.');
         return;
       }
-
       // const formData = new FormData();
       // formData.append('image', selectedFile);
 
@@ -27,7 +39,7 @@ const ImageDropbox = () => {
       //   body: formData,
       // });
       const imageRef = ref(storage, `user/images/${selectedFile.name}`);
-
+      setRefernceImage(imageRef)
       uploadBytes(imageRef, selectedFile).then((snapshot) => {
         getDownloadURL(snapshot.ref).then((url) => {
           console.log(url);
@@ -52,7 +64,8 @@ const ImageDropbox = () => {
         </div>
         <input id="dropzone-file" type="file" name="image" accept=".png, .jpg, .jpeg" onChange={handleFileChange} className="hidden" />
       </label>
-      <button onClick={uploadImageToBackend}>Send to backend</button>
+      <button onClick={deleteImageHandler}>deleteImageHandler</button>
+      <button onClick={uploadImageHandler}>Send to backend</button>
     </div>
   );
 };
