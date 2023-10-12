@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { useLoginUserMutation } from "../../../redux/apiCalls/apiSlice";
+import { useGetUserProfileQuery, useLoginUserMutation } from "../../../redux/apiCalls/apiSlice";
 import InputFields from "../../reusableComponent/InputFields";
 import { toast } from "react-toastify";
 
@@ -20,13 +20,13 @@ function LoginFields() {
 
   const handleSubmit = async (values) => {
     try {
-      const response = await loginUser(values);
+      const response = await loginUser({values, source: "Email"});
       if(response.data && response.data.token.status == true) {
         toast.success(response.data.message);
       } else {
         toast.error(response.error.data.message);
       }
-      localStorage.setItem("userToken", response.data.token);
+      localStorage.setItem("userToken", response.data.token.token);
     } catch (error) {
       console.log(error);
     }

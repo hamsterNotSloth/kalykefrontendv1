@@ -25,16 +25,15 @@ function SignupModal({goToLoginHandler}) {
 
   const handleSubmit = async (values) => {
     try {
-      let response = await signUp(values);
-      console.log("cre", response);
-      if(response.data && response.data.status == true) {
+      let response = await signUp({values, source: "Email"});
+      if(response.data && response.data.status === true) {
         toast.success(response.data.message);
       } else {
-        toast.error(response.data.message);
+        toast.error(response.error.data.message);
       }
       localStorage.setItem("userToken", response.data.token);
     } catch (error) {
-      console.log(error);
+      toast.error(error);
     }
   };
 

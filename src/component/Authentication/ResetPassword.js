@@ -9,7 +9,7 @@ function ResetPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await resetPassword({resetToken, password})
+    const response = await resetPassword({token: resetToken, password})
     console.log(response, 'response')
     try {
     } catch(err) {

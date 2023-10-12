@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import LoginButtons from "./LoginButtons";
 import LoginFields from "./LoginFields";
 import ForgotPassword from "../ForgotPassword";

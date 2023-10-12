@@ -12,7 +12,7 @@ function App() {
     <>
       <div className="bg-[#f4f4f4]">
         <Header />
-        <ToastContainer position="top-right" autoClose={5000} closeOnClick pauseOnFocusLoss pauseOnHover={false}/>
+        <ToastContainer position="top-right" autoClose={2000} closeOnClick pauseOnFocusLoss pauseOnHover={false}/>
         <Router>
           <Routes>
             <Route path="/forget-password" element={<ForgotPassword />}/>

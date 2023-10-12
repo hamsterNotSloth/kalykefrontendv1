@@ -1,20 +1,27 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { Token } from "../../customHooks/token";
 
 export const apiSlice = createApi({
   reducerPath: "apiSlice",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:8000/api/",
+    prepareHeaders: (headers, { getState }) => {
+      const token = Token();
+      if (token) {
+          headers.set('authorization', `${token}`);
+      }
+      return headers;
+  },
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
     getUserProfile: builder.query({
-      query: (userToken) => ({
-        url: "user-update-tasks/my-profile",
+      query: () => ({
+        url: "user/user-profile",
         method: "GET",
-
         headers: {
           "Content-type": "application/json; charset=UTF-8",
-          authorization: `${userToken}`,
+          // authorization: `${token}`,
         },
       }),
       providesTags: ["User"],
@@ -53,8 +60,8 @@ export const apiSlice = createApi({
       invalidatesTags: ["User"],
     }),
     resetPassword: builder.mutation({
-      query: ({resetToken, password}) => ({
-        url: `user/reset-password/${resetToken}`,
+      query: ({token, password}) => ({
+        url: `user/reset-password/${token}`,
         method: "POST",
         body: JSON.stringify({ password }),
         headers: {
