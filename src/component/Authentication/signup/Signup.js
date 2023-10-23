@@ -14,7 +14,7 @@ function Signup({setSignUpModalStatus}) {
   const [showSignUpContent, setShowSignUpContent] = useState(false);
   const [loginUser] = useLoginUserMutation();
 
-  const loginContentHandler = () => {
+  const signUpContentHandler = () => {
     setShowMainContent(false);
     setShowSignUpContent(true);
   };
@@ -78,7 +78,7 @@ function Signup({setSignUpModalStatus}) {
     {
       icon: "images/mail.png",
       text: "sign in with Email",
-      func: loginContentHandler,
+      func: signUpContentHandler,
     },
   ];
 
@@ -97,7 +97,7 @@ function Signup({setSignUpModalStatus}) {
             {showSignUpContent ? <SignupModal goToLoginHandler={goToLoginHandler}/> : null}
             {showMainContent ? (
               <MainModal
-                loginContentHandler={loginContentHandler}
+                goToLoginHandler={goToLoginHandler}
                 buttonItems={buttonItems}
               />
             ) : null}

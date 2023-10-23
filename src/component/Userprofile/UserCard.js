@@ -8,15 +8,21 @@ import { Token } from '../../customHooks/token';
 function UserCard() {
     const [updateComponentToggler, setUpdateComponentToggler] = useState(false)
     const token = Token()
-    const { data: userProfileData } = useGetUserProfileQuery({ token })
+    const { data: userProfileData } = useGetUserProfileQuery({token})
+
     const updateProfileDetails = () => {
         setUpdateComponentToggler(!updateComponentToggler)
     }
-   
+
     return (
         <div className='bg-white w-[375px] min-h-[250px] h-[100%] flex flex-col items-center shadow-md p-5 rounded-md'>
             <div className='h-[150px] w-[150px] rounded-full mb-7'>
-                <img src="/images/userPic.jpg" className='rounded-full' alt="user Pic" />
+                <img
+                    src={userProfileData && userProfileData.userProfile.profilePicture}
+                    className="rounded-full w-[100%] h-[100%]"
+                    alt="user Pic"
+                />
+
             </div>
             <div className='text-center pb-2'>
                 <span className='text-[21px] font-semibold'>{userProfileData && userProfileData.userProfile.userName}</span>

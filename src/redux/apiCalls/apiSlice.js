@@ -5,23 +5,23 @@ export const apiSlice = createApi({
   reducerPath: "apiSlice",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:8000/api/",
-    prepareHeaders: (headers, { getState }) => {
-      const token = Token();
-      if (token) {
-          headers.set('authorization', `${token}`);
-      }
-      return headers;
-  },
+  //   prepareHeaders: (headers, { getState }) => {
+  //     const token = Token();
+  //     if (token) {
+  //       headers.set('authorization', `${token}`);
+  //     }
+  //     return headers;
+  // },
   }),
   tagTypes: ["User"],
-  endpoints: (builder) => ({
+  endpoints: (builder) => ({ 
     getUserProfile: builder.query({
-      query: () => ({
+      query: ({token}) => ({
         url: "user/user-profile",
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
-          // authorization: `${token}`,
+          authorization: `${token}`,
         },
       }),
       providesTags: ["User"],

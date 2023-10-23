@@ -4,13 +4,21 @@ import { getFirestore } from "@firebase/firestore";
 import { getStorage } from "firebase/storage";
 import "firebase/storage";
 
+
+const api_key = process.env.REACT_APP_FIREBASE_API_KEY;
+const auth_domain = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN;
+const project_id = process.env.REACT_APP_FIREBASE_PROJECT_ID;
+const storage_bucket = process.env.REACT_APP_FIREBASE_STORAGE_BUCKET;
+const messenger_sender_id = process.env.REACT_APP_FIREBASE_MESSENGER_SENDER_ID;
+const app_id = process.env.REACT_APP_FIREBASE_APP_ID;
+
 const firebaseConfig = {
-  apiKey: "AIzaSyB9okevj1SZLhsGF5o0y7DQIJctlMWf5_o",
-  authDomain: "divine-actor-401115.firebaseapp.com",
-  projectId: "divine-actor-401115",
-  storageBucket: "divine-actor-401115.appspot.com",
-  messagingSenderId: "839029334431",
-  appId: "1:839029334431:web:6db90333d843987e701daa"
+  apiKey: api_key,
+  authDomain: auth_domain,
+  projectId: project_id,
+  storageBucket: storage_bucket,
+  messagingSenderId: messenger_sender_id,
+  appId: app_id
 };
 
 

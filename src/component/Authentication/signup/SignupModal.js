@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import InputFields from "../../reusableComponent/InputFields";
 import Policy from "./Policy";
 import { Formik, Form } from "formik";
@@ -40,7 +40,7 @@ function SignupModal({goToLoginHandler}) {
   return (
     <>
       <div>
-        <span className="block  font-bold text-[15px] md:text-[20px] text-[#2C2C2E]  mt-[20px]  mb-[25px]  md:mt-[25px]  md:mb-[25px]">
+        <span className="block font-bold text-[15px] md:text-[20px] text-[#2C2C2E] mt-[20px] mb-[25px] md:mt-[25px] md:mb-[25px]">
           Create Account
         </span>
         <Formik

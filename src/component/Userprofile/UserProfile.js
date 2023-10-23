@@ -1,8 +1,8 @@
 import React from 'react'
 import UserCard from "./UserCard"
 import UserStatistics from './UserStatistics'
-import ImageDropbox from './ImageDropbox'
 import { faComment, faDownload, faEye, faUser } from '@fortawesome/free-solid-svg-icons'
+
 function UserProfile() {
   return (
     <div className='max-w-[1200px] flex justify-between mx-auto py-7'>
@@ -15,7 +15,6 @@ function UserProfile() {
           <UserStatistics count={0} text={"Downloads"} icon={faDownload} />
           <UserStatistics count={0} text={"Comments"} icon={faComment} />
         </div>
-        <ImageDropbox />
       </div>
     </div>
   )

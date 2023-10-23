@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { useGetUserProfileQuery, useLoginUserMutation } from "../../../redux/apiCalls/apiSlice";
+import {  useLoginUserMutation } from "../../../redux/apiCalls/apiSlice";
 import InputFields from "../../reusableComponent/InputFields";
 import { toast } from "react-toastify";
+import { Token } from "../../../customHooks/token";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -13,6 +14,7 @@ const validationSchema = Yup.object().shape({
 
 function LoginFields() {
   const [loginUser] = useLoginUserMutation();
+  const token = Token()
   const initialValues = {
     email: "",
     password: "",
