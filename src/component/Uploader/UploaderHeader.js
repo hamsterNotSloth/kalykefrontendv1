@@ -2,7 +2,7 @@ import React from 'react'
 
 function UploaderHeader({setSignUpModalStatus}) {
   return (
-    <div className='flex justify-between mb-10'>
+    <div className='flex justify-end gap-[50px] mb-10'>
       <ul className='flex gap-3'>
         <li>
             Upload

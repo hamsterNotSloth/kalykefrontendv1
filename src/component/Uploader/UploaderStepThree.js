@@ -1,11 +1,11 @@
 import React from 'react'
 import { Token } from '../../customHooks/token';
-import { useUploadProductMutation } from '../../redux/apiCalls/productApiSlice';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
+import { useUploadProductMutation } from '../../redux/apiCalls/apiSlice';
 
 function UploaderStepThree() {
-  const [uploadProduct] = useUploadProductMutation()
+  const [uploadProduct, {isLoading}] = useUploadProductMutation()
   const token = Token()
   const productDetails = useSelector((state) => state.product);
   const productUploadHandler = async () => {
@@ -14,15 +14,13 @@ function UploaderStepThree() {
       if(response) {
         toast.success(response.data.message)
       }
-      console.log(response)
     } catch(err) {
-      console.log(err)
       toast.error(err)
     }
   };
   return (
     <div className='flex justify-center'>
-      <button onClick={productUploadHandler} className="bg-blue-500 mt-3 text-white px-4 py-2 rounded hover:bg-blue-600">Upload Product</button>
+      <button disabled={isLoading} onClick={productUploadHandler} className="bg-blue-500 mt-3 text-white px-4 py-2 rounded hover:bg-blue-600">{isLoading? "Processing..." : "Upload Product"} </button>
     </div>
   )
 }

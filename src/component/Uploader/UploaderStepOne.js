@@ -1,13 +1,12 @@
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { storage } from '../../config/config';
 import { useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice';
 import { Token } from '../../customHooks/token';
 import { toast } from 'react-toastify';
 import DropZone from './DropZone';
-import { useUploadProductMutation } from '../../redux/apiCalls/productApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetProductDetails, updateProductDetails } from '../../redux/slices/productSlice';
+import {  updateProductDetails } from '../../redux/slices/productSlice';
 import ImagesList from './ImagesList';
 
 const UploaderStepOne = ({ setSelectedFile, selectedFile,setCurrentLevel }) => {
@@ -17,7 +16,6 @@ const UploaderStepOne = ({ setSelectedFile, selectedFile,setCurrentLevel }) => {
 
   const token = Token()
   const { data: userProfileData } = useGetUserProfileQuery({ token })
-  const [uploadProduct] = useUploadProductMutation()
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
@@ -85,9 +83,7 @@ const UploaderStepOne = ({ setSelectedFile, selectedFile,setCurrentLevel }) => {
   };
   
   const removeImageHandler = (id) => {
-    console.log(id)
     const imageExist = selectedFile.filter((item,index) => index !== id) 
-    console.log(imageExist)
     setSelectedFile(imageExist)
   }
  

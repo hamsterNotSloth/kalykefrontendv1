@@ -8,8 +8,8 @@ import HeaderRightAuthenticate from './HeaderRightAuthenticate'
 
 const Header = () => {
   const token = Token()
-  const { data: userProfileData, refetch: profileRefetch } = useGetUserProfileQuery({ token })
-  
+  const { data: userProfileData } = useGetUserProfileQuery({ token })
+
   return (
     <>
       <div className='flex py-4 px-6 justify-between items-center'>

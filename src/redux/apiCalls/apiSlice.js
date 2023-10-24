@@ -13,7 +13,7 @@ export const apiSlice = createApi({
   //     return headers;
   // },
   }),
-  tagTypes: ["User"],
+  tagTypes: ["User", "product"],
   endpoints: (builder) => ({ 
     getUserProfile: builder.query({
       query: ({token}) => ({
@@ -46,6 +46,18 @@ export const apiSlice = createApi({
           "Content-type": "application/json; charset=UTF-8",
         },
       }),
+      invalidatesTags: ["User", "product"],
+    }),
+    updateUserInfo: builder.mutation({
+      query: ({newUserInfo:data,token}) => ({
+        url: "user/update-user",
+        method: "PATCH",
+        body: data,
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          authorization: `${token}`,
+        },
+      }),
       invalidatesTags: ["User"],
     }),
     forgetPassword: builder.mutation({
@@ -70,6 +82,40 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+    getUserproducts: builder.query({
+      query: (token) => ({
+        url: "product/my-products",
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          authorization: `${token}`,
+        },
+      }),
+      providesTags: ["product", "User"],
+    }),
+    getproducts: builder.query({
+      query: ({ token }) => ({
+        url: "product/my-products",
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          authorization: `${token}`,
+        },
+      }),
+      providesTags: ["product"],
+    }),
+    uploadProduct: builder.mutation({
+      query: ({ productDetails, token }) => ({
+        url: "product/create-product",
+        method: "POST",
+        body: { productDetails },
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "authorization": token
+        },
+      }),
+      invalidatesTags: ["product"],
+    }),
   }),
 });
-export const { useSignUpMutation, useLoginUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
+export const { useUploadProductMutation, useGetUserproductsQuery, useUpdateUserInfoMutation, useSignUpMutation, useLoginUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
