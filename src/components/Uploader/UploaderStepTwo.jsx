@@ -29,7 +29,7 @@ function UploaderStepTwo({ setCurrentLevel }) {
     setIsLoading(true)
     dispatch(updateProductDetails({ ...productDetails, title: details.title, description: details.description}));
     if(details.title.length > 0 && details.description.length > 0){
-      setCurrentLevel("3");
+      setCurrentLevel(3);
     }
     setIsLoading(false)
   }

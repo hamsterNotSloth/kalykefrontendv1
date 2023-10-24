@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { useUploadProductMutation } from '../../redux/apiCalls/apiSlice';
 
-function UploaderStepThree() {
+function UploaderStepThree({setCurrentLevel}) {
   const [uploadProduct, {isLoading}] = useUploadProductMutation()
   const token = Token()
   const productDetails = useSelector((state) => state.product);

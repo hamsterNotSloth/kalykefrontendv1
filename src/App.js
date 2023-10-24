@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Header from "./component/Header/Header"
+import Header from "./components/Header/Header"
 import NotFoundPage from "./pages/NotFoundPage"
-import ForgotPassword from "./component/Authentication/ForgotPassword";
-import ResetPassword from "./component/Authentication/ResetPassword";
+import ForgotPassword from "./components/Authentication/ForgotPassword";
+import ResetPassword from "./components/Authentication/ResetPassword";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
-import Signup from "./component/Authentication/signup/Signup";
+import Signup from "./components/Authentication/signup/Signup";
 import UserProfilePage from "./pages/UserProfilePage";
 
 function App() {

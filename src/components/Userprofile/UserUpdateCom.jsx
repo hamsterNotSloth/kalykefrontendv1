@@ -1,13 +1,13 @@
 import { faGlobe, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faLinkedin, faYoutube } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useUpdateUserInfoMutation } from '../../redux/apiCalls/apiSlice';
+import { toast } from "react-toastify";
 
 function UserUpdateCom({ token, updateProfileDetails }) {
-    const [editorHtml, setEditorHtml] = useState('');
     const [newUserInfo, setNewUserInfo] = useState({
         userName: null,
         description: null
@@ -18,8 +18,12 @@ function UserUpdateCom({ token, updateProfileDetails }) {
         try {
             const response = await updateUserInfo({newUserInfo, token })
             console.log(response, "response user updated")
+            if(response && response.data) {
+                toast.success(response.data.message)
+            }
         } catch (error) {
             console.log(error)
+            toast.error(error)
         }
     }
 
@@ -51,15 +55,15 @@ function UserUpdateCom({ token, updateProfileDetails }) {
         }
 
     ]
-
+    
     return (
         <div className='w-[100%]'>
             <div className='mb-3'>
                 <input type="text" onChange={(e) => {setNewUserInfo({...newUserInfo, userName: e.target.value})}} className='border-[1px] outline-none border-[#bbbbbb] focus:outline-none  border rounded-sm w-[100%] my-1 p-2' placeholder={"Enter new name"} />
             </div>
             <ReactQuill
-                value={editorHtml}
-                onChange={(e) => {setNewUserInfo({...newUserInfo, description: e.target.value})}}
+                value={newUserInfo.description}
+                onChange={(text) => {setNewUserInfo({...newUserInfo, description: text})}}
                 modules={{
                     toolbar: [
                         ['bold', 'italic', 'underline'],

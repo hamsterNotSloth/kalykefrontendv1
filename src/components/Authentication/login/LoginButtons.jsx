@@ -1,7 +1,7 @@
 import React from "react";
 import { auth, provider } from "../../../config/config";
 import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import Button from "../../reusableComponent/Button";
+import Button from "../../ReUsableComponent/Button";
 import { useLoginUserMutation } from "../../../redux/apiCalls/apiSlice";
 import { toast } from "react-toastify";
 function LoginButtons() {

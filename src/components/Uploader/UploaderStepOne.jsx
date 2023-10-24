@@ -20,7 +20,11 @@ const UploaderStepOne = ({ setSelectedFile, selectedFile,setCurrentLevel }) => {
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      return setSelectedFile([...selectedFile, file]);
+      if (file.type === 'image/jpeg' || file.type === 'image/png') {
+        return setSelectedFile([...selectedFile, file]);
+      } else {
+        toast.error("Only JPEG, PNG are supported.")
+      }
     }
   }
 
@@ -73,7 +77,7 @@ const UploaderStepOne = ({ setSelectedFile, selectedFile,setCurrentLevel }) => {
       const uploadedFiles = await Promise.all(uploadPromises);
       await dispatch(updateProductDetails({ ...productDetails, images: [...productDetails.images, ...uploadedFiles] }));
       setIsUploadLoading(false)
-      setCurrentLevel("2")
+      setCurrentLevel(2)
       toast.success("Successfully uploaded all images.");
     } catch (error) {
       toast.error(error);

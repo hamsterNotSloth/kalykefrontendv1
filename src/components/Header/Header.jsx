@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import HeaderLeft from './HeaderLeft'
 import HeaderInputField from './HeaderInputField'
 import HeaderRight from './HeaderRight'

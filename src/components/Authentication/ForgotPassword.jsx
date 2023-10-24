@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { useForgetPasswordMutation } from '../../redux/apiCalls/apiSlice';
 import { toast } from 'react-toastify';
 
