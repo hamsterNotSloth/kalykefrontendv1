@@ -6,7 +6,7 @@ import UploaderStepThree from './UploaderStepThree';
 
 function UploaderPopUp({ setSignUpModalStatus }) {
   const [selectedFile, setSelectedFile] = useState([]);
-  const [currentLevel, setCurrentLevel] = useState(1)
+  const [currentLevel, setCurrentLevel] = useState(2)
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="fixed inset-0 bg-black opacity-50"></div>

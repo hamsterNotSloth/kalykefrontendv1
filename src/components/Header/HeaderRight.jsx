@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { faBullhorn, faUpLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useGetUserProfileQuery } from "../../redux/apiCalls/apiSlice"
-import { Token } from '../../customHooks/token'
 import ProfileDropDown from './ProfileDropDown'
 import UploaderPopUp from '../Uploader/UploaderPopUp'
+import { getToken } from '../../Token/token'
 
 const HeaderRight = () => {
   const [signUpModalStatus, setSignUpModalStatus] = useState(false)
-  const token = Token()
+  const token = getToken()
   const [isProfileDropDownOpen, setIsProfileDropDownOpen] = useState(false)
   const { data: userProfileData, refetch: profileRefetch } = useGetUserProfileQuery({ token })
 

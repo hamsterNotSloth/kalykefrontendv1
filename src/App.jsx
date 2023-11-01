@@ -5,8 +5,8 @@ import ForgotPassword from "./components/Authentication/ForgotPassword";
 import ResetPassword from "./components/Authentication/ResetPassword";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
-import Signup from "./components/Authentication/signup/Signup";
 import UserProfilePage from "./pages/UserProfilePage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 
 function App() {
   return (
@@ -16,10 +16,10 @@ function App() {
         <Router>
           <Header />
           <Routes>
-            <Route path="/forget-password" element={<ForgotPassword />} />
             <Route path="*" element={<NotFoundPage />} />
-            <Route path="/login" element={<Signup />} />
+            {/* <Route path="/login" element={<Signup />} /> */}
             <Route path="/user-profile" element={<UserProfilePage />} />
+            <Route path="/products/:id" element={<ProductDetailsPage />} />
             <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
           </Routes>
         </Router>

@@ -18,7 +18,7 @@ function ProfileDropDown({signOutHandler}) {
   
 
   return (
-    <div className='bg-white rounded-lg absolute w-[280px] right-0 py-4 px-4 shadow-md'>
+    <div className='bg-white rounded-lg absolute z-10 w-[280px] right-0 py-4 px-4 shadow-md'>
       <button className='bg-[#e8e8e8] rounded-full py-2 px-4 w-[100%]'>View My Models</button>
       <ul>
         {dropDownList.map((item, index) => {

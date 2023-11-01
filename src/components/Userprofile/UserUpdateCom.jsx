@@ -7,19 +7,45 @@ import 'react-quill/dist/quill.snow.css';
 import { useUpdateUserInfoMutation } from '../../redux/apiCalls/apiSlice';
 import { toast } from "react-toastify";
 
-function UserUpdateCom({ token, updateProfileDetails }) {
+function UserUpdateCom({ token, userProfileData, updateProfileDetails }) {
+    useEffect(() => {
+        console.log(userProfileData.userProfile.userName, 'userProfileData')
+    }, [userProfileData])
     const [newUserInfo, setNewUserInfo] = useState({
-        userName: null,
-        description: null
+        userName: userProfileData.userProfile && userProfileData.userProfile.userName,
+        description: userProfileData.userProfile && userProfileData.userProfile.description,
+        socialMedia: [
+            {
+                socialMediaName: "Website",
+                link: ""
+            },
+            {
+                socialMediaName: "Instagram",
+                link: ""
+            },
+            {
+                socialMediaName: "Facebook",
+                link: ""
+            },
+            {
+                socialMediaName: "Youtube",
+                link: ""
+            },
+            {
+                socialMediaName: "Linkedin",
+                link: ""
+            }
+        ]
     })
     const [updateUserInfo] = useUpdateUserInfoMutation()
 
-    const updateUserInfoHandler = async () => {
+    const updateUserInfoHandler = async (e) => {
+        e.preventDefault()
         try {
-            const response = await updateUserInfo({newUserInfo, token })
-            console.log(response, "response user updated")
-            if(response && response.data) {
+            const response = await updateUserInfo({ newUserInfo, token })
+            if (response && response.data) {
                 toast.success(response.data.message)
+                updateProfileDetails()
             }
         } catch (error) {
             console.log(error)
@@ -27,63 +53,51 @@ function UserUpdateCom({ token, updateProfileDetails }) {
         }
     }
 
-    const socialMedia = [
-        {
-            icon: faGlobe,
-            source: "Website address",
-            link: "This is a link"
-        },
-        {
-            icon: faInstagram,
-            source: "Instagram username",
-            link: "This is a link"
-        },
-        {
-            icon: faFacebook,
-            source: "Facebook",
-            link: "This is a link"
-        },
-        {
-            icon: faYoutube,
-            source: "Youtube Channel",
-            link: "This is a link"
-        },
-        {
-            icon: faLinkedin,
-            source: "Linkedin profile",
-            link: "This is a link"
-        }
+    const socialMedia = [faGlobe, faInstagram, faFacebook, faYoutube, faLinkedin]
 
-    ]
-    
     return (
-        <div className='w-[100%]'>
+        <form onSubmit={(e)=> updateUserInfoHandler(e)} className='w-[100%]'>
             <div className='mb-3'>
-                <input type="text" onChange={(e) => {setNewUserInfo({...newUserInfo, userName: e.target.value})}} className='border-[1px] outline-none border-[#bbbbbb] focus:outline-none  border rounded-sm w-[100%] my-1 p-2' placeholder={"Enter new name"} />
+                <label className='text-[16px] font-semibold'>Name</label>
+                <input type="text" onChange={(e) => { setNewUserInfo({ ...newUserInfo, userName: e.target.value }) }} className='border-[1px] outline-none border-[#bbbbbb] focus:outline-none  border rounded-sm w-[100%] my-1 p-2' placeholder={newUserInfo.userName} />
             </div>
-            <ReactQuill
-                value={newUserInfo.description}
-                onChange={(text) => {setNewUserInfo({...newUserInfo, description: text})}}
-                modules={{
-                    toolbar: [
-                        ['bold', 'italic', 'underline'],
-                        ['link'],
-                        ['clean']
-                    ]
-                }}
-            />
+            <div className='mt-2'>
+                <label className='text-[16px] font-semibold'>Description</label>
+                <ReactQuill
+                    value={newUserInfo.description}
+                    onChange={(text) => { setNewUserInfo({ ...newUserInfo, description: text }) }}
+                    modules={{
+                        toolbar: [
+                            ['bold', 'italic', 'underline'],
+                            ['link'],
+                            ['clean']
+                        ]
+                    }}
+                />
+            </div>
             <div className='mt-6'>
-                {socialMedia.map(item => {
-                    return (
-                        <div className='flex items-center'>
-                            <span className='border-l-[1px] border-t border-b border-[#bbbbbb] rounded-sm pl-2 my-1 py-2'><FontAwesomeIcon icon={item.icon} /></span>
-                            <input type="text" className='border-r-[1px] outline-none border-[#bbbbbb] focus:outline-none border-t border-b rounded-sm w-[100%] my-1 p-2' placeholder={item.source} />
-                        </div>
-                    )
-                })}
+            <label className='text-[16px] font-semibold'>Social media links.</label>
+                {newUserInfo.socialMedia.map((item, index) => (
+                    <div className='flex items-center' key={index}>
+                        <span className='border-l-[1px] border-t border-b border-[#bbbbbb] rounded-sm pl-2 my-1 py-2'>
+                            <FontAwesomeIcon icon={socialMedia[index]} />
+                        </span>
+                        <input
+                            type="text"
+                            value={item.link}
+                            onChange={(e) => {
+                                const updatedSocialMedia = [...newUserInfo.socialMedia];
+                                updatedSocialMedia[index].link = e.target.value;
+                                setNewUserInfo({ ...newUserInfo, socialMedia: updatedSocialMedia });
+                            }}
+                            className='border-r-[1px] outline-none border-[#bbbbbb] focus:outline-none border-t border-b rounded-sm w-[100%] my-1 p-2'
+                            placeholder={item.source}
+                        />
+                    </div>
+                ))}
             </div>
-            <button onClick={updateUserInfoHandler} className='bg-[#1da1f2] w-[100%] border-[1px] border-[#b4b4b4] mt-5 rounded-2xl text-white px-7 py-1'><FontAwesomeIcon icon={faPenToSquare} /> Apply</button>
-        </div>
+            <button type='submit' className='bg-[#1da1f2] w-[100%] border-[1px] border-[#b4b4b4] mt-5 rounded-2xl text-white px-7 py-1'><FontAwesomeIcon icon={faPenToSquare} /> Apply</button>       
+        </form>
     )
 }
 

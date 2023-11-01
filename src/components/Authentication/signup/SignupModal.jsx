@@ -3,39 +3,42 @@ import InputFields from "../../ReUsableComponent/InputFields";
 import Policy from "./Policy";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { useSignUpMutation } from "../../../redux/apiCalls/apiSlice";
 import { toast } from "react-toastify";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../config/config";
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required("Username is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string().required("Password is required"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Confirm Password is required"),
 });
-function SignupModal({goToLoginHandler}) {
+function SignupModal({ goToLoginHandler }) {
   const initialValues = {
-    username: "",
     email: "",
     password: "",
     confirmPassword: "",
   };
-  const [signUp] = useSignUpMutation();
 
   const handleSubmit = async (values) => {
     try {
-      let response = await signUp({values, source: "Email"});
-      if(response.data && response.data.status === true) {
-        toast.success(response.data.message);
-      } else {
-        toast.error(response.error.data.message);
+      const response = await createUserWithEmailAndPassword(auth, values.email, values.password);
+      if(response.user && response.user.providerData) {
+        return toast.success("Signup Successfull!")
       }
-      localStorage.setItem("userToken", response.data.token);
+      else {
+        toast.error("Something went wrong. Have a query? Contact the support team.")
+      }
     } catch (error) {
-      toast.error(error);
+      console.log('error:', error.message);
+      if(error.message == "Firebase: Error (auth/email-already-in-use).") {
+        return toast.error("Email already in use.")
+      }
+      toast.error(error.message || "An unexpected error occurred.");
     }
   };
+  
 
   return (
     <>
@@ -50,13 +53,6 @@ function SignupModal({goToLoginHandler}) {
         >
           {({ errors, touched }) => (
             <Form>
-              <InputFields label="Username*" type="text" name="username" />
-              {errors.username && touched.username ? (
-                <div className="text-[#FF0000] mb-[17px]  mt-[-16px]  text-[12px]">
-                  {errors.username}
-                </div>
-              ) : null}
-
               <InputFields label="Email*" type="email" name="email" />
               {errors.email && touched.email ? (
                 <div className="text-[#FF0000] mb-[17px]  mt-[-16px] text-[12px]">

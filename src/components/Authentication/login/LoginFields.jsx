@@ -1,10 +1,11 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import {  useLoginUserMutation } from "../../../redux/apiCalls/apiSlice";
+import {  useSignInUserMutation } from "../../../redux/apiCalls/apiSlice";
 import InputFields from "../../ReUsableComponent/InputFields";
 import { toast } from "react-toastify";
-import { Token } from "../../../customHooks/token";
+import { auth } from "../../../config/config";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -12,8 +13,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function LoginFields() {
-  const [loginUser] = useLoginUserMutation();
-  const token = Token()
+  const [signInUser] = useSignInUserMutation();
   const initialValues = {
     email: "",
     password: "",
@@ -21,15 +21,20 @@ function LoginFields() {
 
   const handleSubmit = async (values) => {
     try {
-      const response = await loginUser({values, source: "Email"});
-      if(response.data && response.data.token.status == true) {
-        toast.success(response.data.message);
-      } else {
-        toast.error(response.error.data.message);
+      const firebaseAuth = await signInWithEmailAndPassword(auth, values.email, values.password)
+      if(firebaseAuth.user && firebaseAuth.user.providerData) {
+        const response = await signInUser({credential: firebaseAuth.user, source: "Email"});
+        if(response.data && response.data.userData.status == true) {
+         localStorage.setItem("userToken", response.data.userData.token);
+          toast.success(response.data.userData.message);
+        } else {
+          toast.error(response.error.data.message);
+        }
       }
-      localStorage.setItem("userToken", response.data.token.token);
     } catch (error) {
-      console.log(error);
+      if(error.message === "Firebase: Error (auth/invalid-login-credentials).") {
+        return toast.error("Invalid Credentials.")
+      }
     }
   };
   return (

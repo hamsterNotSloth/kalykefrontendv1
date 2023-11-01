@@ -2,12 +2,12 @@ import React from 'react'
 import HeaderLeft from './HeaderLeft'
 import HeaderInputField from './HeaderInputField'
 import HeaderRight from './HeaderRight'
-import { Token } from '../../customHooks/token'
 import { useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice'
 import HeaderRightAuthenticate from './HeaderRightAuthenticate'
+import { getToken } from '../../Token/token'
 
 const Header = () => {
-  const token = Token()
+  const token = getToken()
   const { data: userProfileData } = useGetUserProfileQuery({ token })
 
   return (

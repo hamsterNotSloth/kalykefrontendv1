@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Token } from "../../customHooks/token";
+
+const backendBaseUrl = process.env.REACT_APP_BACKEND_BASE_URL;
 
 export const apiSlice = createApi({
   reducerPath: "apiSlice",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api/",
+    baseUrl: `${backendBaseUrl}/api/`,
   //   prepareHeaders: (headers, { getState }) => {
   //     const token = Token();
   //     if (token) {
@@ -17,7 +18,7 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({ 
     getUserProfile: builder.query({
       query: ({token}) => ({
-        url: "user/user-profile",
+        url: "user/",
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -26,20 +27,9 @@ export const apiSlice = createApi({
       }),
       providesTags: ["User"],
     }),
-    signUp: builder.mutation({
+    signInUser: builder.mutation({
       query: (data) => ({
-        url: "user/createUser",
-        method: "POST",
-        body: data,
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      }),
-      invalidatesTags: ["User"],
-    }),
-    loginUser: builder.mutation({
-      query: (data) => ({
-        url: "user/login",
+        url: "user/",
         method: "POST",
         body: data,
         headers: {
@@ -93,20 +83,19 @@ export const apiSlice = createApi({
       }),
       providesTags: ["product", "User"],
     }),
-    getproducts: builder.query({
-      query: ({ token }) => ({
-        url: "product/my-products",
+    getproduct: builder.query({
+      query: (id ) => ({
+        url: `product/${id}`,
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
-          authorization: `${token}`,
         },
       }),
       providesTags: ["product"],
     }),
     uploadProduct: builder.mutation({
       query: ({ productDetails, token }) => ({
-        url: "product/create-product",
+        url: "product/",
         method: "POST",
         body: { productDetails },
         headers: {
@@ -118,4 +107,4 @@ export const apiSlice = createApi({
     }),
   }),
 });
-export const { useUploadProductMutation, useGetUserproductsQuery, useUpdateUserInfoMutation, useSignUpMutation, useLoginUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
+export const { useUploadProductMutation, useGetproductQuery,useGetUserproductsQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;

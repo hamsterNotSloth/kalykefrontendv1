@@ -6,13 +6,13 @@ import SignupModal from "./SignupModal";
 import { auth, provider } from "../../../config/config";
 import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Login from "../login/Login";
-import { useLoginUserMutation } from "../../../redux/apiCalls/apiSlice";
+import { useSignInUserMutation } from "../../../redux/apiCalls/apiSlice";
 import { toast } from "react-toastify";
 
 function Signup({setSignUpModalStatus}) {
   const [showMainContent, setShowMainContent] = useState(true);
   const [showSignUpContent, setShowSignUpContent] = useState(false);
-  const [loginUser] = useLoginUserMutation();
+  const [signInUser] = useSignInUserMutation();
 
   const signUpContentHandler = () => {
     setShowMainContent(false);
@@ -29,15 +29,17 @@ function Signup({setSignUpModalStatus}) {
       const provider = new GoogleAuthProvider();
       provider.addScope('email');
       const result = await signInWithPopup(auth, provider);
-      const response = await loginUser({ credential: result.user, source: "Google" });
-      if(response.data && response.data.token.status == true) {
-        toast.success(response.data.message);
+      const response = await signInUser({ credential: result.user, source: "Google" });
+      console.log(response, 'response')
+      if(response.data && response.data.userData.status == true) {
+        localStorage.setItem('userToken', response.data.userData.token)
+        toast.success(response.data.userData.message);
       } else {
         toast.error(response.error.data.message);
       }
-      localStorage.setItem('userToken', response.data.token.token)
     } catch (error) {
       console.error("Error signing in with Google:", error);
+      toast.error(error);
     }
   };
 
@@ -47,15 +49,16 @@ function Signup({setSignUpModalStatus}) {
       const provider = new FacebookAuthProvider();
       provider.addScope('email');
       const result = await signInWithPopup(auth, provider);
-      const response = await loginUser({ credential: result.user, source: "Facebook" });
-      if(response.data && response.data.token.status == true) {
-        toast.success(response.data.message);
+      console.log(result, result)
+      const response = await signInUser({ credential: result.user, source: "Facebook" });
+      if(response.data && response.data.userData.status == true) {
+        toast.success(response.data.userData.message);
       } else {
         toast.error(response.error.data.message);
       }
-      localStorage.setItem('userToken', response.data.token.token)
+      localStorage.setItem('userToken', response.data.userData.token)
     } catch (err) {
-      console.log(err, "Facebook login failed");
+      toast.error(err.message);
     }
   };
 

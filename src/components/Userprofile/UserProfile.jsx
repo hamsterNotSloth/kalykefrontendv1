@@ -3,11 +3,11 @@ import UserCard from "./UserCard"
 import UserStatistics from './UserStatistics'
 import { faComment, faDownload, faEye, faUser } from '@fortawesome/free-solid-svg-icons'
 import ProductCard from '../ReUsableComponent/ProductCard'
-import { Token } from '../../customHooks/token'
 import { useGetUserproductsQuery } from '../../redux/apiCalls/apiSlice'
+import { getToken } from '../../Token/token'
 
 function UserProfile() {
-  const token = Token()
+  const token = getToken()
   const {data: userProducts} = useGetUserproductsQuery(token)
   
   return (
