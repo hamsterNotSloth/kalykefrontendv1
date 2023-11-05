@@ -7,8 +7,7 @@ const productSlice = createSlice({
     description: '',
     category: null,
     modalSetting: '',
-    modalRawData: null,
-    modal: {},
+    modal: [],
     images: [],
   },
   reducers: {
@@ -21,7 +20,6 @@ const productSlice = createSlice({
         description: '',
         category: null,
         modalSetting: '',
-        modalRawData: null,
         modal: null,
         images: [],
       };

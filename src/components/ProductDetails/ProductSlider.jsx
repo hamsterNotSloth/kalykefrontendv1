@@ -10,7 +10,7 @@ function ProductSlider({ productDetails }) {
             <div className="w-[100%] bg-[#dedede] border rounded-lg py-6  m-30">
                 <div className='px-10'>
                     <div className="flex gap-[30px]">
-                        <div className="max-w-[350px] w-[100%] md:-[484px] border-r-[1px] border-r-[#bdbdbd] pr-[25px]">
+                        <div className="max-w-[300px] h-[500px] overflow-y-auto w-[100%] md:-[484px] border-r-[1px] border-r-[#bdbdbd] pr-[25px]">
                             {productDetails && productDetails.product.images.map((img, index) => {
                                 return (index < 4) ? (
                                     <div key={index} onClick={() => setData({ image: img.downloadLink, index })} className={`p-2 mb-15 max-w-[250px] w-full h-[250px] cursor-pointer ${data.image === img.downloadLink ? 'border border-blue-500' : ''}`}>

@@ -5,7 +5,7 @@ import ImagesUploader from './ImagesUploader';
 import { getToken } from '../../Token/token';
 import { toast } from 'react-toastify';
 import { storage } from '../../config/config';
-import { useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice';
+import { useGetMyProfileQuery, useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProductDetails } from '../../redux/slices/productSlice';
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
@@ -15,8 +15,9 @@ import { mainCartegories } from './categories';
 function UploaderStepTwo({ setCurrentLevel }) {
   const [selectedFile, setSelectedFile] = useState([]);
   const [isUploadLoading, setIsUploadLoading] = useState(false)
+  const [fileUploadProgress, setFileUploadProgress] = useState(false);
   const token = getToken()
-  const { data: userProfileData } = useGetUserProfileQuery({ token })
+  const { data: userProfileData } = useGetMyProfileQuery( token )
   const [details, setDetails] = useState({
     title: '',
     description: '',
@@ -31,7 +32,6 @@ function UploaderStepTwo({ setCurrentLevel }) {
   const modules = {
     toolbar: {
       container: [
-        [{ 'header': '1' }, { 'header': '2' }],
         ['bold', 'italic', 'underline', 'list'],
       ],
     },
@@ -43,23 +43,11 @@ function UploaderStepTwo({ setCurrentLevel }) {
   //   dispatch(updateProductDetails({ ...productDetails, title: details.title, description: details.description, modalSetting: details.modalSetting }));
   // } 
 
-  const uploadModalHanddler = async () => {
-    try {
-      const storageRef = ref(storage, `modals/${userProfileData && userProfileData.userProfile._id}/${productDetails.modalRawData.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, productDetails.modalRawData);
-      console.log(storageRef, ":::download link:", uploadTask)
-      const snapshot = await getDownloadURL(uploadTask.ref);
-    } catch (error) {
-      console.log(error)
-      toast.error(error.message)
-    }
-  }
-
   const uploadImageHandler = async (e) => {
     e.preventDefault()
     // productDescriptionHandler()
     if (token) {
-      if (!userProfileData.userProfile && !userProfileData.userProfile._id) {
+      if (!userProfileData && !userProfileData.myProfile && !userProfileData.myProfile._id) {
         setIsUploadLoading(false)
         return toast.error("You are unauthorized to do that. Please login or Signup to continue.");
       }
@@ -75,11 +63,11 @@ function UploaderStepTwo({ setCurrentLevel }) {
         setIsUploadLoading(false)
         return;
       }
+      setFileUploadProgress(true)
       const uploadPromises = selectedFile.map(async (file) => {
-        const imageRef = ref(storage, `images/${userProfileData && userProfileData.userProfile._id}/${file.name}`);
+        const imageRef = ref(storage, `images/${userProfileData && userProfileData.myProfile && userProfileData.myProfile._id}/${file.name}`);
         try {
           const snapshot = await uploadBytes(imageRef, file);
-          console.log(snapshot,' snapshot')
           const url = await getDownloadURL(snapshot.ref);
           return { downloadLink: url, refernceLink: imageRef.toString() };
         } catch (error) {
@@ -88,9 +76,10 @@ function UploaderStepTwo({ setCurrentLevel }) {
         }
       });
       const uploadedFiles = await Promise.all(uploadPromises);
+      setFileUploadProgress(false)
       dispatch(updateProductDetails({ ...productDetails, title: details.title, description: details.description, category: details.category, modalSetting: details.modalSetting, images: [...productDetails.images, ...uploadedFiles] }));
       setIsUploadLoading(false)
-      toast.success("Successfully uploaded all images.");
+      toast.success("Final step. Click upload to upload your modal.");
       if (details.title.length > 0 && details.description.length > 0) {
         setCurrentLevel(3);
       }
@@ -104,7 +93,7 @@ function UploaderStepTwo({ setCurrentLevel }) {
   return (
     <div>
       <div className='mb-5'>
-        <ImagesUploader setSelectedFile={setSelectedFile} selectedFile={selectedFile} isUploadLoading={isUploadLoading} uploadImageHandler={uploadImageHandler} />
+        <ImagesUploader fileUploadProgress={fileUploadProgress} setSelectedFile={setSelectedFile} selectedFile={selectedFile} isUploadLoading={isUploadLoading} uploadImageHandler={uploadImageHandler} />
       </div>
       <div>
         <label className='text-[16px] font-semibold'>Title</label>

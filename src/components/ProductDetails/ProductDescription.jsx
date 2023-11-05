@@ -1,7 +1,6 @@
 import React from 'react'
 
 function ProductDescription({ productDetails }) {
-
   return (
     <div className='p-3 pl-[80px]'>
       <div>

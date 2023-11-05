@@ -10,7 +10,7 @@ function ProductDetailsHeader({ productDetails }) {
             </div>
             <div className='flex flex-col '>
                 <h1 className='text-[24px] leading-6 font-semibold'>{productDetails && productDetails.product.title}</h1>
-                <span>By <Link to="/test" className='text-[#0067ff] font-semibold'>{productDetails && productDetails.user.userName}</Link></span>
+                <span>By <Link to={`/user/${productDetails && productDetails.user && productDetails.user.u_id}`} className='text-[#0067ff] font-semibold'>{productDetails && productDetails.user.userName}</Link></span>
             </div>
         </div>
     )

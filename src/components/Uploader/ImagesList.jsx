@@ -1,16 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
-function ImagesList({ selectedFile, removeImageHandler }) {
+function ImagesList({ selectedFile, fileUploadProgress, removeImageHandler }) {
+    
     return (
         <>
             <ul className='pt-4'>
                 {selectedFile.map((item, index) => {
                     return (
-                        <li key={Math.random() * 0.901 % 1.61} className='flex justify-between items-center'><span className='flex gap-2 items-center'>
+                        <li key={`ImagesList ${index * Math.random() * Date.now()}`} className='flex justify-between items-center'><span className='flex gap-2 items-center'>
                             <FontAwesomeIcon icon={faFile} />
-                            <span>{item.name}</span>
+                            <span>{item.name}</span> <span className='text-[12px]'>{fileUploadProgress? "uploading" : null}</span>
                         </span>
                             <button onClick={()=>removeImageHandler(index)}><FontAwesomeIcon icon={faTrashCan} /></button>
                         </li>

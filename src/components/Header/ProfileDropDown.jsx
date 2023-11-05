@@ -1,12 +1,18 @@
-import React from 'react'
-import {Link} from "react-router-dom"
+import React, { useEffect } from 'react'
+import {Link, useParams} from "react-router-dom"
+import { useGetMyProfileQuery, useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice'
+import { getToken } from '../../Token/token'
 
 function ProfileDropDown({signOutHandler}) {
+  const token = getToken()
+  const {user_id} = useParams()
+  const {data: userProfileData} = useGetMyProfileQuery(token)
+
     const dropDownList = [
         {
             text: "View Profile",
             icon: "none",
-            to: "/user-profile"
+            to: `/user/${userProfileData && userProfileData.myProfile && userProfileData.myProfile.u_id}`
         },
         {
             text: "settings",
@@ -22,7 +28,7 @@ function ProfileDropDown({signOutHandler}) {
       <button className='bg-[#e8e8e8] rounded-full py-2 px-4 w-[100%]'>View My Models</button>
       <ul>
         {dropDownList.map((item, index) => {
-            return <Link className='block' to={item.to} key={Math.random() * Date.now().toString(36)}>{item.text}</Link>
+            return <Link className='block' to={item.to} key={`profileDropdown ${index + Math.random() * Date.now()}`}>{item.text}</Link>
         })}
       </ul>
       <Link to="/" onClick={() => signOutHandler()} className='text-dark hover:text-[#ea4754] rounded-full transition-colors duration-100'>Sign out</Link>

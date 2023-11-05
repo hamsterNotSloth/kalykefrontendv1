@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { faBullhorn, faUpLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useGetUserProfileQuery } from "../../redux/apiCalls/apiSlice"
+import { useGetMyProfileQuery } from "../../redux/apiCalls/apiSlice"
 import ProfileDropDown from './ProfileDropDown'
 import UploaderPopUp from '../Uploader/UploaderPopUp'
 import { getToken } from '../../Token/token'
 
 const HeaderRight = () => {
   const [signUpModalStatus, setSignUpModalStatus] = useState(false)
-  const token = getToken()
   const [isProfileDropDownOpen, setIsProfileDropDownOpen] = useState(false)
-  const { data: userProfileData, refetch: profileRefetch } = useGetUserProfileQuery({ token })
-
+  const token = getToken()
+  const {data: userProfileData, refetch: profileRefetch} = useGetMyProfileQuery(token)
   const profileDropDownHandler = () => {
     setIsProfileDropDownOpen(!isProfileDropDownOpen)
   }
@@ -19,6 +18,8 @@ const HeaderRight = () => {
   const signOutHandler = async () => {
     localStorage.removeItem("userToken")
     profileRefetch()
+    window.location.reload();
+
   }
 
   return (
@@ -36,7 +37,7 @@ const HeaderRight = () => {
       <div className='relative'>
         <div>
           <button onClick={profileDropDownHandler} className='w-[41px]'>
-            <img src={userProfileData && userProfileData.userProfile.profilePicture} referrerpolicy="no-referrer" alt="profile Picture" className='rounded-full w-[100%]' />
+            <img src={userProfileData && userProfileData.myProfile.profilePicture} referrerpolicy="no-referrer" alt="profile Picture" className='rounded-full w-[100%]' />
           </button>
           {isProfileDropDownOpen && <ProfileDropDown signOutHandler={signOutHandler} />}
         </div>

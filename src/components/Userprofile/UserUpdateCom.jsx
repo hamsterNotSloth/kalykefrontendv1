@@ -7,13 +7,11 @@ import 'react-quill/dist/quill.snow.css';
 import { useUpdateUserInfoMutation } from '../../redux/apiCalls/apiSlice';
 import { toast } from "react-toastify";
 
-function UserUpdateCom({ token, userProfileData, updateProfileDetails }) {
-    useEffect(() => {
-        console.log(userProfileData.userProfile.userName, 'userProfileData')
-    }, [userProfileData])
+function UserUpdateCom({ token, userData, updateProfileDetails }) {
+    
     const [newUserInfo, setNewUserInfo] = useState({
-        userName: userProfileData.userProfile && userProfileData.userProfile.userName,
-        description: userProfileData.userProfile && userProfileData.userProfile.description,
+        userName: userData.userName,
+        description: userData.description,
         socialMedia: [
             {
                 socialMediaName: "Website",

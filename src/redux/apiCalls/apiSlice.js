@@ -17,8 +17,19 @@ export const apiSlice = createApi({
   tagTypes: ["User", "product"],
   endpoints: (builder) => ({ 
     getUserProfile: builder.query({
-      query: ({token}) => ({
-        url: "user/",
+      query: ({user_id:id, token}) => ({
+        url: `user/${id}`,
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          authorization: token
+        },
+      }),
+      providesTags: ["User"],
+    }),
+    getMyProfile: builder.query({
+      query: (token) => ({
+        url: `user/user/my-profile`,
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -73,12 +84,22 @@ export const apiSlice = createApi({
       invalidatesTags: ["User"],
     }),
     getUserproducts: builder.query({
-      query: (token) => ({
-        url: "product/my-products",
+      query: (id) => ({
+        url: `product//user-products/${id}`,
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
-          authorization: `${token}`,
+        },
+      }),
+      providesTags: ["product", "User"],
+    }),
+    getMyProducts: builder.query({
+      query: (token) => ({
+        url: `product/my-products`,
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          autherization: token
         },
       }),
       providesTags: ["product", "User"],
@@ -107,4 +128,4 @@ export const apiSlice = createApi({
     }),
   }),
 });
-export const { useUploadProductMutation, useGetproductQuery,useGetUserproductsQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
+export const { useUploadProductMutation, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;

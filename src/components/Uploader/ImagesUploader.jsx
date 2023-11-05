@@ -6,7 +6,7 @@ import DropZone from './DropZone';
 
 import ImagesList from './ImagesList';
 
-const ImagesUploader = ({uploadImageHandler, isUploadLoading, selectedFile, setSelectedFile}) => {
+const ImagesUploader = ({fileUploadProgress, uploadImageHandler, isUploadLoading, selectedFile, setSelectedFile}) => {
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
@@ -43,7 +43,7 @@ const ImagesUploader = ({uploadImageHandler, isUploadLoading, selectedFile, setS
   return (
     <>
       <DropZone uploadImageHandler={uploadImageHandler} isUploadLoading={isUploadLoading} handleFileChange={handleFileChange} />
-      {selectedFile.length > 0? <ImagesList removeImageHandler={removeImageHandler} selectedFile = {selectedFile}/> : "No files uploaded" }
+      {selectedFile.length > 0? <ImagesList fileUploadProgress={fileUploadProgress} removeImageHandler={removeImageHandler} selectedFile = {selectedFile}/> : "No files uploaded" }
     </>
   );
 };
