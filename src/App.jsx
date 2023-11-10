@@ -9,6 +9,7 @@ import UserProfilePage from "./pages/UserProfilePage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ProductNotFoundProtectedRoute from "./ProtectedRoutes/ProductNotFoundProtectRoute";
 import MyProfilePage from "./pages/MyProfilePage";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             {/* <Route path="/login" element={<Signup />} /> */}
             <Route path="/user/:user_id" element={<UserProfilePage />} />
             <Route path="/user/my-profile" element={<MyProfilePage />}/>
+            <Route path="/" element={<HomePage />}/>
             <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
           </Routes>
         </Router>

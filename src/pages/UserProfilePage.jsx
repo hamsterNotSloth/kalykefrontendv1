@@ -6,10 +6,10 @@ import { useParams } from 'react-router-dom'
 function UserProfilePage() {
   
   const {user_id} = useParams()
-  const {data: userProducts} = useGetUserproductsQuery(user_id)
+  const {data: userProducts, isLoading} = useGetUserproductsQuery(user_id)
   return (
     <>
-      <UserProfile autherizationRequired={false} userProducts={userProducts}/>
+      {isLoading? <div className='w-full h-[100vh] flex justify-center items-center'><span>Loading...</span></div> : <UserProfile autherizationRequired={false} userProducts={userProducts}/>}
     </>
   )
 }

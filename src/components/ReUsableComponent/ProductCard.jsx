@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 function ProductCard({ item, styling }) {
+    
     return (
         <div className={styling}>
             <Link to={`/products/${item._id}`} > 

@@ -1,12 +1,13 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./apiCalls/apiSlice";
-import errorReducer from './slices/errorSlice';
+import filtersSlice from './slices/filtersSlice';
 import productSlice from "./slices/productSlice";
 // import { productSlice } from "./apiCalls/productSlice";
 
 const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
   product: productSlice, 
+  filtersSlice:filtersSlice
 });
 
 export const store = configureStore({

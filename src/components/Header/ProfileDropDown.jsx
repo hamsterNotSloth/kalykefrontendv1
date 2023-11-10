@@ -6,7 +6,7 @@ import { getToken } from '../../Token/token'
 function ProfileDropDown({signOutHandler}) {
   const token = getToken()
   const {user_id} = useParams()
-  const {data: userProfileData} = useGetMyProfileQuery(token)
+  const {data: userProfileData, isLoading} = useGetMyProfileQuery(token)
 
     const dropDownList = [
         {
@@ -22,7 +22,7 @@ function ProfileDropDown({signOutHandler}) {
     ]
 
   
-
+    if(isLoading) return <div className='w-full h-[100vh] flex justify-center items-center'><span>Loading...</span></div>
   return (
     <div className='bg-white rounded-lg absolute z-10 w-[280px] right-0 py-4 px-4 shadow-md'>
       <button className='bg-[#e8e8e8] rounded-full py-2 px-4 w-[100%]'>View My Models</button>

@@ -14,7 +14,7 @@ export const apiSlice = createApi({
   //     return headers;
   // },
   }),
-  tagTypes: ["User", "product"],
+  tagTypes: ["User", "product", "descriptionProduct"],
   endpoints: (builder) => ({ 
     getUserProfile: builder.query({
       query: ({user_id:id, token}) => ({
@@ -38,6 +38,36 @@ export const apiSlice = createApi({
       }),
       providesTags: ["User"],
     }),
+    getPromotedUsers: builder.query({
+      query: (token) => ({
+        url: `user/promotion/users`,
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          authorization: `${token}`,
+        },
+      }),
+    }),
+    getAllProducts: builder.query({
+      query: (valueAtIndex ) => ({
+        url: `product/all-products?currentFilter=${valueAtIndex}`,
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+    }),
+    getSimilarProducts: builder.query({
+
+      query: ({tags, created_by}) => ({
+        url: `product/similar-modals?created_by=${created_by}&tags=${encodeURIComponent(tags)}`,
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+      providesTags: ["descriptionProduct"],
+    }),
     signInUser: builder.mutation({
       query: (data) => ({
         url: "user/",
@@ -54,6 +84,18 @@ export const apiSlice = createApi({
         url: "user/update-user",
         method: "PATCH",
         body: data,
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          authorization: `${token}`,
+        },
+      }),
+      invalidatesTags: ["User"],
+    }),
+    follow: builder.mutation({
+      query: ({token, email}) => ({
+        url: "user/follow",
+        method: "PATCH",
+        body: {email},
         headers: {
           "Content-type": "application/json; charset=UTF-8",
           authorization: `${token}`,
@@ -112,7 +154,7 @@ export const apiSlice = createApi({
           "Content-type": "application/json; charset=UTF-8",
         },
       }),
-      providesTags: ["product"],
+      providesTags: ["product", "descriptionProduct"],
     }),
     uploadProduct: builder.mutation({
       query: ({ productDetails, token }) => ({
@@ -128,4 +170,4 @@ export const apiSlice = createApi({
     }),
   }),
 });
-export const { useUploadProductMutation, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
+export const { useUploadProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;

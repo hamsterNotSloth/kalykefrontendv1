@@ -7,6 +7,7 @@ function ImagesList({ selectedFile, fileUploadProgress, removeImageHandler }) {
     return (
         <>
             <ul className='pt-4'>
+                <div className='text-[#ff0000]'>{selectedFile.length > 4? "Maximum limit is only 4 files per upload" : null}</div>
                 {selectedFile.map((item, index) => {
                     return (
                         <li key={`ImagesList ${index * Math.random() * Date.now()}`} className='flex justify-between items-center'><span className='flex gap-2 items-center'>

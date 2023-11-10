@@ -5,6 +5,7 @@ const productSlice = createSlice({
   initialState: {
     title: '',
     description: '',
+    tags: [],
     category: null,
     modalSetting: '',
     modal: [],
@@ -18,9 +19,10 @@ const productSlice = createSlice({
       return {
         title: '',
         description: '',
+        tags: [],
         category: null,
         modalSetting: '',
-        modal: null,
+        modal: [],
         images: [],
       };
     },

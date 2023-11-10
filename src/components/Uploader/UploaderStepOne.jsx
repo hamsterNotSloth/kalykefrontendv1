@@ -22,7 +22,6 @@ const UploaderStepOne = ({ setCurrentLevel }) => {
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      console.log(file,' file')
       setSelectedFile([...selectedFiles, file]);
     }
   }
@@ -102,7 +101,7 @@ const UploaderStepOne = ({ setCurrentLevel }) => {
       <DropZone handleFileChange={handleFileChange} />
       {selectedFiles.length > 0? <ImagesList fileUploadProgress={fileUploadProgress} removeImageHandler={removeImageHandler} selectedFile = {selectedFiles}/> : "No files uploaded" }
       <div>
-        <button onClick={uploadFileHandler} className="bg-blue-500 mt-3 text-white px-4 py-2 rounded hover:bg-blue-600">
+        <button disabled={selectedFiles.length > 4} onClick={uploadFileHandler} className="bg-blue-500 mt-3 text-white px-4 py-2 rounded hover:bg-blue-600">
           {isUploadLoading ? 'Processing...' : "Next"}
         </button>
       </div>
