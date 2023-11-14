@@ -19,8 +19,8 @@ function UserStatistics({ count, text, icon }) {
       count: userProfile && userProfile.profile && userProfile.profile.following?.length || 0
     },
     {
-      title: "Following",
-      count: userProfile && userProfile.profile && userProfile.profile.followers?.length
+      title: "Total Views",
+      count: userProfile && userProfile.views
     },
     {
       title: "Following",

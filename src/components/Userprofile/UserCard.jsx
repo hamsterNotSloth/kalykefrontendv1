@@ -7,35 +7,36 @@ import { getToken } from '../../Token/token';
 import { useParams } from 'react-router-dom';
 import ProfileUpdatePopup from './ProfileUpdatePopup';
 
-function UserCard({ autherizationRequired }) {
+function UserCard() {
     const [profileImage, setProfileImage] = useState()
     const token = getToken()
     const { user_id } = useParams()
     const { data: userProfile, isLoading, refetch: userProfileRefetch } = useGetUserProfileQuery({ user_id, token })
+    
     const [newUserInfo, setNewUserInfo] = useState({
-        userName: userProfile?.profile?.userName,
-        description: userProfile?.profile?.description,
-        profilePicture: userProfile?.profile?.profilePicture,
+        userName: null,
+        description: null,
+        profilePicture: null,
         socialMedia: [
             {
                 socialMediaName: "Website",
-                link: ""
+                link: null
             },
             {
                 socialMediaName: "Instagram",
-                link: ""
+                link: null
             },
             {
                 socialMediaName: "Facebook",
-                link: ""
+                link: null
             },
             {
                 socialMediaName: "Youtube",
-                link: ""
+                link: null
             },
             {
                 socialMediaName: "Linkedin",
-                link: ""
+                link: null
             }
         ]
     })
@@ -59,7 +60,7 @@ function UserCard({ autherizationRequired }) {
             </button> : null}
             <div className='h-[150px] w-[150px] relative rounded-full mb-7'>
                 {updateComponentToggler ? <button className='absolute right-0' onClick={() => setUpdateImageToggler(true)}><FontAwesomeIcon icon={faPenToSquare} /></button> : null}
-                {updateImageToggler ? <ProfileUpdatePopup newUserInfo={newUserInfo} setNewUserInfo={setNewUserInfo} profileImage={profileImage} setProfileImage={setProfileImage} setUpdateImageToggler={setUpdateImageToggler} /> : null}
+                {updateImageToggler ? <ProfileUpdatePopup userProfile={userProfile} newUserInfo={newUserInfo} setNewUserInfo={setNewUserInfo} profileImage={profileImage} setProfileImage={setProfileImage} setUpdateImageToggler={setUpdateImageToggler} /> : null}
                 <div className='w-full h-full'>
                     <img
                         src={userProfile && userProfile.profile && userProfile.profile.profilePicture ? userProfile.profile.profilePicture : 'No image'}
@@ -79,7 +80,7 @@ function UserCard({ autherizationRequired }) {
                         </button>
                     ) : null}
 
-                    {updateComponentToggler && <UserUpdateCom newUserInfo={newUserInfo} setNewUserInfo={setNewUserInfo} token={token} updateProfileDetails={updateProfileDetails} />}
+                    {updateComponentToggler && <UserUpdateCom newUserInfo={newUserInfo} userProfile={userProfile} setNewUserInfo={setNewUserInfo} token={token} updateProfileDetails={updateProfileDetails} />}
                 </>
             )}
 

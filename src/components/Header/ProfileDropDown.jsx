@@ -12,7 +12,7 @@ function ProfileDropDown({signOutHandler}) {
         {
             text: "View Profile",
             icon: "none",
-            to: `/user/${userProfileData && userProfileData.myProfile && userProfileData.myProfile.u_id}`
+            to: `/user/${userProfileData?.myProfile?.u_id}`
         },
         {
             text: "settings",
@@ -25,7 +25,9 @@ function ProfileDropDown({signOutHandler}) {
     if(isLoading) return <div className='w-full h-[100vh] flex justify-center items-center'><span>Loading...</span></div>
   return (
     <div className='bg-white rounded-lg absolute z-10 w-[280px] right-0 py-4 px-4 shadow-md'>
-      <button className='bg-[#e8e8e8] rounded-full py-2 px-4 w-[100%]'>View My Models</button>
+      <div className='flex'>
+      <Link to={`/user/${userProfileData?.myProfile?.u_id}`} className='bg-[#e8e8e8] flex justify-center rounded-full py-2 px-4 w-[100%]'>View My Models</Link>
+      </div>
       <ul>
         {dropDownList.map((item, index) => {
             return <Link className='block' to={item.to} key={`profileDropdown ${index + Math.random() * Date.now()}`}>{item.text}</Link>

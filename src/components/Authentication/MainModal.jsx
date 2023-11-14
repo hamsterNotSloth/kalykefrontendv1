@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../ReUsableComponent/Button";
+import Button from "../Common/Button";
 import Conditions from "./Conditions";
 
 function MainModal({ buttonItems, goToLoginHandler }) {

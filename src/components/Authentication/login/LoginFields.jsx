@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import {  useSignInUserMutation } from "../../../redux/apiCalls/apiSlice";
-import InputFields from "../../ReUsableComponent/InputFields";
+import InputFields from "../../Common/InputFields";
 import { toast } from "react-toastify";
 import { auth } from "../../../config/config";
 import { signInWithEmailAndPassword } from "firebase/auth";

@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import UserCard from "./UserCard"
 import UserStatistics from './UserStatistics'
 import {  faUser } from '@fortawesome/free-solid-svg-icons'
-import ProductCard from '../ReUsableComponent/ProductCard'
+import ProductCard from '../Common/ProductCard'
 
-function UserProfile({ autherizationRequired, userProducts }) {
+function UserProfile({  userProducts }) {
 
   return (
     <div className='max-w-[1200px] flex justify-between mx-auto py-7'>
-      <UserCard autherizationRequired={autherizationRequired} />
+      <UserCard  />
       <div className='w-[100%] ml-[70px]'>
         <UserStatistics count={0} text={"Followers"} icon={faUser} />
         <div className='flex flex-wrap gap-4'>

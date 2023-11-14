@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { useUserViewedProductMutation } from '../../redux/apiCalls/apiSlice'
+import { getToken } from '../../Token/token'
 
 function ProductCard({ item, styling }) {
-    
     return (
         <div className={styling}>
             <Link to={`/products/${item._id}`} > 

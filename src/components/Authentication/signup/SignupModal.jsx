@@ -1,5 +1,5 @@
 import React from "react";
-import InputFields from "../../ReUsableComponent/InputFields";
+import InputFields from "../../Common/InputFields";
 import Policy from "./Policy";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";

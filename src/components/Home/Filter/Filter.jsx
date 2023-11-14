@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearFilter, setFilter } from '../../../redux/slices/filtersSlice';
 
 function Filter() {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(1);
   const currentFilter = useSelector((state) => state.filtersSlice);
   const { refetch: refetchAllProducts } = useGetAllProductsQuery(currentFilter);
   const dispatch = useDispatch();
 
-  const filterList = ["Trending", "New Uploads", "From top designers", "Default"];
+  const filterList = ["Trending", "New Uploads", "From top users"];
 
   const handleClick = (index) => {
     setActiveIndex(index);

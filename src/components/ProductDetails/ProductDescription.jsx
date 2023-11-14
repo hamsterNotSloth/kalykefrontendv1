@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useGetSimilarProductsQuery } from '../../redux/apiCalls/apiSlice'
-import ProductCard from '../ReUsableComponent/ProductCard';
+import ProductCard from '../Common/ProductCard';
 
 function ProductDescription({ productDetails }) {
   const tagsString = productDetails && productDetails.product && productDetails.product.tags.join(','); 

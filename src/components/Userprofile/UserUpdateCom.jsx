@@ -7,7 +7,7 @@ import 'react-quill/dist/quill.snow.css';
 import { useUpdateUserInfoMutation } from '../../redux/apiCalls/apiSlice';
 import { toast } from "react-toastify";
 
-function UserUpdateCom({ newUserInfo, setNewUserInfo,token,  updateProfileDetails }) {
+function UserUpdateCom({ newUserInfo, setNewUserInfo,token,  updateProfileDetails, userProfile }) {
     
 
     const [updateUserInfo] = useUpdateUserInfoMutation()
@@ -32,12 +32,11 @@ function UserUpdateCom({ newUserInfo, setNewUserInfo,token,  updateProfileDetail
         <form type='Submit' className='w-[100%]'>
             <div className='mb-3'>
                 <label className='text-[16px] font-semibold'>Name</label>
-                <input type="text" onChange={(e) => { setNewUserInfo({ ...newUserInfo, userName: e.target.value }) }} className='border-[1px] outline-none border-[#bbbbbb] focus:outline-none  border rounded-sm w-[100%] my-1 p-2' placeholder={newUserInfo.userName} />
+                <input type="text" onChange={(e) => { setNewUserInfo({ ...newUserInfo, userName: e.target.value }) }} className='border-[1px] outline-none border-[#bbbbbb] focus:outline-none  border rounded-sm w-[100%] my-1 p-2' placeholder={userProfile?.profile?.userName} />
             </div>
             <div className='mt-2'>
                 <label className='text-[16px] font-semibold'>Description</label>
                 <ReactQuill
-                    value={newUserInfo.description}
                     onChange={(text) => { setNewUserInfo({ ...newUserInfo, description: text }) }}
                     modules={{
                         toolbar: [

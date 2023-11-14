@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useGetPromotedUsersQuery } from '../../../redux/apiCalls/apiSlice';
-import Followbtn from "../../ReUsableComponent/FollowBtn"
+import Followbtn from "../../Common/FollowBtn"
 import {Link} from "react-router-dom"
 
 function BannerSlide({ item }) {

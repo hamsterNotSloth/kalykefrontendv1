@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useFollowMutation, useGetMyProfileQuery } from '../../redux/apiCalls/apiSlice'
 import { getToken } from '../../Token/token'
 import { toast } from 'react-toastify'
 
 function Followbtn({productDetails, style}) {
-  
     const token = getToken()
     const {data: myProfileData} = useGetMyProfileQuery(token)
-    const [follow] = useFollowMutation() 
+    const [follow, {isLoading}] = useFollowMutation() 
     
     const followUserHandler = async() => {
       let email;
@@ -33,7 +32,7 @@ function Followbtn({productDetails, style}) {
      
   return (
     <>
-      <button  onClick={followUserHandler} className={style}> {myProfileData?.myProfile?.following.includes(productDetails?.user?.email) || myProfileData?.myProfile?.following.includes(productDetails?.email)? "UnFollow" : "Follow"}</button>
+      <button disabled={isLoading} onClick={followUserHandler} className={`${style} ${isLoading? `bg-[#d9d9d9]` : ``}`}> {myProfileData?.myProfile?.following.includes(productDetails?.user?.email) || myProfileData?.myProfile?.following.includes(productDetails?.email)? "UnFollow" : "Follow"}</button>
     </>
   )
 }

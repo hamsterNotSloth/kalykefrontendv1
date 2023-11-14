@@ -4,7 +4,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React from 'react'
 import { storage } from '../../config/config';
 
-function ProfileUpdatePopup({ newUserInfo, setNewUserInfo, userData, setUpdateImageToggler,profileImage, setProfileImage }) {
+function ProfileUpdatePopup({ newUserInfo, userProfile, setNewUserInfo, userData, setUpdateImageToggler,profileImage, setProfileImage }) {
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -41,7 +41,8 @@ const handleFileUpload = async (e) => {
               <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
               <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
             </div>
-            <input id="dropzone-file" type="file" name="image" accept=".png, .jpg, .jpeg" onChange={handleFileChange} className="hidden" />
+            <input id="dropzone-file" type="file" name="image" accept=".png, .jpg, .jpeg" onChange={handleFileChange} 
+                    value={userProfile?.profile?.profilePicture} className="hidden" />
           </label>
         </div>
         <div className='flex justify-end pt-4 gap-3'>

@@ -133,7 +133,7 @@ export const apiSlice = createApi({
           "Content-type": "application/json; charset=UTF-8",
         },
       }),
-      providesTags: ["product", "User"],
+      providesTags: ["product"],
     }),
     getMyProducts: builder.query({
       query: (token) => ({
@@ -168,6 +168,17 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["product"],
     }),
+    userViewedProduct: builder.mutation({
+      query: ({ id, token }) => ({
+        url: `product/${id}`,
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "authorization": token
+        },
+      }),
+      invalidatesTags: ["product"],
+    }),
   }),
 });
-export const { useUploadProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
+export const { useUploadProductMutation, useUserViewedProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
