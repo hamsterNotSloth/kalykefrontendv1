@@ -13,6 +13,9 @@ const HeaderLeft = () => {
           <button>Explore</button>
           <FontAwesomeIcon icon={faCaretDown} />
         </div>
+        <div className='flex gap-[6px] items-center'>
+          <Link to={'/coming-soon'}>Memberships</Link>
+        </div>
       </div>
     </>
   )

@@ -10,6 +10,8 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ProductNotFoundProtectedRoute from "./ProtectedRoutes/ProductNotFoundProtectRoute";
 import MyProfilePage from "./pages/MyProfilePage";
 import HomePage from "./pages/HomePage";
+import ComingSoonPage from "./pages/ComingSoonPage";
+import LicensePage from "./pages/LicensePage";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
             <Route path="/user/my-profile" element={<MyProfilePage />}/>
             <Route path="/" element={<HomePage />}/>
             <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
+            <Route path="/coming-soon" element={<ComingSoonPage />}/>
+            <Route path="/licenses" element={<LicensePage />} />
           </Routes>
         </Router>
       </div>
