@@ -49,8 +49,8 @@ export const apiSlice = createApi({
       }),
     }),
     getAllProducts: builder.query({
-      query: (valueAtIndex ) => ({
-        url: `product/all-products?currentFilter=${valueAtIndex}`,
+      query: ({filter="null", category="null"}) => ({
+        url: `product/all-products?category=${category}&currentFilter=${filter}`,
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",

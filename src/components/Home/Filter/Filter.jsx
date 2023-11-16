@@ -1,33 +1,33 @@
 import React, { useState } from 'react';
-import { useGetAllProductsQuery } from '../../../redux/apiCalls/apiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearFilter, setFilter } from '../../../redux/slices/filtersSlice';
 
 function Filter() {
   const [activeIndex, setActiveIndex] = useState(1);
   const currentFilter = useSelector((state) => state.filtersSlice);
-  const { refetch: refetchAllProducts } = useGetAllProductsQuery(currentFilter);
   const dispatch = useDispatch();
 
   const filterList = ["Trending", "New Uploads", "From top users"];
+  const categoryFilter = ["Hollaween", "Animals", "Arts & Entertainment", "Devices"]
 
   const handleClick = (index) => {
     setActiveIndex(index);
     querySelectorHandler(index);
   };
 
-  const querySelectorHandler = async (index) => {
+  const querySelectorHandler =  (index) => {
     let valueAtIndex;
     if (index >= 0 && index < filterList.length) {
       valueAtIndex = filterList[index];
-      await dispatch(setFilter(valueAtIndex));
+       dispatch(setFilter({...currentFilter, filter: valueAtIndex}));
     } else {
       console.log("Index is out of bounds");
     }
-    if(valueAtIndex == "Default") {
-     return dispatch(clearFilter())
-    }
-    refetchAllProducts(valueAtIndex);
+  };
+
+  const handleCategoryChange = (e) => {
+    const category = e.target.value;
+    dispatch(setFilter({...currentFilter, category: category}));
   };
 
   return (
@@ -42,6 +42,18 @@ function Filter() {
             {item}
           </button>
         ))}
+      <select className='px-7'
+        id="category"
+        onChange={handleCategoryChange}
+        value={currentFilter.category}
+      >
+        <option value="null">Select Category</option>
+        {categoryFilter.map((category, index) => (
+          <option key={index} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
       </div>
     </div>
   );
