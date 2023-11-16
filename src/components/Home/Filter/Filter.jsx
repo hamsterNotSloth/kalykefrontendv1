@@ -49,7 +49,7 @@ function Filter() {
       >
         <option value="null">Select Category</option>
         {categoryFilter.map((category, index) => (
-          <option key={index} value={category}>
+          <option key={`Category Filter at Homepage ${index} ${Math.random() * Date.now()}`} value={category}>
             {category}
           </option>
         ))}

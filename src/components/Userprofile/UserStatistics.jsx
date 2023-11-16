@@ -40,7 +40,7 @@ function UserStatistics({ count, text, icon }) {
     <div className='flex mb-20 justify-between'>
       {statistics.map(item => {
         return (
-          <div className='bg-white rounded-lg w-[150px] h-[120px] flex flex-col items-center justify-center p-3'>
+          <div key={`userprofile statistics ${Math.random() * Date.now()}`} className='bg-white rounded-lg w-[150px] h-[120px] flex flex-col items-center justify-center p-3'>
             <div className='bg-[#999999] flex items-center justify-center w-[30px] h-[30px] rounded-full'>
               <FontAwesomeIcon icon={icon} className='text-white' />
             </div>
