@@ -10,7 +10,6 @@ const ProductNotFoundProtectedRoute = () => {
 const navigate = useNavigate();
   useEffect(() => {
     if (!productDetails && productDetailsError) {
-      console.log(productDetailsError,'productDetailsError')
       return navigate("/not-found", { state: { errorStatus: productDetailsError } });
     }
   }, [productDetails, id, productDetailsError]);

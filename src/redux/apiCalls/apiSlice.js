@@ -6,13 +6,6 @@ export const apiSlice = createApi({
   reducerPath: "apiSlice",
   baseQuery: fetchBaseQuery({
     baseUrl: `${backendBaseUrl}/api/`,
-  //   prepareHeaders: (headers, { getState }) => {
-  //     const token = Token();
-  //     if (token) {
-  //       headers.set('authorization', `${token}`);
-  //     }
-  //     return headers;
-  // },
   }),
   tagTypes: ["User", "product", "descriptionProduct"],
   endpoints: (builder) => ({ 
@@ -50,7 +43,7 @@ export const apiSlice = createApi({
     }),
     getAllProducts: builder.query({
       query: ({filter="null", category="null"}) => ({
-        url: `product/all-products?category=${category}&currentFilter=${filter}`,
+        url: `product/all-products?category=${encodeURIComponent(category)}&currentFilter=${filter}`,
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",

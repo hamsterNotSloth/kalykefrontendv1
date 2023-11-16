@@ -22,17 +22,19 @@ function App() {
           <Header />
           <Routes>
             <Route path="*" element={<NotFoundPage />} />
+            <Route path="/" element={<HomePage />}/>
             <Route path="/not-found" element={<NotFoundPage />} />
             <Route element={<ProductNotFoundProtectedRoute />}>
               <Route path="/products/:id" element={<ProductDetailsPage />} />
             </Route>
-            {/* <Route path="/login" element={<Signup />} /> */}
             <Route path="/user/:user_id" element={<UserProfilePage />} />
             <Route path="/user/my-profile" element={<MyProfilePage />}/>
-            <Route path="/" element={<HomePage />}/>
-            <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
             <Route path="/coming-soon" element={<ComingSoonPage />}/>
             <Route path="/licenses" element={<LicensePage />} />
+
+            {/* <Route path="/login" element={<Signup />} /> */}
+            <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
+
           </Routes>
         </Router>
       </div>

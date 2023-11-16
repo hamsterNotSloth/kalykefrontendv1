@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateProductDetails } from '../../redux/slices/productSlice';
 import ImagesList from './ImagesList';
 import { getToken } from '../../Token/token';
-import { useParams } from 'react-router-dom';
 
 const UploaderStepOne = ({ setCurrentLevel }) => {
   const [isUploadLoading, setIsUploadLoading] = useState(false)
@@ -17,13 +16,15 @@ const UploaderStepOne = ({ setCurrentLevel }) => {
   const dispatch = useDispatch();
   const token = getToken()
   const productDetails = useSelector((state) => state.product);
-  const { data: userProfileData } = useGetMyProfileQuery( token )
+  const { data: userProfileData } = useGetMyProfileQuery(token)
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
-    console.log(file,'file')
     if (file) {
-      setSelectedFile([...selectedFiles, file]);
+      if (file.type !== "application/x-compressed") {
+        return toast.error("You can only upload a single zipfile. Zip file should contain all modals")
+      }
+        setSelectedFile([...selectedFiles, file]);
     }
   }
 
@@ -93,14 +94,14 @@ const UploaderStepOne = ({ setCurrentLevel }) => {
   // }
 
   const removeImageHandler = (id) => {
-    const imageExist = selectedFiles.filter((item,index) => index !== id) 
+    const imageExist = selectedFiles.filter((item, index) => index !== id)
     setSelectedFile(imageExist)
   }
 
   return (
     <>
       <DropZone handleFileChange={handleFileChange} />
-      {selectedFiles.length > 0? <ImagesList fileUploadProgress={fileUploadProgress} removeImageHandler={removeImageHandler} selectedFile = {selectedFiles}/> : "No files uploaded" }
+      {selectedFiles.length > 0 ? <ImagesList fileUploadProgress={fileUploadProgress} removeImageHandler={removeImageHandler} selectedFile={selectedFiles} /> : "No files uploaded"}
       <div>
         <button disabled={selectedFiles.length > 4} onClick={uploadFileHandler} className="bg-blue-500 mt-3 text-white px-4 py-2 rounded hover:bg-blue-600">
           {isUploadLoading ? 'Processing...' : "Next"}

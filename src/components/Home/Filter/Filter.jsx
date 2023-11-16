@@ -8,7 +8,7 @@ function Filter() {
   const dispatch = useDispatch();
 
   const filterList = ["Trending", "New Uploads", "From top users"];
-  const categoryFilter = ["Hollaween", "Animals", "Arts & Entertainment", "Devices"]
+  const categoryFilter = ["Animals", "Arts & Entertainment", "Autos & Vehicles", "Business & Industrial", "Devices", "Food & Drink", "Gridfinity", "Health & Fitness", "Hobbies & Games", "Home & Garden", "People", "Pop Culture", "mask"]
 
   const handleClick = (index) => {
     setActiveIndex(index);

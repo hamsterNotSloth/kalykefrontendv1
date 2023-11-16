@@ -14,9 +14,7 @@ function DownloadScreen({ productDetails }) {
   const get_url_extension = (url) => {
     return downloadLink.split(/[#?]/)[0].split('.').pop().trim();
   }
-  useEffect(() => {
-    console.log(productDetails?.product?.modal[0].downloadLink)
-  }, [productDetails])
+  
   const downloadImageHandler = () => {
     let xhr = new XMLHttpRequest();
     xhr.responseType = 'blob';

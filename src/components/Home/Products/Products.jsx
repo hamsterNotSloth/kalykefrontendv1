@@ -14,6 +14,7 @@ function Products() {
   if (isLoading || isFetching) return <div className='flex items-center justify-center h-[100vh] w-full'><ClimbingBoxLoader color={"#000"} size={20} aria-label="Loading Spinner" data-testid="loader" /></div>
   return (
     <div className='flex gap-4 flex-wrap p-4 max-w-[1700px] mx-auto'>
+      {productsData?.allProducts?.length <= 0? <span>No Available Products!</span> : null}
       {productsData?.allProducts?.map(item => {
         return <ProductCard item={item} styling={"w-[200px] h-[200px]"} />
       })}

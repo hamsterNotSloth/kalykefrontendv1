@@ -31,9 +31,6 @@ const HeaderRight = () => {
           <FontAwesomeIcon icon={faUpLong} className='text-[#ffff] text-[21px]' />
         </button>
       </div>
-      <div className='w-[40px] h-[40px] bg-[#8d8d91] justify-center rounded-[90px] flex items-center'>
-        <FontAwesomeIcon icon={faBullhorn} className='text-[#ffff] text-[21px]' />
-      </div>
       <div className='relative'>
         <div>
           <button onClick={profileDropDownHandler} className='w-[41px]'>
