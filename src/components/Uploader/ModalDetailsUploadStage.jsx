@@ -12,9 +12,10 @@ import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes, uploadBytes
 import { mainCartegories } from './categories';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import Quill from '../Common/Quil';
 
 
-function UploaderStepTwo({ setCurrentLevel }) {
+function ModalDetailsUploadStage({ setCurrentLevel }) {
   const [selectedFile, setSelectedFile] = useState([]);
   const [hashtags, setHashtags] = useState([]);
   const [hashTagValue, setHashTagValue] = useState('');
@@ -28,20 +29,14 @@ function UploaderStepTwo({ setCurrentLevel }) {
     category: null,
     modalSetting: ''
   });
-
+  const descriptionHandler = (value) => {
+    setDetails({ ...details, description: value })
+  }
 
   const dispatch = useDispatch()
   const productDetails = useSelector((state) => state.product);
 
-  const modules = {
-    toolbar: {
-      container: [
-        ['bold', 'italic', 'underline', 'list'],
-      ],
-    },
-  };
-
-  const formats = ['bold', 'italic', 'underline', 'list'];
+ 
 
   // const productDescriptionHandler = () => {
   //   dispatch(updateProductDetails({ ...productDetails, title: details.title, description: details.description, modalSetting: details.modalSetting }));
@@ -125,13 +120,7 @@ function UploaderStepTwo({ setCurrentLevel }) {
       </div>
       <div className='mt-3'>
         <label className='text-[16px] font-semibold'>Description</label>
-        <ReactQuill
-          theme="snow"
-          value={details.description}
-          modules={modules}
-          formats={formats}
-          onChange={(value) => setDetails({ ...details, description: value })}
-        />
+        <Quill descriptionHandler={descriptionHandler} description={details.description} />
       </div>
       <div className='mt-3'>
         <label className='text-[16px] font-semibold'>Tags(Tag should start with #)</label>
@@ -183,4 +172,4 @@ function UploaderStepTwo({ setCurrentLevel }) {
   );
 }
 
-export default UploaderStepTwo;
+export default ModalDetailsUploadStage;

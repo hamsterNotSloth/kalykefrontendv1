@@ -6,6 +6,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useUpdateUserInfoMutation } from '../../redux/apiCalls/apiSlice';
 import { toast } from "react-toastify";
+import Quill from '../Common/Quil';
 
 function UserUpdateCom({ newUserInfo, setNewUserInfo,token,  updateProfileDetails, userProfile }) {
     
@@ -27,7 +28,9 @@ function UserUpdateCom({ newUserInfo, setNewUserInfo,token,  updateProfileDetail
     }
 
     const socialMedia = [faGlobe, faInstagram, faFacebook, faYoutube, faLinkedin]
-
+    const descriptionHandler = (text) => {
+        setNewUserInfo({ ...newUserInfo, description: text })
+      }
     return (
         <form type='Submit' className='w-[100%]'>
             <div className='mb-3'>
@@ -36,16 +39,7 @@ function UserUpdateCom({ newUserInfo, setNewUserInfo,token,  updateProfileDetail
             </div>
             <div className='mt-2'>
                 <label className='text-[16px] font-semibold'>Description</label>
-                <ReactQuill
-                    onChange={(text) => { setNewUserInfo({ ...newUserInfo, description: text }) }}
-                    modules={{
-                        toolbar: [
-                            ['bold', 'italic', 'underline'],
-                            ['link'],
-                            ['clean']
-                        ]
-                    }}
-                />
+                <Quill descriptionHandler={descriptionHandler} description={newUserInfo.description}/>
             </div>
             <div className='mt-6'>
                 <label className='text-[16px] font-semibold'>Social media links.</label>

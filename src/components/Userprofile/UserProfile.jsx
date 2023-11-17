@@ -11,6 +11,7 @@ function UserProfile({  userProducts }) {
       <UserCard  />
       <div className='w-[100%] ml-[70px]'>
         <UserStatistics count={0} text={"Followers"} icon={faUser} />
+        <span className='font-semibold text-[18px] inline-block pb-2'>Modals</span>
         <div className='flex flex-wrap gap-4'>
           {userProducts && userProducts.myProducts && userProducts.myProducts.map((item) => {
             return <ProductCard key={`Userprofile ${Math.random() * Date.now()}`} item={item} userProducts={userProducts} styling={"w-[230px] h-[300px]"} />

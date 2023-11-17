@@ -21,14 +21,6 @@ function UserStatistics({ count, text, icon }) {
     {
       title: "Total Views",
       count: userProfile && userProfile.views
-    },
-    {
-      title: "Following",
-      count: userProfile && userProfile.profile && userProfile.profile.followers?.length
-    },
-    {
-      title: "Following",
-      count: userProfile && userProfile.profile && userProfile.profile.followers?.length
     }
   ]
 
@@ -37,7 +29,9 @@ function UserStatistics({ count, text, icon }) {
   }, [user_id])
 
   return (
-    <div className='flex mb-20 justify-between'>
+    <>
+    <span className='font-semibold inline-block pb-2 text-[18px]'>User Statistics:</span>
+      <div className='flex mb-20 gap-2'>
       {statistics.map(item => {
         return (
           <div key={`userprofile statistics ${Math.random() * Date.now()}`} className='bg-white rounded-lg w-[150px] h-[120px] flex flex-col items-center justify-center p-3'>
@@ -50,6 +44,7 @@ function UserStatistics({ count, text, icon }) {
         )
       })}
     </div>
+    </>
   )
 }
 

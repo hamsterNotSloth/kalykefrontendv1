@@ -27,7 +27,7 @@ function ProductDescription({ productDetails }) {
       </div>
       <div className='mt-5'>
         <h4 className='text-[21px] font-semibold'>Modal Settings</h4>
-        <span>{productDetails && productDetails.product.setting ? productDetails.product.setting : "This modal has no setting"}</span>
+        <span>{productDetails && productDetails.product.modalSetting ? productDetails.product.modalSetting : "This modal has no setting"}</span>
       </div>
       <div className='mt-5'>
         <h4 className='text-[21px] font-semibold'>Similar Products</h4>

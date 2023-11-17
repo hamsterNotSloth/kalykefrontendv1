@@ -2,23 +2,18 @@ import React, { useEffect } from 'react'
 import {Link, useParams} from "react-router-dom"
 import { useGetMyProfileQuery, useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice'
 import { getToken } from '../../Token/token'
+import { toast } from 'react-toastify'
 
 function ProfileDropDown({signOutHandler}) {
   const token = getToken()
-  const {user_id} = useParams()
   const {data: userProfileData, isLoading} = useGetMyProfileQuery(token)
-
+  
     const dropDownList = [
         {
             text: "View Profile",
             icon: "none",
             to: `/user/${userProfileData?.myProfile?.u_id}`
-        },
-        {
-            text: "settings",
-            icon: "none",
-            to: "none"
-        },
+        }
     ]
 
   

@@ -51,7 +51,6 @@ export const apiSlice = createApi({
       }),
     }),
     getSimilarProducts: builder.query({
-
       query: ({tags, created_by}) => ({
         url: `product/similar-modals?created_by=${created_by}&tags=${encodeURIComponent(tags)}`,
         method: "GET",
@@ -126,7 +125,7 @@ export const apiSlice = createApi({
           "Content-type": "application/json; charset=UTF-8",
         },
       }),
-      providesTags: ["product"],
+      providesTags: ["User"],
     }),
     getMyProducts: builder.query({
       query: (token) => ({
@@ -147,7 +146,7 @@ export const apiSlice = createApi({
           "Content-type": "application/json; charset=UTF-8",
         },
       }),
-      providesTags: ["product", "descriptionProduct"],
+      providesTags: ["descriptionProduct"],
     }),
     uploadProduct: builder.mutation({
       query: ({ productDetails, token }) => ({
@@ -170,7 +169,6 @@ export const apiSlice = createApi({
           "authorization": token
         },
       }),
-      invalidatesTags: ["product"],
     }),
   }),
 });

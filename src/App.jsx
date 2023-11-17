@@ -4,7 +4,7 @@ import NotFoundPage from "./pages/NotFoundPage"
 import ForgotPassword from "./components/Authentication/ForgotPassword";
 import ResetPassword from "./components/Authentication/ResetPassword";
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import UserProfilePage from "./pages/UserProfilePage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ProductNotFoundProtectedRoute from "./ProtectedRoutes/ProductNotFoundProtectRoute";
@@ -12,8 +12,12 @@ import MyProfilePage from "./pages/MyProfilePage";
 import HomePage from "./pages/HomePage";
 import ComingSoonPage from "./pages/ComingSoonPage";
 import LicensePage from "./pages/LicensePage";
+import { getToken } from "./Token/token";
+import { useEffect } from "react";
+import {  useGetMyProfileQuery } from "./redux/apiCalls/apiSlice";
 
 function App() {
+
   return (
     <>
       <div className="bg-[#f4f4f4]">

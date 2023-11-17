@@ -6,7 +6,7 @@ import { getToken } from '../../Token/token';
 import { resetProductDetails, updateProductDetails } from '../../redux/slices/productSlice';
 import { Link } from 'react-router-dom';
 
-function UploaderStepThree() {
+function ModalConfirmUploadStage() {
   const [uploadProduct, { isLoading }] = useUploadProductMutation()
   const token = getToken()
   const dispatch = useDispatch()
@@ -30,4 +30,4 @@ function UploaderStepThree() {
   )
 }
 
-export default UploaderStepThree
+export default ModalConfirmUploadStage

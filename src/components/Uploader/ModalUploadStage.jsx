@@ -9,7 +9,7 @@ import { updateProductDetails } from '../../redux/slices/productSlice';
 import ImagesList from './ImagesList';
 import { getToken } from '../../Token/token';
 
-const UploaderStepOne = ({ setCurrentLevel }) => {
+const ModalUploadStage = ({ setCurrentLevel }) => {
   const [isUploadLoading, setIsUploadLoading] = useState(false)
   const [selectedFiles, setSelectedFile] = useState([])
   const [fileUploadProgress, setFileUploadProgress] = useState(false);
@@ -111,4 +111,4 @@ const UploaderStepOne = ({ setCurrentLevel }) => {
   );
 };
 
-export default UploaderStepOne;
+export default ModalUploadStage;
