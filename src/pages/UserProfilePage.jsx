@@ -11,7 +11,7 @@ function UserProfilePage() {
   if (isLoading ) return <div className='flex items-center justify-center h-[100vh] w-full'><ClimbingBoxLoader color={"#000"} size={20} aria-label="Loading Spinner" data-testid="loader" /></div>
   return (
     <>
-{/*       <UserProfile autherizationRequired={false} userProducts={userProducts}/> */}
+      <UserProfile />
       test
     </>
   )
