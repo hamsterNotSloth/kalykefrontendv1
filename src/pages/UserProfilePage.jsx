@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-// import UserProfile from '../components/UserProfile/UserProfile'
+import UserProfile from '../components/UserProfile/UserProfile'
 import { useGetUserproductsQuery } from '../redux/apiCalls/apiSlice'
 import { useParams } from 'react-router-dom'
 import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader'
