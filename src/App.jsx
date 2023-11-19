@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import UserProfilePage from "./pages/UserProfilePage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ProductNotFoundProtectedRoute from "./ProtectedRoutes/ProductNotFoundProtectRoute";
-import MyProfilePage from "./pages/MyProfilePage";
+// import MyProfilePage from "./pages/MyProfilePage";
 import HomePage from "./pages/HomePage";
 import ComingSoonPage from "./pages/ComingSoonPage";
 import LicensePage from "./pages/LicensePage";
@@ -32,7 +32,7 @@ function App() {
               <Route path="/products/:id" element={<ProductDetailsPage />} />
             </Route>
             <Route path="/user/:user_id" element={<UserProfilePage />} />
-            <Route path="/user/my-profile" element={<MyProfilePage />}/>
+{/*             <Route path="/user/my-profile" element={<MyProfilePage />}/> */}
             <Route path="/coming-soon" element={<ComingSoonPage />}/>
             <Route path="/licenses" element={<LicensePage />} />
 
