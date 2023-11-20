@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import UserProfile from '../components/UserProfile/UserProfile'
+// import UserProfile from '../components/UserProfile/UserProfile'
 import { useGetMyProductsQuery, useGetMyProfileQuery, useGetUserproductsQuery } from '../redux/apiCalls/apiSlice'
 import { getToken } from '../Token/token'
 import { useParams } from 'react-router-dom'
