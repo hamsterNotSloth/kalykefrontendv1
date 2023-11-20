@@ -9,12 +9,12 @@ import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 function MyProfilePage() {
   const token = getToken()
   const { user_id } = useParams()
-  const { data: userProducts, isLoading, isFetching, isError } = useGetMyProductsQuery(token)
-  if (!isLoading || !isFetching) return <div className='flex items-center justify-center h-[100vh] w-full'><ClimbingBoxLoader color={"#000"} size={20} aria-label="Loading Spinner" data-testid="loader" /></div>
-  if(isError) return <div>Something went wrong</div>
+  const { data: userProducts, isLoading,error,  isFetching, isError } = useGetMyProductsQuery(token)
+  if(isError) return <div className='flex items-center justify-center h-[100vh] w-full'>Something went wrong</div>
+  if (isLoading || isFetching) return <div className='flex items-center justify-center h-[100vh] w-full'><ClimbingBoxLoader color={"#000"} size={20} aria-label="Loading Spinner" data-testid="loader" /></div>
   return (
     <>
-      <UserProfile autherizationRequired={true} userProducts={userProducts} />
+      {/* <UserProfile autherizationRequired={true} userProducts={userProducts} /> */}
     </>
   )
 }

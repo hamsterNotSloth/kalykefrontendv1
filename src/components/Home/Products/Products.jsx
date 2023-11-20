@@ -16,7 +16,7 @@ function Products() {
     <div className='flex gap-4 flex-wrap p-4 max-w-[1700px] mx-auto'>
       {productsData?.allProducts?.length <= 0? <span>No Available Products!</span> : null}
       {productsData?.allProducts?.map(item => {
-        return <ProductCard item={item} styling={"w-[200px] h-[200px]"} />
+        return <ProductCard item={item} key={`Products on homepage ${item} ${Math.random() * Date.now()}`} styling={"w-[200px] h-[200px]"} />
       })}
     </div>
   )

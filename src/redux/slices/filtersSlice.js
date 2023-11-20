@@ -3,7 +3,8 @@ const filtersSlice = createSlice({
   name: 'filters',
   initialState: {
     filter: null,
-    category: null
+    category: null,
+    searchBar: ''
   }, 
   reducers: {
     setFilter: (state, action) => action.payload,

@@ -14,26 +14,27 @@ import ComingSoonPage from "./pages/ComingSoonPage";
 import LicensePage from "./pages/LicensePage";
 import { getToken } from "./Token/token";
 import { useEffect } from "react";
-import {  useGetMyProfileQuery } from "./redux/apiCalls/apiSlice";
+import { useGetMyProfileQuery } from "./redux/apiCalls/apiSlice";
+import SearchResultsPage from "./pages/SearchResultsPage";
 
 function App() {
 
   return (
     <>
       <div className="bg-[#f4f4f4]">
-        <ToastContainer position="top-right" autoClose={2000} closeOnClick pauseOnFocusLoss pauseOnHover={false} />
         <Router>
           <Header />
           <Routes>
             <Route path="*" element={<NotFoundPage />} />
-            <Route path="/" element={<HomePage />}/>
+            <Route path="/" element={<HomePage />} />
             <Route path="/not-found" element={<NotFoundPage />} />
             <Route element={<ProductNotFoundProtectedRoute />}>
               <Route path="/products/:id" element={<ProductDetailsPage />} />
             </Route>
+            <Route path="/search-results" element={<SearchResultsPage />} />
             <Route path="/user/:user_id" element={<UserProfilePage />} />
-            <Route path="/user/my-profile" element={<MyProfilePage />}/>
-            <Route path="/coming-soon" element={<ComingSoonPage />}/>
+            <Route path="/user/my-profile" element={<MyProfilePage />} />
+            <Route path="/coming-soon" element={<ComingSoonPage />} />
             <Route path="/licenses" element={<LicensePage />} />
 
             {/* <Route path="/login" element={<Signup />} /> */}
@@ -41,6 +42,7 @@ function App() {
 
           </Routes>
         </Router>
+        <ToastContainer position="top-right" autoClose={2000} closeOnClick pauseOnFocusLoss pauseOnHover={false} />
       </div>
     </>
   );

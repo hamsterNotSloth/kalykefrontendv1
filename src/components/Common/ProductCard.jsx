@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { useUserViewedProductMutation } from '../../redux/apiCalls/apiSlice'
-import { getToken } from '../../Token/token'
+import { Link } from 'react-router-dom'
 
 function ProductCard({ item, styling }) {
     return (

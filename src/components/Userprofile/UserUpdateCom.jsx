@@ -1,8 +1,7 @@
 import { faGlobe, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faLinkedin, faYoutube } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
-import ReactQuill from 'react-quill';
+import React from 'react';
 import 'react-quill/dist/quill.snow.css';
 import { useUpdateUserInfoMutation } from '../../redux/apiCalls/apiSlice';
 import { toast } from "react-toastify";
@@ -22,7 +21,6 @@ function UserUpdateCom({ newUserInfo, setNewUserInfo,token,  updateProfileDetail
                 updateProfileDetails()
             }
         } catch (error) {
-            console.log(error)
             toast.error(error)
         }
     }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import HeaderLeft from './HeaderLeft'
 import HeaderInputField from './HeaderInputField'
 import HeaderRight from './HeaderRight'
@@ -9,10 +9,13 @@ import { toast } from 'react-toastify'
 
 const Header = () => {
   const token = getToken()
-  const {data: userProfileData, error} = useGetMyProfileQuery(token)
-  
+  const {data: userProfileData, error, isError} = useGetMyProfileQuery(token)
+  const [renderErrorOnce, setRenderErrorOnce] = useState(1)
   useEffect(()=> {
-    toast.error(error?.data?.message)
+    setRenderErrorOnce(renderErrorOnce + 1)
+    if(isError && renderErrorOnce % 2 != 0) {
+      toast.error(error?.data?.message)
+    }
   }, [error])
   return (
     <>
@@ -20,7 +23,7 @@ const Header = () => {
         <HeaderLeft />
         {/* {signUpModalStatus ? <Signup setSignUpModalStatus={setSignUpModalStatus} /> : null} */}
         <HeaderInputField />
-         {userProfileData && userProfileData.status == true? <HeaderRight  /> : <HeaderRightAuthenticate />} 
+         {userProfileData && userProfileData.status == true? <HeaderRight /> : <HeaderRightAuthenticate />} 
       </div>
     </>
   )

@@ -24,7 +24,7 @@ const HeaderRight = () => {
 
   return (
     <>
-    {signUpModalStatus ? <UploaderPopUp setSignUpModalStatus={setSignUpModalStatus} /> : null}
+    {signUpModalStatus && <UploaderPopUp setSignUpModalStatus={setSignUpModalStatus} />}
     <div className='flex justify-between items-center gap-[20px]'>
       <div className='w-[40px] h-[40px] bg-[#8d8d91] justify-center rounded-[90px] flex items-center'>
         <button onClick={() => setSignUpModalStatus(true)}>
@@ -34,7 +34,7 @@ const HeaderRight = () => {
       <div className='relative'>
         <div>
           <button onClick={profileDropDownHandler} className='w-[41px]'>
-            <img src={userProfileData && userProfileData.myProfile.profilePicture} referrerpolicy="no-referrer" alt="profile Picture" className='rounded-full w-[100%]' />
+            <img src={userProfileData.myProfile.profilePicture} referrerpolicy="no-referrer" alt="profile Picture" className='rounded-full w-[100%]' />
           </button>
           {isProfileDropDownOpen && <ProfileDropDown signOutHandler={signOutHandler} />}
         </div>

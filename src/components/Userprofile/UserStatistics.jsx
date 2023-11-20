@@ -12,11 +12,11 @@ function UserStatistics({ count, text, icon }) {
   const statistics = [
     {
       title: "Followers",
-      count: userProfile && userProfile.profile && userProfile.profile.followers?.length || 0
+      count: userProfile && userProfile.profile && userProfile.profile.followers.length || 0
     },
     {
       title: "Following",
-      count: userProfile && userProfile.profile && userProfile.profile.following?.length || 0
+      count: userProfile && userProfile.profile && userProfile.profile.following.length || 0
     },
     {
       title: "Total Views",

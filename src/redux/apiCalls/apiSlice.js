@@ -93,7 +93,6 @@ export const apiSlice = createApi({
           authorization: `${token}`,
         },
       }),
-      invalidatesTags: ["User"],
     }),
     forgetPassword: builder.mutation({
       query: (email) => ({
@@ -104,7 +103,6 @@ export const apiSlice = createApi({
           "Content-type": "application/json; charset=UTF-8",
         },
       }),
-      invalidatesTags: ["User"],
     }),
     resetPassword: builder.mutation({
       query: ({token, password}) => ({
@@ -115,11 +113,20 @@ export const apiSlice = createApi({
           "Content-type": "application/json; charset=UTF-8",
         },
       }),
-      invalidatesTags: ["User"],
     }),
     getUserproducts: builder.query({
       query: (id) => ({
         url: `product//user-products/${id}`,
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+      providesTags: ["User"],
+    }),
+    getSearchedProducts: builder.query({
+      query: (search) => ({
+        url: `product/search/products?products=${search}`,
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -172,4 +179,4 @@ export const apiSlice = createApi({
     }),
   }),
 });
-export const { useUploadProductMutation, useUserViewedProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
+export const { useUploadProductMutation, useGetSearchedProductsQuery, useUserViewedProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;

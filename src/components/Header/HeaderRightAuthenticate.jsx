@@ -5,7 +5,7 @@ function HeaderRightAuthenticate() {
     const [signUpModalStatus, setSignUpModalStatus] = useState(false)
   return (
     <>
-      {signUpModalStatus ? <Signup setSignUpModalStatus={setSignUpModalStatus} /> : null}
+      {signUpModalStatus && <Signup setSignUpModalStatus={setSignUpModalStatus} />}
       <button onClick={() => setSignUpModalStatus(true)}>SignUp</button>
     </>
   )
