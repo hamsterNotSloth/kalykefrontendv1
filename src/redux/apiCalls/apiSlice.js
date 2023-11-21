@@ -64,7 +64,7 @@ export const apiSlice = createApi({
       query: (data) => ({
         url: "user/",
         method: "POST",
-        body: data,
+        body: {data},
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },

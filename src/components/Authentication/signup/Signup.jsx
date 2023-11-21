@@ -29,14 +29,15 @@ function Signup({setSignUpModalStatus}) {
       const provider = new GoogleAuthProvider();
       provider.addScope('email');
       const result = await signInWithPopup(auth, provider);
+      console.log(result,'result')
       const response = await signInUser({ credential: result.user, source: "Google" });
-      console.log(response, 'response')
+
       if(response.data && response.data.userData.status == true) {
-        localStorage.setItem('userToken', response.data.userData.token)
         toast.success(response.data.userData.message);
       } else {
         toast.error(response.error.data.message);
       }
+      localStorage.setItem('userToken', response?.data?.userData?.token)
     } catch (error) {
       console.error("Error signing in with Google:", error);
       toast.error(error);
@@ -49,8 +50,8 @@ function Signup({setSignUpModalStatus}) {
       const provider = new FacebookAuthProvider();
       provider.addScope('email');
       const result = await signInWithPopup(auth, provider);
-      console.log(result, result)
       const response = await signInUser({ credential: result.user, source: "Facebook" });
+      console.log(response,'responseresponseresponse')
       if(response.data && response.data.userData.status == true) {
         toast.success(response.data.userData.message);
       } else {
