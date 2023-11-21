@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-// import UserProfile from '../components/UserProfile/UserProfile'
+import UserProfile from '../components/UserProfile/UserProfile'
 import { useGetMyProductsQuery, useGetMyProfileQuery, useGetUserproductsQuery } from '../redux/apiCalls/apiSlice'
 import { getToken } from '../Token/token'
 import { useParams } from 'react-router-dom'
@@ -14,7 +14,7 @@ function MyProfilePage() {
   if (isLoading || isFetching) return <div className='flex items-center justify-center h-[100vh] w-full'><ClimbingBoxLoader color={"#000"} size={20} aria-label="Loading Spinner" data-testid="loader" /></div>
   return (
     <>
-      {/* <UserProfile autherizationRequired={true} userProducts={userProducts} /> */}
+      <UserProfile autherizationRequired={true} userProducts={userProducts} />
     </>
   )
 }
