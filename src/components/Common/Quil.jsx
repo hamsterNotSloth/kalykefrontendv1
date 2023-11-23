@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactQuill from 'react-quill'
 
 function Quill({descriptionHandler, description}) {
@@ -11,7 +11,11 @@ function Quill({descriptionHandler, description}) {
       };
     
       const formats = ['bold', 'italic', 'underline', 'list'];
+      useEffect(() => {
+        console.log(description,'description')
+      }, [description])
   return (
+        <>
         <ReactQuill
           theme="snow"
           value={description}
@@ -19,6 +23,8 @@ function Quill({descriptionHandler, description}) {
           formats={formats}
           onChange={(value) => descriptionHandler(value)}
         />
+        <p className='flex justify-end'>{description?.length}</p>
+        </>
   )
 }
 

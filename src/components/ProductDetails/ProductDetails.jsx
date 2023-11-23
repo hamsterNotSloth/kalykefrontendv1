@@ -36,7 +36,7 @@ function ProductDetails() {
     <div className='px-6 mx-30 mt-[30px] max-w-[1800px] mx-auto'>
       <ProductDetailsHeader productDetails={productDetails} />
       <ProductSlider productDetails={productDetails} />
-      <div className='flex justify-center xl:justify-between flex-col xl:flex-row mt-5 p-3'>
+      <div className='flex justify-center mb-[50px] xl:justify-between flex-col xl:flex-row mt-5 p-3'>
         <ProductDescription productDetails={productDetails} />
         <DownloadScreen productDetails={productDetails} />
       </div>

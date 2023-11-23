@@ -12,11 +12,10 @@ function UserCard() {
     const token = getToken()
     const { user_id } = useParams()
     const { data: userProfile, isLoading, refetch: userProfileRefetch } = useGetUserProfileQuery({ user_id, token })
-
     const [newUserInfo, setNewUserInfo] = useState({
-        userName: null,
-        description: null,
-        profilePicture: null,
+        userName: userProfile?.profile?.userName,
+        description: userProfile?.profile?.description,
+        profilePicture: userProfile?.profile?.profilePicture,
         socialMedia: [
             {
                 socialMediaName: "Website",
@@ -51,6 +50,17 @@ function UserCard() {
     const updateProfileDetails = () => {
         setUpdateComponentToggler(!updateComponentToggler)
     }
+
+    const formatDate = (dateString) => {
+        const dateObject = new Date(dateString);
+      
+        const year = dateObject.getFullYear();
+        const month = (dateObject.getMonth() + 1).toString().padStart(2, '0'); 
+        const day = dateObject.getDate().toString().padStart(2, '0');
+      
+        return `${year}-${month}-${day}`;
+      }
+
     if (isLoading) return <div><span>Loading!</span></div>
     return (
         <div className='bg-white w-[375px] relative min-h-[250px] h-[100%] flex flex-col items-center shadow-md p-5 rounded-md'>
@@ -72,8 +82,9 @@ function UserCard() {
                     <img src={newUserInfo.profilePicture} className="rounded-full w-[100%] h-[100%]" alt="user Pic" />}
                 </div>
             </div>
-            <div className='text-center pb-2'>
+            <div className='text-center flex flex-col items-center pb-2'>
                 <span className='text-[21px] font-semibold'>{userProfile && userProfile.profile && userProfile.profile.userName ? userProfile.profile.userName : "No username"}</span>
+                <span>Since, {formatDate(userProfile.profile.createdAt)}</span>
             </div>
             {userProfile && userProfile.permissionGranter && (
                 <>

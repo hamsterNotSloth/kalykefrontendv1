@@ -13,7 +13,9 @@ function UploaderHeader({setSignUpModalStatus, setCurrentLevel, currentLevel}) {
       <ul className='flex gap-3'>
         {steps.map((step, index) => {
           return (
-            <li key={-0.91 * Math.random % 1.013532} className={index < currentLevel ? 'font-bold' : ''}>{step}</li>
+            <li key={-0.91 * Math.random % 1.013532} 
+            // onClick={() => setCurrentLevel(index+1)}
+            className={index < currentLevel ? 'font-bold cursor-pointer' : 'cursor-pointer'}>{step}</li>
           )
         } )}
       </ul>

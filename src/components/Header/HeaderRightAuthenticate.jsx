@@ -6,7 +6,7 @@ function HeaderRightAuthenticate() {
   return (
     <>
       {signUpModalStatus && <Signup setSignUpModalStatus={setSignUpModalStatus} />}
-      <button onClick={() => setSignUpModalStatus(true)}>SignUp</button>
+      <button onClick={() => setSignUpModalStatus(true)}>Sign in</button>
     </>
   )
 }

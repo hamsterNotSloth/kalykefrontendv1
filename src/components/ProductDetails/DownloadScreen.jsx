@@ -10,10 +10,9 @@ function DownloadScreen({ productDetails }) {
   const [isDownloading, setIsDownloading] = useState(false)
   const [fileTypes, setFileTypes] = useState([])
   const [fileTypeToDownload, setFileTypeToDownload] = useState(null)
+  const [fileExtension, setFileExtension] = useState(setFileTypes[0])
   const [currentXhr, setCurrentXhr] = useState()
   const token = getToken()
-  const downloadLink = productDetails?.product.modal[0].downloadLink;
-  const downloadTitle = productDetails?.product.title;
 
   const allowedExtensionsDownloadHandler = () => {
     const extensionsAllowed = productDetails?.product?.modal?.map(item => {
@@ -23,44 +22,8 @@ function DownloadScreen({ productDetails }) {
     setFileTypes(uniqFiles);
   }
 
-  const get_url_extension = (url) => {
-    return downloadLink.split(/[#?]/)[0].split('.').pop().trim();
-  }
-
-
-  // const downloadImageHandler = () => {
-  //   if(!fileTypeToDownload){
-  //     return toast.error("First, Select a file type to download.")
-  //   }
-  //   setIsDownloading(true)
-  //   for (let i = 0; i < fileTypeToDownload.length; i++) {
-  //     const downloadLink = fileTypeToDownload[i].downloadLink;
-  //     const fileExtension = downloadLink.split(/[#?]/)[0].split('.').pop().trim();
-  //     console.log(fileExtension, 'downloadLink')
-  //     let xhr = new XMLHttpRequest();
-  //     setCurrentXhr(xhr)
-  //     xhr.responseType = 'blob';
-  //     xhr.onload = (event) => {
-  //       if (xhr.status === 200) {
-  //         let blob = xhr.response;
-  //         let file = new File([blob], `Thangs modal${i + 1}.${fileExtension}`, { type: blob.type });
-  //         let a1 = document.createElement('a');
-  //         a1.href = URL.createObjectURL(file);
-  //         a1.download = file.name;
-  //         a1.click();
-  //         URL.revokeObjectURL(a1.href);
-  //         toast.success(`Thangs modal${i + 1} started`);
-  //       } else {
-  //         toast.error(`Failed to download file ${i + 1}. Status: ${xhr.status}`);
-  //       }
-  //     };
-  //     xhr.open('GET', downloadLink);
-  //     xhr.send();
-  //   }
-  //   setIsDownloading(false)
-  // }
-
   const downloadImageHandler = async () => {
+    if(!token) return toast.error("Please login to continue")
     if (!fileTypeToDownload) {
       toast.error("First, Select a file type to download.");
       return;
@@ -111,7 +74,6 @@ function DownloadScreen({ productDetails }) {
   };
 
   const fileToDownloadHandler = (e) => {
-    console.log(productDetails?.product?.modal)
     if (e.target.value != null) {
       const links = productDetails?.product?.modal?.filter(item => {
         const extension = item.downloadLink.split(/[#?]/)[0].split('.').pop().trim();
@@ -120,27 +82,47 @@ function DownloadScreen({ productDetails }) {
       if (!links) {
         return toast.error("No downloads for this extension found.")
       }
+      setFileExtension(e.target.value)
       setFileTypeToDownload(links)
     }
     else {
       setFileTypeToDownload(null)
     }
   }
+
+  const extractDate = (inputString) => {
+    const dateObject = new Date(inputString);
+
+    const year = dateObject.getFullYear();
+    const month = String(dateObject.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(dateObject.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+    return formattedDate;
+  }
+
   useEffect(() => {
     allowedExtensionsDownloadHandler()
   }, [productDetails])
-  
+
   return (
     <div className='w-[300px] mt-5 xl:mt-0'>
+      <div className='flex flex-col pb-3'>
+        <span>Created At: {extractDate(productDetails?.product?.createdAt)}</span>
+        <span>Last Updated: {extractDate(productDetails?.product?.updatedAt)}</span>
+      </div>
       <div className='flex'>
-          <button disabled={isDownloading} className='bg-[#2f85ff] rounded-r-0 hover:bg-[#5487ff] text-white text-[21px] h-[46px] w-[100%] rounded-l-md  w-full' onClick={downloadImageHandler}>{isDownloading? "Downloading" : "Download"}</button>
-        <select onChange={fileToDownloadHandler}
+        <button disabled={isDownloading} className='bg-[#2f85ff] rounded-r-0 hover:bg-[#5487ff] text-white text-[21px] h-[46px] w-[100%] rounded-l-md  w-full' onClick={downloadImageHandler}>{isDownloading ? "Downloading" : "Download"}</button>
+        <select onChange={fileToDownloadHandler} value={fileExtension}
           className='bg-[#2f85ff] border-l px-2 max-w-[90px] w-full text-white rounded-r-[1px] hover:bg-[#5487ff]'>
-          <option value={null}>Select download type</option>
+          <option value={fileTypes[0]}>{fileTypes[0]}</option>
           {
-            fileTypes.map(item => {
-              return <option key={`Download options ${Math.random() * Date.now()}`} value={item}>{item}</option>
-            })
+            fileTypes.map((item, index) => (
+              index !== 0 ? (
+                <option key={`Download options ${Math.random() * Date.now()}`} value={item}>
+                  {item}
+                </option>
+              ) : null
+            ))
           }
         </select>
       </div>

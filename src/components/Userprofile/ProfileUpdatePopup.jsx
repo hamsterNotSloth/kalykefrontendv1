@@ -1,10 +1,12 @@
 import { faFile, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import React from 'react'
+import React, { useState } from 'react'
 import { storage } from '../../config/config';
+import { toast } from 'react-toastify';
 
 function ProfileUpdatePopup({ newUserInfo, userProfile, setNewUserInfo, userData, setUpdateImageToggler,profileImage, setProfileImage }) {
+  const [isImageUploading, setIsImageUploading] = useState(false)
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -13,7 +15,9 @@ function ProfileUpdatePopup({ newUserInfo, userProfile, setNewUserInfo, userData
 }
 
 const handleFileUpload = async (e) => {
-    const imageRef = ref(storage, `profilePic/${userData?.profile?._id}/${profileImage.name}`);
+  if(profileImage?.name == null) return toast.error("No Image selected, cancel if you don't want to replace current image.")
+  setIsImageUploading(true)  
+  const imageRef = ref(storage, `profilePic/${userData?.profile?._id}/${profileImage.name}`);
     try {
         const snapshot = await uploadBytes(imageRef, profileImage);
         const url = await getDownloadURL(snapshot.ref);
@@ -24,6 +28,7 @@ const handleFileUpload = async (e) => {
         console.error("Error uploading file:", error);
         throw error;
     }
+    setIsImageUploading(false)
 };
   return (
     <div className='fixed inset-0 flex items-center justify-center z-50'>
@@ -45,7 +50,7 @@ const handleFileUpload = async (e) => {
           </label>
         </div>
         <div>
-        {profileImage?.name && <><FontAwesomeIcon icon={faFile} /> {profileImage?.name}</>}
+        {profileImage?.name && <><FontAwesomeIcon icon={faFile} /> {profileImage?.name}</>} {isImageUploading && "loading"}
         </div>
         <div className='flex justify-end pt-4 gap-3'>
           <button className='border border-[#d4cfcf] rounded text-[18px]' onClick={handleFileUpload}>Confirm</button>

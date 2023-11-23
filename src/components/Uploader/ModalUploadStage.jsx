@@ -21,10 +21,9 @@ const ModalUploadStage = ({ setCurrentLevel }) => {
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (file.type !== "application/x-compressed" && file.type !== "application/x-zip-compressed") {
-        return toast.error("File types allowed, zip, rar")
-      }
         setSelectedFile([...selectedFiles, file]);
+    } else {
+      toast.error("No File selected.")
     }
   }
 

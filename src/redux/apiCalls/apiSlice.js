@@ -177,6 +177,41 @@ export const apiSlice = createApi({
         },
       }),
     }),
+    deleteProduct: builder.mutation({
+      query: ( {_id, token} ) => ({
+        url: `product/delete-product`,
+        method: "DELETE",
+        body: {_id},
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "authorization": token
+        },
+      }),
+      invalidatesTags: ["product", "User"],
+    }),
+    addComments: builder.mutation({
+      query:({productId, token, comment}) => ({
+        url: `product/${productId}/comments`,
+        method: "PATCH",
+        body: {comment},
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "authorization": token
+        },
+      }),
+      invalidatesTags: ["descriptionProduct"],
+    }),
+    deleteComment: builder.mutation({
+      query:({productId, token, comment_id}) => ({
+        url: `product/${productId}/comments/${comment_id}`,
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "authorization": token
+        },
+      }),
+      invalidatesTags: ["descriptionProduct"],
+    })
   }),
 });
-export const { useUploadProductMutation, useGetSearchedProductsQuery, useUserViewedProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
+export const { useUploadProductMutation, useDeleteCommentMutation, useDeleteProductMutation, useAddCommentsMutation, useGetSearchedProductsQuery, useUserViewedProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;

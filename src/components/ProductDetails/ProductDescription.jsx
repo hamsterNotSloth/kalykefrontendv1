@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useGetSimilarProductsQuery } from '../../redux/apiCalls/apiSlice'
 import ProductCard from '../Common/ProductCard';
+import Comments from './Comments';
 
 function ProductDescription({ productDetails }) {
   const tagsString = productDetails && productDetails.product && productDetails.product.tags.join(','); 
@@ -37,6 +38,7 @@ function ProductDescription({ productDetails }) {
         <h4 className='text-[21px] font-semibold'>Products from the same designer</h4>
         <div>{ similarProducts && similarProducts.productsFromSameUser? <div className='flex flex-wrap gap-5'>{similarProducts.productsFromSameUser.map(products => <ProductCard key={`SameUserProducts at Description ${Math.random() * Math.random()}`} item = {products} styling={"w-[130px] h-[150px]"} />)}</div> :<span> No more Products from this designer</span> }</div>
       </div>
+      <Comments productDetails={productDetails} />
     </div>
   )
 }

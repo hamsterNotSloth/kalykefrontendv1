@@ -16,6 +16,8 @@ import { getToken } from "./Token/token";
 import { useEffect } from "react";
 import { useGetMyProfileQuery } from "./redux/apiCalls/apiSlice";
 import SearchResultsPage from "./pages/SearchResultsPage";
+import Comments from "./components/ProductDetails/Comments";
+import Footer from "./components/Footer/Footer";
 
 function App() {
 
@@ -31,7 +33,7 @@ function App() {
             <Route element={<ProductNotFoundProtectedRoute />}>
               <Route path="/products/:id" element={<ProductDetailsPage />} />
             </Route>
-            <Route path="/search-results" element={<SearchResultsPage />} />
+            <Route path="/:search/search-results" element={<SearchResultsPage />} />
             <Route path="/user/:user_id" element={<UserProfilePage />} />
             <Route path="/user/my-profile" element={<MyProfilePage />} />
             <Route path="/coming-soon" element={<ComingSoonPage />} />
@@ -39,8 +41,8 @@ function App() {
 
             {/* <Route path="/login" element={<Signup />} /> */}
             <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
-
           </Routes>
+          <Footer />
         </Router>
         <ToastContainer position="top-right" autoClose={2000} closeOnClick pauseOnFocusLoss pauseOnHover={false} />
       </div>
