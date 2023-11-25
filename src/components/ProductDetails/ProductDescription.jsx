@@ -7,7 +7,6 @@ function ProductDescription({ productDetails }) {
   const tagsString = productDetails && productDetails.product && productDetails.product.tags.join(','); 
   
   const {data: similarProducts, refetch: getSimilarProducts} = useGetSimilarProductsQuery({tags: tagsString, created_by: productDetails && productDetails.product && productDetails.product.created_by})
- 
   useEffect(() => {
     getSimilarProducts({tags: productDetails && productDetails.product && productDetails.product.tags, created_by: productDetails && productDetails.product && productDetails.product.created_by})
   },[productDetails])
@@ -20,15 +19,15 @@ function ProductDescription({ productDetails }) {
       </div>
       <div className='mt-5'>
         <h4 className='text-[21px] font-semibold'>Category</h4>
-        <span>{productDetails && productDetails.product.category ? productDetails.product.category : "This modal has no category selected"}</span>
+        <span>{productDetails && productDetails.product.category ? productDetails.product.category : "This model has no category selected"}</span>
       </div>
       <div className='mt-5'>
         <h4 className='text-[21px] font-semibold'>Tags</h4>
-        <span>{productDetails && productDetails.product.tags ? <span className='mt-3 flex gap-2'>{productDetails.product.tags.map(item=> <span key={`productDesc tags ${Math.random() * Date.now()}`} className='bg-[#e3e3e3] px-2 rounded-md'>{item}</span>)}</span> : "This modal has no category selected"}</span>
+        <span>{productDetails && productDetails.product.tags ? <span className='mt-3 flex gap-2'>{productDetails.product.tags.map(item=> <span key={`productDesc tags ${Math.random() * Date.now()}`} className='bg-[#e3e3e3] px-2 rounded-md'>{item}</span>)}</span> : "This model has no category selected"}</span>
       </div>
       <div className='mt-5'>
-        <h4 className='text-[21px] font-semibold'>Modal Settings</h4>
-        <span>{productDetails && productDetails.product.modalSetting ? productDetails.product.modalSetting : "This modal has no setting"}</span>
+        <h4 className='text-[21px] font-semibold'>Model Settings</h4>
+        <span>{productDetails && productDetails.product.modalSetting ? productDetails.product.modalSetting : "This model has no setting"}</span>
       </div>
       <div className='mt-5'>
         <h4 className='text-[21px] font-semibold'>Similar Products</h4>

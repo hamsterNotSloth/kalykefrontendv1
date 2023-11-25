@@ -42,6 +42,7 @@ const ImagesUploader = ({fileUploadProgress, uploadImageHandler, isUploadLoading
  
   return (
     <>
+    <span>Upload Images for model</span>
       <DropZone uploadImageHandler={uploadImageHandler} isUploadLoading={isUploadLoading} handleFileChange={handleFileChange} />
       {selectedFile.length > 0? <ImagesList fileUploadProgress={fileUploadProgress} removeImageHandler={removeImageHandler} selectedFile = {selectedFile}/> : "No files uploaded" }
     </>

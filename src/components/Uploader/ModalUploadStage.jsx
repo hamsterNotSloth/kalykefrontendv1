@@ -62,7 +62,7 @@ const ModalUploadStage = ({ setCurrentLevel }) => {
       setFileUploadProgress(false)
       dispatch(updateProductDetails({ ...productDetails, modal: [...productDetails.modal, ...uploadedFiles] }));
       setIsUploadLoading(false)
-      toast.success("Almost there! Add details for your modal.");
+      toast.success("Almost there! Add details for your model.");
       setCurrentLevel(2);
     } catch (error) {
       toast.error(error.message);
@@ -99,8 +99,9 @@ const ModalUploadStage = ({ setCurrentLevel }) => {
 
   return (
     <>
+    <label>Upload model files</label>
       <DropZone handleFileChange={handleFileChange} />
-      {selectedFiles.length > 0 ? <ImagesList fileUploadProgress={fileUploadProgress} removeImageHandler={removeImageHandler} selectedFile={selectedFiles} /> : "Upload a Zip file containing your modal. You can only upload a single zip file. Happy Designing"}
+      {selectedFiles.length > 0 ? <ImagesList fileUploadProgress={fileUploadProgress} removeImageHandler={removeImageHandler} selectedFile={selectedFiles} /> : "Upload a Zip file containing your model. You can only upload a single zip file. Happy Designing"}
       <div>
         <button disabled={selectedFiles.length > 4} onClick={uploadFileHandler} className="bg-blue-500 mt-3 text-white px-4 py-2 rounded hover:bg-blue-600">
           {isUploadLoading ? 'Processing...' : "Next"}

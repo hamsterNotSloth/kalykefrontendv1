@@ -211,7 +211,17 @@ export const apiSlice = createApi({
         },
       }),
       invalidatesTags: ["descriptionProduct"],
+    }),
+    productPurchase: builder.mutation({
+      query:({productId, token}) => ({
+        url: `product/${productId}/purchase`,
+        method: "POST",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "authorization": token
+        },
+      }),
     })
   }),
 });
-export const { useUploadProductMutation, useDeleteCommentMutation, useDeleteProductMutation, useAddCommentsMutation, useGetSearchedProductsQuery, useUserViewedProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
+export const { useUploadProductMutation, useProductPurchaseMutation,useDeleteCommentMutation, useDeleteProductMutation, useAddCommentsMutation, useGetSearchedProductsQuery, useUserViewedProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
