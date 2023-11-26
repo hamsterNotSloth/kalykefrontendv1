@@ -175,7 +175,7 @@ function DownloadScreen({ productDetails }) {
           <span>Views:</span>
           <span>{productDetails ? productDetails?.product?.userViews?.length : 0}</span>
         </div>
-        <Link className='h-[40px] w-full rounded-sm bg-[#c1c0c0] hover:bg-[#b2b2b2] flex justify-center items-center mt-2' to={`/user/${productDetails?.user?.u_id}`}>Visit {productDetails?.user?.userName}</Link>
+        <Link className='h-[40px] w-full rounded-sm bg-[#c1c0c0] hover:bg-[#b2b2b2] flex justify-center items-center mt-2' to={`/user/${productDetails?.user?.u_id}`}>Visit {productDetails?.user?.userName}'s Profile</Link>
         {token ? <Followbtn productDetails={productDetails} style={`bg-[#8d8d8d] mt-3 hover:bg-[#444444] text-white text-[21px] h-[46px] w-[100%] rounded-md  w-full`} /> : null}
         <textarea
           ref={textAreaRef}
