@@ -17,7 +17,7 @@ const HeaderLeft = () => {
         <div className='flex gap-[18px] items-center'>
           <button>Explore</button>
           <div className='flex gap-[6px] items-center'>
-            <Link to={'/coming-soon'}>Memberships</Link>
+            <Link to={'/coming-soon'}>Membership</Link>
           </div>
           <div>
             <div className="relative">
