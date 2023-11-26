@@ -7,8 +7,8 @@ function Filter() {
   const currentFilter = useSelector((state) => state.filtersSlice);
   const dispatch = useDispatch();
 
-  const filterList = ["Most Viewed", "New Uploads", "Most Downloaded","From top users"];
-  const categoryFilter = ["Animals", "Arts & Entertainment", "Autos & Vehicles", "Business & Industrial", "Devices", "Food & Drink", "Gridfinity", "Health & Fitness", "Hobbies & Games", "Home & Garden", "People", "Pop Culture", "mask"]
+  const filterList = ["Most Viewed", "New Uploads", "Most Downloaded", "From Top Designers"];
+  const categoryFilter = ["Animals", "Arts & Entertainment", "Autos & Vehicles", "Business & Industrial", "Devices", "Education", "Fashion", "Food & Drink", "Gridfinity", "Health & Fitness", "Hobbies & Games", "Home & Garden", "People", "Pop Culture", "Mask", "Seasonal"]
 
   const handleClick = (index) => {
     setActiveIndex(index);
