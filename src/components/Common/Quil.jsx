@@ -23,7 +23,6 @@ function Quill({descriptionHandler, description}) {
           formats={formats}
           onChange={(value) => descriptionHandler(value)}
         />
-        <p className='flex justify-end'>{description?.length}</p>
         </>
   )
 }

@@ -31,7 +31,6 @@ function Footer() {
         </a>
       </div>
       <div>
-        <span>Follow us on</span>
         <ul className='flex gap-3 items-center'>
         {socialMedia.map(item => {
             return (

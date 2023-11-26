@@ -24,7 +24,7 @@ console.log(userProfile,'userProfile')
     {
       icon: faEye,
       title: "Total Views",
-      count: userProfile && userProfile.views
+      count: userProfile && userProfile.views 
     },
     {
       icon: faDownload,

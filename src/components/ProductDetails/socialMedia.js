@@ -1,5 +1,4 @@
 import { faFacebook, faInstagram, faPinterest, faReddit, faTiktok, faTwitter } from '@fortawesome/free-brands-svg-icons';
-
 export const socialMedia = [
     {
         icon: faTwitter,

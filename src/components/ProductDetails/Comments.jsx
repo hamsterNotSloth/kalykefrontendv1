@@ -1,18 +1,20 @@
 import React, { useState } from 'react'
 import Quill from '../Common/Quil'
-import { useAddCommentsMutation, useDeleteCommentMutation } from '../../redux/apiCalls/apiSlice'
+import { useAddCommentsMutation, useDeleteCommentMutation, useDeleteReplyMutation } from '../../redux/apiCalls/apiSlice'
 import { getToken } from '../../Token/token'
 import { toast } from 'react-toastify'
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import ReplyComment from './ReplyComment'
+import { Link } from 'react-router-dom'
 
 const Comments = ({ productDetails }) => {
   const token = getToken()
   const [comment, setComment] = useState('')
-  const [commentOptions, setCommentOptions] = useState([]);
-  const [addComments] = useAddCommentsMutation()
-  const [deleteComment] = useDeleteCommentMutation()
-
+  const [addComments, {isLoading: isAddingComment}] = useAddCommentsMutation()
+  const [deleteComment, {isLoading: isCommentDeleting}] = useDeleteCommentMutation()
+  const [deleteReply, {isLoading: isReplyDeleting}] = useDeleteReplyMutation();
+  const [replyTo, setReplyTo] = useState(null);
 
   const deleteCommentHandler = async (comment_id) => {
     try {
@@ -30,7 +32,7 @@ const Comments = ({ productDetails }) => {
     try {
       const response = await addComments({ productId: productDetails?.product._id, token, comment })
       if (response && response.error) {
-        toast.error(response.error.data.message)
+        toast.error(response.error?.data?.message || "Failed to add your comment, please try again.")
       }
       setComment('')
     } catch (error) {
@@ -38,8 +40,8 @@ const Comments = ({ productDetails }) => {
     }
   }
 
-  const commentHandler = (text) => {
-    setComment(text)
+  const commentHandler = (e) => {
+    setComment(e.target.value)
   }
 
   const formatDate = (dateString) => {
@@ -52,48 +54,90 @@ const Comments = ({ productDetails }) => {
     return `${year}-${month}-${day}`;
   }
 
-  const toggleOptions = (index) => {
-    setCommentOptions((prevOptions) => {
-      const newOptions = [...prevOptions];
-      newOptions[index] = !newOptions[index];
-      for (let i = 0; i < newOptions.length; i++) {
-        if (i !== index) {
-          newOptions[i] = false;
-        }
-      }
-
-      return newOptions;
+const deleteReplyHandler = async (data) => {
+  const {productId, token, comment_id,replyId} = data
+  try {
+    const response = await deleteReply({
+      productId,
+      token,
+      comment_id,
+      replyId
     });
-  };
 
+    if (response.error) {
+      toast.error(response.error.data.message);
+    }
+  } catch (error) {
+    toast.error(error.message);
+  }
+};
+
+  const replyHandler = (commentId) => {
+    setReplyTo(commentId);
+  };
   return (
     <div className='py-8'>
       <span className='flex pb-3 font-semibold'>Comments</span>
       <div className='pb-2'>
-        <Quill descriptionHandler={commentHandler} description={comment} />
-        <button onClick={addCommentsHandler} className='px-2 py-1 bg-slate-500 rounded-sm text-white'>Add your thought</button>
+        <div class="flex items-center mb-4 mt-4">
+          <img src="your-avatar.jpg" alt="Your Avatar" class="w-8 h-8 rounded-full mr-2" />
+          <textarea onChange={commentHandler} value={comment} placeholder="Add a comment..." class="w-full border rounded-md p-2 focus:outline-none focus:border-blue-500"></textarea>
+          <button onClick={addCommentsHandler} disabled={isAddingComment} class="ml-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Post</button>
+        </div>
       </div>
       <ul>
         {productDetails.product.comments?.map((item, index) => {
           return <li className=' pb-3' key={`Comment ${index} ${item._id}`}>
-            <div className='border-b-[1px] pb-2 border-b-black flex flex-col items-start gap-2'>
-              <div className='flex items-center justify-between w-full'>
-                <div className='flex gap-2 items-center'>
-                  <div className='w-[40px] h-[40px]'><img className='rounded-full w-full h-full object-contain' src={item.profilePic} alt="profile image" /></div>
-                  <span className='text-[12px]'>Comment created-At: {formatDate(productDetails.product.createdAt)}</span>
-                </div>
-                <div>
-                  <button onClick={() => toggleOptions(index)} className='relative flex items-center'><FontAwesomeIcon icon={faEllipsis} /></button>
-                  {commentOptions[index] && (
-                    <div className={`absolute z-50 bg-white rounded p-1`}>
-                      <button onClick={() => deleteCommentHandler(item._id)}>Delete</button>
+            <div class="bg-white p-4 rounded-lg shadow-md">
+              <div class="flex items-start mb-4">
+                <img src={item.profilePic} alt="User Avatar" class="w-8 h-8 rounded-full mr-2" />
+                <div class="flex-1">
+                  <div class="flex items-center mb-2">
+                    <div className='flex gap-1 items-end'>
+                    <Link to={`user/${item.u_id}`} class="font-bold text-gray-800">{item.userName}</Link> <span className='text-[12px]'>{formatDate(item.createdAt)}</span>
                     </div>
-                  )}
+                    <div class="ml-auto">
+                      <button class="text-gray-500 hover:text-blue-500 mr-2" onClick={() => replyHandler(item._id)}>Reply</button>
+                      <button class="text-red-500 hover:text-red-700" disabled={isCommentDeleting} onClick={() => deleteCommentHandler(item._id)}>Delete</button>
+                    </div>
+                  </div>
+                  <p class="text-gray-600">{item.text}</p>
                 </div>
               </div>
-              <div dangerouslySetInnerHTML={{ __html: item.text }} />
-
             </div>
+            {replyTo === item._id && (
+              <ReplyComment
+                productId={productDetails?.product._id}
+                commentId={item._id}
+                onReplyAdded={() => setReplyTo(null)}
+              />
+            )}
+            {item.replies?.map((reply, replyIndex) => (
+              <div key={`Reply ${replyIndex} ${reply._id}`} className="bg-white p-4 mt-4 rounded-lg shadow-md ml-8">
+                <div className="flex items-center mb-2">
+                  <img src={reply.profilePic} alt="User Avatar" class="w-8 h-8 rounded-full mr-2" />
+                  <div class="flex-1">
+                    <div class="flex items-center mb-2">
+                    <div className='flex gap-1 items-end'>
+                    <Link to={`user/${item.u_id}`} class="font-bold text-gray-800">{reply.userName}</Link>  <span className='text-[12px]'>{formatDate(item.createdAt)}</span>
+                    </div>
+                      <div class="ml-auto">
+                        <button class="text-gray-500 hover:text-blue-500 mr-2" onClick={() => replyHandler(reply._id)}>Reply</button>
+                        <button class="text-red-500 hover:text-red-700" disabled={isReplyDeleting} onClick={() => deleteReplyHandler({productId: productDetails?.product._id, token, comment_id:item._id, replyId: reply._id })}>Delete</button>
+                      </div>
+                    </div>
+                    <p className="text-gray-600">{reply.text}</p>
+                  </div>
+                </div>
+                {replyTo === reply._id && (
+                  <ReplyComment
+                    productId={productDetails?.product._id}
+                    commentId={item._id}
+                    onReplyAdded={() => setReplyTo(null)}
+                  />
+                )}
+              </div>
+            ))}
           </li>
         })}
       </ul>

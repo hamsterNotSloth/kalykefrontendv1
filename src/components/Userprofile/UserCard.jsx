@@ -85,6 +85,7 @@ function UserCard() {
             <div className='text-center flex flex-col items-center pb-2'>
                 <span className='text-[21px] font-semibold'>{userProfile && userProfile.profile && userProfile.profile.userName ? userProfile.profile.userName : "No username"}</span>
                 <span>Since, {formatDate(userProfile.profile.createdAt)}</span>
+                <div dangerouslySetInnerHTML={{ __html: userProfile?.profile?.description }} />
             </div>
             {userProfile && userProfile.permissionGranter && (
                 <>

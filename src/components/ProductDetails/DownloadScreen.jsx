@@ -7,6 +7,8 @@ import Followbtn from '../Common/FollowBtn';
 import JSZip from 'jszip';
 import { socialMedia } from './socialMedia';
 import SocialMediaRow from '../Common/SocialMediaRow';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClipboard } from '@fortawesome/free-solid-svg-icons'
 
 const backendBaseUrl = process.env.REACT_APP_FRONTEND_URL;
 
@@ -20,15 +22,14 @@ function DownloadScreen({ productDetails }) {
   const { id } = useParams()
   const textAreaRef = useRef(id);
   const [productPurchase] = useProductPurchaseMutation()
-  const {data: myProfile} = useGetMyProfileQuery(token)
-
+  const { data: myProfile } = useGetMyProfileQuery(token)
   const copyToClipboard = () => {
     if (textAreaRef.current) {
       textAreaRef.current.value = `${backendBaseUrl}/products/${id}`;
       textAreaRef.current.select();
       document.execCommand('copy');
       toast.success('Copied to clipboard');
-      textAreaRef.current.value = ''; 
+      textAreaRef.current.value = '';
     }
   };
 
@@ -41,7 +42,7 @@ function DownloadScreen({ productDetails }) {
   }
 
   const downloadImageHandler = async () => {
-    if(!token || !myProfile?.myProfile?._id || myProfile?.status == false) return toast.error("Please login to continue")
+    if (!token || !myProfile?.myProfile?._id || myProfile?.status == false) return toast.error("Please login to continue")
     if (!fileTypeToDownload) {
       toast.error("First, Select a file type to download.");
       return;
@@ -73,7 +74,7 @@ function DownloadScreen({ productDetails }) {
 
       URL.revokeObjectURL(a.href);
       toast.success('Zip file download started');
-      await productPurchase({productId: productDetails?.product?._id, token})
+      await productPurchase({ productId: productDetails?.product?._id, token })
     } catch (error) {
       toast.error('Error during download');
     } finally {
@@ -115,7 +116,7 @@ function DownloadScreen({ productDetails }) {
     const dateObject = new Date(inputString);
 
     const year = dateObject.getFullYear();
-    const month = String(dateObject.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const month = String(dateObject.getMonth() + 1).padStart(2, '0');
     const day = String(dateObject.getDate()).padStart(2, '0');
     const formattedDate = `${year}-${month}-${day}`;
     return formattedDate;
@@ -174,24 +175,28 @@ function DownloadScreen({ productDetails }) {
           <span>Views:</span>
           <span>{productDetails ? productDetails?.product?.userViews?.length : 0}</span>
         </div>
-        <Link className='h-[40px] w-full rounded-sm bg-[#c1c0c0] hover:bg-[#b2b2b2] flex justify-center items-center mt-2' to={`/user/${productDetails?.user?.u_id}`}>Visit UserProfile</Link>
+        <Link className='h-[40px] w-full rounded-sm bg-[#c1c0c0] hover:bg-[#b2b2b2] flex justify-center items-center mt-2' to={`/user/${productDetails?.user?.u_id}`}>Visit {productDetails?.user?.userName}</Link>
         {token ? <Followbtn productDetails={productDetails} style={`bg-[#8d8d8d] mt-3 hover:bg-[#444444] text-white text-[21px] h-[46px] w-[100%] rounded-md  w-full`} /> : null}
-        <button className='bg-[#8d8d8d] mt-3 hover:bg-[#444444] text-white text-[21px] h-[46px] w-[100%] rounded-md  w-full ' onClick={copyToClipboard}>
-          Share Product
-        </button>
         <textarea
           ref={textAreaRef}
           readOnly
           style={{ position: 'absolute', left: '-9999px' }}
         />
         {/* <FontAwesomeIcon icon={faTwitter} /> */}
-        <ul className='flex gap-3 justify-center items-center'>
+        <div className='flex gap-2 items-end justify-center'>
+          <span className='text-[12px]'>Share on</span>
+        <ul className='flex gap-3 mt-3 justify-center items-center'>
           {socialMedia.map(item => {
             return (
               <SocialMediaRow copyToClipboard={copyToClipboard} item={item} key={`social-media-product ${item.link} ${Math.random() * Date.now()}`} />
             )
           })}
+          <li ><button onClick={copyToClipboard}>
+            <FontAwesomeIcon icon={faClipboard} />
+          </button>
+          </li>
         </ul>
+        </div>
       </div>
     </div>
   );

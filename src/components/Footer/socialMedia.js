@@ -11,7 +11,7 @@ export const socialMedia = [
     },
     {
         icon: faReddit,
-        link: 'https://www.reddit.com/'
+        link: 'https://www.reddit.com/r/3dprinter/submit'
     },
     {
         icon: faPinterest,
