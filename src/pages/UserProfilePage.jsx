@@ -7,7 +7,10 @@ import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader'
 function UserProfilePage() {
   
   const {user_id} = useParams()
-  const {data: userProducts, isLoading} = useGetUserproductsQuery(user_id)
+  const {data: userProducts, isLoading, refetch: getAllProducts} = useGetUserproductsQuery(user_id)
+  useEffect(() => {
+    getAllProducts(user_id)
+  }, [user_id])
   if (isLoading ) return <div className='flex items-center justify-center h-[100vh] w-full'><ClimbingBoxLoader color={"#000"} size={20} aria-label="Loading Spinner" data-testid="loader" /></div>
   return (
     <>

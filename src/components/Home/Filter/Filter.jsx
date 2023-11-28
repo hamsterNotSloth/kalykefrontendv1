@@ -42,18 +42,6 @@ function Filter() {
             {item}
           </button>
         ))}
-      <select className='px-7'
-        id="category"
-        onChange={handleCategoryChange}
-        value={currentFilter.category}
-      >
-        <option value="null">Select Category</option>
-        {categoryFilter.map((category, index) => (
-          <option key={`Category Filter at Homepage ${index} ${Math.random() * Date.now()}`} value={category}>
-            {category}
-          </option>
-        ))}
-      </select>
       </div>
     </div>
   );

@@ -32,7 +32,7 @@ function Followbtn({productDetails, style}) {
      
   return (
     <>
-      <button disabled={isLoading} onClick={followUserHandler} className={`${style} ${isLoading? `bg-[#d9d9d9]` : ``}`}> {myProfileData?.myProfile?.following.includes(productDetails?.user?.email) || myProfileData?.myProfile?.following.includes(productDetails?.email)? "UnFollow" : "Follow"}</button>
+      <button disabled={isLoading} onClick={followUserHandler} className={`${style} ${isLoading? `bg-[#d9d9d9]` : ``}`}> {myProfileData?.myProfile?.following?.includes(productDetails?.user?.email) || myProfileData?.myProfile?.following?.includes(productDetails?.email)? "UnFollow" : "Follow"}</button>
     </>
   )
 }

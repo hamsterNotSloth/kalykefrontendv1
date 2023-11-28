@@ -1,7 +1,6 @@
-import { faFacebook, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import React, { useEffect, useState } from 'react';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
 import { socialMedia } from './socialMedia';
 import SocialMediaRow from '../Common/SocialMediaRow';
 
@@ -11,7 +10,7 @@ function Footer() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const triggerPoint = 200;
+      const triggerPoint = 100;
 
       setIsFixed(scrollY > triggerPoint);
     };
@@ -24,19 +23,31 @@ function Footer() {
   }, []);
 
   return (
-    <div className={` bottom-0 left-0 right-0 bg-white p-3 flex justify-between items-center z-50 ${isFixed ? 'sticky' : ''}`}>
+    <div className={`bg-white p-3 px-6 flex justify-between items-center ${isFixed ? 'fixed bottom-0 left-0 right-0 z-50' : ''}`}>
       <div>
-        <a href='https://ko-fi.com/kalyke' className='bg-[#29abe0] text-white px-2 py-1 rounded-sm flex items-center justify-center gap-2' target='_blank' rel='noopener noreferrer'>
+        <a
+          href='https://ko-fi.com/kalyke'
+          className='bg-[#29abe0] text-white px-2 py-1 rounded-sm flex items-center justify-center gap-2'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
           <FontAwesomeIcon className='text-[#e91313]' icon={faHeart} /> Support kalyke
         </a>
       </div>
       <div>
-        <ul className='flex gap-3 items-center'>
-        {socialMedia.map(item => {
-            return (
-              <SocialMediaRow item={item} key={`social-media-footer ${item.link} ${Math.random() * Date.now()}`} />
-            )
-          })}
+        <ul className='flex gap-3 max-w-[328px] justify-end items-center'>
+          {socialMedia.map((item) => (
+            <SocialMediaRow key={`social-media-footer-${item.link}`} item={item} />
+          ))}
+        </ul>
+      </div>
+      <div>
+        <ul className='flex max-w-[480px] justify-end gap-3'>
+          <li>Terms & Conditions</li>
+          <li>Support</li>
+          <li>Feedback</li>
+          <li>Report Model</li>
+          <li>Privacy</li>
         </ul>
       </div>
     </div>

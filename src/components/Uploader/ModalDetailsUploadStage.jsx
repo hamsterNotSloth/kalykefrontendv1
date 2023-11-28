@@ -90,9 +90,9 @@ function ModalDetailsUploadStage({ setCurrentLevel }) {
   };
 
   const handleAddHashtag = () => {
-    const hashtag = hashTagValue.trim();
+    const hashtag = hashTagValue.replace(/\s/g, '').toLowerCase();
 
-    if (hashtag.startsWith('#') && hashtag.length > 1) {
+    if (hashtag.length > 1) {
       if (hashtags.length < 5 && !hashtags.includes(hashtag)) {
         setHashtags([...hashtags, hashtag]);
         setHashTagValue('');
@@ -123,7 +123,7 @@ function ModalDetailsUploadStage({ setCurrentLevel }) {
         <Quill descriptionHandler={descriptionHandler} description={details.description} />
       </div>
       <div className='mt-3'>
-        <label className='text-[16px] font-semibold'>Tags(Tag should start with #)</label>
+        <label className='text-[16px] font-semibold'>Tags</label>
         <input
           type="text"
           value={hashTagValue}

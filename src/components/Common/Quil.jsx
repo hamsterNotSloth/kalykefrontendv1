@@ -11,9 +11,7 @@ function Quill({descriptionHandler, description}) {
       };
     
       const formats = ['bold', 'italic', 'underline', 'list'];
-      useEffect(() => {
-        console.log(description,'description')
-      }, [description])
+   
   return (
         <>
         <ReactQuill
