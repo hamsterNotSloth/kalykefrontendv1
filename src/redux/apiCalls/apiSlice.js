@@ -20,6 +20,17 @@ export const apiSlice = createApi({
       }),
       providesTags: ["User"],
     }),
+    getWishListItems: builder.query({
+      query: (token) => ({
+        url: `user/wishlist/products`,
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          authorization: token
+        },
+      }),
+      providesTags: ["descriptionProduct"],
+    }),
     getMyProfile: builder.query({
       query: (token) => ({
         url: `user/user/my-profile`,
@@ -132,7 +143,6 @@ export const apiSlice = createApi({
           "Content-type": "application/json; charset=UTF-8",
         },
       }),
-      providesTags: ["User"],
     }),
     getMyProducts: builder.query({
       query: (token) => ({
@@ -165,7 +175,7 @@ export const apiSlice = createApi({
           "authorization": token
         },
       }),
-      invalidatesTags: ["product"],
+      invalidatesTags: ["product", "User"],
     }),
     userViewedProduct: builder.mutation({
       query: ({ id, token }) => ({
@@ -244,7 +254,19 @@ export const apiSlice = createApi({
           "authorization": token
         },
       }),
+    }),
+    wishlist: builder.mutation({
+      query:({productId, token}) =>({
+        url: `user/wishlist`,
+        method: "POST",
+        body: {productId},
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "authorization": token
+        },
+      }),
+      invalidatesTags: ["descriptionProduct"],
     })
   }),
 });
-export const { useUploadProductMutation, useDeleteReplyMutation,useAddReplyMutation,useProductPurchaseMutation,useDeleteCommentMutation, useDeleteProductMutation, useAddCommentsMutation, useGetSearchedProductsQuery, useUserViewedProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
+export const { useUploadProductMutation, useWishlistMutation, useGetWishListItemsQuery,useDeleteReplyMutation,useAddReplyMutation,useProductPurchaseMutation,useDeleteCommentMutation, useDeleteProductMutation, useAddCommentsMutation, useGetSearchedProductsQuery, useUserViewedProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;

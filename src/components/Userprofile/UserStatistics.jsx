@@ -9,35 +9,33 @@ function UserStatistics({ count, text, icon }) {
   const token = getToken()
   const { user_id } = useParams()
   const { data: userProfile, refetch: userProfileRefetch } = useGetUserProfileQuery({ user_id, token })
-console.log(userProfile,'userProfile')
   const statistics = [
     {
       icon: faUser,
       title: "Followers",
-      count: userProfile && userProfile.profile && userProfile.profile.followers.length || 0
+      count: userProfile && userProfile.profile && userProfile.profile.followers?.length || 0
     },
     {
       icon: faUser,
       title: "Following",
-      count: userProfile && userProfile.profile && userProfile.profile.following.length || 0
+      count: userProfile && userProfile.profile && userProfile.profile.following?.length || 0
     },
     {
       icon: faEye,
       title: "Total Views",
-      count: userProfile && userProfile.views 
+      count: userProfile && userProfile.views || 0
     },
     {
       icon: faDownload,
       title: "Total Downloads",
-      count: userProfile && userProfile.totalDownloads
+      count: userProfile && userProfile.totalDownloads || 0
     },
     {
       icon: faComment,
       title: "Total Comments",
-      count: userProfile && userProfile.totalComments
+      count: userProfile && userProfile.totalComments || 0
     }
   ]
-
   useEffect(() => {
     userProfileRefetch({ user_id, token })
   }, [user_id])

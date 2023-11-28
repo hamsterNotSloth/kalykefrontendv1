@@ -13,6 +13,11 @@ function ProfileDropDown({signOutHandler}) {
             text: "View Profile",
             icon: "none",
             to: `/user/${userProfileData?.myProfile?.u_id}`
+        },
+        {
+          text: "Wishlist",
+          icon: "none",
+          to:"/products/Wishlist"
         }
     ]
 

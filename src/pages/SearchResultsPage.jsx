@@ -17,8 +17,8 @@ function SearchResultsPage() {
     <>
       <div className='p-4 max-w-[1700px] mx-auto gap-3'>
         {searchedProducts?.products?.length > 0 && <span>Search - {search}</span>}
-        {searchedProducts?.products?.length == 0 && <span>No models found!</span>}
-        {searchedProducts?.products == null && <span>Search products by title!</span>}
+        {searchedProducts?.products?.length == 0 && <span>No Modals Found!</span>}
+        {searchedProducts?.products == null && <span>Search Products by Title!</span>}
         <div className='flex gap-4 flex-wrap'>
           {searchedProducts?.products?.map((item, index) => {
             return <ProductCard key={`SearchedProducts ${index} ${Math.random() * Date.now()}`} item={item} styling={`w-[200px] h-[200px]`} />

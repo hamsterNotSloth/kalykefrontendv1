@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useFollowMutation, useGetMyProductsQuery, useGetMyProfileQuery, useProductPurchaseMutation } from '../../redux/apiCalls/apiSlice';
+import { useFollowMutation, useGetMyProductsQuery, useGetMyProfileQuery, useProductPurchaseMutation, useWishlistMutation } from '../../redux/apiCalls/apiSlice';
 import { getToken } from '../../Token/token';
 import { toast } from 'react-toastify';
 import Followbtn from '../Common/FollowBtn';
@@ -9,6 +9,7 @@ import { socialMedia } from './socialMedia';
 import SocialMediaRow from '../Common/SocialMediaRow';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard } from '@fortawesome/free-solid-svg-icons'
+import WishlistBtn from '../Common/WishlistBtn';
 
 const backendBaseUrl = process.env.REACT_APP_FRONTEND_URL;
 
@@ -21,8 +22,8 @@ function DownloadScreen({ productDetails }) {
   const token = getToken()
   const { id } = useParams()
   const textAreaRef = useRef(id);
-  const [productPurchase] = useProductPurchaseMutation()
   const { data: myProfile } = useGetMyProfileQuery(token)
+  const [productPurchase] = useProductPurchaseMutation()
   const copyToClipboard = () => {
     if (textAreaRef.current) {
       textAreaRef.current.value = `${backendBaseUrl}/products/${id}`;
@@ -42,7 +43,7 @@ function DownloadScreen({ productDetails }) {
   }
 
   const downloadImageHandler = async () => {
-    if (!token || !myProfile?.myProfile?._id || myProfile?.status == false) return toast.error("Please login to continue")
+    if (!myProfile?.myProfile?._id || myProfile?.status == false) return toast.error("Please login to continue")
     if (!fileTypeToDownload) {
       toast.error("First, Select a file type to download.");
       return;
@@ -118,7 +119,7 @@ function DownloadScreen({ productDetails }) {
     const year = dateObject.getFullYear();
     const month = String(dateObject.getMonth() + 1).padStart(2, '0');
     const day = String(dateObject.getDate()).padStart(2, '0');
-    const formattedDate = `${year}-${month}-${day}`;
+    const formattedDate = `${day}-${month}-${year}`;
     return formattedDate;
   }
 
@@ -135,9 +136,9 @@ function DownloadScreen({ productDetails }) {
     <div className='w-[300px] mt-5 xl:mt-0'>
       <div className='flex flex-col pb-3'>
         <span>Created At: {extractDate(productDetails?.product?.createdAt)}</span>
-        <span>Last Updated: {extractDate(productDetails?.product?.updatedAt)}</span>
-        <span>Total Downloads: {productDetails?.product?.purchaseHistory?.length}</span>
+        <span>Total Downloads: {productDetails?.product?.purchaseHistory?.length || 0}</span>
       </div>
+      <WishlistBtn product = {productDetails?.product} token={token} />
       <div className='flex'>
         <button disabled={isDownloading} className='bg-[#2f85ff] rounded-r-0 hover:bg-[#5487ff] text-white text-[21px] h-[46px] w-[100%] rounded-l-md  w-full' onClick={downloadImageHandler}>{isDownloading ? "Downloading" : "Download"}</button>
         <select onChange={(e) => { setFileExtension(e.target.value) }} value={fileExtension}
@@ -161,21 +162,21 @@ function DownloadScreen({ productDetails }) {
         </div>
         <div className='flex border-b-[1px] pb-1 justify-center gap-4 '>
           <span>Designs Created:</span>
-          <span>{productDetails ? productDetails?.totalProducts : "Error while fetching data"}</span>
+          <span>{productDetails?.totalProducts || 0}</span>
         </div>
         <div className='flex border-b-[1px] pb-1 justify-center gap-4 '>
           <span>Followers:</span>
-          <span>{productDetails ? productDetails?.user?.followers?.length : "Error while fetching data"}</span>
+          <span>{productDetails?.user?.followers?.length || 0}</span>
         </div>
         <div className='flex border-b-[1px] pb-1 justify-center gap-4 '>
           <span>Following:</span>
-          <span>{productDetails ? productDetails?.user?.following?.length : "Error while fetching data"}</span>
+          <span>{productDetails?.user?.following?.length || 0}</span>
         </div>
         <div className='flex justify-center gap-4 '>
           <span>Views:</span>
-          <span>{productDetails ? productDetails?.product?.userViews?.length : 0}</span>
+          <span>{productDetails?.product?.userViews?.length || 0}</span>
         </div>
-        <Link className='h-[40px] w-full rounded-sm bg-[#c1c0c0] hover:bg-[#b2b2b2] flex justify-center items-center mt-2' to={`/user/${productDetails?.user?.u_id}`}>Visit {productDetails?.user?.userName}'s Profile</Link>
+        <Link className='h-[40px] w-full rounded-sm bg-[#c1c0c0] hover:bg-[#b2b2b2] flex justify-center items-center mt-2' to={`/user/${productDetails?.user?.u_id}`}>Visit {productDetails?.user?.userName}</Link>
         {token ? <Followbtn productDetails={productDetails} style={`bg-[#8d8d8d] mt-3 hover:bg-[#444444] text-white text-[21px] h-[46px] w-[100%] rounded-md  w-full`} /> : null}
         <textarea
           ref={textAreaRef}

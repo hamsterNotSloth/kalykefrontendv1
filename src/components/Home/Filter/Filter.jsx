@@ -7,8 +7,8 @@ function Filter() {
   const currentFilter = useSelector((state) => state.filtersSlice);
   const dispatch = useDispatch();
 
-  const filterList = ["Most Viewed", "New Uploads", "Most Downloaded", "From Top Designers"];
-  const categoryFilter = ["Animals", "Arts & Entertainment", "Autos & Vehicles", "Business & Industrial", "Devices", "Education", "Fashion", "Food & Drink", "Gridfinity", "Health & Fitness", "Hobbies & Games", "Home & Garden", "People", "Pop Culture", "Mask", "Seasonal"]
+  const filterList = ["Most Viewed", "New Uploads", "Most Downloaded","From top users"];
+  const categoryFilter = ["Animals", "Arts & Entertainment", "Autos & Vehicles", "Business & Industrial", "Devices", "Food & Drink", "Gridfinity", "Health & Fitness", "Hobbies & Games", "Home & Garden", "People", "Pop Culture", "mask"]
 
   const handleClick = (index) => {
     setActiveIndex(index);
@@ -42,18 +42,6 @@ function Filter() {
             {item}
           </button>
         ))}
-      <select className='px-7'
-        id="category"
-        onChange={handleCategoryChange}
-        value={currentFilter.category}
-      >
-        <option value="null">Select Category</option>
-        {categoryFilter.map((category, index) => (
-          <option key={`Category Filter at Homepage ${index} ${Math.random() * Date.now()}`} value={category}>
-            {category}
-          </option>
-        ))}
-      </select>
       </div>
     </div>
   );

@@ -14,13 +14,14 @@ import ComingSoonPage from "./pages/ComingSoonPage";
 import LicensePage from "./pages/LicensePage";
 import { getToken } from "./Token/token";
 import { useEffect } from "react";
-import { useGetMyProfileQuery } from "./redux/apiCalls/apiSlice";
+import { useGetMyProfileQuery, useGetUserProfileQuery } from "./redux/apiCalls/apiSlice";
 import SearchResultsPage from "./pages/SearchResultsPage";
 import Comments from "./components/ProductDetails/Comments";
 import Footer from "./components/Footer/Footer";
+import CategoryPage from "./pages/CategoryPage";
+import WishlistPage from "./pages/WishlistPage";
 
 function App() {
-
   return (
     <>
       <div className="bg-[#f4f4f4]">
@@ -36,11 +37,13 @@ function App() {
             <Route path="/:search/search-results" element={<SearchResultsPage />} />
             <Route path="/user/:user_id" element={<UserProfilePage />} />
             <Route path="/user/my-profile" element={<MyProfilePage />} />
+            <Route path="/products/Wishlist" element={<WishlistPage />} />
             <Route path="/coming-soon" element={<ComingSoonPage />} />
             <Route path="/licenses" element={<LicensePage />} />
 
             {/* <Route path="/login" element={<Signup />} /> */}
             <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
+            <Route path="/Category/:category" element={<CategoryPage />} />
           </Routes>
           <Footer />
         </Router>
