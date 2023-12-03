@@ -11,14 +11,15 @@ const project_id = process.env.REACT_APP_FIREBASE_PROJECT_ID;
 const storage_bucket = process.env.REACT_APP_FIREBASE_STORAGE_BUCKET;
 const messenger_sender_id = process.env.REACT_APP_FIREBASE_MESSENGER_SENDER_ID;
 const app_id = process.env.REACT_APP_FIREBASE_APP_ID;
-
+const measurementId = process.env.REACT_APP_FIREBASE_MEASUREMENTID
 const firebaseConfig = {
   apiKey: api_key,
   authDomain: auth_domain,
   projectId: project_id,
   storageBucket: storage_bucket,
   messagingSenderId: messenger_sender_id,
-  appId: app_id
+  appId: app_id,
+  measurementId: measurementId
 };
 
 

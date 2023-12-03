@@ -131,12 +131,10 @@ function DownloadScreen({ productDetails }) {
     allowedExtensionsDownloadHandler()
     setFileExtension(fileTypes[0])
   }, [productDetails])
-
   return (
     <div className='w-[300px] mt-5 xl:mt-0'>
       <div className='flex flex-col pb-3'>
         <span>Created At: {extractDate(productDetails?.product?.createdAt)}</span>
-        <span>Total Downloads: {productDetails?.product?.purchaseHistory?.length || 0}</span>
       </div>
       <WishlistBtn product = {productDetails?.product} token={token} />
       <div className='flex'>
@@ -169,12 +167,16 @@ function DownloadScreen({ productDetails }) {
           <span>{productDetails?.user?.followers?.length || 0}</span>
         </div>
         <div className='flex border-b-[1px] pb-1 justify-center gap-4 '>
-          <span>Following:</span>
-          <span>{productDetails?.user?.following?.length || 0}</span>
-        </div>
-        <div className='flex justify-center gap-4 '>
           <span>Views:</span>
           <span>{productDetails?.product?.userViews?.length || 0}</span>
+        </div>
+        <div className='flex border-b-[1px] pb-1 justify-center gap-4 '>
+          <span>Total Downloads:</span>
+          <span>{productDetails?.product?.purchaseHistory?.length || 0}</span>
+        </div>
+        <div className='flex border-b-[1px] pb-1 justify-center gap-4 '>
+          <span>Wishlisted:</span>
+          <span>{productDetails?.product?.wishlist?.length || 0}</span>
         </div>
         <Link className='h-[40px] w-full rounded-sm bg-[#c1c0c0] hover:bg-[#b2b2b2] flex justify-center items-center mt-2' to={`/user/${productDetails?.user?.u_id}`}>Visit {productDetails?.user?.userName}</Link>
         {token ? <Followbtn productDetails={productDetails} style={`bg-[#8d8d8d] mt-3 hover:bg-[#444444] text-white text-[21px] h-[46px] w-[100%] rounded-md  w-full`} /> : null}

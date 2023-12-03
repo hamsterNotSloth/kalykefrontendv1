@@ -266,7 +266,28 @@ export const apiSlice = createApi({
         },
       }),
       invalidatesTags: ["descriptionProduct"],
+    }),
+    createStripeUser: builder.mutation({
+      query:({token}) =>({
+        url: `stripe/create-stripe-user`,
+        method: "POST",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "authorization": token
+        },
+      }),
+    }),
+    addTransaction: builder.mutation({
+      query:({amount, token}) =>({
+        url: `stripe/add-transaction`,
+        method: "POST",
+        body: {amount},
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "authorization": token
+        },
+      }),
     })
   }),
 });
-export const { useUploadProductMutation, useWishlistMutation, useGetWishListItemsQuery,useDeleteReplyMutation,useAddReplyMutation,useProductPurchaseMutation,useDeleteCommentMutation, useDeleteProductMutation, useAddCommentsMutation, useGetSearchedProductsQuery, useUserViewedProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
+export const { useUploadProductMutation, useAddTransactionMutation, useCreateStripeUserMutation, useWishlistMutation, useGetWishListItemsQuery,useDeleteReplyMutation,useAddReplyMutation,useProductPurchaseMutation,useDeleteCommentMutation, useDeleteProductMutation, useAddCommentsMutation, useGetSearchedProductsQuery, useUserViewedProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;

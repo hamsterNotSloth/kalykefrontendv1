@@ -97,7 +97,7 @@ const HeaderLeft = () => {
                     </li>
                     <li>
                       <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                        Got a suggestion
+                        Got a suggestion?
                       </a>
                     </li>
                   </ul>
@@ -109,7 +109,7 @@ const HeaderLeft = () => {
             <a href="https://medium.com/@kalyke3d" target='_blank'>Blog</a>
           </div>
           <div className='flex gap-[6px] items-center'>
-            <Link to={'/coming-soon'}>Memberships</Link>
+            <Link to={'/coming-soon'}>Membership</Link>
           </div>
         </div>
       </div>

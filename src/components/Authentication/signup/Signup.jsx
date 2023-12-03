@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 
 import MainModal from "../MainModal";
 import Logo from "./Logo";
@@ -9,7 +9,7 @@ import Login from "../login/Login";
 import { useSignInUserMutation } from "../../../redux/apiCalls/apiSlice";
 import { toast } from "react-toastify";
 
-function Signup({setSignUpModalStatus}) {
+function Signup({ setSignUpModalStatus }) {
   const [showMainContent, setShowMainContent] = useState(true);
   const [showSignUpContent, setShowSignUpContent] = useState(false);
   const [signInUser] = useSignInUserMutation();
@@ -29,10 +29,9 @@ function Signup({setSignUpModalStatus}) {
       const provider = new GoogleAuthProvider();
       provider.addScope('email');
       const result = await signInWithPopup(auth, provider);
-      console.log(result,'result')
       const response = await signInUser({ credential: result.user, source: "Google" });
 
-      if(response.data && response.data.userData.status == true) {
+      if (response.data && response.data.userData.status == true) {
         toast.success(response.data.userData.message);
       } else {
         toast.error(response.error.data.message);
@@ -51,8 +50,7 @@ function Signup({setSignUpModalStatus}) {
       provider.addScope('email');
       const result = await signInWithPopup(auth, provider);
       const response = await signInUser({ credential: result.user, source: "Facebook" });
-      console.log(response,'responseresponseresponse')
-      if(response.data && response.data.userData.status == true) {
+      if (response.data && response.data.userData.status == true) {
         toast.success(response.data.userData.message);
       } else {
         toast.error(response.error.data.message);
@@ -98,7 +96,7 @@ function Signup({setSignUpModalStatus}) {
               showSignUpContent={showSignUpContent}
               signContentHandler={signContentHandler}
             />
-            {showSignUpContent ? <SignupModal goToLoginHandler={goToLoginHandler}/> : null}
+            {showSignUpContent ? <SignupModal goToLoginHandler={goToLoginHandler} /> : null}
             {showMainContent ? (
               <MainModal
                 goToLoginHandler={goToLoginHandler}

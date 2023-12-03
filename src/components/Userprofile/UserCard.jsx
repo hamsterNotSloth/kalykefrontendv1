@@ -6,10 +6,13 @@ import { useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice';
 import { getToken } from '../../Token/token';
 import { useParams } from 'react-router-dom';
 import ProfileUpdatePopup from './ProfileUpdatePopup';
+import { faCcStripe } from '@fortawesome/free-brands-svg-icons';
+import CreateStripeUser from './Stripe/createStripeUser';
 
 function UserCard() {
     const [profileImage, setProfileImage] = useState()
     const token = getToken()
+    const [openStripeLinkComponent, setOpenStripeLinkComponent] = useState(false)
     const { user_id } = useParams()
     const { data: userProfile, isLoading, refetch: userProfileRefetch } = useGetUserProfileQuery({ user_id, token })
     const [newUserInfo, setNewUserInfo] = useState({
@@ -98,7 +101,10 @@ function UserCard() {
                     {updateComponentToggler && <UserUpdateCom newUserInfo={newUserInfo} userProfile={userProfile} setNewUserInfo={setNewUserInfo} token={token} updateProfileDetails={updateProfileDetails} />}
                 </>
             )}
-
+            <button onClick={() => setOpenStripeLinkComponent(!openStripeLinkComponent)} className='mt-4'>
+              <FontAwesomeIcon icon={faCcStripe} />
+            </button>
+            {openStripeLinkComponent && <CreateStripeUser />}
         </div>
     )
 }
