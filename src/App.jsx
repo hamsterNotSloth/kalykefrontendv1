@@ -20,7 +20,7 @@ import Comments from "./components/ProductDetails/Comments";
 import Footer from "./components/Footer/Footer";
 import CategoryPage from "./pages/CategoryPage";
 import WishlistPage from "./pages/WishlistPage";
-import DesignUpload from "./components/UserProfile/Stripe/productDesign";
+import Success from "./components/messages/Success";
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
             {/* <Route path="/login" element={<Signup />} /> */}
             <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
             <Route path="/Category/:category" element={<CategoryPage />} />
-            <Route path="/design-upload/transaction" element={<DesignUpload />} />
+            <Route path="/messages/success" element={<Success />}/>
           </Routes>
           <Footer />
         </Router>

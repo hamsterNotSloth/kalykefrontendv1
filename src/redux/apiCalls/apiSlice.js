@@ -278,10 +278,10 @@ export const apiSlice = createApi({
       }),
     }),
     addTransaction: builder.mutation({
-      query:({amount, token}) =>({
+      query:({amount, token, productId}) =>({
         url: `stripe/add-transaction`,
         method: "POST",
-        body: {amount},
+        body: {amount, productId},
         headers: {
           "Content-type": "application/json; charset=UTF-8",
           "authorization": token

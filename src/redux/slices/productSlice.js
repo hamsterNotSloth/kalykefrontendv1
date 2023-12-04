@@ -10,6 +10,7 @@ const productSlice = createSlice({
     modalSetting: '',
     modal: [],
     images: [],
+    price: 0
   },
   reducers: {
     updateProductDetails: (state, action) => {
@@ -24,6 +25,7 @@ const productSlice = createSlice({
         modalSetting: '',
         modal: [],
         images: [],
+        price: 0
       };
     },
   },

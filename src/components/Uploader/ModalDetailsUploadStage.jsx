@@ -123,6 +123,10 @@ function ModalDetailsUploadStage({ setCurrentLevel }) {
         <Quill descriptionHandler={descriptionHandler} description={details.description} />
       </div>
       <div className='mt-3'>
+        <label className='text-[16px] font-semibold'>Price <span className='text-[12px] font-semibold'>(Price would be calculated in terms of USD)</span></label>
+        <input type='number' min='0' onChange={(e) => {console.log(e.target.value);setDetails({ ...details, price: e.target.value })}} className="w-full px-2 h-[40px] border-[2px] border-[#c1b9b9] rounded-sm" placeholder='Enter price in USD, if you want this model to be free leave it.'/>
+      </div>
+      <div className='mt-3'>
         <label className='text-[16px] font-semibold'>Tags</label>
         <input
           type="text"
