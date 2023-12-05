@@ -23,7 +23,7 @@ function Footer() {
   }, []);
 
   return (
-    <div className={`bg-white p-3 px-6 flex justify-between items-center ${isFixed ? 'fixed bottom-0 left-0 right-0 z-50' : ''}`}>
+    <div className={`bg-white p-3 px-6 flex justify-between border-t-[1px] rounded-t-lg mx-5 shadow-md items-center h-[50px] ${isFixed ? 'fixed bottom-0 left-0 right-0 z-50' : ''}`}>
       <div>
         <a
           href='https://ko-fi.com/kalyke'

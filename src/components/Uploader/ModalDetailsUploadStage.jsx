@@ -27,7 +27,8 @@ function ModalDetailsUploadStage({ setCurrentLevel }) {
     title: '',
     description: '',
     category: null,
-    modalSetting: ''
+    modalSetting: '',
+    price: 0
   });
   const descriptionHandler = (value) => {
     setDetails({ ...details, description: value })
@@ -76,7 +77,7 @@ function ModalDetailsUploadStage({ setCurrentLevel }) {
       });
       const uploadedFiles = await Promise.all(uploadPromises);
       setFileUploadProgress(false)
-      dispatch(updateProductDetails({ ...productDetails, tags: hashtags, title: details.title, description: details.description, category: details.category, modalSetting: details.modalSetting, images: [...productDetails.images, ...uploadedFiles] }));
+      dispatch(updateProductDetails({ ...productDetails, tags: hashtags, title: details.title, description: details.description, category: details.category, modalSetting: details.modalSetting, price: details.price, images: [...productDetails.images, ...uploadedFiles] }));
       setIsUploadLoading(false)
       toast.success("Final step. Click upload to upload your modal.");
       if (details.title.length > 0 && details.description.length > 0) {
@@ -123,8 +124,12 @@ function ModalDetailsUploadStage({ setCurrentLevel }) {
         <Quill descriptionHandler={descriptionHandler} description={details.description} />
       </div>
       <div className='mt-3'>
+        <label className='text-[16px] font-semibold'>Modal Settings</label>
+        <input type="text" className="w-full px-2 h-[40px] border-[2px] border-[#c1b9b9] rounded-sm" onChange={(e) => setDetails({ ...details, modalSetting: e.target.value })} placeholder='Copy and paste your modal settings here.' />
+      </div>
+      <div className='mt-3'>
         <label className='text-[16px] font-semibold'>Price <span className='text-[12px] font-semibold'>(Price would be calculated in terms of USD)</span></label>
-        <input type='number' min='0' onChange={(e) => {console.log(e.target.value);setDetails({ ...details, price: e.target.value })}} className="w-full px-2 h-[40px] border-[2px] border-[#c1b9b9] rounded-sm" placeholder='Enter price in USD, if you want this model to be free leave it.'/>
+        <input type='number' min='0' onChange={(e) => {setDetails({ ...details, price: e.target.value })}} className="w-full px-2 h-[40px] border-[2px] border-[#c1b9b9] rounded-sm" placeholder='Enter price in USD, if you want this model to be free leave it.'/>
       </div>
       <div className='mt-3'>
         <label className='text-[16px] font-semibold'>Tags</label>
@@ -160,10 +165,6 @@ function ModalDetailsUploadStage({ setCurrentLevel }) {
             </option>
           ))}
         </select>
-      </div>
-      <div className='mt-3'>
-        <label className='text-[16px] font-semibold'>Modal Settings</label>
-        <input type="text" className="w-full px-2 h-[40px] border-[2px] border-[#c1b9b9] rounded-sm" onChange={(e) => setDetails({ ...details, modalSetting: e.target.value })} placeholder='Copy and paste your modal settings here.' />
       </div>
       <button
         disabled={isUploadLoading || selectedFile.length > 4}

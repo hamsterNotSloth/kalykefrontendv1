@@ -53,8 +53,8 @@ export const apiSlice = createApi({
       }),
     }),
     getAllProducts: builder.query({
-      query: ({filter="null", category="null"}) => ({
-        url: `product/all-products?category=${encodeURIComponent(category)}&currentFilter=${filter}`,
+      query: ({filter="null", category="null", isFree}) => ({
+        url: `product/all-products?category=${encodeURIComponent(category)}&currentFilter=${filter}&isFree=${isFree}`,
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -63,7 +63,7 @@ export const apiSlice = createApi({
     }),
     getSimilarProducts: builder.query({
       query: ({tags, created_by}) => ({
-        url: `product/similar-modals?created_by=${created_by}&tags=${encodeURIComponent(tags)}`,
+        url: `product/product/similar-modals?createdby=${created_by}&tags=${encodeURIComponent(tags)}`,
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -154,6 +154,17 @@ export const apiSlice = createApi({
         },
       }),
       providesTags: ["product", "User"],
+    }),
+    getDownloadableProductsList: builder.query({
+      query: (token) => ({
+        url: `user/user/downloadable-products`,
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          'authorization': token
+        },
+      }),
+      providesTags: ["User"],
     }),
     getproduct: builder.query({
       query: (id ) => ({
@@ -265,7 +276,7 @@ export const apiSlice = createApi({
           "authorization": token
         },
       }),
-      invalidatesTags: ["descriptionProduct"],
+      invalidatesTags: ["descriptionProduct", "product"],
     }),
     createStripeUser: builder.mutation({
       query:({token}) =>({
@@ -290,4 +301,4 @@ export const apiSlice = createApi({
     })
   }),
 });
-export const { useUploadProductMutation, useAddTransactionMutation, useCreateStripeUserMutation, useWishlistMutation, useGetWishListItemsQuery,useDeleteReplyMutation,useAddReplyMutation,useProductPurchaseMutation,useDeleteCommentMutation, useDeleteProductMutation, useAddCommentsMutation, useGetSearchedProductsQuery, useUserViewedProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
+export const { useUploadProductMutation, useGetDownloadableProductsListQuery, useAddTransactionMutation, useCreateStripeUserMutation, useWishlistMutation, useGetWishListItemsQuery,useDeleteReplyMutation,useAddReplyMutation,useProductPurchaseMutation,useDeleteCommentMutation, useDeleteProductMutation, useAddCommentsMutation, useGetSearchedProductsQuery, useUserViewedProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;

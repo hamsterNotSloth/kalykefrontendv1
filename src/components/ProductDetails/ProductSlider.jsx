@@ -3,8 +3,10 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 function ProductSlider({ productDetails }) {
-    const [data, setData] = useState({ image: productDetails && productDetails.product.images[0].downloadLink, index: 0 });
-
+    const [data, setData] = useState({ image: productDetails?.product.images[0].downloadLink, index: 0 });
+    useEffect(() => {
+        setData({ image: productDetails?.product.images[0].downloadLink, index: 0 })
+    }, [productDetails])
     return (
         <>
             <div className="w-[100%] bg-[#dedede] border rounded-lg py-6  m-30">
@@ -22,7 +24,6 @@ function ProductSlider({ productDetails }) {
                         <div className="flex-5 h-[487px] flex justify-center w-[100%]">
                             <div className="bg-white h-full overflow-hidden relative cursor-pointer">
                                 <img src={data.image ? data.image : productDetails && productDetails.product.images[0].downloadLink} alt="" className="object-contain h-full" />
-
                             </div>
                         </div>
                     </div>

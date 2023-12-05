@@ -11,7 +11,6 @@ const CreateStripeUser = () => {
       const response = await createStripeUser({token})
       const { accountLinkUrl } = response.data;
 
-      // Redirect the user to the Stripe onboarding flow
       window.location.href = accountLinkUrl;
       console.log('Stripe User ID:', response);
     } catch (error) {

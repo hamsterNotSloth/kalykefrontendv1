@@ -126,7 +126,6 @@ function DownloadScreen({ productDetails }) {
   const isEmailIncluded = productDetails?.product?.purchaseHistory?.some(
     (purchase) => purchase.email === myProfile?.myProfile?.email
   );
-console.log(myProfile,'myProfile')
   useEffect(() => {
     fileToDownloadHandler(fileExtension)
   }, [fileExtension])

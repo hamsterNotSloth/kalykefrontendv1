@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearFilter, setFilter } from '../../../redux/slices/filtersSlice';
+import { filterList, filtersOfFreeStatus } from './filterData';
 
 function Filter() {
   const [activeIndex, setActiveIndex] = useState(1);
+  const [isFree, setIsFree] = useState(null); 
   const currentFilter = useSelector((state) => state.filtersSlice);
   const dispatch = useDispatch();
-
-  const filterList = ["Most Viewed", "New Uploads", "Most Downloaded","From top users"];
-  const categoryFilter = ["Animals", "Arts & Entertainment", "Autos & Vehicles", "Business & Industrial", "Devices", "Food & Drink", "Gridfinity", "Health & Fitness", "Hobbies & Games", "Home & Garden", "People", "Pop Culture", "mask"]
 
   const handleClick = (index) => {
     setActiveIndex(index);
     querySelectorHandler(index);
   };
 
-  const querySelectorHandler =  (index) => {
+  const querySelectorHandler =  (index = 1) => {
     let valueAtIndex;
     if (index >= 0 && index < filterList.length) {
       valueAtIndex = filterList[index];
@@ -30,8 +29,21 @@ function Filter() {
     dispatch(setFilter({...currentFilter, category: category}));
   };
 
+  const handleToggleChange = (val) => {
+    setIsFree(val); 
+  };
+  useEffect(()=>{
+    dispatch(setFilter({ ...currentFilter, isFree: isFree }))
+  }, [isFree])
   return (
     <div className='p-4 max-w-[1700px] mx-auto'>
+        <div className='mb-2'>
+        {filtersOfFreeStatus.map(item => {
+          return (
+            <button className={`border rounded-full px-4 py-2 ${isFree == item.value && "bg-black text-white" }`} onClick={()=> handleToggleChange(item.value)}>{item.text}</button>
+          )
+        })}
+        </div>
       <div className='w-full bg-white h-[50px] overflow-x-auto border flex '>
         {filterList.map((item, index) => (
           <button

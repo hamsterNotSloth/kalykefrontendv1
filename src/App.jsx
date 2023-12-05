@@ -21,6 +21,7 @@ import Footer from "./components/Footer/Footer";
 import CategoryPage from "./pages/CategoryPage";
 import WishlistPage from "./pages/WishlistPage";
 import Success from "./components/messages/Success";
+import DownloadableProductsPage from "./pages/DownloadableProductsPage";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route path="/user/:user_id" element={<UserProfilePage />} />
             <Route path="/user/my-profile" element={<MyProfilePage />} />
             <Route path="/products/Wishlist" element={<WishlistPage />} />
+            <Route path="/products/downloaded-products" element={<DownloadableProductsPage />} />
             <Route path="/coming-soon" element={<ComingSoonPage />} />
             <Route path="/licenses" element={<LicensePage />} />
 
@@ -49,7 +51,7 @@ function App() {
           </Routes>
           <Footer />
         </Router>
-        <ToastContainer position="top-right" autoClose={2000} closeOnClick pauseOnFocusLoss pauseOnHover={false} />
+        <ToastContainer position="bottom-right" autoClose={2000} closeOnClick pauseOnFocusLoss pauseOnHover={false} />
       </div>
     </>
   );

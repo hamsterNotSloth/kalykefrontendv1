@@ -7,10 +7,11 @@ import ProductDetailsHeader from './ProductDetailsHeader'
 import DownloadScreen from './DownloadScreen'
 import { getToken } from '../../Token/token'
 import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader'
+import NotFoundPage from '../../pages/NotFoundPage'
 
 function ProductDetails() {
   const { id } = useParams()
-  const { data: productDetails, isLoading, refetch } = useGetproductQuery(id)
+  const { data: productDetails, isLoading, error, refetch } = useGetproductQuery(id)
   const [userViewedProduct] = useUserViewedProductMutation()
   const token = getToken()
   const userViewedProductHandler = async () => {
@@ -31,6 +32,7 @@ function ProductDetails() {
   useEffect(() => {
     fetchData()
   }, [id])
+  if(error) return <NotFoundPage />
   if (isLoading) return <div className='flex items-center justify-center h-[100vh] w-full'><ClimbingBoxLoader color={"#000"} size={20} aria-label="Loading Spinner" data-testid="loader" /></div>
   return (
     <div className='px-6 mx-30 mt-[30px] max-w-[1800px] mx-auto'>
@@ -40,7 +42,7 @@ function ProductDetails() {
         <ProductDescription productDetails={productDetails} />
         <DownloadScreen productDetails={productDetails} />
       </div>
-    </div>
+     </div>
   )
 }
 

@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {Link, useParams} from "react-router-dom"
 import { useGetMyProfileQuery, useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice'
 import { getToken } from '../../Token/token'
 import { toast } from 'react-toastify'
 
-function ProfileDropDown({signOutHandler}) {
+function ProfileDropDown({signOutHandler, profileDropDownHandler}) {
   const token = getToken()
   const {data: userProfileData, isLoading} = useGetMyProfileQuery(token)
   
@@ -18,6 +18,11 @@ function ProfileDropDown({signOutHandler}) {
           text: "Wishlist",
           icon: "none",
           to:"/products/Wishlist"
+        },
+        {
+          text: "Downloaded products",
+          icon: "none",
+          to:"/products/downloaded-products"
         }
     ]
 
@@ -26,14 +31,14 @@ function ProfileDropDown({signOutHandler}) {
   return (
     <div className='bg-white rounded-lg absolute z-10 w-[280px] right-0 py-4 px-4 shadow-md'>
       <div className='flex'>
-      <Link to={`/user/${userProfileData?.myProfile?.u_id}`} className='bg-[#e8e8e8] flex justify-center rounded-full py-2 px-4 w-[100%]'>View My Models</Link>
+      <Link to={`/user/${userProfileData?.myProfile?.u_id}`} onClick={profileDropDownHandler} className='bg-[#e8e8e8] hover:bg-[#585858] hover:text-[white] flex justify-center rounded-full py-2 px-4 w-[100%]'>View My Models</Link>
       </div>
       <ul>
         {dropDownList.map((item, index) => {
-            return <Link className='block' to={item.to} key={`profileDropdown ${index + Math.random() * Date.now()}`}>{item.text}</Link>
+            return <Link className='block hover:text-[#3c3c3c]' to={item.to} key={`profileDropdown ${index + Math.random() * Date.now()}`} onClick={profileDropDownHandler}>{item.text}</Link>
         })}
       </ul>
-      <Link to="/" onClick={() => signOutHandler()} className='text-dark hover:text-[#ea4754] rounded-full transition-colors duration-100'>Sign out</Link>
+      <Link to="/" onClick={() => {profileDropDownHandler();signOutHandler()}} className='text-dark hover:text-[#ea4754] rounded-full transition-colors duration-100'>Sign out</Link>
     </div>
   )
 }

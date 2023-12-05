@@ -10,7 +10,6 @@ function ResetPassword() {
     e.preventDefault();
 
     const response = await resetPassword({token: resetToken, password})
-    console.log(response, 'response')
     try {
     } catch(err) {
       console.log(err)

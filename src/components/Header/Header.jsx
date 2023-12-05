@@ -10,13 +10,7 @@ import { toast } from 'react-toastify'
 const Header = () => {
   const token = getToken()
   const {data: userProfileData, error, isError} = useGetMyProfileQuery(token)
-  const [renderErrorOnce, setRenderErrorOnce] = useState(1)
-  useEffect(()=> {
-    setRenderErrorOnce(renderErrorOnce + 1)
-    if(isError && renderErrorOnce % 2 != 0) {
-      toast.error(error?.data?.message)
-    }
-  }, [error])
+ 
   return (
     <>
       <div className='flex py-4 px-6 justify-between items-center'>

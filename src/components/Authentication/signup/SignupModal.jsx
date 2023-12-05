@@ -31,7 +31,6 @@ function SignupModal({ goToLoginHandler }) {
         toast.error("Something went wrong. Have a query? Contact the support team.")
       }
     } catch (error) {
-      console.log('error:', error.message);
       if(error.message == "Firebase: Error (auth/email-already-in-use).") {
         return toast.error("Email already in use.")
       }

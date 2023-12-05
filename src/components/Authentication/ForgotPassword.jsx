@@ -14,7 +14,6 @@ const ForgotPassword = ({setResetPassModal}) => {
       } else {
         toast.error(response.error.data.message);
       }
-      console.log(response)
       } catch(err) {
         console.log("failed", err)
       }

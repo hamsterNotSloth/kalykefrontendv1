@@ -36,7 +36,7 @@ const HeaderRight = () => {
           <button onClick={profileDropDownHandler} className='w-[41px]'>
             <img src={userProfileData.myProfile.profilePicture} referrerpolicy="no-referrer" alt="profile Picture" className='rounded-full w-[100%]' />
           </button>
-          {isProfileDropDownOpen && <ProfileDropDown signOutHandler={signOutHandler} />}
+          {isProfileDropDownOpen && <ProfileDropDown profileDropDownHandler={profileDropDownHandler} signOutHandler={signOutHandler} />}
         </div>
       </div>
     </div></>

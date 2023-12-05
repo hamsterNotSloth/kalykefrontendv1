@@ -16,7 +16,7 @@ function SearchResultsPage() {
   return (
     <>
       <div className='p-4 max-w-[1700px] mx-auto gap-3'>
-        {searchedProducts?.products?.length > 0 && <span>Search - {search}</span>}
+        {searchedProducts?.products?.length > 0 && <span className='text-[20px] font-semibold'>Search - {search}</span>}
         {searchedProducts?.products?.length == 0 && <span>No models found!</span>}
         {searchedProducts?.products == null && <span>Search products by title!</span>}
         <div className='flex gap-4 flex-wrap'>

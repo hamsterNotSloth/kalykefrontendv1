@@ -2,16 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 const filtersSlice = createSlice({
   name: 'filters',
   initialState: {
-    filter: null,
+    filter: "New Uploads",
     category: null,
-    searchBar: ''
+    searchBar: '',
+    isFree: null,
   }, 
   reducers: {
     setFilter: (state, action) => action.payload,
     clearFilter: () => {
       return {
         filter: null,
-        category: null
+        category: null,
+        isFree: null
       }
     },
   },

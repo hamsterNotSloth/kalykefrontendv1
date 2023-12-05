@@ -17,7 +17,7 @@ function Terms() {
       <div className="flex gap-2 mt-[15px]">
         <input
           type="checkbox"
-          class="form-checkbox h-4 w-4 text-blue-600 rounded-xl"
+          className="form-checkbox h-4 w-4 text-blue-600 rounded-xl"
         />
         <span className=" text-center text-[#999999] text-[9px] md:text-[13px] font-[500]">
           Get updates & product news from Thangs

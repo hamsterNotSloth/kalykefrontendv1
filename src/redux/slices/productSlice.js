@@ -5,12 +5,12 @@ const productSlice = createSlice({
   initialState: {
     title: '',
     description: '',
+    price: 0,
     tags: [],
     category: null,
     modalSetting: '',
     modal: [],
-    images: [],
-    price: 0
+    images: []
   },
   reducers: {
     updateProductDetails: (state, action) => {
@@ -20,12 +20,12 @@ const productSlice = createSlice({
       return {
         title: '',
         description: '',
+        price: 0,
         tags: [],
         category: null,
         modalSetting: '',
         modal: [],
-        images: [],
-        price: 0
+        images: []
       };
     },
   },

@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import Quill from '../Common/Quil'
-import { useAddCommentsMutation, useDeleteCommentMutation, useDeleteReplyMutation } from '../../redux/apiCalls/apiSlice'
+import { useAddCommentsMutation, useDeleteCommentMutation, useDeleteReplyMutation, useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice'
 import { getToken } from '../../Token/token'
 import { toast } from 'react-toastify'
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ReplyComment from './ReplyComment'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 const Comments = ({ productDetails }) => {
   const token = getToken()
@@ -15,7 +15,6 @@ const Comments = ({ productDetails }) => {
   const [deleteComment, {isLoading: isCommentDeleting}] = useDeleteCommentMutation()
   const [deleteReply, {isLoading: isReplyDeleting}] = useDeleteReplyMutation();
   const [replyTo, setReplyTo] = useState(null);
-
   const deleteCommentHandler = async (comment_id) => {
     try {
       const response = await deleteComment({ productId: productDetails?.product._id, token, comment_id })
@@ -79,29 +78,28 @@ const deleteReplyHandler = async (data) => {
     <div className='py-8'>
       <span className='flex pb-3 font-semibold'>Comments</span>
       <div className='pb-2'>
-        <div class="flex items-center mb-4 mt-4">
-          <img src="your-avatar.jpg" alt="Your Avatar" class="w-8 h-8 rounded-full mr-2" />
-          <textarea onChange={commentHandler} value={comment} placeholder="Add a comment..." class="w-full border rounded-md p-2 focus:outline-none focus:border-blue-500"></textarea>
-          <button onClick={addCommentsHandler} disabled={isAddingComment} class="ml-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Post</button>
+        <div className="flex items-center mb-4 mt-4">
+          <textarea onChange={commentHandler} value={comment} placeholder="Add a comment..." className="w-full border rounded-md p-2 focus:outline-none focus:border-blue-500"></textarea>
+          <button onClick={addCommentsHandler} disabled={isAddingComment} className="ml-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Post</button>
         </div>
       </div>
       <ul>
         {productDetails.product.comments?.map((item, index) => {
           return <li className=' pb-3' key={`Comment ${index} ${item._id}`}>
-            <div class="bg-white p-4 rounded-lg shadow-md">
-              <div class="flex items-start mb-4">
-                <img src={item.profilePic} alt="User Avatar" class="w-8 h-8 rounded-full mr-2" />
-                <div class="flex-1">
-                  <div class="flex items-center mb-2">
+            <div className="bg-white p-4 rounded-lg shadow-md">
+              <div className="flex items-start mb-4">
+                <img src={item.profilePic} alt="User Avatar" className="w-8 h-8 rounded-full mr-2" />
+                <div className="flex-1">
+                  <div className="flex items-center mb-2">
                     <div className='flex gap-1 items-end'>
-                    <Link to={`user/${item.u_id}`} class="font-bold text-gray-800">{item.userName}</Link> <span className='text-[12px]'>{formatDate(item.createdAt)}</span>
+                    <Link to={`user/${item.u_id}`} className="font-bold text-gray-800">{item.userName}</Link> <span className='text-[12px]'>{formatDate(item.createdAt)}</span>
                     </div>
-                    <div class="ml-auto">
-                      <button class="text-gray-500 hover:text-blue-500 mr-2" onClick={() => replyHandler(item._id)}>Reply</button>
-                      <button class="text-red-500 hover:text-red-700" disabled={isCommentDeleting} onClick={() => deleteCommentHandler(item._id)}>Delete</button>
+                    <div className="ml-auto">
+                      <button className="text-gray-500 hover:text-blue-500 mr-2" onClick={() => replyHandler(item._id)}>Reply</button>
+                      <button className="text-red-500 hover:text-red-700" disabled={isCommentDeleting} onClick={() => deleteCommentHandler(item._id)}>Delete</button>
                     </div>
                   </div>
-                  <p class="text-gray-600">{item.text}</p>
+                  <p className="text-gray-600">{item.text}</p>
                 </div>
               </div>
             </div>
@@ -115,15 +113,15 @@ const deleteReplyHandler = async (data) => {
             {item.replies?.map((reply, replyIndex) => (
               <div key={`Reply ${replyIndex} ${reply._id}`} className="bg-white p-4 mt-4 rounded-lg shadow-md ml-8">
                 <div className="flex items-center mb-2">
-                  <img src={reply.profilePic} alt="User Avatar" class="w-8 h-8 rounded-full mr-2" />
-                  <div class="flex-1">
-                    <div class="flex items-center mb-2">
+                  <img src={reply.profilePic} alt="User Avatar" className="w-8 h-8 rounded-full mr-2" />
+                  <div className="flex-1">
+                    <div className="flex items-center mb-2">
                     <div className='flex gap-1 items-end'>
-                    <Link to={`user/${item.u_id}`} class="font-bold text-gray-800">{reply.userName}</Link>  <span className='text-[12px]'>{formatDate(item.createdAt)}</span>
+                    <Link to={`user/${item.u_id}`} className="font-bold text-gray-800">{reply.userName}</Link>  <span className='text-[12px]'>{formatDate(item.createdAt)}</span>
                     </div>
-                      <div class="ml-auto">
-                        <button class="text-gray-500 hover:text-blue-500 mr-2" onClick={() => replyHandler(reply._id)}>Reply</button>
-                        <button class="text-red-500 hover:text-red-700" disabled={isReplyDeleting} onClick={() => deleteReplyHandler({productId: productDetails?.product._id, token, comment_id:item._id, replyId: reply._id })}>Delete</button>
+                      <div className="ml-auto">
+                        <button className="text-gray-500 hover:text-blue-500 mr-2" onClick={() => replyHandler(reply._id)}>Reply</button>
+                        <button className="text-red-500 hover:text-red-700" disabled={isReplyDeleting} onClick={() => deleteReplyHandler({productId: productDetails?.product._id, token, comment_id:item._id, replyId: reply._id })}>Delete</button>
                       </div>
                     </div>
                     <p className="text-gray-600">{reply.text}</p>
