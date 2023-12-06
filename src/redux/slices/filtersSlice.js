@@ -6,6 +6,7 @@ const filtersSlice = createSlice({
     category: null,
     searchBar: '',
     isFree: null,
+    fileType: "All fileTypes"
   }, 
   reducers: {
     setFilter: (state, action) => action.payload,
@@ -13,7 +14,8 @@ const filtersSlice = createSlice({
       return {
         filter: null,
         category: null,
-        isFree: null
+        isFree: null,
+        fileType: "All fileTypes"
       }
     },
   },

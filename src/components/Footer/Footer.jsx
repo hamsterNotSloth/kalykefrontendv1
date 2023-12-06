@@ -35,7 +35,7 @@ function Footer() {
         </a>
       </div>
       <div>
-        <ul className='flex gap-3 max-w-[328px] justify-end items-center'>
+        <ul className='flex gap-3 w-[400px] justify-end items-center'>
           {socialMedia.map((item) => (
             <SocialMediaRow key={`social-media-footer-${item.link}`} item={item} />
           ))}

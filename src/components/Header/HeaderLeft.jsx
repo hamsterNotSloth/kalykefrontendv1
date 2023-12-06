@@ -1,4 +1,4 @@
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { faBriefcase, faCar, faCaretDown, faDice, faFireFlameCurved, faGear, faHouse, faLayerGroup, faMasksTheater, faMobile, faPaintBrush, faPaw, faPerson, faPersonSkiing, faUtensils } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -37,7 +37,7 @@ const HeaderLeft = () => {
     };
   }, [dropdownRef]);
 
-  const categoryFilter = ["Animals", "Arts & Entertainment", "Autos & Vehicles", "Business & Industrial", "Devices", "Food & Drink", "Gridfinity", "Health & Fitness", "Hobbies & Games", "Home & Garden", "People", "Pop Culture", "mask"]
+  const categoryFilter = [{ categoryName: "Animals", icon: faPaw }, { categoryName: "Arts & Entertainment", icon: faPaintBrush }, { categoryName: "Autos & Vehicles", icon: faCar }, { categoryName: "Business & Industrial", icon: faBriefcase}, { categoryName: "Devices", icon: faMobile }, { categoryName: "Food & Drink", icon: faUtensils }, { categoryName: "Gridfinity", icon: faGear }, { categoryName: "Health & Fitness", icon: faPersonSkiing }, { categoryName: "Hobbies & Games", icon: faDice }, { categoryName: "Home & Garden", icon: faHouse }, { categoryName: "People", icon: faPerson  }, { categoryName: "Pop Culture", icon: faFireFlameCurved }, { categoryName: "mask", icon: faMasksTheater }]
   return (
     <>
       <div className='flex gap-[30px]'>
@@ -59,15 +59,18 @@ const HeaderLeft = () => {
                 d="m1 1 4 4 4-4"
               />
             </svg></button>
-            {isExploreDropDownOpen && <div className="absolute z-50 h-[250px] overflow-auto w-[400px] right-0 left-0 mt-2 origin-top-right bg-white border border-gray-300 divide-y divide-gray-200 rounded-md shadow-lg">
-              <div className="py-1 px-2 flex flex-wrap gap-x-10 gap-y-6">
+            {isExploreDropDownOpen && <div className="absolute z-50  overflow-auto w-[650px] right-0 left-0 mt-2 origin-top-right bg-white border border-gray-300 divide-y divide-gray-200 rounded-md shadow-lg">
+              <div className="px-5 py-4">
+                <span className='mb-4 flex items-center font-medium'><FontAwesomeIcon icon={faLayerGroup} /> Categories:</span>
+                <div className='flex flex-wrap gap-x-6 gap-y-6'>
                 {categoryFilter.map((item, index) => {
                   return (
-                    <div key={`drop-down-explore${Math.random() * Date.now()}`}>
-                      <button className='hover:text-[#424040]' onClick={(e) => { e.preventDefault(); categoryHandler(item) }}>{index + 1}- {item}</button>
+                    <div className='w-[180px]' key={`drop-down-explore${Math.random() * Date.now()}`}>
+                      <button className='hover:text-[#424040]' onClick={(e) => { e.preventDefault(); categoryHandler(item.categoryName) }}> <FontAwesomeIcon icon={item.icon} /> {item.categoryName}</button>
                     </div>
                   )
                 })}
+                </div>
               </div>
             </div>}
           </div>

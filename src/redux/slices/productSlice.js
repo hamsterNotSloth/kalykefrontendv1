@@ -18,14 +18,14 @@ const productSlice = createSlice({
     },
     resetProductDetails: (state) => {
       return {
-        title: '',
-        description: '',
-        price: 0,
-        tags: [],
-        category: null,
-        modalSetting: '',
-        modal: [],
-        images: []
+        // title: '',
+        // description: '',
+        // price: 0,
+        // tags: [],
+        // category: null,
+        // modalSetting: '',
+        // modal: [],
+        // images: []
       };
     },
   },

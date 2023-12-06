@@ -20,6 +20,7 @@ const ModalUploadStage = ({ setCurrentLevel }) => {
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
+    console.log(file,'file')
     if (file) {
         setSelectedFile([...selectedFiles, file]);
     } else {

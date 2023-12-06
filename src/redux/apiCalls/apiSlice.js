@@ -53,8 +53,8 @@ export const apiSlice = createApi({
       }),
     }),
     getAllProducts: builder.query({
-      query: ({filter="null", category="null", isFree}) => ({
-        url: `product/all-products?category=${encodeURIComponent(category)}&currentFilter=${filter}&isFree=${isFree}`,
+      query: ({filter="null", category="null", isFree, fileType}) => ({
+        url: `product/all-products?category=${encodeURIComponent(category)}&currentFilter=${filter}&isFree=${isFree}&fileType=${fileType}`,
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -198,6 +198,18 @@ export const apiSlice = createApi({
         },
       }),
     }),
+    addRating: builder.mutation({
+      query: ({ _id, token, rating }) => ({
+        url: `product/${_id}/rating`,
+        method: "PATCH",
+        body: {rating},
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "authorization": token
+        },
+      }),
+      invalidatesTags: ["descriptionProduct"],
+    }),
     deleteProduct: builder.mutation({
       query: ( {_id, token} ) => ({
         url: `product/delete-product`,
@@ -301,4 +313,4 @@ export const apiSlice = createApi({
     })
   }),
 });
-export const { useUploadProductMutation, useGetDownloadableProductsListQuery, useAddTransactionMutation, useCreateStripeUserMutation, useWishlistMutation, useGetWishListItemsQuery,useDeleteReplyMutation,useAddReplyMutation,useProductPurchaseMutation,useDeleteCommentMutation, useDeleteProductMutation, useAddCommentsMutation, useGetSearchedProductsQuery, useUserViewedProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
+export const { useUploadProductMutation, useGetDownloadableProductsListQuery, useAddRatingMutation, useAddTransactionMutation, useCreateStripeUserMutation, useWishlistMutation, useGetWishListItemsQuery,useDeleteReplyMutation,useAddReplyMutation,useProductPurchaseMutation,useDeleteCommentMutation, useDeleteProductMutation, useAddCommentsMutation, useGetSearchedProductsQuery, useUserViewedProductMutation, useGetPromotedUsersQuery, useGetAllProductsQuery, useFollowMutation,useGetSimilarProductsQuery, useGetMyProductsQuery, useGetproductQuery,useGetUserproductsQuery, useGetMyProfileQuery, useUpdateUserInfoMutation, useSignInUserMutation, useForgetPasswordMutation, useResetPasswordMutation, useGetUserProfileQuery } = apiSlice;
