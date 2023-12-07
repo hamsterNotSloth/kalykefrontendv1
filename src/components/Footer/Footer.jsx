@@ -45,7 +45,7 @@ function Footer() {
         <ul className='flex max-w-[480px] justify-end gap-3'>
           <li>Terms & Conditions</li>
           <li>Support</li>
-          <li>Feedback</li>
+          <li><a href='https://docs.google.com/forms/d/e/1FAIpQLSeciR5hznseDBhkWU-9FoSO-uHNGI-PQFNfr8f_vB0veidoDA/viewform' target='_blank'> Feedback</a></li>
           <li>Report Model</li>
           <li>Privacy</li>
         </ul>

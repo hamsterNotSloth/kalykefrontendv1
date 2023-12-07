@@ -13,7 +13,7 @@ function ProductDescription({ productDetails }) {
   }, [productDetails])
   
   return (
-    <div >
+    <div className='max-w-[1135px]'>
       <div>
         <h4 className='text-[21px] font-semibold'>Description</h4>
         <div className='max-w-[900px] w-[100%]' dangerouslySetInnerHTML={{ __html: productDetails && productDetails.product?.description }} />
@@ -32,7 +32,7 @@ function ProductDescription({ productDetails }) {
       </div>
       <div className='mt-5'>
         <h4 className='text-[21px] font-semibold'>Similar Products</h4>
-        <div>{similarProducts && similarProducts?.similarProducts?.length > 0 ? (
+        <div>{similarProducts && similarProducts?.similarProducts?.length > 1 ? (
           <div className='flex flex-wrap gap-5'>
             {similarProducts?.similarProducts?.map((product) => (
               product._id != productDetails?.product?._id ? (

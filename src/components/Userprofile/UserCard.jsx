@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faGlobe, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import UserUpdateCom from './UserUpdateCom';
 import { useCreateStripeUserMutation, useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice';
 import { getToken } from '../../Token/token';
 import { useParams } from 'react-router-dom';
 import ProfileUpdatePopup from './ProfileUpdatePopup';
-import { faCcStripe } from '@fortawesome/free-brands-svg-icons';
+import { faCcStripe, faFacebook, faInstagram, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import CreateStripeUser from './Stripe/createStripeUser';
 
 function UserCard() {
@@ -77,6 +77,14 @@ function UserCard() {
         }
     };
 
+    const iconMapping = {
+        Website: faGlobe,
+        Instagram: faInstagram,
+        Facebook: faFacebook,
+        Youtube: faYoutube,
+        Linkedin: faLinkedin,
+    };
+
     if (isLoading) return <div><span>Loading!</span></div>
     return (
         <div className='bg-white w-[375px] relative min-h-[250px] h-[100%] flex flex-col items-center shadow-md p-5 rounded-md'>
@@ -103,6 +111,15 @@ function UserCard() {
                 <span>Since, {formatDate(userProfile?.profile?.createdAt)}</span>
                 <div dangerouslySetInnerHTML={{ __html: userProfile?.profile?.description }} />
             </div>
+            <ul className='flex gap-3 pb-1'>
+                {userProfile?.profile?.socialMedia?.map(link => (
+                    <li key={link.socialMediaName}>
+                        <a href={link.link} target="_blank" rel="noopener noreferrer">
+                            <FontAwesomeIcon icon={iconMapping[link.socialMediaName]} />
+                        </a>
+                    </li>
+                ))}
+            </ul>
             {userProfile && userProfile.permissionGranter && (
                 <>
                     {!updateComponentToggler && (

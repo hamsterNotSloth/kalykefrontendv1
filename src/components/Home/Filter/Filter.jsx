@@ -38,7 +38,7 @@ function Filter() {
     dispatch(setFilter({ ...currentFilter, isFree: isFree }))
   }, [isFree])
   return (
-    <div className='p-4 max-w-[1700px] mx-auto'>
+    <div className='p-4 max-w-[1500px] mx-auto'>
       <div className='mb-2'>
       </div>
       <div className='w-full bg-white h-[50px] overflow-x-auto justify-between border flex '>

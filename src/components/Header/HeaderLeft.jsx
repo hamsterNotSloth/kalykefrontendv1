@@ -10,7 +10,8 @@ const HeaderLeft = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isExploreDropDownOpen, setIsExploreDropDownOpen] = useState(false)
   const navigate = useNavigate()
-  const dropdownRef = useRef(null);
+  const dropExploredownRef = useRef(null);
+  const dropdownRef = useRef(null)
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
@@ -23,10 +24,11 @@ const HeaderLeft = () => {
     toggleExploreDropDownHandler()
   }
 
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsExploreDropDownOpen(false);
+        setDropdownOpen(false);
       }
     };
 
@@ -37,13 +39,27 @@ const HeaderLeft = () => {
     };
   }, [dropdownRef]);
 
-  const categoryFilter = [{ categoryName: "Animals", icon: faPaw }, { categoryName: "Arts & Entertainment", icon: faPaintBrush }, { categoryName: "Autos & Vehicles", icon: faCar }, { categoryName: "Business & Industrial", icon: faBriefcase}, { categoryName: "Devices", icon: faMobile }, { categoryName: "Food & Drink", icon: faUtensils }, { categoryName: "Gridfinity", icon: faGear }, { categoryName: "Health & Fitness", icon: faPersonSkiing }, { categoryName: "Hobbies & Games", icon: faDice }, { categoryName: "Home & Garden", icon: faHouse }, { categoryName: "People", icon: faPerson  }, { categoryName: "Pop Culture", icon: faFireFlameCurved }, { categoryName: "mask", icon: faMasksTheater }]
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropExploredownRef.current && !dropExploredownRef.current.contains(event.target)) {
+        setIsExploreDropDownOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [dropExploredownRef]);
+
+  const categoryFilter = [{ categoryName: "Animals", icon: faPaw }, { categoryName: "Arts & Entertainment", icon: faPaintBrush }, { categoryName: "Autos & Vehicles", icon: faCar }, { categoryName: "Business & Industrial", icon: faBriefcase }, { categoryName: "Devices", icon: faMobile }, { categoryName: "Food & Drink", icon: faUtensils }, { categoryName: "Gridfinity", icon: faGear }, { categoryName: "Health & Fitness", icon: faPersonSkiing }, { categoryName: "Hobbies & Games", icon: faDice }, { categoryName: "Home & Garden", icon: faHouse }, { categoryName: "People", icon: faPerson }, { categoryName: "Pop Culture", icon: faFireFlameCurved }, { categoryName: "mask", icon: faMasksTheater }]
   return (
     <>
       <div className='flex gap-[30px]'>
         <CompanyLogo />
         <div className='flex gap-[18px] items-center'>
-          <div className='relative' ref={dropdownRef}>
+          <div className='relative' ref={dropExploredownRef}>
             <button className='flex gap-1 items-center' onClick={toggleExploreDropDownHandler}>Explore   <svg
               className={`w-2.5 h-2.5 ms-3 ${isExploreDropDownOpen ? 'transform rotate-180' : ''}`}
               aria-hidden="true"
@@ -63,19 +79,19 @@ const HeaderLeft = () => {
               <div className="px-5 py-4">
                 <span className='mb-4 flex items-center font-medium'><FontAwesomeIcon icon={faLayerGroup} /> Categories:</span>
                 <div className='flex flex-wrap gap-x-6 gap-y-6'>
-                {categoryFilter.map((item, index) => {
-                  return (
-                    <div className='w-[180px]' key={`drop-down-explore${Math.random() * Date.now()}`}>
-                      <button className='hover:text-[#424040]' onClick={(e) => { e.preventDefault(); categoryHandler(item.categoryName) }}> <FontAwesomeIcon icon={item.icon} /> {item.categoryName}</button>
-                    </div>
-                  )
-                })}
+                  {categoryFilter.map((item, index) => {
+                    return (
+                      <div className='w-[180px]' key={`drop-down-explore${Math.random() * Date.now()}`}>
+                        <button className='hover:text-[#424040]' onClick={(e) => { e.preventDefault(); categoryHandler(item.categoryName) }}> <FontAwesomeIcon icon={item.icon} /> {item.categoryName}</button>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             </div>}
           </div>
           <div>
-            <div className="relative">
+            <div className="relative" ref={dropdownRef}>
               <button
                 id="dropdownDefaultButton"
                 onClick={toggleDropdown}

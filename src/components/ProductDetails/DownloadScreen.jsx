@@ -8,7 +8,7 @@ import JSZip from 'jszip';
 import { socialMedia } from './socialMedia';
 import SocialMediaRow from '../Common/SocialMediaRow';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClipboard } from '@fortawesome/free-solid-svg-icons'
+import { faClipboard, faStar } from '@fortawesome/free-solid-svg-icons'
 import WishlistBtn from '../Common/WishlistBtn';
 import DesignUpload from './SaleProduct';
 
@@ -139,10 +139,12 @@ function DownloadScreen({ productDetails }) {
   return (
     <div className='w-[300px] mt-5 xl:mt-0'>
       <div>
-        <span>Rate Product</span>
+      <span className='text-[#4d8802] text-[16px]'><FontAwesomeIcon icon={faStar} />{productDetails?.product?.avgRating || 0}</span>
         <div className="flex items-center">
           {productDetails?.product?.purchaseHistory?.some(item =>  item.email === myProfile?.myProfile?.email) && !productDetails?.product?.ratings?.some(item =>  item.email === myProfile?.myProfile?.email) &&
-          <>{[1, 2, 3, 4, 5].map((star, index) => (
+          <>
+          <span>Rate Product</span>
+          {[1, 2, 3, 4, 5].map((star, index) => (
             <button
               key={`star-${Math.random * Date.now()}-rating`}
               disabled={addingRating}

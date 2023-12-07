@@ -35,7 +35,7 @@ function ProductDetails() {
   if(error) return <NotFoundPage />
   if (isLoading) return <div className='flex items-center justify-center h-[100vh] w-full'><ClimbingBoxLoader color={"#000"} size={20} aria-label="Loading Spinner" data-testid="loader" /></div>
   return (
-    <div className='px-6 mx-30 mt-[30px] max-w-[1800px] mx-auto'>
+    <div className='px-6 mx-30 mt-[30px] max-w-[1500px] mx-auto'>
       <ProductDetailsHeader productDetails={productDetails} />
       <ProductSlider productDetails={productDetails} />
       <div className='flex justify-center xl:justify-between flex-col xl:flex-row mt-5 p-3'>

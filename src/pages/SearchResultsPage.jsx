@@ -15,7 +15,7 @@ function SearchResultsPage() {
   if (isLoading || isFetching) return <div className='flex items-center justify-center h-[100vh] w-full'><ClimbingBoxLoader color={"#000"} size={20} aria-label="Loading Spinner" data-testid="loader" /></div>
   return (
     <>
-      <div className='p-4 max-w-[1700px] mx-auto gap-3'>
+      <div className='p-4 max-w-[1500px] mx-auto gap-3'>
         {searchedProducts?.products?.length > 0 && <span className='text-[20px] font-semibold'>Search - {search}</span>}
         {searchedProducts?.products?.length == 0 && <span>No models found!</span>}
         {searchedProducts?.products == null && <span>Search products by title!</span>}

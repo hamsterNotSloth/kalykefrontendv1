@@ -6,11 +6,12 @@ const productSlice = createSlice({
     title: '',
     description: '',
     price: 0,
-    tags: [],
     category: null,
     modalSetting: '',
     modal: [],
+    tags: [],
     images: []
+
   },
   reducers: {
     updateProductDetails: (state, action) => {

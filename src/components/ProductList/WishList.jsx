@@ -7,7 +7,7 @@ const WishList = () => {
   const token = getToken()
   const { data: wishListItems } = useGetWishListItemsQuery(token)
   return (
-    <div className=' h-[100vh]  p-4 max-w-[1700px] mx-auto'>
+    <div className=' h-[100vh]  p-4 max-w-[1500px] mx-auto'>
       <span className="block pb-2 font-semibold text-[20px]">Wishlisted Items</span>
       {wishListItems?.products?.length > 0 ? <div className='flex gap-4 flex-wrap'>
         {wishListItems?.products?.map(item => {

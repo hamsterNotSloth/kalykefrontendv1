@@ -1,10 +1,10 @@
 import React from 'react'
 import BannerSlide from './BannerSlide'
 import Slider from "react-slick";
-import { useGetPromotedUsersQuery } from '../../../redux/apiCalls/apiSlice';
+import { useGetPromotedContentQuery, useGetPromotedUsersQuery } from '../../../redux/apiCalls/apiSlice';
 
 function BannerSlider() {
-  const {data: promotedUsers, isLoading} = useGetPromotedUsersQuery()
+  const { data: promotionData, isLoading } = useGetPromotedContentQuery()
     const settings = {
         dots: true,
         infinite: true,
@@ -15,9 +15,9 @@ function BannerSlider() {
       if(isLoading) return <div className='h-full min-h-[400px]'>Loading!!!</div>
 
   return (
-      <div className='max-w-[2040px] pl-[30px] pr-[60px] mx-auto'>
+      <div className='max-w-[1500px] pl-[30px] pr-[60px] mx-auto'>
         <Slider {...settings}>
-       {promotedUsers?.promotedUsers?.map(item => {
+       {promotionData?.map(item => {
         return <BannerSlide key={`Bannerslider promotions ${Math.random() * Date.now()}`} item={item}/>
        })}
         </Slider>
