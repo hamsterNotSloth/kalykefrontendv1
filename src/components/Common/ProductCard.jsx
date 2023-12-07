@@ -8,10 +8,10 @@ import { getToken } from '../../Token/token'
 function ProductCard({ item, deletePermission, productDeleteHandler }) {
     const token = getToken()
     return (
-        <Link to={`/products/${item?._id}`} className="w-[250px] bg-white block h-[325px] rounded overflow-hidden shadow-lg">
-            <div className='h-[240px]'>
+        <div className="w-[250px] bg-white block h-[325px] rounded overflow-hidden shadow-lg">
+            <Link to={`/products/${item?._id}`} className='h-[240px] block'>
                 <img className="w-full object-cover h-full" src={item?.images[0]?.downloadLink} alt="model" />
-            </div>
+            </Link>
             <div className='px-6 pt-2 pb-1 flex justify-between items-center'>
             <div>
                 <Link to={`http://localhost:3000/user/${item?.u_id}`} as="div" className="inline-block w-[30px] h-[30px] flex items-center gap-1"><img src={item?.profileImg} className='rounded-full' alt="profile" /> <FontAwesomeIcon icon={faArrowRight} /></Link>
@@ -27,7 +27,7 @@ function ProductCard({ item, deletePermission, productDeleteHandler }) {
                 <span className='flex items-center'><WishlistBtn descriptionWishListHandler={false} token={token} product={item} /></span>
                 <span className='text-[#4d8802] text-[16px]'><FontAwesomeIcon icon={faStar} />{item?.avgRating || 0}</span>
             </div>
-        </Link>
+        </div>
     )
 }
 

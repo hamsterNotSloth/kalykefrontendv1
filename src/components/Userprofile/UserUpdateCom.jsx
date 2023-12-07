@@ -41,8 +41,9 @@ function UserUpdateCom({ newUserInfo, setNewUserInfo,token,  updateProfileDetail
             </div>
             <div className='mt-6'>
                 <label className='text-[16px] font-semibold'>Social media links.</label>
-                {newUserInfo.socialMedia.map((item, index) => (
+                {userProfile?.profile?.socialMedia?.map((item, index) => (
                     <div className='flex items-center' key={index}>
+                    {console.log(item, 'item')}
                         <span className='border-l-[1px] border-t border-b border-[#bbbbbb] rounded-sm pl-2 my-1 py-2'>
                             <FontAwesomeIcon icon={socialMedia[index]} />
                         </span>

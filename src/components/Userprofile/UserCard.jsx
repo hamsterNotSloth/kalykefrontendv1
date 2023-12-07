@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGlobe, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical, faGlobe, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import UserUpdateCom from './UserUpdateCom';
 import { useCreateStripeUserMutation, useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice';
 import { getToken } from '../../Token/token';
@@ -8,9 +8,11 @@ import { useParams } from 'react-router-dom';
 import ProfileUpdatePopup from './ProfileUpdatePopup';
 import { faCcStripe, faFacebook, faInstagram, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import CreateStripeUser from './Stripe/createStripeUser';
+import ShareProfile from './ShareProfile';
 
 function UserCard() {
     const [profileImage, setProfileImage] = useState()
+    const [isShareBtnOpen, setIsShareBtnOpen] = useState(false)
     const token = getToken()
     const { user_id } = useParams()
     const { data: userProfile, isLoading, refetch: userProfileRefetch } = useGetUserProfileQuery({ user_id, token })
@@ -111,7 +113,8 @@ function UserCard() {
                 <span>Since, {formatDate(userProfile?.profile?.createdAt)}</span>
                 <div dangerouslySetInnerHTML={{ __html: userProfile?.profile?.description }} />
             </div>
-            <ul className='flex gap-3 pb-1'>
+            <div className='flex justify-between w-full'>
+            <ul className='flex w-[232px] justify-center gap-3 pb-1'>
                 {userProfile?.profile?.socialMedia?.map(link => (
                     <li key={link.socialMediaName}>
                         <a href={link.link} target="_blank" rel="noopener noreferrer">
@@ -120,6 +123,12 @@ function UserCard() {
                     </li>
                 ))}
             </ul>
+
+            <div className='relative flex justify-end'>
+                <button onClick={() => setIsShareBtnOpen(!isShareBtnOpen)}><FontAwesomeIcon icon={faEllipsisVertical} /></button>
+                {isShareBtnOpen && <ShareProfile setIsShareBtnOpen={setIsShareBtnOpen} />}
+            </div>
+            </div>
             {userProfile && userProfile.permissionGranter && (
                 <>
                     {!updateComponentToggler && (
