@@ -12,7 +12,6 @@ const CreateStripeUser = () => {
       const { accountLinkUrl } = response.data;
 
       window.location.href = accountLinkUrl;
-      console.log('Stripe User ID:', response);
     } catch (error) {
       console.error('Error:', error.message);
     }

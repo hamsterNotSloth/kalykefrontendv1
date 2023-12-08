@@ -6,15 +6,15 @@ export const socialMedia = [
     },
     {
         icon: faInstagram,
-        link: 'https://www.instagram.com/abdul_is_a_designer/'
+        link: 'https://www.instagram.com/'
     },
     {
         icon: faReddit,
-        link: 'https://www.reddit.com/'
+        link: 'https://www.reddit.com/r/3dprinter/submit'
     },
     {
         icon: faPinterest,
-        link: 'https://www.pinterest.com/'
+        link: 'https://www.pinterest.com/pin-creation-tool/'
     },
     {
         icon: faTiktok,

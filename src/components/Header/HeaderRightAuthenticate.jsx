@@ -6,7 +6,7 @@ function HeaderRightAuthenticate() {
   return (
     <>
       {signUpModalStatus && <Signup setSignUpModalStatus={setSignUpModalStatus} />}
-      <button onClick={() => setSignUpModalStatus(true)}>Sign in</button>
+      <button className='px-4 font-semibold py-2 bg-white rounded-sm hover:bg-[#d5d5d5] hover:text-dark border-dark border' onClick={() => setSignUpModalStatus(true)}>Sign up</button>
     </>
   )
 }

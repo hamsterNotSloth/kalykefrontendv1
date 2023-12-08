@@ -3,10 +3,14 @@ import Quill from '../Common/Quil';
 import { mainCartegories } from './categories';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { useGetMyProfileQuery } from '../../redux/apiCalls/apiSlice';
+import { getToken } from '../../Token/token';
 
 function DescriptionColumn({details, setDetails}) {
     const [hashtags, setHashtags] = useState([]);
     const [hashTagValue, setHashTagValue] = useState('');
+    const token = getToken()
+    const {data: myProfileData} = useGetMyProfileQuery(token)
     const descriptionHandler = (value) => {
         setDetails({ ...details, description: value })
     }
@@ -54,9 +58,9 @@ function DescriptionColumn({details, setDetails}) {
                 <label>Specify the technical details of your creation (object size, printing time, infill…). Say whether it’s a model for FDM 3D printing, resin or both. </label>
             </div>
             <div className='mt-3'>
-                <label className='text-[16px] font-semibold'>Price <span className='text-[12px] font-semibold'>(Price would be calculated in terms of USD)</span></label>
-                <input type='number' min='0' onChange={(e) => { setDetails({ ...details, price: e.target.value }) }} className="w-full px-2 h-[40px] border-[2px] border-[#c1b9b9] rounded-sm" placeholder='Enter price in USD, if you want this model to be free leave it.' />
-                <label>Add price in terms of USD. Leave it if you want this product to be free. </label>
+                <label className='text-[16px] font-semibold'>{myProfileData?.myProfile?.paymentAccountLink && "Price"}  <span className='text-[12px] font-semibold'>{myProfileData?.myProfile?.paymentAccountLink? "(Price would be calculated in terms of USD)" : "Currently your user permission only allows free model upload. Link your payment method to be verified." }</span></label>
+                <input disabled={!myProfileData?.myProfile?.paymentAccountLink} type='number' min='0' onChange={(e) => { setDetails({ ...details, price: e.target.value }) }} className={`w-full px-2 h-10 border-2 rounded-sm ${!myProfileData?.myProfile?.paymentAccountLink ? 'cursor-not-allowed opacity-90 border' : 'hover:bg-gray-200 hover:border-gray-400'}`} placeholder='Enter price in USD, if you want this model to be free leave it.' />
+                <label>{myProfileData?.myProfile?.paymentAccountLink && "Add price in terms of USD. Leave it if you want this product to be free."} </label>
             </div>
             <div className='mt-3'>
                 <label className='text-[16px] font-semibold'>Categories</label>

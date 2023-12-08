@@ -26,7 +26,7 @@ function LoginFields() {
         const response = await signInUser({credential: firebaseAuth.user, source: "Email"});
         if(response.data && response.data.userData.status == true) {
          localStorage.setItem("userToken", response.data.userData.token);
-          toast.success(response.data.userData.message);
+          toast.success("Login Successfull");
         } else {
           toast.error(response.error.data.message);
         }

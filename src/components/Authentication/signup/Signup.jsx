@@ -77,11 +77,11 @@ function Signup({ setSignUpModalStatus }) {
       text: "Sign in with Facebook",
       func: faceBookSignInHandler,
     },
-    // {
-    //   icon: "images/mail.png",
-    //   text: "sign in with Email",
-    //   func: signUpContentHandler,
-    // },
+    {
+      icon: "images/mail.png",
+      text: "sign in with Email",
+      func: signUpContentHandler,
+    },
   ];
 
   return (

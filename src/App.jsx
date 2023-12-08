@@ -24,6 +24,7 @@ import Success from "./components/messages/Success";
 import DownloadableProductsPage from "./pages/DownloadableProductsPage";
 import DescriptionColumn from "./components/UploadNew/DescriptionColumn";
 import Uploader from "./components/UploadNew/Uploader";
+import UnAuthorized from "./components/messages/UnAuthorized";
 
 function App() {
   return (
@@ -46,7 +47,6 @@ function App() {
               <Route path="/coming-soon" element={<ComingSoonPage />} />
               <Route path="/licenses" element={<LicensePage />} />
 
-              {/* <Route path="/login" element={<Signup />} /> */}
               <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
               <Route path="/Category/:category" element={<CategoryPage />} />
               <Route path="/messages/success" element={<Success />} />

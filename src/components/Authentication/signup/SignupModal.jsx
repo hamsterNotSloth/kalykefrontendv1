@@ -23,9 +23,9 @@ function SignupModal({ goToLoginHandler }) {
 
   const handleSubmit = async (values) => {
     try {
-      const response = await createUserWithEmailAndPassword(auth, values.email, values.password);
+      let response = await createUserWithEmailAndPassword(auth, values.email, values.password);
       if(response.user && response.user.providerData) {
-        return toast.success("Signup Successfull!")
+        return toast.success("Signup successfull, please login to continue!")
       }
       else {
         toast.error("Something went wrong. Have a query? Contact the support team.")

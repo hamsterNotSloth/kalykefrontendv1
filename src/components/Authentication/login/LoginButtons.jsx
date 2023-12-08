@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 function LoginButtons() {
   const [signInUser] = useSignInUserMutation();
   const GoogleSignUpHandler = async () => {
-
     try {
       const provider = new GoogleAuthProvider();
       provider.addScope('email');

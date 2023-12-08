@@ -3,11 +3,13 @@ import { useGetDownloadableProductsListQuery } from '../../redux/apiCalls/apiSli
 import { getToken } from '../../Token/token'
 import ProductCard from '../Common/ProductCard'
 import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader'
+import UnAuthorized from '../messages/UnAuthorized'
 
 const DownloadableProducts = () => {
   const token = getToken()
   const { data: products, isLoading, isFetching } = useGetDownloadableProductsListQuery(token)
-  
+  console.log(products,'products')
+  if(!products) return <UnAuthorized />
   if (isLoading || isFetching) return <div className='flex items-center justify-center h-[100vh] w-full'><ClimbingBoxLoader color={"#000"} size={20} aria-label="Loading Spinner" data-testid="loader" /></div>
   return (
     <div>

@@ -4,17 +4,17 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import WishlistBtn from './WishlistBtn'
 import { getToken } from '../../Token/token'
-
+const url = process.env.REACT_APP_BACKEND_BASE_URL
 function ProductCard({ item, deletePermission, productDeleteHandler }) {
     const token = getToken()
     return (
-        <div className="w-[250px] bg-white block h-[325px] rounded overflow-hidden shadow-lg">
+        <div className="w-[250px] bg-white block h-[315px] rounded overflow-hidden shadow-lg">
             <Link to={`/products/${item?._id}`} className='h-[240px] block'>
                 <img className="w-full object-cover h-full" src={item?.images[0]?.downloadLink} alt="model" />
             </Link>
             <div className='px-6 pt-2 pb-1 flex justify-between items-center'>
             <div>
-                <Link to={`http://localhost:3000/user/${item?.u_id}`} as="div" className="inline-block w-[30px] h-[30px] flex items-center gap-1"><img src={item?.profileImg} className='rounded-full' alt="profile" /> <FontAwesomeIcon icon={faArrowRight} /></Link>
+                <Link to={`${url}/user/${item?.u_id}`} as="div" className="inline-block w-[30px] h-[30px] flex items-center gap-1"><img src={item?.profileImg} className='rounded-full' alt="profile" /> <FontAwesomeIcon icon={faArrowRight} /></Link>
             </div>
             <div>
                 <span className="font-bold block text-[18px]">{item?.free ? "Free" : `$${item?.price}`}</span>

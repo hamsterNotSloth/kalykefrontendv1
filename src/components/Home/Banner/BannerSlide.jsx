@@ -4,9 +4,8 @@ import Followbtn from "../../Common/FollowBtn"
 import { Link } from "react-router-dom"
 
 function BannerSlide({ item }) {
-  console.log(item)
   return (
-    <div className={`bg-[#fff]  flex-row h-[400px] justify-between rounded-lg md:pl-[80px] overflow-x-hideen flex h-full `} >
+    <div className={`bg-[#fff]  flex-row h-[400px] justify-between rounded-lg md:pl-[80px] overflow-x-hideen flex `} >
       <div className='max-w-[700px] flex  flex-col justify-center'>
         <div className='mb-6'>
           <h1 className='text-[34px] font-bold'>Kalyke - The best marketplace for designers, by designers</h1>

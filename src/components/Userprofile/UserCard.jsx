@@ -16,42 +16,46 @@ function UserCard() {
     const token = getToken()
     const { user_id } = useParams()
     const { data: userProfile, isLoading, refetch: userProfileRefetch } = useGetUserProfileQuery({ user_id, token })
+    const initializeSocialMedia = () => {
+        const socialMediaArray = [
+            { socialMediaName: 'Website', link: null },
+            { socialMediaName: 'Instagram', link: null },
+            { socialMediaName: 'Facebook', link: null },
+            { socialMediaName: 'Youtube', link: null },
+            { socialMediaName: 'Linkedin', link: null },
+        ];
+
+        userProfile?.profile?.socialMedia.forEach((item) => {
+            const index = socialMediaArray.findIndex(
+                (socialMedia) => socialMedia.socialMediaName === item.socialMediaName
+            );
+            if (index !== -1) {
+                socialMediaArray[index].link = item.link;
+            }
+        });
+        setNewUserInfo({newUserInfo, socialMedia: socialMediaArray})        
+    };
     const [newUserInfo, setNewUserInfo] = useState({
         userName: userProfile?.profile?.userName,
         description: userProfile?.profile?.description,
         profilePicture: userProfile?.profile?.profilePicture,
         socialMedia: [
-            {
-                socialMediaName: "Website",
-                link: null
-            },
-            {
-                socialMediaName: "Instagram",
-                link: null
-            },
-            {
-                socialMediaName: "Facebook",
-                link: null
-            },
-            {
-                socialMediaName: "Youtube",
-                link: null
-            },
-            {
-                socialMediaName: "Linkedin",
-                link: null
-            }
+            { socialMediaName: 'Website', link: '' },
+            { socialMediaName: 'Instagram', link: '' },
+            { socialMediaName: 'Facebook', link: '' },
+            { socialMediaName: 'Youtube', link: '' },
+            { socialMediaName: 'Linkedin', link: '' },
         ]
     })
-
     const [createStripeUser] = useCreateStripeUserMutation()
-
     const [updateComponentToggler, setUpdateComponentToggler] = useState(false)
     const [updateImageToggler, setUpdateImageToggler] = useState(false)
-
     useEffect(() => {
         userProfileRefetch({ user_id, token })
     }, [user_id])
+    useEffect(()=> {
+        initializeSocialMedia()
+    }, [userProfile])
     const updateProfileDetails = () => {
         setUpdateComponentToggler(!updateComponentToggler)
     }
@@ -73,7 +77,6 @@ function UserCard() {
 
             // Redirect the user to the Stripe onboarding flow
             window.location.href = accountLinkUrl;
-            console.log('Stripe User ID:', response);
         } catch (error) {
             console.error('Error:', error.message);
         }
@@ -93,7 +96,7 @@ function UserCard() {
             {updateComponentToggler && <button onClick={updateProfileDetails} type="button" className=" absolute right-[7px] top-[6px] rounded-md p-2 inline-flex items-center justify-center text-gray-400 ">
                 <span className="sr-only">Close menu</span>
                 <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    <path  d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>}
             <div className='h-[150px] w-[150px] relative rounded-full mb-7'>
@@ -114,20 +117,20 @@ function UserCard() {
                 <div dangerouslySetInnerHTML={{ __html: userProfile?.profile?.description }} />
             </div>
             <div className='flex justify-between w-full'>
-            <ul className='flex w-[232px] justify-center gap-3 pb-1'>
-                {userProfile?.profile?.socialMedia?.map(link => (
-                    <li key={link.socialMediaName}>
-                        <a href={link.link} target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={iconMapping[link.socialMediaName]} />
-                        </a>
-                    </li>
-                ))}
-            </ul>
+                <ul className='flex w-[232px] justify-center gap-3 pb-1'>
+                    {userProfile?.profile?.socialMedia?.map(link => (
+                        <li key={link.socialMediaName}>
+                            <a href={link.link} target="_blank" rel="noopener noreferrer">
+                                <FontAwesomeIcon icon={iconMapping[link.socialMediaName]} />
+                            </a>
+                        </li>
+                    ))}
+                </ul>
 
-            <div className='relative flex justify-end'>
-                <button onClick={() => setIsShareBtnOpen(!isShareBtnOpen)}><FontAwesomeIcon icon={faEllipsisVertical} /></button>
-                {isShareBtnOpen && <ShareProfile setIsShareBtnOpen={setIsShareBtnOpen} />}
-            </div>
+                <div className='relative flex justify-end'>
+                    <button onClick={() => setIsShareBtnOpen(!isShareBtnOpen)}><FontAwesomeIcon icon={faEllipsisVertical} /></button>
+                    {isShareBtnOpen && <ShareProfile setIsShareBtnOpen={setIsShareBtnOpen} />}
+                </div>
             </div>
             {userProfile && userProfile.permissionGranter && (
                 <>
@@ -140,7 +143,7 @@ function UserCard() {
                     {updateComponentToggler && <UserUpdateCom newUserInfo={newUserInfo} userProfile={userProfile} setNewUserInfo={setNewUserInfo} token={token} updateProfileDetails={updateProfileDetails} />}
 
                     <div>
-                        <span className='text-[14px]'>Payment method: </span><button onClick={() => handleCreateStripeUser()} className='mt-4'>
+                        <span className='text-[14px]'>{userProfile?.profile?.paymentAccountLink ? "Linked Payment method:" : "Link Payment method"} </span><button onClick={() => handleCreateStripeUser()} className='mt-4'>
                             <FontAwesomeIcon icon={faCcStripe} />
                         </button>
                     </div>

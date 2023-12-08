@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useGetSimilarProductsQuery } from '../../redux/apiCalls/apiSlice'
 import ProductCard from '../Common/ProductCard';
 import Comments from './Comments';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function ProductDescription({ productDetails }) {
   const tagsString = productDetails && productDetails.product && productDetails.product.tags.join(',');
@@ -13,7 +13,7 @@ function ProductDescription({ productDetails }) {
   }, [productDetails])
   
   return (
-    <div className='max-w-[1135px]'>
+    <div className='max-w-[1135px] w-full'>
       <div>
         <h4 className='text-[21px] font-semibold'>Description</h4>
         <div className='max-w-[900px] w-[100%]' dangerouslySetInnerHTML={{ __html: productDetails && productDetails.product?.description }} />
@@ -29,6 +29,10 @@ function ProductDescription({ productDetails }) {
       <div className='mt-5'>
         <h4 className='text-[21px] font-semibold'>Model Settings</h4>
         <span>{productDetails && productDetails.product?.modalSetting ? productDetails.product?.modalSetting : "This model has no setting"}</span>
+      </div>
+      <div className='mt-5'>
+        <h4 className='text-[21px] font-semibold'>Model Settings</h4>
+        <Link className='block text-[18px] text-[#0707ff] mt-2' to='/licenses' target='_blank'>Licenses</Link>
       </div>
       <div className='mt-5'>
         <h4 className='text-[21px] font-semibold'>Similar Products</h4>

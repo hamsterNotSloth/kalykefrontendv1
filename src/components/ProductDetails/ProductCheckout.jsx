@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { useAddTransactionMutation } from '../../redux/apiCalls/apiSlice';
 import { getToken } from '../../Token/token';
 
+import { toast } from 'react-toastify';
 const ProductCheckout = ({ product }) => {
   const stripe = useStripe();
   const [loading, setLoading] = useState(false);
   const token = getToken()
-  const [addTransaction] = useAddTransactionMutation()
+  const [addTransaction, {error}] = useAddTransactionMutation()
   const handleCheckout = async () => {
     try {
       setLoading(true);

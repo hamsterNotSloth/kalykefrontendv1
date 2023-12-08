@@ -41,7 +41,6 @@ function DownloadScreen({ productDetails }) {
   const addRatingHandler = async (rating) => {
     try {
       const response = await AddRating({ _id: productDetails?.product?._id, token, rating })
-      console.log(response,'response')
     } catch (err) {
       console.log(err)
     }

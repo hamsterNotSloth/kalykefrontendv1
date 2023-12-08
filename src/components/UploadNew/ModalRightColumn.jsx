@@ -30,11 +30,9 @@ function ModalRightColumn({ details, setDetails }) {
 
     const handleFileChange = (e) => {
         const file = e.target.files?.[0];
-        console.log(file,'file')
         const match = file.name.match(/\.([^.]+)$/);
         const fileEx = match ? match[1] : null;
         const fileExtension = fileEx.toLowerCase()
-        console.log(fileExtension,'fileExtension')
         if( file.type == "application/x-zip-compressed" || fileExtension == "fbx" || fileExtension == "obj"  || fileExtension == "stl" || fileExtension == "3mf" || fileExtension == "ply" || fileExtension == "g-code" || fileExtension == "x3g"  || fileExtension == "amf" ) {
             if (selectedFiles.length > 4) {
                 return toast.error("You can only add 6 models files")

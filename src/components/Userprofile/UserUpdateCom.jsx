@@ -7,8 +7,8 @@ import { useUpdateUserInfoMutation } from '../../redux/apiCalls/apiSlice';
 import { toast } from "react-toastify";
 import Quill from '../Common/Quil';
 
-function UserUpdateCom({ newUserInfo, setNewUserInfo,token,  updateProfileDetails, userProfile }) {
-    
+function UserUpdateCom({ newUserInfo, setNewUserInfo, token, updateProfileDetails, userProfile }) {
+
 
     const [updateUserInfo] = useUpdateUserInfoMutation()
 
@@ -28,7 +28,7 @@ function UserUpdateCom({ newUserInfo, setNewUserInfo,token,  updateProfileDetail
     const socialMedia = [faGlobe, faInstagram, faFacebook, faYoutube, faLinkedin]
     const descriptionHandler = (text) => {
         setNewUserInfo({ ...newUserInfo, description: text })
-      }
+    }
     return (
         <form type='Submit' className='w-[100%]'>
             <div className='mb-3'>
@@ -37,14 +37,14 @@ function UserUpdateCom({ newUserInfo, setNewUserInfo,token,  updateProfileDetail
             </div>
             <div className='mt-2'>
                 <label className='text-[16px] font-semibold'>Description</label>
-                <Quill descriptionHandler={descriptionHandler} description={newUserInfo.description}/>
+                <Quill descriptionHandler={descriptionHandler} description={newUserInfo.description} />
             </div>
             <div className='mt-6'>
                 <label className='text-[16px] font-semibold'>Social media links.</label>
-                {userProfile?.profile?.socialMedia?.map((item, index) => (
+                {newUserInfo.socialMedia?.map((item, index) => (
                     <div className='flex items-center' key={index}>
-                    {console.log(item, 'item')}
                         <span className='border-l-[1px] border-t border-b border-[#bbbbbb] rounded-sm pl-2 my-1 py-2'>
+                            {/* Assuming 'socialMedia' is an array of FontAwesome icons */}
                             <FontAwesomeIcon icon={socialMedia[index]} />
                         </span>
                         <input
@@ -56,7 +56,7 @@ function UserUpdateCom({ newUserInfo, setNewUserInfo,token,  updateProfileDetail
                                 setNewUserInfo({ ...newUserInfo, socialMedia: updatedSocialMedia });
                             }}
                             className='border-r-[1px] outline-none border-[#bbbbbb] focus:outline-none border-t border-b rounded-sm w-[100%] my-1 p-2'
-                            placeholder={item.source}
+                            placeholder={item.socialMediaName} 
                         />
                     </div>
                 ))}

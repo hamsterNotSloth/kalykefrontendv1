@@ -5,8 +5,8 @@ import { loadStripe } from '@stripe/stripe-js';
 import { getToken } from '../../Token/token';
 import { useAddTransactionMutation } from '../../redux/apiCalls/apiSlice';
 import ProductCheckout from './ProductCheckout';
-const stripe_public = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
-const stripePromise = loadStripe('pk_test_51OI4miLzxkeRIY0ykMbc3SB2QOIfGz3yKGjqIueZTNAYmXrm98wSrnheGbeHoNn66RsxjXL6m3NAfbEozKh74XSf00iHPej8HN');
+const stripe_public = process.env.REACT_APP_STRIPE_YATHRAT_PUBLISHABLE_KEY_TEST;
+const stripePromise = loadStripe(stripe_public);
 
 const DesignUpload = ({product}) => {
     return (
