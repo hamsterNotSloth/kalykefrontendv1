@@ -10,9 +10,8 @@ const ImagesUploader = ({fileUploadProgress, isUploadLoading, selectedFile, setS
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
-    console.log(file, 'file')
     if (file) {
-      if (file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/gif') {
+      if (file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/gif' || file.type === 'image/webpack') {
         return setSelectedFile([...selectedFile, file]);
       } else {
         toast.error("Only JPEG, PNG are supported.")

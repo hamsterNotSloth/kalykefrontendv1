@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import ReactQuill from 'react-quill'
 
-function Quill({descriptionHandler, description}) {
+function Quill({descriptionHandler, style, description}) {
     const modules = {
         toolbar: {
           container: [
@@ -19,6 +19,8 @@ function Quill({descriptionHandler, description}) {
           value={description}
           modules={modules}
           formats={formats}
+          style={{ backgroundColor: `${style}` }}
+
           onChange={(value) => descriptionHandler(value)}
         />
         </>

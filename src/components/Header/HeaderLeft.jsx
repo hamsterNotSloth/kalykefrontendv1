@@ -133,6 +133,11 @@ const HeaderLeft = () => {
                         Got a suggestion?
                       </a>
                     </li>
+                    <li>
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeciR5hznseDBhkWU-9FoSO-uHNGI-PQFNfr8f_vB0veidoDA/viewform" target='_blank' onClick={toggleDropdown} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                        Promotion
+                      </a>
+                    </li>
                   </ul>
                 </div>
               )}

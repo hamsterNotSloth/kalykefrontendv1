@@ -7,7 +7,6 @@ import UnAuthorized from '../messages/UnAuthorized'
 const WishList = () => {
   const token = getToken()
   const { data: wishListItems } = useGetWishListItemsQuery(token)
-  console.log(wishListItems,'wishListItems')
   if(!wishListItems) return <UnAuthorized />
   return (
     <div className=' h-[100vh]  p-4 max-w-[1500px] mx-auto'>

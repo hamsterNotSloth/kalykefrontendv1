@@ -1,22 +1,23 @@
 import React, {  useState } from 'react';
 import { useForgetPasswordMutation } from '../../redux/apiCalls/apiSlice';
 import { toast } from 'react-toastify';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { auth } from '../../config/config';
 
 const ForgotPassword = ({setResetPassModal}) => {
     const [email, setEmail] = useState('');
-    const [forgetPassword, {isLoading}] = useForgetPasswordMutation()
+    const [isLoading, setIsLoading] = useState(false)
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-     const response = await forgetPassword(email)
-       if(response.data && response.data.status == true) {
-        toast.success(response.data.message);
-      } else {
-        toast.error(response.error.data.message);
-      }
+        setIsLoading(true)
+        await sendPasswordResetEmail(auth, email);
+        setIsLoading(false)
+        toast.success("Email send. Please check your inbox or spam")
       } catch(err) {
         console.log("failed", err)
       }
+      setIsLoading(false)
     };
     
     return (

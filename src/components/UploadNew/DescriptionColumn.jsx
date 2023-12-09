@@ -1,30 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Quill from '../Common/Quil';
 import { mainCartegories } from './categories';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { useGetMyProfileQuery } from '../../redux/apiCalls/apiSlice';
 import { getToken } from '../../Token/token';
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
-function DescriptionColumn({details, setDetails}) {
+function DescriptionColumn({ details, setDetails }) {
     const [hashtags, setHashtags] = useState([]);
     const [hashTagValue, setHashTagValue] = useState('');
+    const [isFreeToggler, setIsFreeToggler] = useState(true)
     const token = getToken()
-    const {data: myProfileData} = useGetMyProfileQuery(token)
+    const { data: myProfileData } = useGetMyProfileQuery(token)
     const descriptionHandler = (value) => {
         setDetails({ ...details, description: value })
     }
 
     const handleAddHashtag = () => {
         const hashtag = hashTagValue.replace(/\s/g, '').toLowerCase();
-
+        const hashTagStr = details?.tags?.map(innerArray => {
+            return innerArray.join("");
+        });
         if (hashtag.length > 1) {
-            if (hashtags.length < 5 && !hashtags.includes(hashtag)) {
+            if (hashtags.length < 5 && !hashTagStr.includes(hashtag)) {
+                const uniqHashTags = [...new Set(hashtag)]
                 setDetails({
                     ...details,
-                    tags: [...details.tags, hashtag]
+                    tags: [...details.tags, uniqHashTags]
                 });
                 setHashTagValue('');
+            }
+            else {
+                toast.error("HashTag already created")
             }
         }
     };
@@ -35,6 +44,10 @@ function DescriptionColumn({details, setDetails}) {
             tags: updatedHashtags
         });
     }
+    const modalSettingHandler = (value) => {
+        setDetails({ ...details, modalSetting: value })
+    }
+
     return (
         <div className='max-w-[900px]'>
             <div>
@@ -49,18 +62,42 @@ function DescriptionColumn({details, setDetails}) {
             </div>
             <div className='mt-3'>
                 <label className='text-[16px] font-semibold'>Description</label>
-                <Quill descriptionHandler={descriptionHandler} description={details.description} />
+                <Quill style={`#fff`} descriptionHandler={descriptionHandler} description={details.description} />
                 <label>Tell the story of your creation (origin of the idea, for what use, why it’s so great…). </label>
             </div>
             <div className='mt-3'>
                 <label className='text-[16px] font-semibold'>Modal Settings</label>
-                <input type="text" className="w-full px-2 h-[40px] border-[2px] border-[#c1b9b9] rounded-sm" onChange={(e) => setDetails({ ...details, modalSetting: e.target.value })} placeholder='Copy and paste your modal settings here.' />
+                <Quill style={`#fff`} descriptionHandler={modalSettingHandler} description={details.modalSetting} />
                 <label>Specify the technical details of your creation (object size, printing time, infill…). Say whether it’s a model for FDM 3D printing, resin or both. </label>
             </div>
             <div className='mt-3'>
-                <label className='text-[16px] font-semibold'>{myProfileData?.myProfile?.paymentAccountLink && "Price"}  <span className='text-[12px] font-semibold'>{myProfileData?.myProfile?.paymentAccountLink? "(Price would be calculated in terms of USD)" : "Currently your user permission only allows free model upload. Link your payment method to be verified." }</span></label>
-                <input disabled={!myProfileData?.myProfile?.paymentAccountLink} type='number' min='0' onChange={(e) => { setDetails({ ...details, price: e.target.value }) }} className={`w-full px-2 h-10 border-2 rounded-sm ${!myProfileData?.myProfile?.paymentAccountLink ? 'cursor-not-allowed opacity-90 border' : 'hover:bg-gray-200 hover:border-gray-400'}`} placeholder='Enter price in USD, if you want this model to be free leave it.' />
-                <label>{myProfileData?.myProfile?.paymentAccountLink && "Add price in terms of USD. Leave it if you want this product to be free."} </label>
+                <div className='container mx-auto'>
+                    <div className="flex items-center">
+                        <label htmlFor="toggle" className="flex items-center cursor-pointer">
+                            <div className="relative">
+                                <input
+                                    type="checkbox"
+                                    id="toggle"
+                                    className="hidden"
+                                    checked={isFreeToggler}
+                                    onChange={() => { setIsFreeToggler(!isFreeToggler); { setDetails({ ...details, price: '0' }) } }}
+                                />
+                                <div className="toggle__line w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+                                <div
+                                    className={`toggle__dot absolute w-6 h-6 bg-white rounded-full top-[-3px] shadow inset-y-0 left-0 ${isFreeToggler ? 'transform translate-x-full bg-green-500' : ''}`}
+                                ></div>
+                            </div>
+                            <span className='inline-block ml-4'>{isFreeToggler? "Free" : 'Paid'} </span>
+                        </label>
+                    </div>
+                </div>
+                {isFreeToggler &&
+                    <>
+                        <label className='text-[16px] font-semibold'>{myProfileData?.myProfile?.paymentAccountLink && "Price"}  <span className='text-[12px] font-semibold'>{myProfileData?.myProfile?.paymentAccountLink ? "(Price would be calculated in terms of USD)" : "Currently your user permission only allows free model upload. Link your payment method to be verified."}</span></label>
+                        <input disabled={!myProfileData?.myProfile?.paymentAccountLink} type='number' min='0' onChange={(e) => { setDetails({ ...details, price: e.target.value }) }} className={`w-full px-2 h-10 border-2 rounded-sm ${!myProfileData?.myProfile?.paymentAccountLink ? 'cursor-not-allowed opacity-90 border' : 'hover:bg-gray-200 hover:border-gray-400'}`} placeholder={`${myProfileData?.myProfile?.paymentAccountLink ? 'Enter price in USD, if you want this model to be free leave it.' : 'Currently your user permission only allows free model upload. Link your payment method to be verified.'}`} />
+                        <label>{myProfileData?.myProfile?.paymentAccountLink && "Add price in terms of USD. Leave it if you want this product to be free."} </label></>
+                    
+                }
             </div>
             <div className='mt-3'>
                 <label className='text-[16px] font-semibold'>Categories</label>
@@ -98,6 +135,23 @@ function DescriptionColumn({details, setDetails}) {
                         })
                     }
 
+                </div>
+            </div>
+            <div className="mt-3">
+                <div>
+                    <label htmlFor="dropdown" className='text-[16px] font-semibold'>Licenses:</label>
+                    <select
+                        id="dropdown"
+                        className='w-full px-2 h-[40px] border-[2px] border-[#c1b9b9] rounded-sm'
+                        value={details.license}
+                        onChange={(e)=>setDetails({ ...details, license: e.target.value }) }
+                    >
+                        <option value="Kalyke - Private Use (by default)">Kalyke - Private Use (by default)</option>
+                        <option value="Kalyke - Commercial Use">Kalyke - Commercial Use</option>
+                        <option value="Kalyke - Commercial Use - No Derivative">Kalyke - Commercial Use - No Derivative</option>
+                    </select>
+
+                    <Link to={'/licenses'} target='_blank' className='block text-[18px] text-[#0707ff] mt-2'>Selected license: {details.license}</Link>
                 </div>
             </div>
         </div >

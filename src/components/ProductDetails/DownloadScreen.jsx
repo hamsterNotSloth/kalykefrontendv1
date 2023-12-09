@@ -135,6 +135,8 @@ function DownloadScreen({ productDetails }) {
     setFileExtension(fileTypes[0])
   }, [productDetails])
 
+
+
   return (
     <div className='w-[300px] mt-5 xl:mt-0'>
       <div>

@@ -19,7 +19,7 @@ function ModalUpload({details, setDetails, isUploadLoading, selectedFiles, uploa
     <div>
       <span className='font-medium text-[18px] block mt-3'>Upload model files</span>
       <DropZone handleFileChange={handleFileChange} />
-      <label>Accepted formats: fbx, obj, stl, 3mf, ply, g-code, x3g, amf, zip. More coming soon.</label>
+      <label>Accepted formats: stl, obj, 3ds, scad, gcode, 3mf, blend, sldprt, sldasm, amf, dae, eps, f3d, fcstd, mtl, pdf, ply, skp, step, dxf, dwg, svg, txt, bmp, ai, x3d, psd, zip.</label>
       {selectedFiles.length > 0 && <ImagesList fileUploadProgress={fileUploadProgress} removeImageHandler={removeImageHandler} selectedFile={selectedFiles} /> }
     </div>
   )

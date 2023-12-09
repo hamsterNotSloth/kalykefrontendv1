@@ -1,9 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useGetPromotedContentQuery, useGetPromotedUsersQuery } from '../../../redux/apiCalls/apiSlice';
 import Followbtn from "../../Common/FollowBtn"
 import { Link } from "react-router-dom"
+import SocialMediaRow from '../../Common/SocialMediaRow';
+import { socialMedia } from './socialMedia';
+import { toast } from 'react-toastify';
+
+const backendBaseUrl = process.env.REACT_APP_FRONTEND_URL;
 
 function BannerSlide({ item }) {
+  const profileShareRef = useRef(item?.u_id);
+  const copyToClipboard = () => {
+    if (profileShareRef.current) {
+      profileShareRef.current.value = `${backendBaseUrl}/user/${item?.u_id}`;
+      profileShareRef.current.select();
+      document.execCommand('copy');
+      toast.success('Copied to clipboard');
+      profileShareRef.current.value = '';
+    }
+  };
   return (
     <div className={`bg-[#fff]  flex-row h-[400px] justify-between rounded-lg md:pl-[80px] overflow-x-hideen flex `} >
       <div className='max-w-[700px] flex  flex-col justify-center'>
@@ -22,6 +37,16 @@ function BannerSlide({ item }) {
                   <h4 to={`/user/${item?.u_id}`} className='text-[18px] text-[#0026ff] font-semibold'>{item?.userName}</h4>
                 </Link>
                 <div className='max-w-[900px] w-[100%] mt-3' dangerouslySetInnerHTML={{ __html: item?.description }} />
+                <ul className='flex gap-2'>
+                  <textarea
+                    ref={profileShareRef}
+                    readOnly
+                    style={{ position: 'absolute', left: '-9999px' }}
+                  />
+                  {socialMedia.map(item => {
+                    return <SocialMediaRow key={`social-media-share-banner-${Math.random()}-${Date.now()}`} item={item} copyToClipboard={copyToClipboard} />
+                  })}
+                </ul>
                 <div className='py-3'>
                   <Followbtn productDetails={item} style={'rounded-xl hover:bg-[#e8e8e8] shadow px-4 py-1'} />
                 </div>
@@ -35,6 +60,16 @@ function BannerSlide({ item }) {
                   <h4 to={`/user/${item?.u_id}`} className='text-[18px] text-[#0026ff] font-semibold'>{item?.userName}</h4>
                 </Link>
                 <div className='max-w-[900px] w-[100%] mt-3' dangerouslySetInnerHTML={{ __html: item?.description }} />
+                <ul className='flex gap-2'>
+                  <textarea
+                    ref={profileShareRef}
+                    readOnly
+                    style={{ position: 'absolute', left: '-9999px' }}
+                  />
+                  {socialMedia.map(item => {
+                    return <SocialMediaRow key={`social-media-share-banner-${Math.random()}-${Date.now()}`} item={item} copyToClipboard={copyToClipboard} />
+                  })}
+                </ul>
                 <div className='py-3'>
                   <Followbtn productDetails={item} style={'rounded-xl hover:bg-[#e8e8e8] shadow px-4 py-1'} />
                 </div>

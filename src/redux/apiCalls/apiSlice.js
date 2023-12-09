@@ -300,7 +300,7 @@ export const apiSlice = createApi({
           "authorization": token
         },
       }),
-      invalidatesTags: ["descriptionProduct", "product"],
+      invalidatesTags: ["descriptionProduct"],
     }),
     createStripeUser: builder.mutation({
       query:({token}) =>({
@@ -313,10 +313,10 @@ export const apiSlice = createApi({
       }),
     }),
     addTransaction: builder.mutation({
-      query:({amount, token, productId}) =>({
+      query:({amount, token, productId, countryCode, exchangeRate}) =>({
         url: `stripe/add-transaction`,
         method: "POST",
-        body: {amount, productId},
+        body: {amount, productId, countryCode, exchangeRate},
         headers: {
           "Content-type": "application/json; charset=UTF-8",
           "authorization": token

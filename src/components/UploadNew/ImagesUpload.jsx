@@ -48,7 +48,6 @@ function ImagesUpload({ details, setDetails, uploadFileHandler, productUploadHan
       setFileUploadProgress(false)
       await productUploadHandler({...details, images: [...details.images, ...uploadedFiles], modal: uploadedModel})
       setIsUploadLoading(false)
-      toast.success("Model Uploaded.");
     } catch (error) {
       toast.error(error.message);
       setIsUploadLoading(false)
@@ -60,7 +59,7 @@ function ImagesUpload({ details, setDetails, uploadFileHandler, productUploadHan
       <ImagesUploader fileUploadProgress={fileUploadProgress} setSelectedFile={setSelectedFile} selectedFile={selectedFile} isUploadLoading={isUploadLoading} />
       <label className='block'> Accepted formats: jpg, jpeg, webp, png, gif. Upload in the sequence you prefer.</label>
       <button disabled={isUploadLoading} onClick={(e)=>uploadImageHandler(e)} className="bg-blue-500 mt-3 text-white px-4 py-2 rounded hover:bg-blue-600">
-          {isUploadLoading ? 'Processing...' : "Next"}
+          {isUploadLoading ? 'Processing...' : "Publish"}
         </button>
     </>
   )

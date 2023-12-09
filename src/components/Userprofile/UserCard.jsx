@@ -75,7 +75,6 @@ function UserCard() {
             const response = await createStripeUser({ token })
             const { accountLinkUrl } = response.data;
 
-            // Redirect the user to the Stripe onboarding flow
             window.location.href = accountLinkUrl;
         } catch (error) {
             console.error('Error:', error.message);
@@ -89,7 +88,7 @@ function UserCard() {
         Youtube: faYoutube,
         Linkedin: faLinkedin,
     };
-
+    
     if (isLoading) return <div><span>Loading!</span></div>
     return (
         <div className='bg-white w-[375px] relative min-h-[250px] h-[100%] flex flex-col items-center shadow-md p-5 rounded-md'>

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import WishlistBtn from './WishlistBtn'
+import { toast } from 'react-toastify';
 import { getToken } from '../../Token/token'
 const url = process.env.REACT_APP_BACKEND_BASE_URL
 function ProductCard({ item, deletePermission, productDeleteHandler }) {

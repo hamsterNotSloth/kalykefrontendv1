@@ -17,12 +17,16 @@ function ModalRightColumn({ details, setDetails }) {
 
     const [uploadProduct] = useUploadProductMutation()
     const productUploadHandler = async (details) => {
+        if (details.title.length == 0 || details.modalSetting.length == 0 ||  details.description.length == 0 || details.category.length == 0 || !details.price || !details.modal || !details.tags || !details.images) {
+            return toast.error("Something is missing please add it to continue")
+        }
         try {
             const response = await uploadProduct({ productDetails: details, token })
             if (response) {
                 toast.success(response.data.message)
-                
+
             }
+            toast.success("Model Published.");
         } catch (err) {
             toast.error(err)
         }
@@ -33,7 +37,7 @@ function ModalRightColumn({ details, setDetails }) {
         const match = file.name.match(/\.([^.]+)$/);
         const fileEx = match ? match[1] : null;
         const fileExtension = fileEx.toLowerCase()
-        if( file.type == "application/x-zip-compressed" || fileExtension == "fbx" || fileExtension == "obj"  || fileExtension == "stl" || fileExtension == "3mf" || fileExtension == "ply" || fileExtension == "g-code" || fileExtension == "x3g"  || fileExtension == "amf" ) {
+        if (file.type == "application/x-zip-compressed" || fileExtension == "psd" || fileExtension == "x3d" || fileExtension == "ai" || fileExtension == "bmp" || fileExtension == "txt" || fileExtension == "svg" || fileExtension == "dwg" || fileExtension == "dxf" || fileExtension == "step" || fileExtension == "skp" || fileExtension == "fcstd" || fileExtension == "mtl" || fileExtension == "pdf" || fileExtension == "dae" || fileExtension == "eps" || fileExtension == "f3d" || fileExtension == "sldasm" || fileExtension == "sldprt" || fileExtension == "blend" || fileExtension == "3ds" || fileExtension == "scad" || fileExtension == "fbx" || fileExtension == "obj" || fileExtension == "stl" || fileExtension == "3mf" || fileExtension == "ply" || fileExtension == "g-code" || fileExtension == "x3g" || fileExtension == "amf") {
             if (selectedFiles.length > 4) {
                 return toast.error("You can only add 6 models files")
             }
@@ -44,9 +48,9 @@ function ModalRightColumn({ details, setDetails }) {
             }
         }
         else {
-            toast.error("Only file type allowed are fbx, obj, stl, 3mf, ply, g-code, x3g, amf, zip")
+            toast.error("Only file type allowed are stl, obj, 3ds, scad, gcode, 3mf, blend, sldprt, sldasm, amf, dae, eps, f3d, fcstd, mtl, pdf, ply, skp, step, dxf, dwg, svg, txt, bmp, ai, x3d, psd, zip")
         }
-        
+
     }
 
     const uploadFileHandler = async () => {
@@ -93,7 +97,7 @@ function ModalRightColumn({ details, setDetails }) {
     return (
         <div>
             <ModalUpload selectedFiles={selectedFiles} setSelectedFile={setSelectedFile} isUploadLoading={isUploadLoading} uploadFileHandler={uploadFileHandler} setFileUploadProgress={setFileUploadProgress} fileUploadProgress={fileUploadProgress} handleFileChange={handleFileChange} details={details} setDetails={setDetails} />
-            <ImagesUpload uploadFileHandler={uploadFileHandler} productUploadHandler={productUploadHandler}  details={details} setDetails={setDetails} />
+            <ImagesUpload uploadFileHandler={uploadFileHandler} productUploadHandler={productUploadHandler} details={details} setDetails={setDetails} />
             <Link className='block text-[18px] mt-2' to='/licenses' target='_blank'>By uploading your model you accept our <span className='text-[#0707ff]'>Licenses</span></Link>
         </div>
     )
