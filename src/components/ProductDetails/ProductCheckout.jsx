@@ -15,7 +15,7 @@ const ProductCheckout = ({ product }) => {
 
   const convertToLocalPrice = async () => {
     try {
-      const response = await axios.get(`https://v6.exchangerate-api.com/v6/490182da2536bbc83d22b4e8/pair/EUR/${countryCode}`);
+      const response = await axios.get(`https://v6.exchangerate-api.com/v6/490182da2536bbc83d22b4e8/pair/usd/${countryCode}`);
       return response?.data?.conversion_rate
     } catch (error) {
       console.error('Error fetching exchange rate:', error.message);
