@@ -32,8 +32,7 @@ const ProductCheckout = ({ product }) => {
           const longitude = position.coords.longitude;
           try {
             const response = await axios.get(`https://api.opencagedata.com/geocode/v1/json?key=3199df66be6d4fc1af1468430ae55f63&q=${latitude}+${longitude}&pretty=1`);
-            const country = response.data.results[0].components.country_code;
-            console.log('Country:', country);
+            const country = response.data.results[0].annotations.currency.iso_code            ;
             setCountryCode(country)
           } catch (error) {
             console.error('Error getting country code:', error.message);
