@@ -4,7 +4,8 @@ import axios from 'axios';
 import { useAddTransactionMutation } from '../../redux/apiCalls/apiSlice';
 import { getToken } from '../../Token/token';
 import { toast } from 'react-toastify';
-const backendBaseUrl = process.env.REACT_APP_BACKEND_BASE_URL;
+const exchangeRateApi = process.env.REACT_APP_EXCHANGERATE_API;
+const locationApi = process.env.REACT_APP_GEO_API;
 
 const ProductCheckout = ({ product }) => {
   const stripe = useStripe();
@@ -16,7 +17,7 @@ const ProductCheckout = ({ product }) => {
 
   const convertToLocalPrice = async () => {
     try {
-      const response = await axios.get(`https://v6.exchangerate-api.com/v6/490182da2536bbc83d22b4e8/pair/usd/${countryCode}`);
+      const response = await axios.get(`https://v6.exchangerate-api.com/v6/${exchangeRateApi}/pair/usd/${countryCode}`);
       return response?.data?.conversion_rate
     } catch (error) {
       console.error('Error fetching exchange rate:', error.message);
@@ -32,7 +33,7 @@ const ProductCheckout = ({ product }) => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           try {
-            const response = await axios.get(`https://api.opencagedata.com/geocode/v1/json?key=3199df66be6d4fc1af1468430ae55f63&q=${latitude}+${longitude}&pretty=1`);
+            const response = await axios.get(`https://api.opencagedata.com/geocode/v1/json?key=${locationApi}&q=${latitude}+${longitude}&pretty=1`);
             const country = response.data.results[0].annotations.currency.iso_code            ;
             setCountryCode(country)
           } catch (error) {
