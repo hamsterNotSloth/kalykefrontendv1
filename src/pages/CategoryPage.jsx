@@ -12,7 +12,7 @@ function CategoryPage() {
   const { category } = useParams()
   return (
     <div className=' max-w-[1700px] mx-auto'>
-      <span className='block px-4 text-[20px] font-semibold'>category - {category}</span>
+      <span className='block px-4 text-[20px] font-semibold'>Category - {category}</span>
       {/* <Filter /> */}
       <Category />
     </div>

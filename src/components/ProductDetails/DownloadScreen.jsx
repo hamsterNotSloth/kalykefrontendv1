@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useAddRatingMutation, useFollowMutation, useGetMyProductsQuery, useGetMyProfileQuery, useProductPurchaseMutation, useWishlistMutation } from '../../redux/apiCalls/apiSlice';
+import { useAddRatingMutation, useFollowMutation, useGetMyProductsQuery, useGetMyProfileQuery, useGetproductQuery, useProductPurchaseMutation, useWishlistMutation } from '../../redux/apiCalls/apiSlice';
 import { getToken } from '../../Token/token';
 import { toast } from 'react-toastify';
 import Followbtn from '../Common/FollowBtn';
@@ -27,7 +27,7 @@ function DownloadScreen({ productDetails }) {
   const textAreaRef = useRef(id);
   const { data: myProfile } = useGetMyProfileQuery(token)
   const [productPurchase] = useProductPurchaseMutation()
-
+  const {   refetch: refetchProducts } = useGetproductQuery(id)
   const copyToClipboard = () => {
     if (textAreaRef.current) {
       textAreaRef.current.value = `${backendBaseUrl}/products/${id}`;
@@ -52,6 +52,7 @@ function DownloadScreen({ productDetails }) {
     })
     const uniqFiles = [...new Set(extensionsAllowed)]
     setFileTypes(uniqFiles);
+    setFileExtension(uniqFiles[0])
   }
 
   const downloadImageHandler = async () => {
@@ -88,6 +89,7 @@ function DownloadScreen({ productDetails }) {
       URL.revokeObjectURL(a.href);
       toast.success('Zip file download started');
       await productPurchase({ productId: productDetails?.product?._id, token })
+      await refetchProducts()
     } catch (error) {
       toast.error('Error during download');
     } finally {
@@ -96,7 +98,6 @@ function DownloadScreen({ productDetails }) {
   };
 
   const fileToDownloadHandler = (fileExtension) => {
-    if (fileExtension == 'Select a file to download') return toast.error("Please choose a file to download.")
     if (fileExtension != null) {
 
       const links = productDetails?.product?.modal?.filter(item => {
@@ -116,13 +117,15 @@ function DownloadScreen({ productDetails }) {
 
   const extractDate = (inputString) => {
     const dateObject = new Date(inputString);
+    const formattedDate = dateObject.toLocaleDateString('en-US', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric'
+    });
 
-    const year = dateObject.getFullYear();
-    const month = String(dateObject.getMonth() + 1).padStart(2, '0');
-    const day = String(dateObject.getDate()).padStart(2, '0');
-    const formattedDate = `${day}-${month}-${year}`;
     return formattedDate;
   }
+
   const isEmailIncluded = productDetails?.product?.purchaseHistory?.some(
     (purchase) => purchase.email === myProfile?.myProfile?.email
   );
@@ -132,25 +135,21 @@ function DownloadScreen({ productDetails }) {
 
   useEffect(() => {
     allowedExtensionsDownloadHandler()
-    setFileExtension(fileTypes[0])
   }, [productDetails])
-
-
 
   return (
     <div className='w-[300px] mt-5 xl:mt-0'>
       <div>
-        <span className='text-[#4d8802] text-[16px]'><FontAwesomeIcon icon={faStar} />{productDetails?.product?.avgRating || 0}</span>
+        <span className='text-[#4d8802] text-[20px]'><FontAwesomeIcon icon={faStar} />{productDetails?.product?.avgRating || 0}</span>
         <div className="w-full">
           {productDetails?.product?.purchaseHistory?.some(item => item.email === myProfile?.myProfile?.email) && !productDetails?.product?.ratings?.some(item => item.email === myProfile?.myProfile?.email) &&
             <div>
-              <span className='block'>Rate Product</span>
               <div className='flex my-2 justify-between'>
-                <div className='flex gap-1 bg-white rounded-sm px-3'>
+                <div className='flex gap-1 rounded-sm px-3'>
                 {[1, 2, 3, 4, 5].map((star, index) => (
                   <button
                     key={`star-${Math.random * Date.now()}-rating`}
-                    className={`cursor-pointer text-2xl ${star <= rating ? 'text-yellow-500' : 'text-gray-300'}`}
+                    className={`cursor-pointer text-2xl ${star <= rating ? 'text-yellow-500' : 'text-gray-500'}`}
                     onClick={() => { setRating(star) }}
                   >
                     ★
@@ -163,14 +162,13 @@ function DownloadScreen({ productDetails }) {
         </div>
       </div>
       <div className='flex flex-col pb-3'>
-        <span>Created At: {extractDate(productDetails?.product?.createdAt)}</span>
+        <span>Created on: {extractDate(productDetails?.product?.createdAt)}</span>
       </div>
       <WishlistBtn product={productDetails?.product} token={token} />
       {productDetails?.product?.free == true || isEmailIncluded ? <div className='flex'>
         <button disabled={isDownloading} className='bg-[#2f85ff] rounded-r-0 hover:bg-[#5487ff] text-white text-[21px] h-[46px] w-[100%] rounded-l-md  w-full' onClick={downloadImageHandler}>{isDownloading ? "Downloading" : "Download"}</button>
         <select onChange={(e) => { setFileExtension(e.target.value) }} value={fileExtension}
           className='bg-[#2f85ff] border-l px-2 max-w-[90px] w-full text-white rounded-r-[1px] hover:bg-[#5487ff]'>
-          <option>Select a file to download</option>
           {
             fileTypes.map((item, index) => {
               return (

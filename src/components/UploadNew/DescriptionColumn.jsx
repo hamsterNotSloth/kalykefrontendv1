@@ -71,7 +71,7 @@ function DescriptionColumn({ details, setDetails }) {
                 <label>Tell the story of your creation (origin of the idea, for what use, why it’s so great…). </label>
             </div>
             <div className='mt-8'>
-                <label className='text-[16px] font-semibold'>Modal Settings</label>
+                <label className='text-[16px] font-semibold'>Model Settings</label>
                 <Quill style={`#fff`} descriptionHandler={modalSettingHandler} description={details.modalSetting} />
                 <label>Specify the technical details of your creation (object size, printing time, infill…). Say whether it’s a model for FDM 3D printing, resin or both. </label>
             </div>

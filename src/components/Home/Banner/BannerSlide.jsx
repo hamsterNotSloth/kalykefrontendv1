@@ -31,8 +31,8 @@ function BannerSlide({ item }) {
             item?.promo == 'model' ?
               <div className='max-w-[324px]'>
                 <span className='mb-6 block text-[16px] font-semibold'>Featured Product</span>
-                <Link to={`/user/${item?.u_id}`} className='flex flex-col'>
-                  <h4 to={`/user/${item?.u_id}`} className='text-[18px] text-[#0026ff] font-semibold'>{item?.productName}</h4>
+                <Link to={`/products/${item?.u_id}`} className='flex flex-col'>
+                  <h4 className='text-[18px] text-[#0026ff] font-semibold'>{item?.productName}</h4>
                   <h4 className='text-[18px] text-[#000] font-semibold'>{item?.price || "free"}</h4>
                 </Link>
                 <div className='max-w-[900px] w-[100%] mt-3' dangerouslySetInnerHTML={{ __html: item?.description }} />
@@ -47,9 +47,9 @@ function BannerSlide({ item }) {
                     return <SocialMediaRow key={`social-media-share-banner-${Math.random()}-${Date.now()}`} item={item} copyToClipboard={copyToClipboard} />
                   })}
                 </ul>
-                <div className='py-3'>
+                {/* <div className='py-3'>
                   <Followbtn productDetails={item} style={'rounded-xl hover:bg-[#e8e8e8] shadow px-4 py-1'} />
-                </div>
+                </div> */}
               </div>
               :
               <div className='max-w-[324px]'>

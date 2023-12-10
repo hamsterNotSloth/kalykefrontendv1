@@ -69,17 +69,17 @@ function Signup({ setSignUpModalStatus }) {
   const buttonItems = [
     {
       icon: "images/google.png",
-      text: "Sign in with Google",
+      text: "Sign up with Google",
       func: GoogleSignUpHandler,
     },
     {
       icon: "images/facebook.png",
-      text: "Sign in with Facebook",
+      text: "Sign up with Facebook",
       func: faceBookSignInHandler,
     },
     {
       icon: "images/mail.png",
-      text: "sign in with Email",
+      text: "Sign up with Email",
       func: signUpContentHandler,
     },
   ];

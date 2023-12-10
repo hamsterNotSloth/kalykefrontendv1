@@ -115,7 +115,7 @@ function UserCard() {
                 <span>Since, {formatDate(userProfile?.profile?.createdAt)}</span>
                 <div dangerouslySetInnerHTML={{ __html: userProfile?.profile?.description }} />
             </div>
-            <div className='flex justify-between w-full'>
+            <div className='flex flex-col justify-between w-full'>
                 <ul className='flex w-[232px] justify-center gap-3 pb-1'>
                     {userProfile?.profile?.socialMedia?.map(link => (
                         <li key={link.socialMediaName}>
@@ -126,8 +126,8 @@ function UserCard() {
                     ))}
                 </ul>
 
-                <div className='relative flex justify-end'>
-                    <button onClick={() => setIsShareBtnOpen(!isShareBtnOpen)}><FontAwesomeIcon icon={faEllipsisVertical} /></button>
+                <div className='relative flex justify-center'>
+                    <button className='text-[16px]' onClick={() => setIsShareBtnOpen(!isShareBtnOpen)}>Click to Share</button>
                     {isShareBtnOpen && <ShareProfile setIsShareBtnOpen={setIsShareBtnOpen} />}
                 </div>
             </div>
