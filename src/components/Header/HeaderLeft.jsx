@@ -119,22 +119,22 @@ const HeaderLeft = () => {
                 <div className="z-10 absolute top-full bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                   <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                     <li>
-                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeDpzchs43LksP8LMtUYQYnwH8HCAKpGS_xjTh2T5yQqaJ0iA/viewform" target='_blank' onClick={toggleDropdown} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <a rel="noopener noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLSeDpzchs43LksP8LMtUYQYnwH8HCAKpGS_xjTh2T5yQqaJ0iA/viewform" target='_blank' onClick={toggleDropdown} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                         Custom designs
                       </a>
                     </li>
                     <li>
-                      <a href="https://forms.gle/wf3GKqYE5VDuWVGs9" target='_blank' onClick={toggleDropdown} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <a rel="noopener noreferrer" href="https://forms.gle/wf3GKqYE5VDuWVGs9" target='_blank' onClick={toggleDropdown} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                         Other printing services
                       </a>
                     </li>
                     <li>
-                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeciR5hznseDBhkWU-9FoSO-uHNGI-PQFNfr8f_vB0veidoDA/viewform" target='_blank' onClick={toggleDropdown} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <a rel="noopener noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLSeciR5hznseDBhkWU-9FoSO-uHNGI-PQFNfr8f_vB0veidoDA/viewform" target='_blank' onClick={toggleDropdown} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                         Got a suggestion?
                       </a>
                     </li>
                     <li>
-                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeciR5hznseDBhkWU-9FoSO-uHNGI-PQFNfr8f_vB0veidoDA/viewform" target='_blank' onClick={toggleDropdown} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <a rel="noopener noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLSdVEoPelG73Q_8Gc13GR_nSvXzBWMAMfWrReSgm26UbS5yy0Q/viewform" target='_blank' onClick={toggleDropdown} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                         Promotion
                       </a>
                     </li>

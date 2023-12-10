@@ -43,11 +43,11 @@ function Footer() {
       </div>
       <div>
         <ul className='flex max-w-[480px] justify-end gap-3'>
-          <li>Terms & Conditions</li>
-          <li>Support</li>
-          <li><a href='https://docs.google.com/forms/d/e/1FAIpQLSeciR5hznseDBhkWU-9FoSO-uHNGI-PQFNfr8f_vB0veidoDA/viewform' target='_blank'> Feedback</a></li>
-          <li>Report Model</li>
-          <li>Privacy</li>
+          <li><a href="https://docs.google.com/document/d/1BG0-q_IAsCRgQESYfQLj0s1G1U1oc_9WqqEJ9u2x4io/edit#heading=h.2zqx1nsy4bnz" target="_blank" rel="noopener noreferrer">Terms & Conditions</a> </li>
+          <li><a href="https://docs.google.com/document/d/1UQBPOvqJ_KXDEzCHSWEnrBwChgSD0LH9K0esPNWxqIA/edit#heading=h.76n0dgv3l9rh" target="_blank" rel="noopener noreferrer">Support</a></li>
+          <li><a href='https://docs.google.com/forms/d/e/1FAIpQLSeciR5hznseDBhkWU-9FoSO-uHNGI-PQFNfr8f_vB0veidoDA/viewform' target='_blank' rel="noopener noreferrer"> Feedback</a></li>
+          <li><a href='https://docs.google.com/forms/d/e/1FAIpQLSesf_brU7bdInDirULcFfUCE0TQXZXuPxGHwFuEaZ04iIZkwg/viewform?usp=send_form' target='_blank' rel="noopener noreferrer">Report Model</a></li>
+          <li><a href="https://docs.google.com/document/d/1AglNGgsYiWLAwvxb9EyNe5YOL5iq0uuoBX7yDtBX9g8/edit#heading=h.eu4l1l5fdd7h" target="_blank" rel="noopener noreferrer">Privacy</a></li>
         </ul>
       </div>
     </div>

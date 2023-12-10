@@ -22,7 +22,7 @@ function BannerSlide({ item }) {
   return (
     <div className={`bg-[#fff]  flex-row h-[400px] justify-between rounded-lg md:pl-[80px] overflow-x-hideen flex `} >
       <div className='max-w-[700px] flex  flex-col justify-center'>
-        <div className='mb-6'>
+        <div>
           <h1 className='text-[34px] font-bold'>Kalyke - The best marketplace for designers, by designers</h1>
           <span className='text-[20px] text-[#848484] font-bold pb-10'>Get the best deals</span>
         </div>
@@ -30,19 +30,19 @@ function BannerSlide({ item }) {
           {
             item?.promo == 'model' ?
               <div className='max-w-[324px]'>
-                <Link to={`/user/${item?.u_id}`} className='flex gap-2 items-center'>
-                  <div className='w-[60px] h-[60px]'>
-                    <img src={item.userPicture} className='rounded-full' alt="Profile image" />
-                  </div>
-                  <h4 to={`/user/${item?.u_id}`} className='text-[18px] text-[#0026ff] font-semibold'>{item?.userName}</h4>
+                <span className='mb-6 block text-[16px] font-semibold'>Featured Product</span>
+                <Link to={`/user/${item?.u_id}`} className='flex flex-col'>
+                  <h4 to={`/user/${item?.u_id}`} className='text-[18px] text-[#0026ff] font-semibold'>{item?.productName}</h4>
+                  <h4 className='text-[18px] text-[#000] font-semibold'>{item?.price || "free"}</h4>
                 </Link>
                 <div className='max-w-[900px] w-[100%] mt-3' dangerouslySetInnerHTML={{ __html: item?.description }} />
-                <ul className='flex gap-2'>
+                <ul className='flex items-end gap-2'>
                   <textarea
                     ref={profileShareRef}
                     readOnly
                     style={{ position: 'absolute', left: '-9999px' }}
                   />
+                  <span className='text-[12px]'>Share on</span>
                   {socialMedia.map(item => {
                     return <SocialMediaRow key={`social-media-share-banner-${Math.random()}-${Date.now()}`} item={item} copyToClipboard={copyToClipboard} />
                   })}
@@ -53,6 +53,7 @@ function BannerSlide({ item }) {
               </div>
               :
               <div className='max-w-[324px]'>
+                <span className='mb-6 block text-[16px] font-semibold'>Featured Designer</span>
                 <Link to={`/user/${item?.u_id}`} className='flex gap-2 items-center'>
                   <div className='w-[60px] h-[60px]'>
                     <img src={item.userPicture} className='rounded-full' alt="Profile image" />
@@ -60,12 +61,13 @@ function BannerSlide({ item }) {
                   <h4 to={`/user/${item?.u_id}`} className='text-[18px] text-[#0026ff] font-semibold'>{item?.userName}</h4>
                 </Link>
                 <div className='max-w-[900px] w-[100%] mt-3' dangerouslySetInnerHTML={{ __html: item?.description }} />
-                <ul className='flex gap-2'>
+                <ul className='flex items-end gap-2'>
                   <textarea
                     ref={profileShareRef}
                     readOnly
                     style={{ position: 'absolute', left: '-9999px' }}
                   />
+                  <span className='text-[12px]'>Share on</span>
                   {socialMedia.map(item => {
                     return <SocialMediaRow key={`social-media-share-banner-${Math.random()}-${Date.now()}`} item={item} copyToClipboard={copyToClipboard} />
                   })}

@@ -9,6 +9,7 @@ const backendBaseUrl = process.env.REACT_APP_BACKEND_BASE_URL;
 const ProductCheckout = ({ product }) => {
   const stripe = useStripe();
   const [loading, setLoading] = useState(false);
+  const [asLocation, setAsLocation] = useState(false)
   const token = getToken()
   const [countryCode, setCountryCode] = useState("")
   const [addTransaction, { error }] = useAddTransactionMutation()
@@ -54,6 +55,7 @@ const ProductCheckout = ({ product }) => {
     try {
       // const IPAddress = await getIPAddress()
       // console.log(IPAddress,'IPAddress')
+      setAsLocation(!asLocation)
       setLoading(true);
       const exchangeRate = await convertToLocalPrice()
       const response = await addTransaction({ amount: product.price, token, productId: product._id, countryCode, exchangeRate })
@@ -75,9 +77,8 @@ const ProductCheckout = ({ product }) => {
   return (
     <div>
       <button className='bg-[#2f85ff] mb-3 hover:bg-[#809ee2] text-white text-[21px] h-[46px] w-[100%] rounded-md  w-full' onClick={handleCheckout} disabled={loading}>
-        {loading ? 'Processing...' : `Buy: ${product.price} USD`}
+        {loading ? 'Processing...' : `Buy: $${product.price}`}
       </button>
-      <button onClick={convertToLocalPrice}>test</button>
     </div>
   );
 };

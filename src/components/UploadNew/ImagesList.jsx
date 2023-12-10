@@ -6,7 +6,7 @@ function ImagesList({ selectedFile, fileUploadProgress, removeImageHandler }) {
 
     return (
         <>
-            {selectedFile.length > 5 && <span className='text-[#ff0000] flex'>Maximum limit is only 4 files per upload</span>}
+            {selectedFile.length > 5 && <span className='text-[#ff0000] flex'>Maximum limit is only 6 files per upload</span>}
             <ul className='pt-4 max-h-[130px] overflow-y-auto'>
                 {selectedFile.map((item, index) => {
                     return (

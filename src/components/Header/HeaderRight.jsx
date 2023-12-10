@@ -6,6 +6,7 @@ import ProfileDropDown from './ProfileDropDown'
 import UploaderPopUp from '../Uploader/UploaderPopUp'
 import { getToken } from '../../Token/token'
 import { Link } from 'react-router-dom'
+import { auth } from '../../config/config'
 
 const HeaderRight = () => {
   const [isProfileDropDownOpen, setIsProfileDropDownOpen] = useState(false)
@@ -17,6 +18,7 @@ const HeaderRight = () => {
   }
 
   const signOutHandler = async () => {
+    await auth.signOut();
     localStorage.removeItem("userToken")
     profileRefetch()
     window.location.reload();

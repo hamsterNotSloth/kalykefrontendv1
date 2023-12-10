@@ -21,7 +21,7 @@ function DownloadScreen({ productDetails }) {
   const [fileExtension, setFileExtension] = useState(fileTypes[0])
   const [rating, setRating] = useState(0)
   const [currentXhr, setCurrentXhr] = useState()
-  const [AddRating, {isLoading: addingRating}] = useAddRatingMutation()
+  const [AddRating, { isLoading: addingRating }] = useAddRatingMutation()
   const token = getToken()
   const { id } = useParams()
   const textAreaRef = useRef(id);
@@ -37,10 +37,10 @@ function DownloadScreen({ productDetails }) {
       textAreaRef.current.value = '';
     }
   };
-  
-  const addRatingHandler = async (rating) => {
+
+  const addRatingHandler = async () => {
     try {
-      const response = await AddRating({ _id: productDetails?.product?._id, token, rating })
+      await AddRating({ _id: productDetails?.product?._id, token, rating })
     } catch (err) {
       console.log(err)
     }
@@ -140,21 +140,26 @@ function DownloadScreen({ productDetails }) {
   return (
     <div className='w-[300px] mt-5 xl:mt-0'>
       <div>
-      <span className='text-[#4d8802] text-[16px]'><FontAwesomeIcon icon={faStar} />{productDetails?.product?.avgRating || 0}</span>
-        <div className="flex items-center">
-          {productDetails?.product?.purchaseHistory?.some(item =>  item.email === myProfile?.myProfile?.email) && !productDetails?.product?.ratings?.some(item =>  item.email === myProfile?.myProfile?.email) &&
-          <>
-          <span>Rate Product</span>
-          {[1, 2, 3, 4, 5].map((star, index) => (
-            <button
-              key={`star-${Math.random * Date.now()}-rating`}
-              disabled={addingRating}
-              className={`cursor-pointer text-2xl ${star <= rating ? 'text-yellow-500' : 'text-gray-300'}`}
-              onClick={() => {addRatingHandler(star);setRating(star)}}
-            >
-              ★
-            </button>
-          ))}  </>}
+        <span className='text-[#4d8802] text-[16px]'><FontAwesomeIcon icon={faStar} />{productDetails?.product?.avgRating || 0}</span>
+        <div className="w-full">
+          {productDetails?.product?.purchaseHistory?.some(item => item.email === myProfile?.myProfile?.email) && !productDetails?.product?.ratings?.some(item => item.email === myProfile?.myProfile?.email) &&
+            <div>
+              <span className='block'>Rate Product</span>
+              <div className='flex my-2 justify-between'>
+                <div className='flex gap-1 bg-white rounded-sm px-3'>
+                {[1, 2, 3, 4, 5].map((star, index) => (
+                  <button
+                    key={`star-${Math.random * Date.now()}-rating`}
+                    className={`cursor-pointer text-2xl ${star <= rating ? 'text-yellow-500' : 'text-gray-300'}`}
+                    onClick={() => { setRating(star) }}
+                  >
+                    ★
+                  </button>
+                ))}
+                </div>
+                <button disabled={addingRating} className='bg-[#2f85ff] w-[130px] hover:bg-[#809ee2] text-white text-[16px] px-3 h-[36px] rounded-md' onClick={() => addRatingHandler()}>Add Rating</button>
+              </div>
+            </div>}
         </div>
       </div>
       <div className='flex flex-col pb-3'>
@@ -178,7 +183,7 @@ function DownloadScreen({ productDetails }) {
         </select>
       </div> : <DesignUpload product={productDetails?.product} />}
 
-      <div className='w-full bg-[#a4a4a4] p-3 rounded-md mt-3 text-white'>
+      <div className='w-full bg-[#2f85ff] p-3 rounded-md mt-3 text-white'>
         <div className='flex flex-col border-b-[1px] pb-1 text-center justify-center gap-4 '>
           <span>Details:</span>
           <div dangerouslySetInnerHTML={{ __html: productDetails?.user?.description }} />
@@ -203,8 +208,8 @@ function DownloadScreen({ productDetails }) {
           <span>Wishlisted:</span>
           <span>{productDetails?.product?.wishlist?.length || 0}</span>
         </div>
-        <Link className='h-[40px] w-full rounded-sm bg-[#c1c0c0] hover:bg-[#b2b2b2] flex justify-center items-center mt-2' to={`/user/${productDetails?.user?.u_id}`}>Visit {productDetails?.user?.userName}</Link>
-        {token ? <Followbtn productDetails={productDetails} style={`bg-[#8d8d8d] mt-3 hover:bg-[#444444] text-white text-[21px] h-[46px] w-[100%] rounded-md  w-full`} /> : null}
+        <Link className='h-[40px] w-full rounded-sm bg-[#fff] hover:bg-[#ebebeb] text-[#000] flex justify-center items-center mt-2' to={`/user/${productDetails?.user?.u_id}`}>Visit {productDetails?.user?.userName}</Link>
+        {token ? <Followbtn productDetails={productDetails} style={`bg-[#fff] mt-3 hover:bg-[#ebebeb] text-[#000] text-[21px] h-[46px] w-[100%] rounded-md  w-full`} /> : null}
         <textarea
           ref={textAreaRef}
           readOnly

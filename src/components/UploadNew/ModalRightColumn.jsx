@@ -21,11 +21,7 @@ function ModalRightColumn({ details, setDetails }) {
             return toast.error("Something is missing please add it to continue")
         }
         try {
-            const response = await uploadProduct({ productDetails: details, token })
-            if (response) {
-                toast.success(response.data.message)
-
-            }
+            await uploadProduct({ productDetails: details, token })
             toast.success("Model Published.");
         } catch (err) {
             toast.error(err)
@@ -38,8 +34,8 @@ function ModalRightColumn({ details, setDetails }) {
         const fileEx = match ? match[1] : null;
         const fileExtension = fileEx.toLowerCase()
         if (file.type == "application/x-zip-compressed" || fileExtension == "psd" || fileExtension == "x3d" || fileExtension == "ai" || fileExtension == "bmp" || fileExtension == "txt" || fileExtension == "svg" || fileExtension == "dwg" || fileExtension == "dxf" || fileExtension == "step" || fileExtension == "skp" || fileExtension == "fcstd" || fileExtension == "mtl" || fileExtension == "pdf" || fileExtension == "dae" || fileExtension == "eps" || fileExtension == "f3d" || fileExtension == "sldasm" || fileExtension == "sldprt" || fileExtension == "blend" || fileExtension == "3ds" || fileExtension == "scad" || fileExtension == "fbx" || fileExtension == "obj" || fileExtension == "stl" || fileExtension == "3mf" || fileExtension == "ply" || fileExtension == "g-code" || fileExtension == "x3g" || fileExtension == "amf") {
-            if (selectedFiles.length > 4) {
-                return toast.error("You can only add 6 models files")
+            if (selectedFiles.length > 6) {
+                return toast.error("You can only add 6 models files at a time.")
             }
             if (file) {
                 setSelectedFile([...selectedFiles, file]);
@@ -98,7 +94,7 @@ function ModalRightColumn({ details, setDetails }) {
         <div>
             <ModalUpload selectedFiles={selectedFiles} setSelectedFile={setSelectedFile} isUploadLoading={isUploadLoading} uploadFileHandler={uploadFileHandler} setFileUploadProgress={setFileUploadProgress} fileUploadProgress={fileUploadProgress} handleFileChange={handleFileChange} details={details} setDetails={setDetails} />
             <ImagesUpload uploadFileHandler={uploadFileHandler} productUploadHandler={productUploadHandler} details={details} setDetails={setDetails} />
-            <Link className='block text-[18px] mt-2' to='/licenses' target='_blank'>By uploading your model you accept our <span className='text-[#0707ff]'>Licenses</span></Link>
+            <a className='block text-[18px] mt-2' href={'https://docs.google.com/document/d/1BG0-q_IAsCRgQESYfQLj0s1G1U1oc_9WqqEJ9u2x4io/edit#heading=h.2zqx1nsy4bnz'} rel="noopener noreferrer" target='_blank'>by uploading you <span className='text-[#0707ff]'>agree to T&C</span></a>
         </div>
     )
 }

@@ -18,25 +18,30 @@ function DescriptionColumn({ details, setDetails }) {
         setDetails({ ...details, description: value })
     }
 
-    const handleAddHashtag = () => {
+    const handleAddHashtag = async () => {
         const hashtag = hashTagValue.replace(/\s/g, '').toLowerCase();
-        const hashTagStr = details?.tags?.map(innerArray => {
-            return innerArray.join("");
-        });
+    
+        if (details.tags.length >= 20) {
+            return toast.error("Max hashtags limit reached");
+        }
+    
         if (hashtag.length > 1) {
-            if (hashtags.length < 5 && !hashTagStr.includes(hashtag)) {
-                const uniqHashTags = [...new Set(hashtag)]
-                setDetails({
-                    ...details,
-                    tags: [...details.tags, uniqHashTags]
-                });
-                setHashTagValue('');
-            }
-            else {
-                toast.error("HashTag already created")
+            if (hashtags.length < 5) {
+                if (!details.tags.includes(hashtag)) {
+                    setDetails({
+                        ...details,
+                        tags: [...details.tags, hashtag]
+                    });
+                    setHashTagValue('');
+                } else {
+                    toast.error("Hashtag already created");
+                }
+            } else {
+                toast.error("Max hashtags limit reached");
             }
         }
     };
+    
     const deleteHashTagHandler = (id) => {
         const updatedHashtags = details.tags.filter((item, index) => index != id)
         setDetails({
@@ -49,7 +54,7 @@ function DescriptionColumn({ details, setDetails }) {
     }
 
     return (
-        <div className='max-w-[900px]'>
+        <div className='max-w-[900px] mt-8'>
             <div>
                 <label className='text-[16px] font-semibold'>Title</label>
                 <input
@@ -60,17 +65,17 @@ function DescriptionColumn({ details, setDetails }) {
                 />
                 <label>Place your keywords in the title.</label>
             </div>
-            <div className='mt-3'>
+            <div className='mt-8'>
                 <label className='text-[16px] font-semibold'>Description</label>
                 <Quill style={`#fff`} descriptionHandler={descriptionHandler} description={details.description} />
                 <label>Tell the story of your creation (origin of the idea, for what use, why it’s so great…). </label>
             </div>
-            <div className='mt-3'>
+            <div className='mt-8'>
                 <label className='text-[16px] font-semibold'>Modal Settings</label>
                 <Quill style={`#fff`} descriptionHandler={modalSettingHandler} description={details.modalSetting} />
                 <label>Specify the technical details of your creation (object size, printing time, infill…). Say whether it’s a model for FDM 3D printing, resin or both. </label>
             </div>
-            <div className='mt-3'>
+            <div className='mt-8'>
                 <div className='container mx-auto'>
                     <div className="flex items-center">
                         <label htmlFor="toggle" className="flex items-center cursor-pointer">
@@ -99,7 +104,7 @@ function DescriptionColumn({ details, setDetails }) {
                     
                 }
             </div>
-            <div className='mt-3'>
+            <div className='mt-8'>
                 <label className='text-[16px] font-semibold'>Categories</label>
                 <select className='w-full px-2 h-[40px] border-[2px] border-[#c1b9b9] rounded-sm' value={mainCartegories} onChange={(e) => setDetails({ ...details, category: e.target.value })}>
                     <option value="">{details.category ? details.category : "Select a Category"}</option>
@@ -110,7 +115,7 @@ function DescriptionColumn({ details, setDetails }) {
                     ))}
                 </select>
             </div>
-            <div className='mt-3'>
+            <div className='mt-8'>
                 <label className='text-[16px] font-semibold'>Tags</label>
                 <div className='flex gap-2'>
                     <input
@@ -137,7 +142,7 @@ function DescriptionColumn({ details, setDetails }) {
 
                 </div>
             </div>
-            <div className="mt-3">
+            <div className="mt-8">
                 <div>
                     <label htmlFor="dropdown" className='text-[16px] font-semibold'>Licenses:</label>
                     <select
