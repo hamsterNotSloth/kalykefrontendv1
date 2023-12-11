@@ -3,15 +3,20 @@ export const mainCartegories = [
     'Arts & Entertainment', 
     'Autos & Vehicles', 
     'Business & Industrial',
+    'Costumes & Cosplays',
     'Devices',
+    'Fashion',
     'Food & Drink',
     'Gridfinity',
+    'Garden',
     'Health & Fitness',
     'Hobbies & Games',
-    'Home & Garden',
+    'Home',
+    'Mask',
     'People',
     'Pop Culture',
-    'mask'
+    'Seasonal'
+    
 ]
 
 export const specialEventsCategory = [
