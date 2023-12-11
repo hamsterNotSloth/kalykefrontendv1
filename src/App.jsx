@@ -27,6 +27,7 @@ import Uploader from "./components/UploadNew/Uploader";
 import UnAuthorized from "./components/messages/UnAuthorized";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/config";
+import NotVerifiedProtectRoute from "./ProtectedRoutes/NotVerifiedProtectRoute";
 
 function App() {
   const [signInUser] = useSignInUserMutation()
@@ -75,8 +76,8 @@ function App() {
             <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
             <Route path="/Category/:category" element={<CategoryPage />} />
             <Route path="/messages/success" element={<Success />} />
-
-            <Route path="/model/upload" element={<Uploader />} />
+            <Route path="/model/upload" element={<NotVerifiedProtectRoute />} />
+            {/* <Route path="/model/upload" element={<Uploader />} /> */}
           </Routes>
           <Footer />
         </Router>

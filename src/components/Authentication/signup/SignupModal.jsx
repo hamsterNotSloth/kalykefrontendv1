@@ -4,7 +4,7 @@ import Policy from "./Policy";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../../../config/config";
 
 const validationSchema = Yup.object().shape({
@@ -24,8 +24,9 @@ function SignupModal({ goToLoginHandler }) {
   const handleSubmit = async (values) => {
     try {
       let response = await createUserWithEmailAndPassword(auth, values.email, values.password);
+      await sendEmailVerification(auth.currentUser)
       if(response.user && response.user.providerData) {
-        return toast.success("Signup successfull, please login to continue!")
+        return toast.success("Signup successfull, please verify your email!")
       }
       else {
         toast.error("Something went wrong. Have a query? Contact the support team.")
