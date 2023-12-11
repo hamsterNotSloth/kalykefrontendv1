@@ -98,7 +98,7 @@ const HeaderLeft = () => {
                 className="focus:outline-none flex items-center"
                 type="button"
               >
-                Contact Us
+                Contact us
                 <svg
                   className={`w-2.5 h-2.5 ms-3 ${isDropdownOpen ? 'transform rotate-180' : ''}`}
                   aria-hidden="true"
