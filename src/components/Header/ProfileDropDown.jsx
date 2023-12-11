@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link, useParams } from "react-router-dom"
-import { useGetMyProfileQuery, useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice'
+import { Link } from "react-router-dom"
+import { useGetMyProfileQuery } from '../../redux/apiCalls/apiSlice'
 import { getToken } from '../../Token/token'
 import { toast } from 'react-toastify'
 

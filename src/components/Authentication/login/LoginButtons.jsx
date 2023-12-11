@@ -1,5 +1,5 @@
 import React from "react";
-import { auth, provider } from "../../../config/config";
+import { auth } from "../../../config/config";
 import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Button from "../../Common/Button";
 import { useSignInUserMutation } from "../../../redux/apiCalls/apiSlice";

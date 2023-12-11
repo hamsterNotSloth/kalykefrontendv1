@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import MainModal from "../MainModal";
 import Logo from "./Logo";
 import SignupModal from "./SignupModal";
-import { auth, provider } from "../../../config/config";
+import { auth } from "../../../config/config";
 import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Login from "../login/Login";
 import { useSignInUserMutation } from "../../../redux/apiCalls/apiSlice";

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import UserCard from "./UserCard"
 import UserStatistics from './UserStatistics'
 import { faUser } from '@fortawesome/free-solid-svg-icons'

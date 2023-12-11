@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import ModalUpload from './ModalUpload'
-import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { getToken } from '../../Token/token'

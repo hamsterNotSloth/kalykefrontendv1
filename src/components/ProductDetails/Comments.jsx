@@ -1,12 +1,9 @@
 import React, { useState } from 'react'
-import Quill from '../Common/Quil'
 import { useAddCommentsMutation, useDeleteCommentMutation, useDeleteReplyMutation, useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice'
 import { getToken } from '../../Token/token'
 import { toast } from 'react-toastify'
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ReplyComment from './ReplyComment'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Comments = ({ productDetails }) => {
   const token = getToken()

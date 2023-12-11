@@ -5,7 +5,6 @@ import { getToken } from '../Token/token'
 import { useParams } from 'react-router-dom'
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
-// This is a test component, it has no real use in the application
 function MyProfilePage() {
   const token = getToken()
   const { user_id } = useParams()

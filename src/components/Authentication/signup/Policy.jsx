@@ -1,17 +1,17 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 function Policy() {
   return (
     <>
       <span className=" text-center text-[#999999] text-[10px] md:text-[13px] font-[500]">
-        Click “Sign up” to agree to Thangs
-        <a href="/" className="text-[#007BC7]  px-[4px]">
+        Click “Sign up” to agree to Kalyke
+        <Link href="/T&C" className="text-[#007BC7]  px-[4px]">
           terms and conditions
-        </a>
-        and <br /> acknowledge that Thangs'{" "}
-        <a href="/" className="text-[#007BC7] ">
+        </Link>
+        and <br /> acknowledge that Kalyke'{" "}
+        <Link to="/PrivacyPolicy" className="text-[#007BC7] ">
           Privacy Policy
-        </a>{" "}
+        </Link>{" "}
         applies to you.
       </span>
       <div className="flex gap-2 mt-[15px]">

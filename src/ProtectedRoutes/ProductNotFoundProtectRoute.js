@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetproductQuery } from "../redux/apiCalls/apiSlice";
-import NotFoundPage from "../pages/NotFoundPage";
 import ProductDetailsPage from "../pages/ProductDetailsPage";
 
 const ProductNotFoundProtectedRoute = () => {

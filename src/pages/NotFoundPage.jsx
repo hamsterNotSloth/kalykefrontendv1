@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
-import { useGetproductQuery } from '../redux/apiCalls/apiSlice';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const NotFoundPage = () => {
   const {state} = useLocation();

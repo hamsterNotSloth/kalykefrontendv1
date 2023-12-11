@@ -13,7 +13,6 @@ function ImagesUpload({ details, setDetails, uploadFileHandler, productUploadHan
   const [fileUploadProgress, setFileUploadProgress] = useState(false);
   const token = getToken()
   const { data: userProfileData } = useGetMyProfileQuery(token)
-  const navigate = useNavigate()
   const uploadImageHandler = async (e) => {
     e.preventDefault()
     if (token) {

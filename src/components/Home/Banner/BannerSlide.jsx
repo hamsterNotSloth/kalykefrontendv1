@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react'
-import { useGetPromotedContentQuery, useGetPromotedUsersQuery } from '../../../redux/apiCalls/apiSlice';
+import React, {  useRef } from 'react'
 import Followbtn from "../../Common/FollowBtn"
 import { Link } from "react-router-dom"
 import SocialMediaRow from '../../Common/SocialMediaRow';

@@ -1,7 +1,7 @@
 import React from 'react'
 import BannerSlide from './BannerSlide'
 import Slider from "react-slick";
-import { useGetPromotedContentQuery, useGetPromotedUsersQuery } from '../../../redux/apiCalls/apiSlice';
+import { useGetPromotedContentQuery } from '../../../redux/apiCalls/apiSlice';
 import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader';
 
 function BannerSlider() {

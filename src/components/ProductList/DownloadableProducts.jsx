@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useGetDownloadableProductsListQuery } from '../../redux/apiCalls/apiSlice'
 import { getToken } from '../../Token/token'
 import ProductCard from '../Common/ProductCard'

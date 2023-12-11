@@ -1,4 +1,3 @@
-// ReplyComment.js
 import React, { useState } from 'react';
 import { useAddReplyMutation } from '../../redux/apiCalls/apiSlice';
 import { getToken } from '../../Token/token';

@@ -2,7 +2,6 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./apiCalls/apiSlice";
 import filtersSlice from './slices/filtersSlice';
 import productSlice from "./slices/productSlice";
-// import { productSlice } from "./apiCalls/productSlice";
 
 const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,

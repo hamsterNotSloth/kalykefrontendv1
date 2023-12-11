@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useAddRatingMutation, useFollowMutation, useGetMyProductsQuery, useGetMyProfileQuery, useGetproductQuery, useProductPurchaseMutation, useWishlistMutation } from '../../redux/apiCalls/apiSlice';
+import { useAddRatingMutation, useGetMyProfileQuery, useGetproductQuery, useProductPurchaseMutation } from '../../redux/apiCalls/apiSlice';
 import { getToken } from '../../Token/token';
 import { toast } from 'react-toastify';
 import Followbtn from '../Common/FollowBtn';
@@ -20,14 +20,13 @@ function DownloadScreen({ productDetails }) {
   const [fileTypeToDownload, setFileTypeToDownload] = useState(null)
   const [fileExtension, setFileExtension] = useState(fileTypes[0])
   const [rating, setRating] = useState(0)
-  const [currentXhr, setCurrentXhr] = useState()
   const [AddRating, { isLoading: addingRating }] = useAddRatingMutation()
   const token = getToken()
   const { id } = useParams()
   const textAreaRef = useRef(id);
   const { data: myProfile } = useGetMyProfileQuery(token)
   const [productPurchase] = useProductPurchaseMutation()
-  const {   refetch: refetchProducts } = useGetproductQuery(id)
+  const {   refetch: refetchProducts, isLoading: gettingProducts } = useGetproductQuery(id)
   const copyToClipboard = () => {
     if (textAreaRef.current) {
       textAreaRef.current.value = `${frontendUrl}/products/${id}`;

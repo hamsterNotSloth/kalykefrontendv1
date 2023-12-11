@@ -1,12 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import DropZone from './DropZone'
 import ImagesList from './ImagesList'
-import { useDispatch } from 'react-redux'
-import { useGetMyProfileQuery } from '../../redux/apiCalls/apiSlice'
-import { getToken } from '../../Token/token'
-import { toast } from 'react-toastify'
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
-import { storage } from '../../config/config'
 
 function ModalUpload({details, setDetails, isUploadLoading, selectedFiles, uploadFileHandler,setSelectedFile, setFileUploadProgress, fileUploadProgress, handleFileChange}) {
 

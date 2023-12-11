@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { useAddTransactionMutation } from '../../redux/apiCalls/apiSlice';

@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { faBullhorn, faUpLong } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useGetMyProfileQuery } from "../../redux/apiCalls/apiSlice"
 import ProfileDropDown from './ProfileDropDown'
-import UploaderPopUp from '../Uploader/UploaderPopUp'
 import { getToken } from '../../Token/token'
 import { Link } from 'react-router-dom'
 import { auth } from '../../config/config'
@@ -48,7 +45,7 @@ const HeaderRight = () => {
       <div className='relative' ref={profileDropdownRef}>
         <div>
           <button onClick={profileDropDownHandler} className='w-[41px]'>
-            <img src={userProfileData.myProfile.profilePicture} referrerpolicy="no-referrer" alt="profile Picture" className='rounded-full w-[100%]' />
+            <img src={userProfileData.myProfile.profilePicture} referrerPolicy="no-referrer" alt="profile Picture" className='rounded-full w-[100%]' />
           </button>
           {isProfileDropDownOpen && <ProfileDropDown profileDropDownHandler={profileDropDownHandler} signOutHandler={signOutHandler} />}
         </div>

@@ -1,5 +1,4 @@
 import React, {  useState } from 'react';
-import { useForgetPasswordMutation } from '../../redux/apiCalls/apiSlice';
 import { toast } from 'react-toastify';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../../config/config';

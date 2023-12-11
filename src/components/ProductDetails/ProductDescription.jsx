@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useGetSimilarProductsQuery } from '../../redux/apiCalls/apiSlice'
 import ProductCard from '../Common/ProductCard';
 import Comments from './Comments';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ProductDescription({ productDetails }) {
   const tagsString = productDetails && productDetails.product && productDetails.product.tags.join(',');

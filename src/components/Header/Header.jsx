@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import HeaderLeft from './HeaderLeft'
 import HeaderInputField from './HeaderInputField'
 import HeaderRight from './HeaderRight'
 import { useGetMyProfileQuery } from '../../redux/apiCalls/apiSlice'
 import HeaderRightAuthenticate from './HeaderRightAuthenticate'
 import { getToken } from '../../Token/token'
-import { toast } from 'react-toastify'
 
 const Header = () => {
   const token = getToken()
@@ -15,7 +14,6 @@ const Header = () => {
     <>
       <div className='flex py-4 px-6 justify-between items-center'>
         <HeaderLeft />
-        {/* {signUpModalStatus ? <Signup setSignUpModalStatus={setSignUpModalStatus} /> : null} */}
         <HeaderInputField />
          {userProfileData && userProfileData.status == true? <HeaderRight /> : <HeaderRightAuthenticate />} 
       </div>

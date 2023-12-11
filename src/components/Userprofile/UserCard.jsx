@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisVertical, faGlobe, faPenToSquare, faShareNodes } from '@fortawesome/free-solid-svg-icons';
+import {  faGlobe, faPenToSquare, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import UserUpdateCom from './UserUpdateCom';
 import { useCreateStripeUserMutation, useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice';
 import { getToken } from '../../Token/token';
 import { useParams } from 'react-router-dom';
 import ProfileUpdatePopup from './ProfileUpdatePopup';
-import { faCcStripe, faFacebook, faInstagram, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons';
-import CreateStripeUser from './Stripe/createStripeUser';
+import { faFacebook, faInstagram, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import ShareProfile from './ShareProfile';
 
 function UserCard() {
@@ -63,11 +62,14 @@ function UserCard() {
     const formatDate = (dateString) => {
         const dateObject = new Date(dateString);
 
-        const year = dateObject.getFullYear();
-        const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
-        const day = dateObject.getDate().toString().padStart(2, '0');
+        const formattedDate = dateObject.toLocaleDateString('en-US', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+          });
+      
 
-        return `${day}-${month}-${year}`;
+        return `${formattedDate}`;
     }
 
     const handleCreateStripeUser = async () => {

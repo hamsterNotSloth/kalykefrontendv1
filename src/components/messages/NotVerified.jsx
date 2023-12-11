@@ -9,7 +9,7 @@ function NotVerified() {
             await sendEmailVerification(auth.currentUser)
             toast.success("Check your inbox or spam")
         } catch(error) {
-            toast.error(error.message || "Something went wrong while sending verification email. Please logout and login again.")
+            toast.error(error.message || "Something went wrong while sending verification email. Please login again and resend email.")
         }
     }
   return (

@@ -117,7 +117,6 @@ function DescriptionColumn({ details, setDetails }) {
                     <option value="">{details.category ? details.category : "Select a Category"}</option>
                     {categoryFilter.map((category, index) => (
                         <option key={category._id} value={category.categoryName}>
-                        {console.log(details.category,'mainCartegories')}
                             {category.categoryName}
                         </option>
                     ))}

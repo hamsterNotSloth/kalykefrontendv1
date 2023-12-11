@@ -29,7 +29,7 @@ export const apiSlice = createApi({
           authorization: token
         },
       }),
-      providesTags: ["descriptionProduct"],
+      providesTags: ["descriptionProduct", "product"],
     }),
     getMyProfile: builder.query({
       query: (token) => ({
@@ -105,7 +105,7 @@ export const apiSlice = createApi({
           authorization: `${token}`,
         },
       }),
-      invalidatesTags: ["promotion", "descriptionProduct"]
+      invalidatesTags: ["promotion", 'User']
     }),
     forgetPassword: builder.mutation({
       query: (email) => ({

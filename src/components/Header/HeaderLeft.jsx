@@ -1,4 +1,4 @@
-import { faBriefcase, faCar, faCaretDown, faDice, faFireFlameCurved, faGear, faHouse, faLayerGroup, faMask, faMasksTheater, faMobile, faPaintBrush, faPaw, faPerson, faPersonSkiing, faShirt, faTree, faUtensils, faWorm } from '@fortawesome/free-solid-svg-icons'
+import { faLayerGroup } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
