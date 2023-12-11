@@ -11,6 +11,7 @@ const ProductCheckout = ({ product }) => {
   const stripe = useStripe();
   const [loading, setLoading] = useState(false);
   const [asLocation, setAsLocation] = useState(false)
+  const [allowLocation, setAllowLocation] = useState(false)
   const token = getToken()
   const [countryCode, setCountryCode] = useState("")
   const [addTransaction, { error }] = useAddTransactionMutation()
@@ -21,34 +22,10 @@ const ProductCheckout = ({ product }) => {
       return response?.data?.conversion_rate
     } catch (error) {
       console.error('Error fetching exchange rate:', error.message);
-      return 1;
+      toast.error("Error while fetching exchange rate. Please unable your location.")
+      return null;
     }
   };
-
-
-  // const getLocation = () => {
-  //   if ('geolocation' in navigator) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       async (position) => {
-  //         const latitude = position.coords.latitude;
-  //         const longitude = position.coords.longitude;
-  //         try {
-  //           const response = await axios.get(`https://api.opencagedata.com/geocode/v1/json?key=${locationApi}&q=${latitude}+${longitude}&pretty=1`);
-  //           const country = response.data.results[0].annotations.currency.iso_code            ;
-  //           setCountryCode(country)
-  //           return country
-  //         } catch (error) {
-  //           console.error('Error getting country code:', error.message);
-  //         }
-  //       },
-  //       (error) => {
-  //         console.error('Error getting user location:', error.message);
-  //       }
-  //     );
-  //   } else {
-  //     console.error('Geolocation is not supported by your browser.');
-  //   }
-  // };
 
   const getLocation = async () => {
     try {
@@ -68,20 +45,28 @@ const ProductCheckout = ({ product }) => {
       }
     } catch (error) {
       console.error('Error getting user location:', error.message);
-      throw error; 
+      return null; 
     }
   };
 
-  // useEffect(() => {
-  //   getLocation()
-  // }, [])
   const handleCheckout = async () => {
     try {
       const location = await getLocation()
       setAsLocation(!asLocation)
       setLoading(true);
+      if(!location) {
+        setLoading(false);
+        return;
+      }
       const exchangeRate = await convertToLocalPrice()
+      if(!exchangeRate) {
+        setLoading(false);
+        return;
+      }
       const response = await addTransaction({ amount: product.price, token, productId: product._id, countryCode: location, exchangeRate })
+      if(response?.error?.data?.message) {
+        return toast.error(response?.error?.data?.message)
+      }
       const sessionId = response.data.sessionId;
       const { error } = await stripe.redirectToCheckout({
         sessionId,
@@ -90,18 +75,25 @@ const ProductCheckout = ({ product }) => {
       if (error) {
         console.error('Error redirecting to Checkout:', error.message);
       }
+      setAllowLocation(false)
     } catch (error) {
-      console.error('Error creating Checkout Session:', error.message);
-    } finally {
-      setLoading(false);
+      if (error.code === error.PERMISSION_DENIED) {
+        console.error('User blocked location access');
+        setAllowLocation(true)
+        toast.error('Please allow location access to proceed with the purchase.');
+      } else {
+        console.error('Error getting user location:', error.message);
+      }
+      return null;
     }
   };
 
   return (
-    <div>
-      <button className='bg-[#2f85ff] mb-3 hover:bg-[#809ee2] text-white text-[21px] h-[46px] w-[100%] rounded-md  w-full' onClick={handleCheckout} disabled={loading}>
+    <div className='mb-3'>
+      <button className='bg-[#2f85ff] hover:bg-[#809ee2] text-white text-[21px] h-[46px] w-[100%] rounded-md  w-full' onClick={handleCheckout} disabled={loading}>
         {loading ? 'Processing...' : `Buy: $${product.price}`}
       </button>
+      {allowLocation && <span className='text-[#ff0000]'>Please allow location to download</span>}
     </div>
   );
 };
