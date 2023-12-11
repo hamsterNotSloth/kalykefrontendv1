@@ -31,7 +31,7 @@ function Footer() {
           target='_blank'
           rel='noopener noreferrer'
         >
-          <FontAwesomeIcon className='text-[#e91313]' icon={faHeart} /> Support kalyke
+          <FontAwesomeIcon className='text-[#e91313]' icon={faHeart} /> Support Kalyke
         </a>
       </div>
       <div>
