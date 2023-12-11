@@ -7,6 +7,7 @@ import { useGetMyProfileQuery } from '../../redux/apiCalls/apiSlice';
 import { getToken } from '../../Token/token';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import { categoryFilter } from '../Common/Categories';
 
 function DescriptionColumn({ details, setDetails }) {
     const [hashtags, setHashtags] = useState([]);
@@ -28,6 +29,11 @@ function DescriptionColumn({ details, setDetails }) {
         if (hashtag.length > 1) {
             if (hashtags.length < 5) {
                 if (!details.tags.includes(hashtag)) {
+                    const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
+                    if (specialCharacterRegex.test(hashtag)) {
+                        return toast.error("Special characters are not allowed in hashtags");
+                    }
+    
                     setDetails({
                         ...details,
                         tags: [...details.tags, hashtag]
@@ -41,6 +47,7 @@ function DescriptionColumn({ details, setDetails }) {
             }
         }
     };
+    
     
     const deleteHashTagHandler = (id) => {
         const updatedHashtags = details.tags.filter((item, index) => index != id)
@@ -106,11 +113,12 @@ function DescriptionColumn({ details, setDetails }) {
             </div>
             <div className='mt-8'>
                 <label className='text-[16px] font-semibold'>Categories</label>
-                <select className='w-full px-2 h-[40px] border-[2px] border-[#c1b9b9] rounded-sm' value={mainCartegories} onChange={(e) => setDetails({ ...details, category: e.target.value })}>
+                <select className='w-full px-2 h-[40px] border-[2px] border-[#c1b9b9] rounded-sm' value={categoryFilter} onChange={(e) => setDetails({ ...details, category: e.target.value })}>
                     <option value="">{details.category ? details.category : "Select a Category"}</option>
-                    {mainCartegories.map((category, index) => (
-                        <option key={category._id} value={category}>
-                            {category}
+                    {categoryFilter.map((category, index) => (
+                        <option key={category._id} value={category.categoryName}>
+                        {console.log(details.category,'mainCartegories')}
+                            {category.categoryName}
                         </option>
                     ))}
                 </select>

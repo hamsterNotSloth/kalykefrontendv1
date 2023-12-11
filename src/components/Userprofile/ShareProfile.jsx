@@ -4,7 +4,7 @@ import { faFacebook, faInstagram, faPinterest, faReddit, faTiktok, faTwitter } f
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const backendBaseUrl = process.env.REACT_APP_FRONTEND_URL;
+const frontendUrl = process.env.REACT_APP_FRONTEND_URL;
 function ShareProfile({setIsShareBtnOpen}) {
     const socialMedia = [
         {
@@ -37,7 +37,7 @@ function ShareProfile({setIsShareBtnOpen}) {
   const profileShareRef = useRef(user_id);
   const copyToClipboard = () => {
     if (profileShareRef.current) {
-        profileShareRef.current.value = `${backendBaseUrl}/user/${user_id}`;
+        profileShareRef.current.value = `${frontendUrl}/user/${user_id}`;
         profileShareRef.current.select();
         document.execCommand('copy');
         toast.success('Copied to clipboard');
@@ -48,7 +48,7 @@ function ShareProfile({setIsShareBtnOpen}) {
 
 
     return (
-        <ul className='absolute top-[30px] flex flex-col gap-1 right-[-25px] bg-white px-1'>
+        <ul className='absolute top-[24px] shadow-md flex flex-col gap-1 right-[0] bg-white px-1'>
             <textarea
           ref={profileShareRef}
           readOnly

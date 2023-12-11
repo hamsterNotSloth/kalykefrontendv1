@@ -12,7 +12,7 @@ import { faClipboard, faStar } from '@fortawesome/free-solid-svg-icons'
 import WishlistBtn from '../Common/WishlistBtn';
 import DesignUpload from './SaleProduct';
 
-const backendBaseUrl = process.env.REACT_APP_FRONTEND_URL;
+const frontendUrl = process.env.REACT_APP_FRONTEND_URL;
 
 function DownloadScreen({ productDetails }) {
   const [isDownloading, setIsDownloading] = useState(false)
@@ -30,7 +30,7 @@ function DownloadScreen({ productDetails }) {
   const {   refetch: refetchProducts } = useGetproductQuery(id)
   const copyToClipboard = () => {
     if (textAreaRef.current) {
-      textAreaRef.current.value = `${backendBaseUrl}/products/${id}`;
+      textAreaRef.current.value = `${frontendUrl}/products/${id}`;
       textAreaRef.current.select();
       document.execCommand('copy');
       toast.success('Copied to clipboard');

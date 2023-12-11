@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisVertical, faGlobe, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical, faGlobe, faPenToSquare, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import UserUpdateCom from './UserUpdateCom';
 import { useCreateStripeUserMutation, useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice';
 import { getToken } from '../../Token/token';
@@ -33,7 +33,7 @@ function UserCard() {
                 socialMediaArray[index].link = item.link;
             }
         });
-        setNewUserInfo({newUserInfo, socialMedia: socialMediaArray})        
+        setNewUserInfo({ newUserInfo, socialMedia: socialMediaArray })
     };
     const [newUserInfo, setNewUserInfo] = useState({
         userName: userProfile?.profile?.userName,
@@ -53,7 +53,7 @@ function UserCard() {
     useEffect(() => {
         userProfileRefetch({ user_id, token })
     }, [user_id])
-    useEffect(()=> {
+    useEffect(() => {
         initializeSocialMedia()
     }, [userProfile])
     const updateProfileDetails = () => {
@@ -88,14 +88,28 @@ function UserCard() {
         Youtube: faYoutube,
         Linkedin: faLinkedin,
     };
-    
+    const dropUserSharedownRef = useRef(null);
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropUserSharedownRef.current && !dropUserSharedownRef.current.contains(event.target)) {
+                setIsShareBtnOpen(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [dropUserSharedownRef]);
+
     if (isLoading) return <div><span>Loading!</span></div>
     return (
         <div className='bg-white w-[375px] relative min-h-[250px] h-[100%] flex flex-col items-center shadow-md p-5 rounded-md'>
             {updateComponentToggler && <button onClick={updateProfileDetails} type="button" className=" absolute right-[7px] top-[6px] rounded-md p-2 inline-flex items-center justify-center text-gray-400 ">
                 <span className="sr-only">Close menu</span>
                 <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                    <path  d="M6 18L18 6M6 6l12 12" />
+                    <path d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>}
             <div className='h-[150px] w-[150px] relative rounded-full mb-7'>
@@ -115,19 +129,20 @@ function UserCard() {
                 <span>Since, {formatDate(userProfile?.profile?.createdAt)}</span>
                 <div dangerouslySetInnerHTML={{ __html: userProfile?.profile?.description }} />
             </div>
-            <div className='flex flex-col justify-between w-full'>
-                <ul className='flex w-[232px] justify-center gap-3 pb-1'>
-                    {userProfile?.profile?.socialMedia?.map(link => (
-                        <li key={link.socialMediaName}>
-                            <a href={link.link} target="_blank" rel="noopener noreferrer">
-                                <FontAwesomeIcon icon={iconMapping[link.socialMediaName]} />
-                            </a>
-                        </li>
-                    ))}
+            <div className='flex gap-4 items-start justify-center w-full'>
+                <ul className='flex justify-center items-center gap-3 pb-1'>
+                    {userProfile?.profile?.socialMedia?.filter(link => link.link && link.link.trim() !== '') 
+                        .map(link => (
+                            <li key={link.socialMediaName}>
+                                <a href={link.link} target="_blank" rel="noopener noreferrer">
+                                    <FontAwesomeIcon icon={iconMapping[link.socialMediaName]} />
+                                </a>
+                            </li>
+                        ))}
                 </ul>
 
-                <div className='relative flex justify-center'>
-                    <button className='text-[16px]' onClick={() => setIsShareBtnOpen(!isShareBtnOpen)}>Click to Share</button>
+                <div className='relative flex justify-center' ref={dropUserSharedownRef}>
+                    <button className='text-[16px]' onClick={() => setIsShareBtnOpen(!isShareBtnOpen)}><FontAwesomeIcon icon={faShareNodes} /></button>
                     {isShareBtnOpen && <ShareProfile setIsShareBtnOpen={setIsShareBtnOpen} />}
                 </div>
             </div>
@@ -142,8 +157,9 @@ function UserCard() {
                     {updateComponentToggler && <UserUpdateCom newUserInfo={newUserInfo} userProfile={userProfile} setNewUserInfo={setNewUserInfo} token={token} updateProfileDetails={updateProfileDetails} />}
 
                     <div>
-                        <span className='text-[14px]'>{userProfile?.profile?.paymentAccountLink ? "Linked Payment method:" : "Link Payment method"} </span><button onClick={() => handleCreateStripeUser()} className='mt-4'>
-                            <FontAwesomeIcon icon={faCcStripe} />
+                        {/* <span className='text-[14px]'>{userProfile?.profile?.paymentAccountLink ? "Linked Payment method:" : "Link Payment method"} </span> */}
+                        <button className={`text-white mt-4 py-2 px-2 rounded-md font-semibold ${userProfile?.profile?.paymentAccountLink ? "bg-[#17ff00]" : "bg-[#f00]"}`} onClick={() => handleCreateStripeUser()}>
+                            {userProfile?.profile?.paymentAccountLink ? "Update Payment Method" : "Link Payment Method"}
                         </button>
                     </div>
                 </>

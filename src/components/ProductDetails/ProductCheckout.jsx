@@ -26,40 +26,62 @@ const ProductCheckout = ({ product }) => {
   };
 
 
-  const getLocation = () => {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          try {
-            const response = await axios.get(`https://api.opencagedata.com/geocode/v1/json?key=${locationApi}&q=${latitude}+${longitude}&pretty=1`);
-            const country = response.data.results[0].annotations.currency.iso_code            ;
-            setCountryCode(country)
-          } catch (error) {
-            console.error('Error getting country code:', error.message);
-          }
-        },
-        (error) => {
-          console.error('Error getting user location:', error.message);
-        }
-      );
-    } else {
-      console.error('Geolocation is not supported by your browser.');
+  // const getLocation = () => {
+  //   if ('geolocation' in navigator) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       async (position) => {
+  //         const latitude = position.coords.latitude;
+  //         const longitude = position.coords.longitude;
+  //         try {
+  //           const response = await axios.get(`https://api.opencagedata.com/geocode/v1/json?key=${locationApi}&q=${latitude}+${longitude}&pretty=1`);
+  //           const country = response.data.results[0].annotations.currency.iso_code            ;
+  //           setCountryCode(country)
+  //           return country
+  //         } catch (error) {
+  //           console.error('Error getting country code:', error.message);
+  //         }
+  //       },
+  //       (error) => {
+  //         console.error('Error getting user location:', error.message);
+  //       }
+  //     );
+  //   } else {
+  //     console.error('Geolocation is not supported by your browser.');
+  //   }
+  // };
+
+  const getLocation = async () => {
+    try {
+      if ('geolocation' in navigator) {
+        const position = await new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+  
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+  
+        const response = await axios.get(`https://api.opencagedata.com/geocode/v1/json?key=${locationApi}&q=${latitude}+${longitude}&pretty=1`);
+        const country = response.data.results[0].annotations.currency.iso_code;
+  
+        setCountryCode(country);
+        return country;
+      }
+    } catch (error) {
+      console.error('Error getting user location:', error.message);
+      throw error; 
     }
   };
 
-  useEffect(() => {
-    getLocation()
-  }, [])
+  // useEffect(() => {
+  //   getLocation()
+  // }, [])
   const handleCheckout = async () => {
     try {
-      // const IPAddress = await getIPAddress()
-      // console.log(IPAddress,'IPAddress')
+      const location = await getLocation()
       setAsLocation(!asLocation)
       setLoading(true);
       const exchangeRate = await convertToLocalPrice()
-      const response = await addTransaction({ amount: product.price, token, productId: product._id, countryCode, exchangeRate })
+      const response = await addTransaction({ amount: product.price, token, productId: product._id, countryCode: location, exchangeRate })
       const sessionId = response.data.sessionId;
       const { error } = await stripe.redirectToCheckout({
         sessionId,

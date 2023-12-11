@@ -28,21 +28,24 @@ import UnAuthorized from "./components/messages/UnAuthorized";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/config";
 import NotVerifiedProtectRoute from "./ProtectedRoutes/NotVerifiedProtectRoute";
+import TermsAndConditions from "./components/Static/T&C";
+import SupportPolicy from "./components/Static/Support";
+import PrivacyPolicy from "./components/Static/Privacy";
 
 function App() {
   const [signInUser] = useSignInUserMutation()
+
+  
+  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
-          // Get the ID token
           const idToken = await user.getIdToken();
 
-          // Your API call to refresh the token
           const response = await signInUser({ credential: user, source: 'Email' });
 
           if (response.data && response.data.userData.status === true) {
-            // Save the refreshed token to localStorage
             localStorage.setItem('userToken', response.data.userData.token);
           }
         } catch (error) {
@@ -77,6 +80,9 @@ function App() {
             <Route path="/Category/:category" element={<CategoryPage />} />
             <Route path="/messages/success" element={<Success />} />
             <Route path="/model/upload" element={<NotVerifiedProtectRoute />} />
+            <Route path="/T&C" element={<TermsAndConditions />} />
+            <Route path="/support" element={<SupportPolicy />} />
+            <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
             {/* <Route path="/model/upload" element={<Uploader />} /> */}
           </Routes>
           <Footer />

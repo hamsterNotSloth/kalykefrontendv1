@@ -6,13 +6,13 @@ import SocialMediaRow from '../../Common/SocialMediaRow';
 import { socialMedia } from './socialMedia';
 import { toast } from 'react-toastify';
 
-const backendBaseUrl = process.env.REACT_APP_FRONTEND_URL;
+const frontendUrl = process.env.REACT_APP_FRONTEND_URL;
 
 function BannerSlide({ item }) {
   const profileShareRef = useRef(item?.u_id);
   const copyToClipboard = () => {
     if (profileShareRef.current) {
-      profileShareRef.current.value = `${backendBaseUrl}/user/${item?.u_id}`;
+      profileShareRef.current.value = `${frontendUrl}/user/${item?.u_id}`;
       profileShareRef.current.select();
       document.execCommand('copy');
       toast.success('Copied to clipboard');

@@ -3,10 +3,12 @@ import { getToken } from '../../Token/token'
 import { useGetWishListItemsQuery } from '../../redux/apiCalls/apiSlice'
 import ProductCard from '../Common/ProductCard'
 import UnAuthorized from '../messages/UnAuthorized'
+import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader'
 
 const WishList = () => {
   const token = getToken()
-  const { data: wishListItems } = useGetWishListItemsQuery(token)
+  const { data: wishListItems, isLoading } = useGetWishListItemsQuery(token)
+  if (isLoading ) return <div className='flex items-center justify-center h-[100vh] w-full'><ClimbingBoxLoader color={"#000"} size={20} aria-label="Loading Spinner" data-testid="loader" /></div>
   if(!wishListItems) return <UnAuthorized />
   return (
     <div className=' h-[100vh]  p-4 max-w-[1500px] mx-auto'>

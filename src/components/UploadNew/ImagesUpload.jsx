@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../../config/config';
 import ImagesUploader from './ImagesUploader';
+import { useNavigate } from 'react-router-dom';
 
 function ImagesUpload({ details, setDetails, uploadFileHandler, productUploadHandler }) {
   const [selectedFile, setSelectedFile] = useState([]);
@@ -12,6 +13,7 @@ function ImagesUpload({ details, setDetails, uploadFileHandler, productUploadHan
   const [fileUploadProgress, setFileUploadProgress] = useState(false);
   const token = getToken()
   const { data: userProfileData } = useGetMyProfileQuery(token)
+  const navigate = useNavigate()
   const uploadImageHandler = async (e) => {
     e.preventDefault()
     if (token) {

@@ -13,7 +13,19 @@ function Uploader() {
         tags: [],
         images: []
     });
-
+    useEffect(() => {
+        const handleBeforeUnload = (event) => {
+          const message = 'Do you want to close? Changes you made may not be saved.';
+          event.returnValue = message; 
+          return message; 
+        };
+    
+        window.addEventListener('beforeunload', handleBeforeUnload);
+    
+        return () => {
+          window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+      }, []);
     return (
         <div className='pb-[361px]  p-4 max-w-[1500px] mx-auto'>
             <h2 className='text-[30px] font-semibold'>Created Something</h2>

@@ -25,7 +25,7 @@ function Filter() {
     }
   };
 
-  const printerFileTyypes = ["All fileTypes", "stl", "obj", "3ds", "scad", "gcode", "3mf", "blend", "sldprt", "sldasm", "amf", "dae", "eps", "f3d", "fcstd", "mtl", "pdf", "ply", "skp", "step", "dxf", "dwg", "svg", "txt", "bmp", "ai", "x3d", "psd", "zip"]
+  const printerFileTyypes = ["All File Types", "stl", "obj", "3ds", "scad", "gcode", "3mf", "blend", "sldprt", "sldasm", "amf", "dae", "eps", "f3d", "fcstd", "mtl", "pdf", "ply", "skp", "step", "dxf", "dwg", "svg", "txt", "bmp", "ai", "x3d", "psd", "zip"]
   const handleCategoryChange = (e) => {
     const category = e.target.value;
     dispatch(setFilter({ ...currentFilter, category: category }));

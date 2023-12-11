@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Conditions({ goToLoginHandler }) {
   return (
@@ -15,13 +16,13 @@ function Conditions({ goToLoginHandler }) {
       <p className=" text-center pt-16 text-[#999999] text-[11px] md:text-[13px] font-[500]">
         Your privacy is most important to us.
         <br /> So here are our
-        <a href="/" className="text-[#007BC7]">
+        <Link to="/PrivacyPolicy" className="text-[#007BC7]">
           Privacy Policy
-        </a>
+        </Link>
         an
-        <a href="/" className="text-[#007BC7]">
+        <Link to="/T&C" className="text-[#007BC7]">
           Terms and <br /> Conditions
-        </a>
+        </Link>
         about how we protect your data.
       </p>
     </>

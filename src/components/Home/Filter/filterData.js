@@ -1,3 +1,3 @@
-export const filterList = ["Most Viewed", "New Uploads", "Most Downloaded","From top users"];
-export const categoryFilter = ["Animals", "Arts & Entertainment", "Autos & Vehicles", "Business & Industrial", "Devices", "Food & Drink", "Gridfinity", "Health & Fitness", "Hobbies & Games", "Home & Garden", "People", "Pop Culture", "mask"]
-export const filtersOfFreeStatus = [{text: "All", value: null}, {text: "free", value: false}, {text: "Paid", value: true}]
+export const filterList = ["Most Viewed", "New Uploads", "Most Downloaded","From Top Users"];
+export const categoryFilter = ["Animals", "Arts & Entertainment", "Costumes & Cosplays", "Garden", "Home", "Fashion", "Autos & Vehicles", "Business & Industrial", "Devices", "Food & Drink", "Gridfinity", "Health & Fitness", "Hobbies & Games",  "People", "Pop Culture", "Seasonal"]
+export const filtersOfFreeStatus = [{text: "All", value: null}, {text: "Free", value: false}, {text: "Paid", value: true}]

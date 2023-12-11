@@ -1,10 +1,9 @@
-import { faBriefcase, faCar, faCaretDown, faDice, faFireFlameCurved, faGear, faHouse, faLayerGroup, faMasksTheater, faMobile, faPaintBrush, faPaw, faPerson, faPersonSkiing, faUtensils } from '@fortawesome/free-solid-svg-icons'
+import { faBriefcase, faCar, faCaretDown, faDice, faFireFlameCurved, faGear, faHouse, faLayerGroup, faMask, faMasksTheater, faMobile, faPaintBrush, faPaw, faPerson, faPersonSkiing, faShirt, faTree, faUtensils, faWorm } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import CompanyLogo from '../Common/Logo'
-import { useDispatch, useSelector } from 'react-redux'
-import { setFilter } from '../../redux/slices/filtersSlice'
+import { categoryFilter } from '../Common/Categories'
 
 const HeaderLeft = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -52,8 +51,7 @@ const HeaderLeft = () => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, [dropExploredownRef]);
-
-  const categoryFilter = [{ categoryName: "Animals", icon: faPaw }, { categoryName: "Arts & Entertainment", icon: faPaintBrush }, { categoryName: "Autos & Vehicles", icon: faCar }, { categoryName: "Business & Industrial", icon: faBriefcase }, { categoryName: "Devices", icon: faMobile }, { categoryName: "Food & Drink", icon: faUtensils }, { categoryName: "Gridfinity", icon: faGear }, { categoryName: "Health & Fitness", icon: faPersonSkiing }, { categoryName: "Hobbies & Games", icon: faDice }, { categoryName: "Home & Garden", icon: faHouse }, { categoryName: "People", icon: faPerson }, { categoryName: "Pop Culture", icon: faFireFlameCurved }, { categoryName: "mask", icon: faMasksTheater }]
+  // const categoryFilter = [{ categoryName: "Animals", icon: faPaw }, { categoryName: "Fashion", icon: faShirt }, { categoryName: "Garden", icon: faWorm }, { categoryName: "Home", icon: faWorm }, {categoryName: "Costumes & Cosplays", icon: faHouse}, {categoryName: "Mask", icon: faMask}, { categoryName: "Arts & Entertainment", icon: faPaintBrush }, { categoryName: "Autos & Vehicles", icon: faCar }, { categoryName: "Business & Industrial", icon: faBriefcase }, { categoryName: "Devices", icon: faMobile }, { categoryName: "Food & Drink", icon: faUtensils }, { categoryName: "Gridfinity", icon: faGear }, { categoryName: "Health & Fitness", icon: faPersonSkiing }, { categoryName: "Hobbies & Games", icon: faDice }, { categoryName: "People", icon: faPerson }, { categoryName: "Pop Culture", icon: faFireFlameCurved }, { categoryName: "Seasonal", icon: faTree }]
   return (
     <>
       <div className='flex gap-[30px]'>

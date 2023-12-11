@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LoginButtons from "./LoginButtons";
 import LoginFields from "./LoginFields";
 import ForgotPassword from "../ForgotPassword";
+import { Link } from "react-router-dom";
 function Login({ setShowMainContent, setShowSignUpContent }) {
   const [resetPassModal, setResetPassModal] = useState(false)
   const goToCreateAccountHandler = () => {
@@ -16,27 +17,15 @@ function Login({ setShowMainContent, setShowSignUpContent }) {
         <LoginFields />
         <span className="text-center block">Forgot Password? <button className="text-[#007BC7]" onClick={() => setResetPassModal(true)}>Reset Now</button> </span>
         <span className="block text-center text-[#999999] text-[10px] md:text-[13px] font-[500]">
-          Click “Log in” to agree to Thangs
-          <a href="/" className="text-[#007BC7]  px-[4px]">
+          Click “Log in” to agree to Kalyke
+          <Link to="/T&C" className="text-[#007BC7]  px-[4px]">
             terms and conditions
-          </a>
-          and <br /> acknowledge that Thangs'{" "}
-          <a href="/" className="text-[#007BC7] ">
-            Privacy Policy
-          </a>{" "}
-          applies to you.
+          </Link>
         </span>
         <span className="block text-center mt-[15px] text-[#999999] text-[10px] md:text-[13px] font-[500]">
-          This site is protected by reCAPTCHA and the Google
-          <a href="/" className="text-[#007BC7] ps-[4px] ">
+          <Link to="/PrivacyPolicy" className="text-[#007BC7] ps-[4px] ">
             Privacy Policy
-          </a>
-          <br />
-          and
-          <a href="/" className="text-[#007BC7] px-[4px] ">
-            Terms of Services
-          </a>
-          apply
+          </Link>
         </span>
         <button
           onClick={goToCreateAccountHandler}
