@@ -30,10 +30,12 @@ function ModalRightColumn({ details, setDetails }) {
 
     const handleFileChange = (e) => {
         const file = e.target.files?.[0];
+        console.log(file,'model file')
         const match = file.name.match(/\.([^.]+)$/);
         const fileEx = match ? match[1] : null;
         const fileExtension = fileEx.toLowerCase()
-        if (file.type == "zip" || file.type == "application/x-zip-compressed" || fileExtension == "psd" || fileExtension == "x3d" || fileExtension == "ai" || fileExtension == "bmp" || fileExtension == "txt" || fileExtension == "svg" || fileExtension == "dwg" || fileExtension == "dxf" || fileExtension == "step" || fileExtension == "skp" || fileExtension == "fcstd" || fileExtension == "mtl" || fileExtension == "pdf" || fileExtension == "dae" || fileExtension == "eps" || fileExtension == "f3d" || fileExtension == "sldasm" || fileExtension == "sldprt" || fileExtension == "blend" || fileExtension == "3ds" || fileExtension == "scad" || fileExtension == "fbx" || fileExtension == "obj" || fileExtension == "stl" || fileExtension == "3mf" || fileExtension == "ply" || fileExtension == "g-code" || fileExtension == "x3g" || fileExtension == "amf") {
+        console.log(file,'fileExtension')
+        if (fileExtension == "zip" || file.type == "application/x-zip-compressed" || fileExtension == "psd" || fileExtension == "x3d" || fileExtension == "ai" || fileExtension == "bmp" || fileExtension == "txt" || fileExtension == "svg" || fileExtension == "dwg" || fileExtension == "dxf" || fileExtension == "step" || fileExtension == "skp" || fileExtension == "fcstd" || fileExtension == "mtl" || fileExtension == "pdf" || fileExtension == "dae" || fileExtension == "eps" || fileExtension == "f3d" || fileExtension == "sldasm" || fileExtension == "sldprt" || fileExtension == "blend" || fileExtension == "3ds" || fileExtension == "scad" || fileExtension == "fbx" || fileExtension == "obj" || fileExtension == "stl" || fileExtension == "3mf" || fileExtension == "ply" || fileExtension == "g-code" || fileExtension == "x3g" || fileExtension == "amf") {
             if (selectedFiles.length > 6) {
                 return toast.error("You can only add 6 models files at a time.")
             }
@@ -95,6 +97,13 @@ function ModalRightColumn({ details, setDetails }) {
             <ModalUpload selectedFiles={selectedFiles} setSelectedFile={setSelectedFile} isUploadLoading={isUploadLoading} uploadFileHandler={uploadFileHandler} setFileUploadProgress={setFileUploadProgress} fileUploadProgress={fileUploadProgress} handleFileChange={handleFileChange} details={details} setDetails={setDetails} />
             <ImagesUpload uploadFileHandler={uploadFileHandler} productUploadHandler={productUploadHandler} details={details} setDetails={setDetails} />
             <Link className='block text-[18px] mt-2' to={`/T&C`}>by uploading you <span className='text-[#0707ff]'>agree to T&C</span></Link>
+            <div className='max-w-[725px]'>
+                <h2 className='font-medium text-[18px] block mt-8'>COMMISSION SYSTEM</h2>
+                <p className='w-full text-[18px]'>
+                    You are a designer and you want to sell your 3D models optimized for 3D printing? Thanks to Kalyke you can earn money with your files STL, OBJ, CAD, 3MF, etc.! For each download, you will receive 80% of the net selling price (excluding VAT) via Stripe. Kalyke keeps 20% of commission which is used to finance bank fees (about 5%) and then all the costs related to the technical maintenance of the platform: hosting, bandwidth, accounting, email communications, translations, etc. There is no subscription system or fixed fee to pay. You sell, you win!
+                    If you are still hesitating to share your models on Kalyke, feel free to read this article Why publish my designs on Kalyke? List of advantages and benefits to get an idea.
+                </p>
+            </div>
         </div>
     )
 }

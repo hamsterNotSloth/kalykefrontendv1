@@ -10,6 +10,7 @@ const ImagesUploader = ({fileUploadProgress, isUploadLoading, selectedFile, setS
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
+    console.log(file,'file')
     if(selectedFile.length > 6) {
       return toast.error("maximum 8 images could be uploaded at a time")
     }

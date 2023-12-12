@@ -27,7 +27,7 @@ function ProductDescription({ productDetails }) {
       </div>
       <div className='mt-5'>
         <h4 className='text-[21px] font-semibold'>Model Settings</h4>
-        <span>{productDetails && productDetails.product?.modalSetting ? productDetails.product?.modalSetting : "This model has no setting"}</span>
+        <div className='max-w-[900px] w-[100%]' dangerouslySetInnerHTML={{ __html: productDetails?.product?.modalSetting }} />
       </div>
       <div className='mt-5'>
         <h4 className='text-[21px] font-semibold'>License</h4>

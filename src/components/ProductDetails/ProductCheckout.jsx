@@ -18,7 +18,10 @@ const ProductCheckout = ({ product }) => {
 
   const convertToLocalPrice = async () => {
     try {
+      const countryCode = localStorage.getItem('currencyCode')
+      console.log(countryCode)
       const response = await axios.get(`https://v6.exchangerate-api.com/v6/${exchangeRateApi}/pair/usd/${countryCode}`);
+      console.log(response?.data?.conversion_rate,'response?.data?.conversion_rate')
       return response?.data?.conversion_rate
     } catch (error) {
       console.error('Error fetching exchange rate:', error.message);
@@ -29,6 +32,7 @@ const ProductCheckout = ({ product }) => {
 
   const getLocation = async () => {
     try {
+      setLoading(true);
       if ('geolocation' in navigator) {
         const position = await new Promise((resolve, reject) => {
           navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -39,15 +43,17 @@ const ProductCheckout = ({ product }) => {
   
         const response = await axios.get(`https://api.opencagedata.com/geocode/v1/json?key=${locationApi}&q=${latitude}+${longitude}&pretty=1`);
         const country = response.data.results[0].annotations.currency.iso_code;
-  
         setCountryCode(country);
         localStorage.setItem('currencyCode', country);
+      setLoading(false);
         return country;
       }
     } catch (error) {
       console.error('Error getting user location:', error.message);
+      setLoading(false);
       return null; 
     }
+    setLoading(false);
   };
   useEffect(() => {
     getLocation()
@@ -55,7 +61,6 @@ const ProductCheckout = ({ product }) => {
   const handleCheckout = async () => {
     try {
       const location = localStorage.getItem('currencyCode');
-      console.log(location,'location')
       setLoading(true);
       if(!location) {
         setLoading(false);
@@ -68,6 +73,7 @@ const ProductCheckout = ({ product }) => {
       }
       const response = await addTransaction({ amount: product.price, token, productId: product._id, countryCode: location, exchangeRate })
       if(response?.error?.data?.message) {
+        setLoading(false);
         return toast.error(response?.error?.data?.message)
       }
       const sessionId = response.data.sessionId;
@@ -79,15 +85,11 @@ const ProductCheckout = ({ product }) => {
         console.error('Error redirecting to Checkout:', error.message);
       }
       setAllowLocation(false)
+      setLoading(false);
     } catch (error) {
-      if (error.code === error.PERMISSION_DENIED) {
-        console.error('User blocked location access');
-        setAllowLocation(true)
-        toast.error('Please allow location access to proceed with the purchase.');
-      } else {
-        console.error('Error getting user location:', error.message);
-      }
-      return null;
+      console.log(error,'error')
+        toast.error(error.message || 'Please allow location access to proceed with the purchase.');
+        setLoading(false);
     }
   };
 

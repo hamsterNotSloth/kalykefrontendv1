@@ -96,19 +96,23 @@ function DescriptionColumn({ details, setDetails }) {
                                 />
                                 <div className="toggle__line w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
                                 <div
-                                    className={`toggle__dot absolute w-6 h-6 bg-white rounded-full top-[-3px] shadow inset-y-0 left-0 ${isFreeToggler ? 'transform translate-x-full bg-green-500' : ''}`}
+                                    className={`toggle__dot absolute w-6 h-6 bg-white rounded-full top-[-3px] shadow inset-y-0 left-0 ${isFreeToggler &&  myProfileData?.myProfile?.paymentAccountLink? 'transform translate-x-full bg-green-500' : ''}`}
                                 ></div>
                             </div>
-                            <span className='inline-block ml-4'>{isFreeToggler? "Free" : 'Paid'} </span>
+                            <span className='inline-block ml-4'>{isFreeToggler && myProfileData?.myProfile?.paymentAccountLink? "Paid" : 'Free'} </span>
                         </label>
+                        {myProfileData?.myProfile?.paymentAccountLink == false && <span className='block text-[#f00] ml-2'>Link payment method in order to upload Paid products. Go to your profile</span>}
                     </div>
                 </div>
-                {isFreeToggler &&
+                {isFreeToggler && myProfileData?.myProfile?.paymentAccountLink &&
                     <>
                         <label className='text-[16px] font-semibold'>{myProfileData?.myProfile?.paymentAccountLink && "Price"}  <span className='text-[12px] font-semibold'>{myProfileData?.myProfile?.paymentAccountLink ? "(Price would be calculated in terms of USD)" : "Currently your user permission only allows free model upload. Link your payment method to be verified."}</span></label>
                         <input disabled={!myProfileData?.myProfile?.paymentAccountLink} type='number' min='0' onChange={(e) => { setDetails({ ...details, price: e.target.value }) }} className={`w-full px-2 h-10 border-2 rounded-sm ${!myProfileData?.myProfile?.paymentAccountLink ? 'cursor-not-allowed opacity-90 border' : 'hover:bg-gray-200 hover:border-gray-400'}`} placeholder={`${myProfileData?.myProfile?.paymentAccountLink ? 'Enter price in USD, if you want this model to be free leave it.' : 'Currently your user permission only allows free model upload. Link your payment method to be verified.'}`} />
-                        <label>{myProfileData?.myProfile?.paymentAccountLink && "Add price in terms of USD. Leave it if you want this product to be free."} </label></>
-                    
+                        <label>{myProfileData?.myProfile?.paymentAccountLink && "Add price in terms of USD. Leave it if you want this product to be free."} </label>
+                        <div>
+                            <img src="/images/commission_logo.png" alt="commission_logo" />
+                        </div>
+                    </>
                 }
             </div>
             <div className='mt-8'>
