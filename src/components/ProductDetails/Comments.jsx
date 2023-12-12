@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAddCommentsMutation, useDeleteCommentMutation, useDeleteReplyMutation, useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice'
 import { getToken } from '../../Token/token'
 import { toast } from 'react-toastify'
@@ -77,7 +77,7 @@ const deleteReplyHandler = async (data) => {
       <div className='pb-2'>
         <div className="flex items-center mb-4 mt-4">
           <textarea onChange={commentHandler} value={comment} placeholder="Add a comment..." className="w-full border rounded-md p-2 focus:outline-none focus:border-blue-500"></textarea>
-          <button onClick={addCommentsHandler} disabled={isAddingComment} className="ml-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Post</button>
+          <button onClick={addCommentsHandler} disabled={isAddingComment} className="ml-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">{isAddingComment? "Processing" : "Post"}</button>
         </div>
       </div>
       <ul>

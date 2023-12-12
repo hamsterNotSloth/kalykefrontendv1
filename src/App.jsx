@@ -7,7 +7,6 @@ import { ToastContainer } from "react-toastify";
 import UserProfilePage from "./pages/UserProfilePage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ProductNotFoundProtectedRoute from "./ProtectedRoutes/ProductNotFoundProtectRoute";
-import MyProfilePage from "./pages/MyProfilePage";
 import HomePage from "./pages/HomePage";
 import ComingSoonPage from "./pages/ComingSoonPage";
 import LicensePage from "./pages/LicensePage";

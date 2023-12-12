@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 const ReplyComment = ({ productId, commentId, onReplyAdded }) => {
   const token = getToken();
   const [reply, setReply] = useState('');
-  const [addReply] = useAddReplyMutation();
+  const [addReply, {isLoading: addingReply}] = useAddReplyMutation();
 
   const addReplyHandler = async () => {
     if (reply.length <= 0) return toast.error("Please add your reply");
@@ -32,8 +32,8 @@ const ReplyComment = ({ productId, commentId, onReplyAdded }) => {
         className="w-full border rounded-md p-2 focus:outline-none focus:border-blue-500"
       />
       <div className="mt-2">
-        <button onClick={addReplyHandler} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-          Post Reply
+        <button addingReply={addingReply} onClick={addReplyHandler} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+          {addingReply? "Processing" : "Post Reply"}
         </button>
       </div>
     </div>
