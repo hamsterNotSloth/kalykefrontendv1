@@ -128,7 +128,7 @@ function UserCard() {
             </div>
             <div className='text-center flex flex-col items-center pb-2'>
                 <span className='text-[21px] font-semibold'>{userProfile && userProfile.profile && userProfile.profile.userName ? userProfile.profile.userName : "No username"}</span>
-                <span>Member since, {formatDate(userProfile?.profile?.createdAt)}</span>
+                <span>Member since {formatDate(userProfile?.profile?.createdAt)}</span>
                 <div dangerouslySetInnerHTML={{ __html: userProfile?.profile?.description }} />
             </div>
             <div className='flex gap-4 items-start justify-center w-full'>

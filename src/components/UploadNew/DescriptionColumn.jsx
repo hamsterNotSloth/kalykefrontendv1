@@ -85,6 +85,7 @@ function DescriptionColumn({ details, setDetails }) {
                 <div className='container mx-auto'>
                     <div className="flex items-center">
                         <label htmlFor="toggle" className="flex items-center cursor-pointer">
+                        <span className='inline-block font-semibold mr-3'>Free</span>
                             <div className="relative">
                                 <input
                                     type="checkbox"
@@ -98,7 +99,7 @@ function DescriptionColumn({ details, setDetails }) {
                                     className={`toggle__dot absolute w-6 h-6 bg-white rounded-full top-[-3px] shadow inset-y-0 left-0 ${isFreeToggler ? 'transform translate-x-full bg-green-500' : ''}`}
                                 ></div>
                             </div>
-                            <span className='inline-block ml-4'>{isFreeToggler ? "Free" : "Paid"} </span>
+                            <span className='inline-block font-semibold ml-3'>Paid</span>
                         </label>
                         {myProfileData?.myProfile?.paymentAccountLink == false && <Link to={`/user/${myProfileData?.myProfile?.u_id || `/not-found`}`} className='block text-[#f00] ml-2'>Link payment method in order to upload Paid products. Go to your profile</Link>}
                     </div>
@@ -166,7 +167,7 @@ function DescriptionColumn({ details, setDetails }) {
                         <option value="Kalyke - Commercial Use - No Derivative">Kalyke - Commercial Use - No Derivative</option>
                     </select>
 
-                    <Link to={'/licenses'} target='_blank' className='block text-[18px] text-[#0707ff] mt-2'>Selected license: {details.license}</Link>
+                    <Link to={'/LicencePolicy'} target='_blank' className='block text-[18px] text-[#0707ff] mt-2'>Selected license: {details.license}</Link>
                 </div>
             </div>
             {isFreeToggler &&

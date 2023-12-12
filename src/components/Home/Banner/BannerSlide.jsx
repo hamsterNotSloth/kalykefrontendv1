@@ -54,7 +54,7 @@ function BannerSlide({ item }) {
                   <h4 to={`/user/${item?.u_id}`} className='text-[18px] text-[#0026ff] font-semibold'>{item?.displayName}</h4>
                 </Link>
                 
-                {item?.createdAt && <span className='block mb-2'>Member Since: {item?.createdAt}</span>} 
+                {item?.createdAt && <span className='block mb-2'>Member Since {item?.createdAt}</span>} 
                 <div className='max-w-[900px] w-[100%]' dangerouslySetInnerHTML={{ __html: item?.description }} />
                 <ul className='flex items-end gap-2'>
                   <textarea

@@ -31,7 +31,7 @@ function ProductDescription({ productDetails }) {
       </div>
       <div className='mt-5'>
         <h4 className='text-[21px] font-semibold'>License</h4>
-        <Link className='block text-[18px] text-[#0707ff] mt-2' to='/licenses' target='_blank'>{productDetails?.product?.license}</Link>
+        <Link className='block text-[18px] text-[#0707ff] mt-2' to='/LicencePolicy' target='_blank'>{productDetails?.product?.license}</Link>
       </div>
       <div className='mt-5'>
         <h4 className='text-[21px] font-semibold'>Similar Products</h4>
