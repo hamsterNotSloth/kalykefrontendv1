@@ -72,12 +72,12 @@ function DownloadScreen({ productDetails }) {
 
         const response = await fetch(downloadLink);
         const blob = await response.blob();
-        const fileName = `Thangs modal${i + 1}.${fileExtension}`;
+        const fileName = `Kalyke modal${i + 1}.${fileExtension}`;
         zip.file(fileName, blob);
       }));
 
       const content = await zip.generateAsync({ type: 'blob' });
-      const zipFileName = 'ThangsModalFiles.zip';
+      const zipFileName = 'KalykeModalFiles.zip';
       const zipFile = new File([content], zipFileName, { type: 'application/zip' });
 
       const a = document.createElement('a');

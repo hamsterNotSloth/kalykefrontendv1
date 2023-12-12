@@ -28,7 +28,7 @@ function Uploader() {
       }, []);
     return (
         <div className='pb-[361px]  p-4 max-w-[1500px] mx-auto'>
-            <h2 className='text-[30px] font-semibold'>Created Something</h2>
+            <h2 className='text-[30px] font-semibold'>Upload your design</h2>
             <div className=' gap-10 flex h-[100vh]'>
                 <DescriptionColumn details={details} setDetails={setDetails} />
                 <ModalRightColumn details={details} setDetails={setDetails} />

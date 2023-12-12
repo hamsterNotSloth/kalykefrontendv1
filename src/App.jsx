@@ -26,6 +26,7 @@ import NotVerifiedProtectRoute from "./ProtectedRoutes/NotVerifiedProtectRoute";
 import TermsAndConditions from "./components/Static/T&C";
 import SupportPolicy from "./components/Static/Support";
 import PrivacyPolicy from "./components/Static/Privacy";
+import EmailVerified from "./components/messages/EmailVerified";
 
 function App() {
   const [signInUser] = useSignInUserMutation()
@@ -76,6 +77,7 @@ function App() {
             <Route path="/T&C" element={<TermsAndConditions />} />
             <Route path="/support" element={<SupportPolicy />} />
             <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+            <Route path="/email-verified" element={<EmailVerified />} />
             {/* <Route path="/model/upload" element={<Uploader />} /> */}
           </Routes>
           <Footer />

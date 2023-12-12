@@ -20,7 +20,7 @@ function Policy() {
           className="form-checkbox h-4 w-4 text-blue-600 rounded-xl"
         />
         <span className=" text-center text-[#999999] text-[9px] md:text-[13px] font-[500]">
-          Get updates & product news from Thangs
+          Get updates & product news from Kalyke
         </span>
       </div>
     </>

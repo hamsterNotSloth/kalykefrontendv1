@@ -30,10 +30,10 @@ function License() {
                 How will I share this digital file?
                 Kalyke require members who download digital files on the website to get permission from the designers, the right holders, to do any of the things that the license does not expressly allow.
 
-                THE DEFAULT LICENSE ON CULTS
+                THE DEFAULT LICENSE ON Kalyke
                 By default, the Kalyke - Private Use license is applied to all designs on the site. As a designer, if you do not specify a license for your design, this license will be automatically applied.
 
-                CULTS - PRIVATE USE
+                Kalyke - PRIVATE USE
                 You are authorized to:
 
                 Print and use the 3D prints of the 3D model for private use, in unlimited quantity;
@@ -164,7 +164,7 @@ function License() {
                 You can read the license conditions to know the legal framework.
 
                 LICENSES FOR SELLABLE DESIGNS
-                CULTS CU - COMMERCIAL USE
+                Kalyke CU - COMMERCIAL USE
                 You are authorized to:
 
                 Print — sell and distribute 3D prints of the 3D model and its adapted models for any use, including commercial use, in unlimited quantities;
@@ -174,9 +174,9 @@ function License() {
                 No sharing of your 3D prints, nor adaptation of the 3D model without attribution;
                 No distribution, sale, donation or exchange of the digital files of the 3D model and the digital files of 3D models adapted from it.
                 READ THE CONDITIONS OF THE LICENSE
-                The Kalyke - Commercial Use (CULTS CU) license grants an unlimited, non-exclusive, worldwide license to print, use, modify, copy and adapt 3D prints of a 3D model from its 3D digital files that are downloadable from the site. It also grants permission to distribute the 3D prints of said digital files and those adapted from them, including for commercial purposes for as long as this license is applied to the licensed 3D model.
+                The Kalyke - Commercial Use (Kalyke CU) license grants an unlimited, non-exclusive, worldwide license to print, use, modify, copy and adapt 3D prints of a 3D model from its 3D digital files that are downloadable from the site. It also grants permission to distribute the 3D prints of said digital files and those adapted from them, including for commercial purposes for as long as this license is applied to the licensed 3D model.
 
-                When you exercise the rights granted by the license (defined below), you agree to be bound by the terms and conditions of this Kalyke - Commercial Use (CULTS CU) license. To the extent that this license may be construed as a contract, you are granted the rights granted by the license in consideration of your acceptance of these terms and conditions, and the designer(s) grants you those rights in consideration of the benefits of making available the 3D digital files of the licensed 3D model under these terms and conditions.
+                When you exercise the rights granted by the license (defined below), you agree to be bound by the terms and conditions of this Kalyke - Commercial Use (Kalyke CU) license. To the extent that this license may be construed as a contract, you are granted the rights granted by the license in consideration of your acceptance of these terms and conditions, and the designer(s) grants you those rights in consideration of the benefits of making available the 3D digital files of the licensed 3D model under these terms and conditions.
 
                 Article 1 - Definitions
                 A 3D model is the result of 3D modeling, a process to develop a three-dimensional representation of animated or living objects and surfaces.
@@ -216,7 +216,7 @@ function License() {
 
                 Failure to comply with the obligations of this license shall automatically result in the revocation of the rights granted by this license.
 
-                CULTS CU-ND - COMMERCIAL USE - NO DERIVATIVE
+                Kalyke CU-ND - COMMERCIAL USE - NO DERIVATIVE
                 You are authorized to:
 
                 Print — copy and distribute 3D prints of the 3D model for any use, including commercial, in unlimited quantities.
@@ -226,9 +226,9 @@ function License() {
                 No modification or adaptation of the 3D model;
                 No distribution or resale of 3D digital files of the 3D model.
                 READ THE CONDITIONS OF THE LICENSE
-                The Kalyke - Commercial Use - No Derivative (CULTS CU-ND) license grants an unlimited, non-exclusive, worldwide license to print and use a 3D model from its 3D digital files downloadable from the wesite. It also grants permission to distribute 3D prints from said digital files, including for commercial purposes for as long as this license is applied to the licensed 3D model.
+                The Kalyke - Commercial Use - No Derivative (Kalyke CU-ND) license grants an unlimited, non-exclusive, worldwide license to print and use a 3D model from its 3D digital files downloadable from the wesite. It also grants permission to distribute 3D prints from said digital files, including for commercial purposes for as long as this license is applied to the licensed 3D model.
 
-                When you exercise the rights granted by the license (defined below), you agree to be bound by the terms and conditions of this Kalyke - Commercial Use - No Derivative (CULTS CU-ND) license. To the extent that this license may be construed as a contract, you are granted the rights granted by the license in consideration of your acceptance of these terms and conditions, and the designer(s) grant(s) you those rights in consideration of the benefits of making the digital files of the licensed 3D model pursuant to these terms and conditions.
+                When you exercise the rights granted by the license (defined below), you agree to be bound by the terms and conditions of this Kalyke - Commercial Use - No Derivative (Kalyke CU-ND) license. To the extent that this license may be construed as a contract, you are granted the rights granted by the license in consideration of your acceptance of these terms and conditions, and the designer(s) grant(s) you those rights in consideration of the benefits of making the digital files of the licensed 3D model pursuant to these terms and conditions.
 
                 Section 1 - Definitions
                 A 3D model is the result of 3D modeling, a process to develop a three-dimensional representation of animated or living objects and surfaces.

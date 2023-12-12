@@ -99,7 +99,7 @@ function DescriptionColumn({ details, setDetails }) {
                                     className={`toggle__dot absolute w-6 h-6 bg-white rounded-full top-[-3px] shadow inset-y-0 left-0 ${isFreeToggler &&  myProfileData?.myProfile?.paymentAccountLink? 'transform translate-x-full bg-green-500' : ''}`}
                                 ></div>
                             </div>
-                            <span className='inline-block ml-4'>{isFreeToggler && myProfileData?.myProfile?.paymentAccountLink? "Paid" : 'Free'} </span>
+                            <span className='inline-block ml-4'>{isFreeToggler && myProfileData?.myProfile?.paymentAccountLink && "Paid"} </span>
                         </label>
                         {myProfileData?.myProfile?.paymentAccountLink == false && <span className='block text-[#f00] ml-2'>Link payment method in order to upload Paid products. Go to your profile</span>}
                     </div>

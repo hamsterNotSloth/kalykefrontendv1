@@ -22,10 +22,12 @@ const ProductCheckout = ({ product }) => {
       console.log(countryCode)
       const response = await axios.get(`https://v6.exchangerate-api.com/v6/${exchangeRateApi}/pair/usd/${countryCode}`);
       console.log(response?.data?.conversion_rate,'response?.data?.conversion_rate')
+      setAllowLocation(false)
       return response?.data?.conversion_rate
     } catch (error) {
       console.error('Error fetching exchange rate:', error.message);
       toast.error("Error while fetching exchange rate. Please unable your location.")
+      setAllowLocation(true)
       return null;
     }
   };
@@ -87,7 +89,6 @@ const ProductCheckout = ({ product }) => {
       setAllowLocation(false)
       setLoading(false);
     } catch (error) {
-      console.log(error,'error')
         toast.error(error.message || 'Please allow location access to proceed with the purchase.');
         setLoading(false);
     }
@@ -98,7 +99,7 @@ const ProductCheckout = ({ product }) => {
       <button className='bg-[#2f85ff] hover:bg-[#809ee2] text-white text-[21px] h-[46px] w-[100%] rounded-md  w-full' onClick={handleCheckout} disabled={loading}>
         {loading ? 'Processing...' : `Buy: $${product.price}`}
       </button>
-      {allowLocation && <span className='text-[#ff0000]'>Please allow location to download</span>}
+      {allowLocation && <span className='text-[#ff0000]'>Your location may be turned off. Please turn on location or head over to faq</span>}
     </div>
   );
 };
