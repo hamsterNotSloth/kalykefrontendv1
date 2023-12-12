@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { useAddTransactionMutation } from '../../redux/apiCalls/apiSlice';
@@ -41,6 +41,7 @@ const ProductCheckout = ({ product }) => {
         const country = response.data.results[0].annotations.currency.iso_code;
   
         setCountryCode(country);
+        localStorage.setItem('currencyCode', country);
         return country;
       }
     } catch (error) {
@@ -48,11 +49,13 @@ const ProductCheckout = ({ product }) => {
       return null; 
     }
   };
-
+  useEffect(() => {
+    getLocation()
+  }, [])
   const handleCheckout = async () => {
     try {
-      const location = await getLocation()
-      setAsLocation(!asLocation)
+      const location = localStorage.getItem('currencyCode');
+      console.log(location,'location')
       setLoading(true);
       if(!location) {
         setLoading(false);

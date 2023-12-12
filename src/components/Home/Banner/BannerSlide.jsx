@@ -43,20 +43,19 @@ function BannerSlide({ item }) {
                   })}
                 </ul>
                 <Link className='flex justify-center items-center mt-4 bg-[#2f85ff] hover:bg-[#5487ff] text-white text-[16px] rounded-md w-[120px] h-[30px]' to={`/products/${item?.producId}`}>View model</Link>
-                {/* <div className='py-3'>
-                  <Followbtn productDetails={item} style={'rounded-xl hover:bg-[#e8e8e8] shadow px-4 py-1'} />
-                </div> */}
               </div>
               :
               <div className='max-w-[324px]'>
                 <span className='block text-[16px] font-semibold'>Featured Designer</span>
-                <Link to={`/user/${item?.u_id}`} className='flex gap-2 items-center'>
+                <Link to={`/user/${item?.u_id}`} className='flex gap-2 mb-3 items-center'>
                   <div className='w-[60px] h-[60px]'>
                     <img src={item.userImage} className='rounded-full' alt="Profile image" />
                   </div>
                   <h4 to={`/user/${item?.u_id}`} className='text-[18px] text-[#0026ff] font-semibold'>{item?.displayName}</h4>
                 </Link>
-                <div className='max-w-[900px] w-[100%] mt-3' dangerouslySetInnerHTML={{ __html: item?.description }} />
+                
+                {item?.createdAt && <span className='block mb-2'>Member Since: {item?.createdAt}</span>} 
+                <div className='max-w-[900px] w-[100%]' dangerouslySetInnerHTML={{ __html: item?.description }} />
                 <ul className='flex items-end gap-2'>
                   <textarea
                     ref={profileShareRef}

@@ -73,13 +73,13 @@ const HeaderLeft = () => {
                 d="m1 1 4 4 4-4"
               />
             </svg></button>
-            {isExploreDropDownOpen && <div className="absolute z-50  overflow-auto w-[650px] right-0 left-0 mt-2 origin-top-right bg-white border border-gray-300 divide-y divide-gray-200 rounded-md shadow-lg">
+            {isExploreDropDownOpen && <div className="absolute z-50  overflow-auto w-[750px] right-0 left-0 mt-2 origin-top-right bg-white border border-gray-300 divide-y divide-gray-200 rounded-md shadow-lg">
               <div className="px-5 py-4">
                 <span className='mb-4 flex items-center font-medium'><FontAwesomeIcon icon={faLayerGroup} /> Categories:</span>
-                <div className='flex flex-wrap gap-x-6 gap-y-6'>
+                <div className='flex pt-3 flex-wrap gap-x-6 gap-y-6'>
                   {categoryFilter.map((item, index) => {
                     return (
-                      <div className='w-[180px]' key={`drop-down-explore${Math.random() * Date.now()}`}>
+                      <div className='w-[220px]' key={`drop-down-explore${Math.random() * Date.now()}`}>
                         <button className='hover:text-[#424040]' onClick={(e) => { e.preventDefault(); categoryHandler(item.categoryName) }}> <FontAwesomeIcon icon={item.icon} /> {item.categoryName}</button>
                       </div>
                     )

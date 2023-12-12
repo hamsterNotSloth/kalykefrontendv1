@@ -4,7 +4,7 @@ import React from 'react'
 function SocialMediaRow({item, copyToClipboard}) {
     const handleClick = () => {
         window.open(item.link, '_blank', 'width=600,height=400');
-        copyToClipboard(); // Optionally, you can call copyToClipboard after opening the window
+        copyToClipboard(); 
       };
     return (
         <li ><a href={item.link} onClick={handleClick} target='_blank'>
