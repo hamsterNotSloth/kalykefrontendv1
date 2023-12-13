@@ -7,7 +7,6 @@ import { MultiSelect } from "react-multi-select-component";
 function Filter() {
   const [activeIndex, setActiveIndex] = useState(1);
   const [isFree, setIsFree] = useState(null);
-  const [selectField, setSelectField] = useState("All")
   const currentFilter = useSelector((state) => state.filtersSlice);
   const dispatch = useDispatch();
 
@@ -67,15 +66,6 @@ function Filter() {
               )
             })}
           </div>
-          {/* <div className='h-full ml-2'>
-            <select className='border-x  pl-2 h-full flex justify-center items-center w-[180px] text-black'
-            onChange={(e)=>dispatch(setFilter({ ...currentFilter, fileType: e.target.value }))}
-            >
-              {printerFileTyypes.map(item => {
-                return <option value={item}>{item}</option>
-              })}
-            </select>
-          </div> */}
           <div className='w-[229px] ml-3'>
             <MultiSelect
               options={printerFileTypes}

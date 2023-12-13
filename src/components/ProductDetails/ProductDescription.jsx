@@ -3,17 +3,25 @@ import { useGetSimilarProductsQuery } from '../../redux/apiCalls/apiSlice'
 import ProductCard from '../Common/ProductCard';
 import Comments from './Comments';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 function ProductDescription({ productDetails }) {
   const tagsString = productDetails && productDetails.product && productDetails.product.tags.join(',');
   const { data: similarProducts, refetch: getSimilarProducts } = useGetSimilarProductsQuery({ tags: tagsString, created_by: productDetails && productDetails.product && productDetails.product.created_by })
   const uniqueProductIds = new Set();
-
+  const removeHtmlTags = (htmlString) => {
+    const regex = /(<([^>]+)>)/gi;
+    return htmlString.replace(regex, '');
+  };
+  const cleanDescription = productDetails?.product?.description ? removeHtmlTags(productDetails?.product?.description) : '';
   useEffect(() => {
     getSimilarProducts({ tags: productDetails && productDetails.product && productDetails.product.tags, created_by: productDetails && productDetails.product && productDetails.product.created_by })
   }, [productDetails])
   return (
     <div className='max-w-[1135px] w-full'>
+      <Helmet>
+        <meta name="description" content={cleanDescription} />
+      </Helmet>
       <div>
         <h4 className='text-[21px] font-semibold'>Description</h4>
         <div className='max-w-[900px] w-[100%]' dangerouslySetInnerHTML={{ __html: productDetails && productDetails.product?.description }} />

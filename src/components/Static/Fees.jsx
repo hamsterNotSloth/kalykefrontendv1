@@ -1,6 +1,7 @@
 import React from 'react'
-
+const totalFee = process.env.REACT_APP_PLATEFORM_TOTAL_FEE
 function Fees() {
+    const sellerProfit = 100 - parseInt(totalFee)
     return (
         <div className='h-[100vh] max-w-[725px] mt-8'>
             <h1 className="text-3xl font-bold mb-4">🌐 Welcome to Kalyke!</h1>
@@ -10,13 +11,13 @@ function Fees() {
             </p>
 
             <p className="mb-6">
-                💰 With Kalyke, you earn a fantastic 88% of the net selling price (excluding VAT) for each download. We believe
+                💰 With Kalyke, you earn a fantastic {sellerProfit}% of the net selling price (excluding VAT) for each download. We believe
                 in rewarding your talent and hard work. Say goodbye to subscription fees or fixed charges – you sell, you win,
                 simple as that!
             </p>
 
             <p className="mb-6">
-                🤝 Our transparent system ensures a fair partnership. We keep a modest 12% commission to cover essential expenses
+                🤝 Our transparent system ensures a fair partnership. We keep a modest {totalFee}% commission to cover essential expenses
                 such as bank fees (approximately 5%) and the technical maintenance of our platform. This includes hosting,
                 bandwidth, accounting, email communications, translations, and more.
             </p>

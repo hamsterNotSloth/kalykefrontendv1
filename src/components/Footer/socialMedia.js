@@ -1,4 +1,4 @@
-import { faDiscord, faFacebook, faInstagram, faPinterest, faReddit, faTiktok, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faDiscord, faFacebook, faInstagram, faPinterest, faReddit, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export const socialMedia = [
     {
@@ -20,5 +20,9 @@ export const socialMedia = [
     {
         icon: faDiscord,
         link: 'https://discord.gg/fEXuAfZQz8'
+    },
+    {
+        icon: faPinterest,
+        link: 'https://pin.it/1DoOfL2'
     }
 ]
