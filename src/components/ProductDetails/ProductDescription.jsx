@@ -3,7 +3,7 @@ import { useGetSimilarProductsQuery } from '../../redux/apiCalls/apiSlice'
 import ProductCard from '../Common/ProductCard';
 import Comments from './Comments';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import {Helmet} from "react-helmet";
 
 function ProductDescription({ productDetails }) {
   const tagsString = productDetails && productDetails.product && productDetails.product.tags.join(',');
@@ -14,12 +14,14 @@ function ProductDescription({ productDetails }) {
     return htmlString.replace(regex, '');
   };
   const cleanDescription = productDetails?.product?.description ? removeHtmlTags(productDetails?.product?.description) : '';
+  console.log(cleanDescription)
   useEffect(() => {
     getSimilarProducts({ tags: productDetails && productDetails.product && productDetails.product.tags, created_by: productDetails && productDetails.product && productDetails.product.created_by })
   }, [productDetails])
   return (
     <div className='max-w-[1135px] w-full'>
       <Helmet>
+        <title>{'Kalyke -' + productDetails?.product?.title || "Kalyke3d model"}</title>
         <meta name="description" content={cleanDescription} />
       </Helmet>
       <div>

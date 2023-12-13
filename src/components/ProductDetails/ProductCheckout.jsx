@@ -100,7 +100,7 @@ const ProductCheckout = ({ product }) => {
       <button className='bg-[#2f85ff] hover:bg-[#809ee2] text-white text-[21px] h-[46px] w-[100%] rounded-md  w-full' onClick={handleCheckout} disabled={loading}>
         {loading ? 'Processing...' : `Buy: $${product.price}`}
       </button>
-      {allowLocation && <span className='text-[#ff0000]'>Your location may be turned off. Please turn on location or head over to faq</span>}
+      {allowLocation && <span className='text-[#ff0000]'>Your location might be turned off. Please turn on location by following this <a href='https://www.wikihow.com/Enable-Location-Services-on-Google-Chrome' className='text-[#384bf7]' target='_blank' rel='noopener noreferrer'>tutorial</a> or head over to the FAQ page</span>}
     </div>
   );
 };

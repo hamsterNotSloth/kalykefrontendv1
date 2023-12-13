@@ -82,12 +82,12 @@ const deleteReplyHandler = async (data) => {
       </div>
       <ul>
         {productDetails.product.comments?.map((item, index) => {
-          return <li className=' pb-3' key={`Comment ${index} ${item._id}`}>
-            <div className="bg-white p-4 rounded-lg shadow-md">
-              <div className="flex items-start mb-4">
+          return <li className='mb-14 pb-1' key={`Comment ${index} ${item._id}`}>
+            <div className="bg-white p-2 rounded-lg shadow-md">
+              <div className="flex items-start mb-2">
                 <img src={item.profilePic} alt="User Avatar" className="w-8 h-8 rounded-full mr-2" />
                 <div className="flex-1">
-                  <div className="flex items-center mb-2">
+                  <div className="flex items-center mb-1">
                     <div className='flex gap-1 items-end'>
                     <Link to={`user/${item.u_id}`} className="font-bold text-gray-800">{item.userName}</Link> <span className='text-[12px]'>{formatDate(item.createdAt)}</span>
                     </div>
@@ -108,11 +108,11 @@ const deleteReplyHandler = async (data) => {
               />
             )}
             {item.replies?.map((reply, replyIndex) => (
-              <div key={`Reply ${replyIndex} ${reply._id}`} className="bg-white p-4 mt-4 rounded-lg shadow-md ml-8">
+              <div key={`Reply ${replyIndex} ${reply._id}`} className="bg-white p-2 mt-5 mb-7 rounded-lg shadow-md ml-8">
                 <div className="flex items-center mb-2">
                   <img src={reply.profilePic} alt="User Avatar" className="w-8 h-8 rounded-full mr-2" />
                   <div className="flex-1">
-                    <div className="flex items-center mb-2">
+                    <div className="flex items-center mb-1">
                     <div className='flex gap-1 items-end'>
                     <Link to={`user/${item.u_id}`} className="font-bold text-gray-800">{reply.userName}</Link>  <span className='text-[12px]'>{formatDate(item.createdAt)}</span>
                     </div>

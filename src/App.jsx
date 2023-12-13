@@ -25,6 +25,7 @@ import SupportPolicy from "./components/Static/Support";
 import PrivacyPolicy from "./components/Static/Privacy";
 import EmailVerified from "./components/messages/EmailVerified";
 import Licence from "./components/Static/Licence";
+import { Helmet } from "react-helmet";
 
 function App() {
   const [signInUser] = useSignInUserMutation()
@@ -49,6 +50,10 @@ function App() {
   return (
     <>
       <div className="bg-[#f4f4f4]">
+      <Helmet>
+        <title>Kalyke - 3D Printing Designs Marketplace</title>
+        <meta name="description" content="Crafting tomorrow's possibilities with 3D-Printed Designs. Visit us to transform your ideas into reality." />
+      </Helmet>
         <Router>
           <Header />
           <Routes>
