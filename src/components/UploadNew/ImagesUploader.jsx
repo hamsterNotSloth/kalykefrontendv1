@@ -2,9 +2,9 @@ import React from 'react';
 
 
 import { toast } from 'react-toastify';
-import DropZone from './DropZone';
 
 import ImagesList from './ImagesList';
+import DropZone from '../Common/DropZone';
 
 const ImagesUploader = ({fileUploadProgress, isUploadLoading, selectedFile, setSelectedFile}) => {
 

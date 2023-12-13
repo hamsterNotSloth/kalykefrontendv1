@@ -1,3 +1,33 @@
 export const filterList = ["Most Viewed", "New Uploads", "Most Downloaded","From Top Users"];
 export const categoryFilter = ["Animals", "Arts & Entertainment", "Costumes & Cosplays", "Garden", "Home", "Fashion", "Autos & Vehicles", "Business & Industrial", "Devices", "Food & Drink", "Gridfinity", "Health & Fitness", "Hobbies & Games",  "People", "Pop Culture", "Seasonal"]
 export const filtersOfFreeStatus = [{text: "All", value: null}, {text: "Free", value: false}, {text: "Paid", value: true}]
+export const printerFileTypes = [
+    { label: "stl", value: "stl" },
+    { label: "obj", value: "obj" },
+    { label: "3ds", value: "3ds" },
+    { label: "scad", value: "scad" },
+    { label: "gcode", value: "gcode" },
+    { label: "3mf", value: "3mf" },
+    { label: "blend", value: "blend" },
+    { label: "sldprt", value: "sldprt" },
+    { label: "sldasm", value: "sldasm" },
+    { label: "amf", value: "amf" },
+    { label: "dae", value: "dae" },
+    { label: "eps", value: "eps" },
+    { label: "f3d", value: "f3d" },
+    { label: "fcstd", value: "fcstd" },
+    { label: "mtl", value: "mtl" },
+    { label: "pdf", value: "pdf" },
+    { label: "ply", value: "ply" },
+    { label: "skp", value: "skp" },
+    { label: "step", value: "step" },
+    { label: "dxf", value: "dxf" },
+    { label: "dwg", value: "dwg" },
+    { label: "svg", value: "svg" },
+    { label: "txt", value: "txt" },
+    { label: "bmp", value: "bmp" },
+    { label: "ai", value: "ai" },
+    { label: "x3d", value: "x3d" },
+    { label: "psd", value: "psd" },
+    { label: "zip", value: "zip" },
+  ];

@@ -5,7 +5,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { getToken } from '../../Token/token';
 import { useAddTransactionMutation } from '../../redux/apiCalls/apiSlice';
 import ProductCheckout from './ProductCheckout';
-const stripe_public = process.env.REACT_APP_STRIPE_YATHRAT_PUBLISHABLE_KEY_TEST;
+const stripe_public = process.env.REACT_APP_STRIPE_YATHRAT_PUBLISHABLE_KEY_PRODUCTION;
 const stripePromise = loadStripe(stripe_public);
 
 const DesignUpload = ({product}) => {

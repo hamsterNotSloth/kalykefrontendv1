@@ -15,13 +15,11 @@ const ProductCheckout = ({ product }) => {
   const token = getToken()
   const [countryCode, setCountryCode] = useState("")
   const [addTransaction, { error }] = useAddTransactionMutation()
-
+  const [toggleLocation, setToggleLocation] = useState(false)
   const convertToLocalPrice = async () => {
     try {
       const countryCode = localStorage.getItem('currencyCode')
-      console.log(countryCode)
       const response = await axios.get(`https://v6.exchangerate-api.com/v6/${exchangeRateApi}/pair/usd/${countryCode}`);
-      console.log(response?.data?.conversion_rate,'response?.data?.conversion_rate')
       setAllowLocation(false)
       return response?.data?.conversion_rate
     } catch (error) {
@@ -48,21 +46,24 @@ const ProductCheckout = ({ product }) => {
         setCountryCode(country);
         localStorage.setItem('currencyCode', country);
       setLoading(false);
+      setAllowLocation(false)
         return country;
       }
     } catch (error) {
       console.error('Error getting user location:', error.message);
       setLoading(false);
+      setAllowLocation(true)
       return null; 
     }
     setLoading(false);
   };
   useEffect(() => {
     getLocation()
-  }, [])
+  }, [toggleLocation])
   const handleCheckout = async () => {
     try {
       const location = localStorage.getItem('currencyCode');
+      setToggleLocation(true)
       setLoading(true);
       if(!location) {
         setLoading(false);

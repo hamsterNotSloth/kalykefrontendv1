@@ -9,11 +9,9 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ProductNotFoundProtectedRoute from "./ProtectedRoutes/ProductNotFoundProtectRoute";
 import HomePage from "./pages/HomePage";
 import ComingSoonPage from "./pages/ComingSoonPage";
-import LicensePage from "./pages/LicensePage";
 import { useEffect } from "react";
 import {  useSignInUserMutation } from "./redux/apiCalls/apiSlice";
 import SearchResultsPage from "./pages/SearchResultsPage";
-import Comments from "./components/ProductDetails/Comments";
 import Footer from "./components/Footer/Footer";
 import CategoryPage from "./pages/CategoryPage";
 import WishlistPage from "./pages/WishlistPage";
@@ -36,9 +34,7 @@ function App() {
       if (user) {
         try {
           const idToken = await user.getIdToken();
-
           const response = await signInUser({ credential: user, source: 'Email' });
-
           if (response.data && response.data.userData.status === true) {
             localStorage.setItem('userToken', response.data.userData.token);
           }
@@ -68,7 +64,6 @@ function App() {
             <Route path="/products/Wishlist" element={<WishlistPage />} />
             <Route path="/products/downloaded-products" element={<DownloadableProductsPage />} />
             <Route path="/coming-soon" element={<ComingSoonPage />} />
-            <Route path="/licenses" element={<LicensePage />} />
 
             <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
             <Route path="/Category/:category" element={<CategoryPage />} />

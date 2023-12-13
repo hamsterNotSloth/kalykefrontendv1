@@ -94,7 +94,7 @@ function ModalRightColumn({ details, setDetails }) {
         <div>
             <ModalUpload selectedFiles={selectedFiles} setSelectedFile={setSelectedFile} isUploadLoading={isUploadLoading} uploadFileHandler={uploadFileHandler} setFileUploadProgress={setFileUploadProgress} fileUploadProgress={fileUploadProgress} handleFileChange={handleFileChange} details={details} setDetails={setDetails} />
             <ImagesUpload uploadFileHandler={uploadFileHandler} productUploadHandler={productUploadHandler} details={details} setDetails={setDetails} />
-            <Link className='block text-[18px] mt-2' to={`/T&C`}>By uploading this design you agree to the <span className='text-[#0707ff]'>Terms & Conditions.</span></Link>
+            <Link target='_blank'  className='block text-[18px] mt-2' to={`/T&C`}>By uploading this design you agree to the <span className='text-[#0707ff]'>Terms & Conditions.</span></Link>
         </div>
     )
 }

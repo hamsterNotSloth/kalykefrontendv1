@@ -2,83 +2,77 @@ import React from 'react'
 
 function Licence() {
     return (
-        <div className="bg-gray-100 p-8 rounded-lg shadow-lg">
-            <h1 className="text-3xl font-bold mb-4">License Policy for Kalyke</h1>
+        <div className="container mx-auto p-8">
+            <h1 className="text-4xl font-bold mb-8">Complete License Policy</h1>
 
-            <div className="mb-6">
-                <h2 className="text-xl font-semibold mb-2">General Principles:</h2>
-                <ul className="list-disc pl-6">
-                    <li>All designs available on Kalyke are subject to licenses and are not all free of copyrights.</li>
-                    <li>Designers are the copyright holders of their files and retain the right to control how those files are shared, credited, and used.</li>
-                    <li>Each design has its own specific license.</li>
-                    <li>By downloading a design from Kalyke, you agree to respect the terms of the chosen license and to use, share, and attribute the design accordingly.</li>
+            <p>Welcome to Kalyke, a platform where you can discover and download unique 3D designs. This document outlines the terms and conditions governing your access and use of these designs. By accessing and using Kalyke, you agree to abide by these terms.</p>
+
+            <section className="mt-8">
+                <h2 className="text-2xl font-bold mb-4">1. Copyright and Ownership:</h2>
+                <p>Designers retain all copyrights and intellectual property rights to their designs, even after they are uploaded to Kalyke. Each design has its own specific license, chosen by the designer, that governs how the files can be used, shared, and modified.</p>
+            </section>
+
+            <section className="mt-8">
+                <h2 className="text-2xl font-bold mb-4">2. License Categories:</h2>
+                <h3 className="text-xl font-bold mb-2">2.1 Free Licenses:</h3>
+                <p>These licenses allow for non-commercial use and distribution of the files, but with certain restrictions. Examples include:</p>
+                <ul className="list-disc pl-8 mt-2">
+                    <li>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0): You can share and adapt the design, but you must give credit to the designer and share any derivative works under the same license.</li>
+                    <li>Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0): You can share the design but cannot modify or adapt it.</li>
+                    <li>CERN Open Hardware Licence 1.2: You can share and modify the design, but you must distribute it under the same license and give credit to the original designer.</li>
+                    <li>GNU General Public License 3.0 (GPLv3): You can share and modify the design, but you must distribute any derivative works under the same license.</li>
+                    <li>GNU Lesser General Public License 3.0 (LGPLv3): You can share and modify the design, but you are not required to distribute any derivative works under the same license.</li>
                 </ul>
-            </div>
 
-            <div className="mb-6">
-                <h2 className="text-xl font-semibold mb-2">License Categories:</h2>
-                <p>There are two main categories of licenses available on Kalyke:</p>
-                <ul className="list-disc pl-6">
-                    <li>Free Digital File Licenses: These licenses allow non-commercial use of the designs with certain restrictions.</li>
-                    <li>Sellable Digital File Licenses: These licenses allow commercial use of the designs with certain restrictions.</li>
+                <h3 className="text-xl font-bold mt-4 mb-2">2.2 Commercial Licenses:</h3>
+                <p>These licenses allow users to sell 3D prints and adapted models derived from the original design. Examples include:</p>
+                <ul className="list-disc pl-8 mt-2">
+                    <li>Kalyke Commercial Use (CU): You can sell 3D prints and adapted models in unlimited quantities, but you cannot share the digital files of the original or adapted designs.</li>
+                    <li>Kalyke Commercial Use - No Derivative (CU-ND): You can sell 3D prints of the original design in unlimited quantities, but you cannot modify or share the digital files.</li>
                 </ul>
-            </div>
+            </section>
 
-            <div className="mb-6">
-                <h2 className="text-xl font-semibold mb-2">Licenses for Free Digital Files:</h2>
-                <div className="mb-4">
-                    <h3 className="text-lg font-semibold mb-2">Private Use:</h3>
-                    <p>This is the default license for all designs on Kalyke. It allows for private use of the design, such as printing and sharing images of your 3D prints. However, it does not allow for commercial use, public sharing, modification, or distribution of the digital files.</p>
-                </div>
-                <div className="mb-4">
-                    <h3 className="text-lg font-semibold mb-2">Creative Commons Licenses:</h3>
-                    <ul className="list-disc pl-6">
-                        <li>CC BY-NC-ATTRIBUTION - NON COMMERCIAL: Allows sharing and adaptation with attribution and non-commercial use.</li>
-                        <li>CC BY-NC-SA - ATTRIBUTION - NON COMMERCIAL - SHARE ALIKE: Allows sharing and adaptation with attribution, non-commercial use, and sharing under the same license.</li>
-                        <li>CC BY-NC-ND - ATTRIBUTION - NON COMMERCIAL - NO DERIVATIVES: Allows sharing with attribution and non-commercial use, but no adaptation.</li>
-                    </ul>
-                </div>
-                <div className="mb-4">
-                    <h3 className="text-lg font-semibold mb-2">CERN Open Hardware Licence (OHL):</h3>
-                    <p>This license allows for sharing, adaptation, and commercial use with certain restrictions, such as maintaining attribution and sharing the same license.</p>
-                </div>
-                <div className="mb-4">
-                    <h3 className="text-lg font-semibold mb-2">GNU General Public License (GPL):</h3>
-                    <p>This license allows for sharing, adaptation, and commercial use with certain restrictions, such as sharing the source code and respecting the conditions of the license.</p>
-                </div>
-                <div className="mb-4">
-                    <h3 className="text-lg font-semibold mb-2">GNU Lesser General Public License (LGPL):</h3>
-                    <p>This license allows for sharing, adaptation, and commercial use with certain restrictions, such as maintaining attribution and respecting the conditions of the license.</p>
-                </div>
-            </div>
+            <section className="mt-8">
+                <h2 className="text-2xl font-bold mb-4">3. License Responsibilities:</h2>
+                <h3 className="text-xl font-bold mb-2">3.1 Designers:</h3>
+                <p>You are responsible for choosing an appropriate license for your design and ensuring that it accurately reflects your intended use. You are responsible for ensuring that you have the copyright and necessary permissions to share any designs that incorporate third-party content.</p>
 
-            <div className="mb-6">
-                <h2 className="text-xl font-semibold mb-2">Licenses for Sellable Digital Files:</h2>
-                <div className="mb-4">
-                    <h3 className="text-lg font-semibold mb-2">CU - Commercial Use:</h3>
-                    <p>This license allows for commercial use of the design, including selling 3D prints and adapted models in unlimited quantities. It also allows for adaptation of the design. However, it does not allow sharing of the digital files.</p>
-                </div>
-                <div className="mb-4">
-                    <h3 className="text-lg font-semibold mb-2">CU-ND - Commercial Use - No Derivative:</h3>
-                    <p>This license allows for commercial use of the design, including selling 3D prints in unlimited quantities. However, it does not allow modification or adaptation of the design, nor does it allow distribution or resale of the digital files.</p>
-                </div>
-            </div>
+                <h3 className="text-xl font-bold mt-4 mb-2">3.2 Users:</h3>
+                <p>You are responsible for reading and understanding the specific license terms before downloading any design. You agree to use the designs only in accordance with the chosen license. You are responsible for obtaining any necessary permissions before using the designs for commercial purposes.</p>
+            </section>
 
-            <div className="mb-6">
-                <h2 className="text-xl font-semibold mb-2">Responsibilities:</h2>
-                <ul className="list-disc pl-6">
-                    <li>Designers: Designers are responsible for choosing the appropriate license for their designs and ensuring that their files are accurately licensed.</li>
-                    <li>Members: Members are responsible for reading and understanding the terms of the license before downloading any design. They are also responsible for using, sharing, and attributing the design in accordance with the chosen license.</li>
-                </ul>
-            </div>
+            <section className="mt-8">
+                <h2 className="text-2xl font-bold mb-4">4. Default License:</h2>
+                <p>If a designer does not specify a license for their design, the "Kalyke - Private Use" license will apply by default. This license allows for private use of the 3D prints but prohibits commercial use, modification, and sharing of the digital files.</p>
+            </section>
 
-            <div className="mb-6">
-                <h2 className="text-xl font-semibold mb-2">Additional Information:</h2>
-                <p>You can find more information about the specific terms of each license by clicking on the license name.</p>
-                <p>If you have any questions about licenses or how to use a design, please contact the designer directly.</p>
-            </div>
+            <section className="mt-8">
+                <h2 className="text-2xl font-bold mb-4">5. Specific Licenses:</h2>
+                <p>For detailed information on each license, including allowed and restricted uses, please refer to the individual license descriptions provided by Kalyke.</p>
+            </section>
 
-            <p className="text-sm text-gray-500">Disclaimer: This document is for informational purposes only and does not constitute legal advice. Please consult with an attorney if you have any questions about the legal terms of a license or your rights and obligations under the law.</p>
+            <section className="mt-8">
+                <h2 className="text-2xl font-bold mb-4">6. Compliance:</h2>
+                <p>Kalyke takes intellectual property rights seriously. Users who violate the terms of a license may face legal consequences and be banned from using the platform. We may also remove any infringing content from the platform.</p>
+            </section>
+
+            <section className="mt-8">
+                <h2 className="text-2xl font-bold mb-4">7. Changes to the License Policy:</h2>
+                <p>Kalyke reserves the right to update this License Policy at any time. We will notify users of any changes through our website or other appropriate channels.</p>
+            </section>
+
+            <section className="mt-8">
+                <h2 className="text-2xl font-bold mb-4">8. Contact Us:</h2>
+                <p>If you have any questions about the Kalyke License Policy, please contact us at [insert contact information].</p>
+            </section>
+
+            <section className="mt-8">
+                <h2 className="text-2xl font-bold mb-4">Additional Information:</h2>
+                <p>This is a general overview of the Kalyke License Policy. It is not a substitute for legal advice. We recommend that you consult with an attorney if you have any questions or concerns about using designs on Kalyke.</p>
+                <p>Kalyke may offer additional terms and conditions for specific services or features. These terms will be displayed prominently when you access those services or features.</p>
+                <p>By using Kalyke, you agree to be bound by all applicable laws and regulations.</p>
+                <p>Thank you for choosing Kalyke!</p>
+            </section>
         </div>
     )
 }

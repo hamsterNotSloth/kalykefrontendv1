@@ -24,9 +24,9 @@ function BannerSlide({ item }) {
         <div>
           {
             item?.promo == 'model' ?
-              <div>
+              <div className='pr-5'>
                 <span className='block text-[16px] font-semibold'>Featured Product</span>
-                <Link to={`/products/${item?.producId}`} className='flex flex-col'>
+                <Link to={`/products/${item?.productId}`} className='flex flex-col'>
                   <h4 className='text-[#000] text-[30px] w-[100%] font-bold'>{item?.productName}</h4>
                   <h4 className='text-[18px] text-[#000] font-semibold'>{'$' + item?.price || "free"}</h4>
                 </Link>
@@ -42,7 +42,7 @@ function BannerSlide({ item }) {
                     return <SocialMediaRow key={`social-media-share-banner-${Math.random()}-${Date.now()}`} item={item} copyToClipboard={copyToClipboard} />
                   })}
                 </ul>
-                <Link className='flex justify-center items-center mt-4 bg-[#2f85ff] hover:bg-[#5487ff] text-white text-[16px] rounded-md w-[120px] h-[30px]' to={`/products/${item?.producId}`}>View model</Link>
+                <Link className='flex justify-center items-center mt-4 bg-[#2f85ff] hover:bg-[#5487ff] text-white text-[16px] rounded-md w-[120px] h-[30px]' to={`/products/${item?.productId}`}>View model</Link>
               </div>
               :
               <div className='max-w-[324px]'>

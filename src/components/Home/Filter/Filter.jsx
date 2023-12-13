@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearFilter, setFilter } from '../../../redux/slices/filtersSlice';
-import { filterList, filtersOfFreeStatus } from './filterData';
+import { filterList, filtersOfFreeStatus, printerFileTypes } from './filterData';
+import { MultiSelect } from "react-multi-select-component";
 
 function Filter() {
   const [activeIndex, setActiveIndex] = useState(1);
@@ -25,7 +26,6 @@ function Filter() {
     }
   };
 
-  const printerFileTyypes = ["All File Types", "stl", "obj", "3ds", "scad", "gcode", "3mf", "blend", "sldprt", "sldasm", "amf", "dae", "eps", "f3d", "fcstd", "mtl", "pdf", "ply", "skp", "step", "dxf", "dwg", "svg", "txt", "bmp", "ai", "x3d", "psd", "zip"]
   const handleCategoryChange = (e) => {
     const category = e.target.value;
     dispatch(setFilter({ ...currentFilter, category: category }));
@@ -37,11 +37,17 @@ function Filter() {
   useEffect(() => {
     dispatch(setFilter({ ...currentFilter, isFree: isFree }))
   }, [isFree])
+
+  const [selected, setSelected] = useState([])
+  useEffect(() => {
+    const fileTypeParams = selected.map((type) => type.value).join(',');
+    dispatch(setFilter({ ...currentFilter, fileType: fileTypeParams }))
+  }, [selected])
   return (
     <div className='p-4 max-w-[1500px] mx-auto'>
       <div className='mb-2'>
       </div>
-      <div className='w-full bg-white h-[50px] overflow-x-auto justify-between border flex '>
+      <div className='w-full bg-white h-[50px] justify-between border flex '>
         <div className='flex'>
           {filterList.map((item, index) => (
             <button
@@ -61,7 +67,7 @@ function Filter() {
               )
             })}
           </div>
-          <div className='h-full ml-2'>
+          {/* <div className='h-full ml-2'>
             <select className='border-x  pl-2 h-full flex justify-center items-center w-[180px] text-black'
             onChange={(e)=>dispatch(setFilter({ ...currentFilter, fileType: e.target.value }))}
             >
@@ -69,6 +75,14 @@ function Filter() {
                 return <option value={item}>{item}</option>
               })}
             </select>
+          </div> */}
+          <div className='w-[229px] ml-3'>
+            <MultiSelect
+              options={printerFileTypes}
+              value={selected}
+              onChange={setSelected}
+              labelledBy="All File Types"
+            />
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react'
-import DropZone from './DropZone'
 import ImagesList from './ImagesList'
+import DropZone from '../Common/DropZone'
 
 function ModalUpload({details, setDetails, isUploadLoading, selectedFiles, uploadFileHandler,setSelectedFile, setFileUploadProgress, fileUploadProgress, handleFileChange}) {
 
