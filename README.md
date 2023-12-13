@@ -1,50 +1,60 @@
-# Kalyke - Modal Designs Hub
+# Kalyke - Model Designs Hub
 
-Welcome to Kalyke, your one-stop destination for exceptional modal designs crafted by designers, for designers. Our platform brings you the best deals on stunning modals to enhance your projects and applications. Whether you're a web developer, UI/UX designer, or anyone looking to elevate their design game, Kalyke has you covered.
+Welcome to Kalyke, your ultimate destination for exceptional model designs crafted by designers, for designers. Our platform offers unbeatable deals on stunning models, empowering web developers, UI/UX designers, and anyone seeking to elevate their design projects.
 
-## Modal Uploader
+## Frontend Dependencies
+- **@craco/craco:** ^7.1.0
+- **@fortawesome/fontawesome-free:** ^6.4.2
+  - **@fortawesome/free-brands-svg-icons:** ^6.4.2
+  - **@fortawesome/free-regular-svg-icons:** ^6.4.2
+  - **@fortawesome/free-solid-svg-icons:** ^6.4.2
+  - **@fortawesome/react-fontawesome:** ^0.2.0
+- **@react-oauth/google:** ^0.11.1
+- **@reduxjs/toolkit:** ^1.9.7
+- **@stripe/react-stripe-js:** ^2.4.0
+- **@stripe/stripe-js:** ^2.2.0
+- **@testing-library/jest-dom:** ^5.17.0
+- **@testing-library/react:** ^13.4.0
+- **@testing-library/user-event:** ^13.5.0
+- **axios:** ^1.6.2
+- **dotenv:** ^16.3.1
+- **firebase:** ^10.4.0
+- **formik:** ^2.4.5
+- **install:** ^0.13.0
+- **isexe:** ^3.1.1
+- **jszip:** ^3.10.1
+- **npm:** ^10.2.5
+- **path-browserify:** ^1.0.1
+- **react:** ^18.2.0
+- **react-dom:** ^18.2.0
+- **react-multi-select-component:** ^4.3.4
+- **react-quill:** ^2.0.0
+- **react-redux:** ^8.1.3
+- **react-router-dom:** ^6.16.0
+- **react-scripts:** 5.0.1
+- **react-slick:** ^0.29.0
+- **react-spinners:** ^0.13.8
+- **react-toastify:** ^9.1.3
+- **slick-carousel:** ^1.8.1
+- **web-vitals:** ^2.1.4
+- **yup:** ^1.3.2
 
-### How to Contribute Your Designs
+## How to Start and Build the App Locally
+- For starting, use `npm start`.
+- For building, use `npm run dev`.
 
-Have a modal design that you believe the community will love? Share it with us using our modal uploader. Follow these simple steps:
+## How to Update Constants
+![image](https://github.com/hamsterNotSloth/kalykefrontendv1/assets/113926529/c21756df-056e-421e-bd7a-806300674ac8)
 
-1. Click on the [Modal Uploader](#) link.
-2. Select your modal design files.
-3. Provide relevant details and a brief description.
-4. Hit upload and watch your design become part of the Kalyke collection.
+You can update the constants as needed and then rebuild the app using `npm run build`. After pushing the code to GitHub, restart the EC2 instance, reconnect it, and restart the server.
 
-## Modal Showcase
-
-### Explore and Download
-
-Once you've uploaded your modal design or if you're simply looking for inspiration, head over to our [Modal Showcase](#) section. Browse through a diverse range of modals created by talented designers. Each design is accompanied by a download link, making it easy for you to integrate these modals into your projects.
-
-## Example Modals
-
-Here are a couple of examples from our collection:
-
-![Modal Example 1](https://github.com/hamsterNotSloth/kalykefrontendv1/assets/113926529/999aedba-d0f2-4063-86b4-b5286d89611e)
-
-![Modal Example 2](https://github.com/hamsterNotSloth/kalykefrontendv1/assets/113926529/47edd878-9a81-48a3-9e32-09731dceb9a5)
-
-## Contribution Guidelines
-
-To ensure the quality of our modal designs, please adhere to the following guidelines when contributing:
-
-- Submit designs in a clean and organized format.
-- Include a brief description of the modal's purpose and functionality.
-- Ensure that your design is visually appealing and user-friendly.
-
-## Downloading Modals
-
-Feel free to download and use the modals from our collection in your projects. However, please be mindful of any licensing or attribution requirements specified by the designer.
-
-## Community Support
-
-Join our growing community of designers and developers on [Community Link](#). Share your experiences, seek advice, and collaborate on new and exciting modal designs.
-
-## Feedback and Issues
-
-If you encounter any issues or have suggestions for improvement, please open an [issue](#) on our GitHub repository. Your feedback is invaluable in helping us make Kalyke even better.
-
-Thank you for being a part of the Kalyke community! Let's elevate design together.
+### Commands for Restarting the Server(windows)
+```bash
+Open window power shell,
+connect ec2
+cd app
+cd kalykefrontendv1
+git pull
+cd ../
+cd kalykebackendv1
+pm2 start ./src/index.js --name kalyke
