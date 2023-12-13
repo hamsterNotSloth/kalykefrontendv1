@@ -3,7 +3,7 @@ import { useGetSimilarProductsQuery } from '../../redux/apiCalls/apiSlice'
 import ProductCard from '../Common/ProductCard';
 import Comments from './Comments';
 import { Link } from 'react-router-dom';
-import {Helmet} from "react-helmet";
+import { Helmet } from 'react-helmet-async';
 
 function ProductDescription({ productDetails }) {
   const tagsString = productDetails && productDetails.product && productDetails.product.tags.join(',');
@@ -21,7 +21,7 @@ function ProductDescription({ productDetails }) {
   return (
     <div className='max-w-[1135px] w-full'>
       <Helmet>
-        <title>{'Kalyke -' + productDetails?.product?.title || "Kalyke3d model"}</title>
+        <title>{'Kalyke - ' + productDetails?.product?.title || "Kalyke3d model"}</title>
         <meta name="description" content={cleanDescription} />
       </Helmet>
       <div>
