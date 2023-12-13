@@ -48,8 +48,13 @@ Welcome to Kalyke, your ultimate destination for exceptional model designs craft
 
 You can update the constants as needed and then rebuild the app using `npm run build`. After pushing the code to GitHub, restart the EC2 instance, reconnect it, and restart the server.
 
-### Commands for Restarting the Server
+### Commands for Restarting the Server(windows)
 ```bash
+Open window power shell,
+connect ec2
 cd app
+cd kalykefrontendv1
+git pull
+cd ../
 cd kalykebackendv1
 pm2 start ./src/index.js --name kalyke
