@@ -9,7 +9,7 @@ function Policy() {
           terms and conditions
         </Link>
         and <br /> acknowledge that Kalyke'{" "}
-        <Link to="/PrivacyPolicy" className="text-[#007BC7] ">
+        <Link to="/privacypolicy" className="text-[#007BC7] ">
           Privacy Policy
         </Link>{" "}
         applies to you.

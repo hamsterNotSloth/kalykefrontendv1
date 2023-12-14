@@ -38,7 +38,9 @@ function Footer() {
       <div>
         <ul className='flex gap-3 w-[400px] justify-end items-center'>
           {socialMedia.map((item) => (
-            <SocialMediaRow key={`social-media-footer-${item.link}`} item={item} />
+            <li key={`social-media-footer-${Math.random()}`}><a href={item.link} target='_blank'>
+              <FontAwesomeIcon icon={item.icon} />
+            </a></li>
           ))}
         </ul>
       </div>
@@ -48,7 +50,7 @@ function Footer() {
           <li><Link to="/support">Support</Link></li>
           <li><a href='https://docs.google.com/forms/d/e/1FAIpQLSeciR5hznseDBhkWU-9FoSO-uHNGI-PQFNfr8f_vB0veidoDA/viewform' target='_blank' rel="noopener noreferrer"> Feedback</a></li>
           <li><a href='https://docs.google.com/forms/d/e/1FAIpQLSesf_brU7bdInDirULcFfUCE0TQXZXuPxGHwFuEaZ04iIZkwg/viewform?usp=send_form' target='_blank' rel="noopener noreferrer">Report Model</a></li>
-          <li><Link to="/PrivacyPolicy">Privacy</Link></li>
+          <li><Link to="/privacypolicy">Privacy</Link></li>
         </ul>
       </div>
     </div>

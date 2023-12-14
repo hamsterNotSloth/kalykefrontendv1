@@ -20,7 +20,7 @@ function ProductDescription({ productDetails }) {
   return (
     <div className='max-w-[1135px] w-full'>
       <Helmet>
-        <title>{productDetails?.product?.title}</title>
+        <title>{`Kalyke - ${productDetails?.product?.title}`}</title>
         <meta name="description" content={cleanDescription} />
         <meta property="og:title" content={productDetails?.product?.title} />
         <meta property="og:description" content={cleanDescription} />
@@ -28,6 +28,10 @@ function ProductDescription({ productDetails }) {
       <div>
         <h4 className='text-[21px] font-semibold'>Description</h4>
         <div className='max-w-[900px] w-[100%]' dangerouslySetInnerHTML={{ __html: productDetails && productDetails.product?.description }} />
+      </div>
+      <div className='mt-5'>
+        <h4 className='text-[21px] font-semibold'>Model Settings</h4>
+        <div className='max-w-[900px] w-[100%]' dangerouslySetInnerHTML={{ __html: productDetails?.product?.modalSetting }} />
       </div>
       <div className='mt-5'>
         <h4 className='text-[21px] font-semibold'>Category</h4>
@@ -41,12 +45,8 @@ function ProductDescription({ productDetails }) {
           : "This model has no category selected"}</span>
       </div>
       <div className='mt-5'>
-        <h4 className='text-[21px] font-semibold'>Model Settings</h4>
-        <div className='max-w-[900px] w-[100%]' dangerouslySetInnerHTML={{ __html: productDetails?.product?.modalSetting }} />
-      </div>
-      <div className='mt-5'>
         <h4 className='text-[21px] font-semibold'>License</h4>
-        <Link className='block text-[18px] text-[#0707ff] mt-2' to='/LicencePolicy' target='_blank'>{productDetails?.product?.license}</Link>
+        <Link className='block text-[18px] text-[#0707ff] mt-2' to='/licencepolicy' target='_blank'>{productDetails?.product?.license}</Link>
       </div>
       <div className='mt-5'>
         <h4 className='text-[21px] font-semibold'>Similar Products</h4>

@@ -3,13 +3,13 @@ import React from 'react'
 
 function SocialMediaRow({item, copyToClipboard}) {
     const handleClick = () => {
-        window.open(item.link, '_blank', 'width=600,height=400');
         copyToClipboard(); 
+        window.open(item.link, '_blank', 'width=600,height=400');
       };
     return (
-        <li ><a href={item.link} onClick={handleClick} target='_blank'>
+        <li ><button onClick={handleClick}>
             <FontAwesomeIcon icon={item.icon} />
-        </a></li>
+        </button></li>
     )
 }
 

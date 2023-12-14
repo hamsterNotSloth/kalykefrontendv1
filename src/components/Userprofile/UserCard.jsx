@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import ProfileUpdatePopup from './ProfileUpdatePopup';
 import { faFacebook, faInstagram, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import ShareProfile from './ShareProfile';
+import Followbtn from '../Common/FollowBtn';
 
 function UserCard() {
     const [profileImage, setProfileImage] = useState()
@@ -148,6 +149,7 @@ function UserCard() {
                     {isShareBtnOpen && <ShareProfile setIsShareBtnOpen={setIsShareBtnOpen} />}
                 </div>
             </div>
+            <Followbtn style={`px-1 py-1 w-[108px] mt-2 rounded-full mb-2`} productDetails={userProfile?.profile} />
             {userProfile && userProfile.permissionGranter && (
                 <>
                     {!updateComponentToggler && (

@@ -71,9 +71,9 @@ function App() {
             <Route path="/model/upload" element={<NotVerifiedProtectRoute />} />
             <Route path="/T&C" element={<TermsAndConditions />} />
             <Route path="/support" element={<SupportPolicy />} />
-            <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+            <Route path="/privacypolicy" element={<PrivacyPolicy />} />
             <Route path="/email-verified" element={<EmailVerified />} />
-            <Route path="/LicencePolicy" element={<Licence />} />
+            <Route path="/licencepolicy" element={<Licence />} />
             {/* <Route path="/model/upload" element={<Uploader />} /> */}
           </Routes>
           <Footer />

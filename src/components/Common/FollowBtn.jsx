@@ -25,7 +25,7 @@ function Followbtn({productDetails, style}) {
         }
         return
       }
-      if(productDetails?.product?.created_by) {
+     else if(productDetails?.product?.created_by) {
         email = productDetails.product.created_by
       }
       else {
@@ -44,9 +44,10 @@ function Followbtn({productDetails, style}) {
           toast.error(err.message || "Failed to follow user...")
         }
       }
+      
   return (
     <>
-      <button disabled={isLoading} onClick={followUserHandler} className={`${style} ${isLoading? `bg-[#d9d9d9]` : ``}`}> {myProfileData?.myProfile?.following?.includes(productDetails?.user?.email) == true? "Unfollow" : "Follow"}</button>
+      <button disabled={isLoading} onClick={followUserHandler} className={`${style} ${isLoading? `bg-[#6b6a6a] text-white` : `bg-[#d9d9d9]`}`}> {myProfileData?.myProfile?.following?.includes(productDetails?.user?.email || productDetails?.email) == true? "Unfollow" : "Follow"}</button>
     </>
   )
 }

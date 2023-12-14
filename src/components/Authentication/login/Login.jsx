@@ -23,7 +23,7 @@ function Login({ setShowMainContent, setShowSignUpContent }) {
           </Link>
         </span>
         <span className="block text-center mt-[15px] text-[#999999] text-[10px] md:text-[13px] font-[500]">
-          <Link to="/PrivacyPolicy" className="text-[#007BC7] ps-[4px] ">
+          <Link to="/privacypolicy" className="text-[#007BC7] ps-[4px] ">
             Privacy Policy
           </Link>
         </span>

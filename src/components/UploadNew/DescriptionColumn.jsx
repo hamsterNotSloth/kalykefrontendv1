@@ -168,7 +168,7 @@ function DescriptionColumn({ details, setDetails }) {
                         <option value="Kalyke - Commercial Use - No Derivative">Kalyke - Commercial Use - No Derivative</option>
                     </select>
 
-                    <Link to={'/LicencePolicy'} target='_blank' className='block text-[18px] text-[#0707ff] mt-2'>Selected license: {details.license}</Link>
+                    <Link to={'/licencepolicy'} target='_blank' className='block text-[18px] text-[#0707ff] mt-2'>Selected license: {details.license}</Link>
                 </div>
             </div>
             {isFreeToggler &&

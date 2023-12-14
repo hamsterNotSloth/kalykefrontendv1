@@ -7,6 +7,7 @@ import { getToken } from '../../Token/token'
 import { toast } from 'react-toastify'
 import { useDeleteProductMutation, useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice'
 import { useParams } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 function UserProfile({ userProducts }) {
   const token = getToken()
@@ -19,12 +20,26 @@ function UserProfile({ userProducts }) {
       if(response && response.error) {
         toast.error(response.error.data?.message)
       }
+      if(response?.data) {
+        toast.success(response?.data?.message)
+      }
     } catch (error) {
       toast.error(error.message)
     }
   }
+  const removeHtmlTags = (htmlString) => {
+    const regex = /(<([^>]+)>)/gi;
+    return htmlString.replace(regex, '');
+  };
+  const cleanDescription = userProfile?.profile?.description ? removeHtmlTags(userProfile?.profile?.description) : '';
   return (
     <div className='max-w-[1200px] flex justify-between mx-auto py-7'>
+      <Helmet>
+        <title>{`Kalyke - ${userProfile?.profile?.userName}`}</title>
+        <meta name="description" content={cleanDescription} />
+        <meta property="og:title" content= { `Kalyke - ${userProfile?.profile?.userName}`} />
+        <meta property="og:description" content={cleanDescription} />
+      </Helmet> 
       <UserCard />
       <div className='w-[100%] h-[100vh] ml-[70px]'>
         <UserStatistics count={0} text={"Followers"} icon={faUser} />

@@ -16,7 +16,7 @@ function Conditions({ goToLoginHandler }) {
       <p className=" text-center pt-16 text-[#999999] text-[11px] md:text-[13px] font-[500]">
         Your privacy is most important to us.
         <br /> So here are our
-        <Link to="/PrivacyPolicy" className="text-[#007BC7]">
+        <Link to="/privacypolicy" className="text-[#007BC7]">
           Privacy Policy
         </Link>
         an
