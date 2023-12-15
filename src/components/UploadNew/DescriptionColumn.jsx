@@ -19,6 +19,7 @@ function DescriptionColumn({ details, setDetails }) {
     const descriptionHandler = (value) => {
         setDetails({ ...details, description: value })
     }
+
     const handleAddHashtag = async () => {
         const hashtag = hashTagValue.replace(/\s/g, '').toLowerCase();
 
@@ -48,7 +49,6 @@ function DescriptionColumn({ details, setDetails }) {
         }
     };
 
-
     const deleteHashTagHandler = (id) => {
         const updatedHashtags = details.tags.filter((item, index) => index != id)
         setDetails({
@@ -56,6 +56,7 @@ function DescriptionColumn({ details, setDetails }) {
             tags: updatedHashtags
         });
     }
+
     const modalSettingHandler = (value) => {
         setDetails({ ...details, modalSetting: value })
     }
@@ -86,7 +87,7 @@ function DescriptionColumn({ details, setDetails }) {
                 <div className='container mx-auto'>
                     <div className="flex items-center">
                         <label htmlFor="toggle" className="flex items-center cursor-pointer">
-                        <span className='inline-block font-semibold mr-3'>Free</span>
+                            <span className='inline-block font-semibold mr-3'>Free</span>
                             <div className="relative">
                                 <input
                                     type="checkbox"

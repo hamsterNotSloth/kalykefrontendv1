@@ -50,7 +50,7 @@ function Filter() {
         <div className='flex'>
           {filterList.map((item, index) => (
             <button
-              key={`FilterList at Homepage ${Math.random() * Date.now() * 0.21354}`}
+              key={`FilterList at Homepage-${item - Math.random()} ${Math.random() * 0.21354}`}
               onClick={() => handleClick(index)}
               className={`border-x flex justify-center items-center w-[180px] ${activeIndex === index ? 'bg-[#000] text-white' : 'text-black'}`}
             >
@@ -62,7 +62,7 @@ function Filter() {
           <div>
             {filtersOfFreeStatus.map(item => {
               return (
-                <button className={`border rounded-full px-4 py-2 ${isFree == item.value && "bg-black text-white"}`} onClick={() => handleToggleChange(item.value)}>{item.text}</button>
+                <button key={`filtersOfFreeStatus-${Math.random() - 0.2123}-${Math.random() + item}`} className={`border rounded-full px-4 py-2 ${isFree == item.value && "bg-black text-white"}`} onClick={() => handleToggleChange(item.value)}>{item.text}</button>
               )
             })}
           </div>

@@ -10,7 +10,8 @@ const productSlice = createSlice({
     modalSetting: '',
     modal: [],
     tags: [],
-    images: []
+    images: [],
+    youtubeURL: ''
 
   },
   reducers: {

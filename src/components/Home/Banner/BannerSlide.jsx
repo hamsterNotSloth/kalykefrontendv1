@@ -49,7 +49,7 @@ function BannerSlide({ item }) {
                 <span className='block text-[16px] font-semibold'>Featured Designer</span>
                 <Link to={`/user/${item?.u_id}`} className='flex gap-2 mb-3 items-center'>
                   <div className='w-[60px] h-[60px]'>
-                    <img src={item.userImage} className='rounded-full' alt="Profile image" />
+                    <img src={item.userImage} className='rounded-full h-full' alt="Profile image" />
                   </div>
                   <h4 to={`/user/${item?.u_id}`} className='text-[18px] text-[#0026ff] font-semibold'>{item?.displayName}</h4>
                 </Link>

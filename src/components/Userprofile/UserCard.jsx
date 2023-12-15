@@ -121,7 +121,7 @@ function UserCard() {
                 <div className='w-full h-full'>
                     {!newUserInfo.profilePicture ? <img
                         src={userProfile && userProfile.profile && userProfile.profile.profilePicture ? userProfile.profile.profilePicture : 'No image'}
-                        className="rounded-full w-[100%] h-[100%]"
+                        className="rounded-full object-cover w-[100%] h-[100%]"
                         alt="user Pic"
                     /> :
                         <img src={newUserInfo.profilePicture} className="rounded-full w-[100%] h-[100%]" alt="user Pic" />}

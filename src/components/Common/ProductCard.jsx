@@ -51,7 +51,7 @@ function ProductCard({ item, deletePermission, productDeleteHandler }) {
                                     onClick={handleConfirmClick}
                                     className="text-red-500 hover:text-red-700"
                                 >
-                                    Confirm
+                                   Confirm
                                 </button>
                             </div>
                         </div>

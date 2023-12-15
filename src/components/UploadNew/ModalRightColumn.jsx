@@ -92,6 +92,10 @@ function ModalRightColumn({ details, setDetails }) {
     };
     return (
         <div>
+            <div>
+            <span class="font-medium text-[18px] mt-7 block">Youtube Video URL</span>
+            <input onChange={(e) => setDetails({ ...details,  youtubeURL: e.target.value})} type="text" placeholder='YT URL' className='w-full px-2 h-[40px] border-[2px] border-[#c1b9b9] rounded-sm' />
+            </div>
             <ModalUpload selectedFiles={selectedFiles} setSelectedFile={setSelectedFile} isUploadLoading={isUploadLoading} uploadFileHandler={uploadFileHandler} setFileUploadProgress={setFileUploadProgress} fileUploadProgress={fileUploadProgress} handleFileChange={handleFileChange} details={details} setDetails={setDetails} />
             <ImagesUpload uploadFileHandler={uploadFileHandler} productUploadHandler={productUploadHandler} details={details} setDetails={setDetails} />
             <Link target='_blank'  className='block text-[18px] mt-2' to={`/T&C`}>By uploading this design you agree to the <span className='text-[#0707ff]'>Terms & Conditions.</span></Link>

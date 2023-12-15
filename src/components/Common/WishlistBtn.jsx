@@ -19,8 +19,7 @@ const WishlistBtn = ({ product, token, descriptionWishListHandler }) => {
     }
     const productId = product?._id
     try {
-      const response = await wishlist({ productId, token })
-      toast.success(response?.data?.message)
+      await wishlist({ productId, token })
     } catch (error) {
       toast.error(error.message || "Something went wrong")
     }

@@ -129,7 +129,7 @@ export const apiSlice = createApi({
     }),
     getUserproducts: builder.query({
       query: (id) => ({
-        url: `product//user-products/${id}`,
+        url: `product/user-products/${id}`,
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",

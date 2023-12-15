@@ -43,6 +43,7 @@ function Followbtn({productDetails, style}) {
           console.log(err)
           toast.error(err.message || "Failed to follow user...")
         }
+        return
       }
       
   return (

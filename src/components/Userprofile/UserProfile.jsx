@@ -44,7 +44,7 @@ function UserProfile({ userProducts }) {
       <div className='w-[100%] h-[100vh] ml-[70px]'>
         <UserStatistics count={0} text={"Followers"} icon={faUser} />
         <span className='font-semibold text-[18px] inline-block pb-2'>Models</span>
-        <div className='flex flex-wrap  pb-[40px] gap-4'>
+        <div className='flex flex-wrap  pb-[80px] gap-4'>
           {userProducts && userProducts.myProducts && userProducts.myProducts.map((item) => {
             return <ProductCard key={`Userprofile ${Math.random() * Date.now()}`} item={item} deletePermission={userProfile?.permissionGranter || false} productDeleteHandler={productDeleteHandler} userProducts={userProducts} styling={"w-[230px] h-[300px]"} />
               {/* {userProfile && userProfile.permissionGranter && <button onClick={() => { productDeleteHandler(item._id) }}>Delete</button>} */}

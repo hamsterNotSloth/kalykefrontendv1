@@ -11,7 +11,8 @@ function Uploader() {
         price: '0',
         modal: [],
         tags: [],
-        images: []
+        images: [],
+        youtubeURL: ''
     });
     useEffect(() => {
         const handleBeforeUnload = (event) => {
