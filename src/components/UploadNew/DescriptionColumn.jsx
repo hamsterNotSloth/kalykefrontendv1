@@ -137,8 +137,14 @@ function DescriptionColumn({ details, setDetails }) {
                         className='w-full px-2 h-[40px] border-[2px] border-[#c1b9b9] rounded-sm'
                         placeholder="Add #hashtags..."
                         onChange={e => { setHashTagValue(e.target.value) }}
+                        onKeyPress={e => {
+                            if (e.key === 'Enter') {
+                                handleAddHashtag();
+                            }
+                        }}
                     />
-                    <button onClick={handleAddHashtag} className='p-2 w-[140px] bg-[#afafaf] text-white rounded-md'>Add Hashtag</button>
+                    <button onClick={handleAddHashtag}
+                        className='p-2 w-[140px] bg-[#afafaf] text-white rounded-md'>Add Hashtag</button>
                 </div>
                 <label>Maximum 20 tags. Example: animal, toy, low poly, math art, art toy</label>
                 <div className='flex gap-5 flex-wrap'>
