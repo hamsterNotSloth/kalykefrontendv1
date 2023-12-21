@@ -180,7 +180,7 @@ function DownloadScreen({ productDetails }) {
         </select>
       </div> : <DesignUpload product={productDetails?.product} />}
 
-      <div className='w-full bg-[#2f85ff] p-3 rounded-md mt-3 text-white'>
+      <div className='w-full bg-[#2f85ff] h-[500px] overflow-y-auto p-3 rounded-md mt-3 text-white'>
         <div className='flex flex-col border-b-[1px] pb-1 text-center justify-center gap-4 '>
           <span>Details:</span>
           <div dangerouslySetInnerHTML={{ __html: productDetails?.user?.description }} />

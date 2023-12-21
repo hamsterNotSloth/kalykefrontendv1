@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useAddCommentsMutation, useDeleteCommentMutation, useDeleteReplyMutation, useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice'
+import { useAddCommentsMutation, useDeleteCommentMutation, useDeleteReplyMutation, useGetMyProfileQuery, useGetUserProfileQuery } from '../../redux/apiCalls/apiSlice'
 import { getToken } from '../../Token/token'
 import { toast } from 'react-toastify'
 import ReplyComment from './ReplyComment'
@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom'
 
 const Comments = ({ productDetails }) => {
   const token = getToken()
+  const {data: myProfileData} = useGetMyProfileQuery(token)
+  console.log(myProfileData,'myProfileData')
   const [comment, setComment] = useState('')
   const [addComments, {isLoading: isAddingComment}] = useAddCommentsMutation()
   const [deleteComment, {isLoading: isCommentDeleting}] = useDeleteCommentMutation()
@@ -93,7 +95,9 @@ const deleteReplyHandler = async (data) => {
                     </div>
                     <div className="ml-auto">
                       <button className="text-gray-500 hover:text-blue-500 mr-2" onClick={() => replyHandler(item._id)}>Reply</button>
+                      {item.user == myProfileData?.myProfile?.email &&
                       <button className="text-red-500 hover:text-red-700" disabled={isCommentDeleting} onClick={() => deleteCommentHandler(item._id)}>Delete</button>
+                      }
                     </div>
                   </div>
                   <p className="text-gray-600">{item.text}</p>
@@ -110,6 +114,7 @@ const deleteReplyHandler = async (data) => {
             {item.replies?.map((reply, replyIndex) => (
               <div key={`Reply ${replyIndex} ${reply._id}`} className="bg-white p-2 mt-5 mb-7 rounded-lg shadow-md ml-16">
                 <div className="flex mb-2">
+                  {console.log(reply, 'reply')}
                   <img src={reply.profilePic} alt="User Avatar" className="w-8 h-8 rounded-full mr-2" />
                   <div className="flex-1">
                     <div className="flex items-center mb-1">
@@ -118,7 +123,9 @@ const deleteReplyHandler = async (data) => {
                     </div>
                       <div className="ml-auto">
                         <button className="text-gray-500 hover:text-blue-500 mr-2" onClick={() => replyHandler(reply._id)}>Reply</button>
+                        {reply.user == myProfileData?.myProfile?.email &&
                         <button className="text-red-500 hover:text-red-700" disabled={isReplyDeleting} onClick={() => deleteReplyHandler({productId: productDetails?.product._id, token, comment_id:item._id, replyId: reply._id })}>Delete</button>
+                        }
                       </div>
                     </div>
                     <p className="text-gray-600">{reply.text}</p>

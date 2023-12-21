@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "../src/redux/store";
 import TagManager from 'react-gtm-module'
 const tagManagerArgs = {
-  gtmId: 'G-NW77ZD6NE2'
+  gtmId: 'GTM-MKWP225W'
 }
 
 TagManager.initialize(tagManagerArgs)
